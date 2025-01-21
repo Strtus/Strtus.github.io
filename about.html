@@ -51,7 +51,7 @@
 <meta property="og:description" content="hi👋，我是Strtus 这里是我的知识博客，它独立于个人博客：myblogrsq.cn，我会在这里分享我的学习收获以及见解 这是我第一次搭建纯静态页面，无需经过服务器的编译，可以直接在浏览器上渲染，使用了基于Node.js技术栈的HEXO框架，目前部署于Github Pages上，由Vercel托管并自动从仓库拉取代码进行发布，它足够轻量且很好的支持了markdown和$\LaTeX$语法 关">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-01-21T16:18:49.000Z">
-<meta property="article:modified_time" content="2025-01-21T16:51:24.977Z">
+<meta property="article:modified_time" content="2025-01-21T16:54:48.292Z">
 <meta property="article:author" content="strtus">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -260,6 +260,56 @@
 
  
 
+
+    <script>
+        if (typeof MathJax === 'undefined') {
+            window.MathJax = {
+                loader: {
+                    source: {
+                        '[tex]/amsCd': '[tex]/amscd',
+                        '[tex]/AMScd': '[tex]/amscd'
+                    }
+                },
+                tex: {
+                    inlineMath: {'[+]': [['$', '$']]},
+                    tags: 'ams'
+                },
+                options: {
+                    renderActions: {
+                        findScript: [10, doc => {
+                            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                                const display = !!node.type.match(/; *mode=display/);
+                                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                                const text = document.createTextNode('');
+                                node.parentNode.replaceChild(text, node);
+                                math.start = {node: text, delim: '', n: 0};
+                                math.end = {node: text, delim: '', n: 0};
+                                doc.math.push(math);
+                            });
+                        }, '', false],
+                        insertedScript: [200, () => {
+                            document.querySelectorAll('mjx-container').forEach(node => {
+                                let target = node.parentNode;
+                                if (target.nodeName.toLowerCase() === 'li') {
+                                    target.parentNode.classList.add('has-jax');
+                                }
+                            });
+                        }, '', false]
+                    }
+                }
+            };
+            (function () {
+                var script = document.createElement('script');
+                script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js";
+                script.defer = true;
+                document.head.appendChild(script);
+            })();
+        } else {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+        }
+    </script>
  
 
  
