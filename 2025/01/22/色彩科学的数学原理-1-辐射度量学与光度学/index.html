@@ -55,8 +55,8 @@
 <meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/EM_spectrum_zh-hans.svg">
 <meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/LuminosityCurve3.svg">
 <meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/Photometry_radiometry_units.svg">
-<meta property="article:published_time" content="2025-01-22T13:41:46.000Z">
-<meta property="article:modified_time" content="2025-01-22T13:49:11.629Z">
+<meta property="article:published_time" content="2025-01-22T14:00:21.000Z">
+<meta property="article:modified_time" content="2025-01-22T14:02:19.364Z">
 <meta property="article:author" content="strtus">
 <meta property="article:tag" content="色彩科学">
 <meta name="twitter:card" content="summary_large_image">
@@ -189,10 +189,10 @@
         <h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><p>为了系统探讨色度学原理，首先需了解“什么是光？”以及“人眼如何对光产生视觉感知？”</p>
 <p>有鉴于此，本文从电磁学与光学和视觉生理学的角度出发，对辐射度量学与光度学做简要阐述。这两大学科共同构成了量化光与色觉的基础框架。鉴于色彩理论所涉及之范畴极其广泛，本文仅聚焦辐射度量学和光度学的核心概念，为后续“颜色匹配实验”“三基色理论”“CIE 1931 XYZ 色度图”等内容奠定基础。</p>
 <p>本文的前置基知识为：微积分、矩阵理论</p>
-<h2 id="1-辐射度量学与光度学基础"><a href="#1-辐射度量学与光度学基础" class="headerlink" title="1. 辐射度量学与光度学基础"></a>1. 辐射度量学与光度学基础</h2><h3 id="1-1-辐射度量学与光度学简介"><a href="#1-1-辐射度量学与光度学简介" class="headerlink" title="1.1 辐射度量学与光度学简介"></a>1.1 辐射度量学与光度学简介</h3><p><strong>辐射度量学</strong>（radiometry）主要研究电磁辐射的能量度量与分布规律。电磁辐射涵盖极宽广的波长范围，包括伽马射线、X 射线、紫外光、可见光、红外光、微波与无线电波等。然而，人眼仅能对其中约 390–780 nm 的波段产生视觉感受，故可见光只占整个电磁波谱的极小部分。</p>
+<h2 id="1-辐射度量学与光度学基础"><a href="#1-辐射度量学与光度学基础" class="headerlink" title="1. 辐射度量学与光度学基础"></a>1. 辐射度量学与光度学基础</h2><h3 id="1-1-辐射度量学与光度学简介"><a href="#1-1-辐射度量学与光度学简介" class="headerlink" title="1.1 辐射度量学与光度学简介"></a>1.1 辐射度量学与光度学简介</h3><p>辐射度量学（radiometry）主要研究电磁辐射的能量度量与分布规律。电磁辐射涵盖极宽广的波长范围，包括伽马射线、X 射线、紫外光、可见光、红外光、微波与无线电波等。然而，人眼仅能对其中约 390–780 nm 的波段产生视觉感受，故可见光只占整个电磁波谱的极小部分。</p>
 <img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/EM_spectrum_zh-hans.svg" style="zoom:150%;" />
 
-<p><strong>光度学</strong>（photometry）则侧重研究可见光对人眼视觉系统所带来的主观亮度刺激，因为虽然同为可见光，不同波长对于人眼的刺激也是不同的。</p>
+<p>光度学（photometry）则侧重研究可见光对人眼视觉系统所带来的主观亮度刺激，因为虽然同为可见光，不同波长对于人眼的刺激也是不同的。</p>
 <p>大量实验证明，人眼对 555 $nm$ 单色光（黄绿色）最敏感，若在该波长定义其视觉响应系数为 1，则其他波长光的视见效率可用函数 ($V(\lambda)$)来表征。</p>
 <p>在将物理辐射量换算成人眼主观亮度的过程中，视见函数起到了加权的作用，某种意义上，视见函数构建了联结光度学和辐射度量学的桥梁。</p>
 <img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/LuminosityCurve3.svg"/>
@@ -205,11 +205,11 @@
 <ol>
 <li><p>**辐射通量($\varPhi_\mathrm{R}$) **<br>表示单位时间内穿过某截面的电磁辐射能量，单位为瓦（$W$）：<br>$$<br>\varPhi_\mathrm{R} &#x3D; \frac{\mathrm{d}Q}{\mathrm{d}t}<br>$$<br>其中 ($Q$) 代表辐射能量，($t$)为时间。</p>
 </li>
-<li><p><strong>辐射强度 ($I$)</strong><br>对点状辐射源而言，为在给定方向(单位立体角)上的辐射通量密度，单位为 ($\mathrm{W&#x2F;sr}$)：<br>$$<br>I &#x3D; \frac{\mathrm{d}\varPhi_\mathrm{R}}{\mathrm{d}\varOmega}<br>\tag{1}<br>$$</p>
+<li><p><strong>辐射强度 ($I$)</strong><br>对点状辐射源而言，为在给定方向(单位立体角)上的辐射通量密度，单位为 ($\mathrm{W&#x2F;sr}$)：<br>$$<br>I &#x3D; \frac{\mathrm{d}\varPhi_\mathrm{R}}{\mathrm{d}\varOmega}<br>$$</p>
 </li>
-<li><p><strong>辐照度 ($E$)</strong><br>当研究辐射能量如何“照射”到表面时，就引入辐照度：<br>$$<br>E &#x3D; \frac{\mathrm{d}\varPhi_\mathrm{R}}{\mathrm{d}A}<br>\tag{2}<br>$$<br>其单位为 ($\mathrm{W&#x2F;m^2}$)。</p>
+<li><p><strong>辐照度 ($E$)</strong><br>当研究辐射能量如何“照射”到表面时，就引入辐照度：<br>$$<br>E &#x3D; \frac{\mathrm{d}\varPhi_\mathrm{R}}{\mathrm{d}A}<br>$$<br>其单位为 ($\mathrm{W&#x2F;m^2}$)。</p>
 </li>
-<li><p><strong>辐亮度 ($L$)</strong><br>指某表面微元在特定方向的出射辐射强度与其面积正交分量之比：<br>$$<br>L &#x3D; \frac{\mathrm{d}I}{\mathrm{d}A^\perp}<br>&#x3D; \frac{\mathrm{d}^2\varPhi_\mathrm{R}}{\mathrm{d}\varOmega ,\mathrm{d}A \cos\theta}<br>\tag{9}<br>$$<br>在无能量损耗的理想条件下，沿光线传播方向，辐亮度恒定不变。这一性质常用于图形学渲染算法中的光能传递计算。</p>
+<li><p><strong>辐亮度 ($L$)</strong><br>指某表面微元在特定方向的出射辐射强度与其面积正交分量之比：<br>$$<br>L &#x3D; \frac{\mathrm{d}I}{\mathrm{d}A^\perp}<br>&#x3D; \frac{\mathrm{d}^2\varPhi_\mathrm{R}}{\mathrm{d}\varOmega ,\mathrm{d}A \cos\theta}<br>$$<br>在无能量损耗的理想条件下，沿光线传播方向，辐亮度恒定不变。这一性质常用于图形学渲染算法中的光能传递计算。</p>
 </li>
 </ol>
 <blockquote>
@@ -221,9 +221,9 @@
 </li>
 <li><p><strong>发光强度 ($I_\mathrm{V}$)</strong><br>对应点光源在单位立体角内的光通量，单位为坎德拉($cd$)。若光源辐射555 nm波长光，功率强度为 ($\tfrac{1}{683},\mathrm{W&#x2F;sr}$)，则发光强度为 1 $cd$。</p>
 </li>
-<li><p><strong>光照度 ($E_\mathrm{V}$)</strong><br>表示照射在单位面积上的光通量，单位勒克斯($lx$)：<br>$$<br>E_\mathrm{V} &#x3D; \frac{\mathrm{d}\varPhi_\mathrm{V}}{\mathrm{d}A}<br>\tag{18}<br>$$</p>
+<li><p><strong>光照度 ($E_\mathrm{V}$)</strong><br>表示照射在单位面积上的光通量，单位勒克斯($lx$)：<br>$$<br>E_\mathrm{V} &#x3D; \frac{\mathrm{d}\varPhi_\mathrm{V}}{\mathrm{d}A}<br>$$</p>
 </li>
-<li><p><strong>光亮度 ($L_\mathrm{V}$)</strong><br>在光度学中，定义与辐亮度平行，只是换成光度学加权：<br>$$<br>L_\mathrm{V}<br>&#x3D; \frac{\mathrm{d}I_\mathrm{V}}{\mathrm{d}A^\perp}<br>&#x3D; \frac{\mathrm{d}^2 \varPhi_\mathrm{V}}{\mathrm{d}\varOmega,\mathrm{d}A \cos\theta}<br>\tag{20}<br>$$<br>单位为 $cd&#x2F;m²$（通常亦称 $nit$）。这在显示器规格中常被提及，例如“500 $nit$”亮度。</p>
+<li><p><strong>光亮度 ($L_\mathrm{V}$)</strong><br>在光度学中，定义与辐亮度平行，只是换成光度学加权：<br>$$<br>L_\mathrm{V}<br>&#x3D; \frac{\mathrm{d}I_\mathrm{V}}{\mathrm{d}A^\perp}<br>&#x3D; \frac{\mathrm{d}^2 \varPhi_\mathrm{V}}{\mathrm{d}\varOmega,\mathrm{d}A \cos\theta}<br>$$<br>单位为 $cd&#x2F;m²$（通常亦称 $nit$）。这在显示器规格中常被提及，例如“500 $nit$”亮度。</p>
 </li>
 </ol>
 <img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/Photometry_radiometry_units.svg"/>
