@@ -56,7 +56,7 @@
 <meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/LuminosityCurve3.svg">
 <meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/Photometry_radiometry_units.svg">
 <meta property="article:published_time" content="2025-01-22T13:41:46.000Z">
-<meta property="article:modified_time" content="2025-01-22T13:45:33.282Z">
+<meta property="article:modified_time" content="2025-01-22T13:49:11.629Z">
 <meta property="article:author" content="strtus">
 <meta property="article:tag" content="色彩科学">
 <meta name="twitter:card" content="summary_large_image">
@@ -189,7 +189,6 @@
         <h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><p>为了系统探讨色度学原理，首先需了解“什么是光？”以及“人眼如何对光产生视觉感知？”</p>
 <p>有鉴于此，本文从电磁学与光学和视觉生理学的角度出发，对辐射度量学与光度学做简要阐述。这两大学科共同构成了量化光与色觉的基础框架。鉴于色彩理论所涉及之范畴极其广泛，本文仅聚焦辐射度量学和光度学的核心概念，为后续“颜色匹配实验”“三基色理论”“CIE 1931 XYZ 色度图”等内容奠定基础。</p>
 <p>本文的前置基知识为：微积分、矩阵理论</p>
-<hr>
 <h2 id="1-辐射度量学与光度学基础"><a href="#1-辐射度量学与光度学基础" class="headerlink" title="1. 辐射度量学与光度学基础"></a>1. 辐射度量学与光度学基础</h2><h3 id="1-1-辐射度量学与光度学简介"><a href="#1-1-辐射度量学与光度学简介" class="headerlink" title="1.1 辐射度量学与光度学简介"></a>1.1 辐射度量学与光度学简介</h3><p><strong>辐射度量学</strong>（radiometry）主要研究电磁辐射的能量度量与分布规律。电磁辐射涵盖极宽广的波长范围，包括伽马射线、X 射线、紫外光、可见光、红外光、微波与无线电波等。然而，人眼仅能对其中约 390–780 nm 的波段产生视觉感受，故可见光只占整个电磁波谱的极小部分。</p>
 <img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/EM_spectrum_zh-hans.svg" style="zoom:150%;" />
 
@@ -200,7 +199,8 @@
 
 
 
-<hr>
+
+
 <h3 id="1-2-辐射度量学的基本概念"><a href="#1-2-辐射度量学的基本概念" class="headerlink" title="1.2 辐射度量学的基本概念"></a>1.2 辐射度量学的基本概念</h3><p>为便于后续建模，引入如下概念</p>
 <ol>
 <li><p>**辐射通量($\varPhi_\mathrm{R}$) **<br>表示单位时间内穿过某截面的电磁辐射能量，单位为瓦（$W$）：<br>$$<br>\varPhi_\mathrm{R} &#x3D; \frac{\mathrm{d}Q}{\mathrm{d}t}<br>$$<br>其中 ($Q$) 代表辐射能量，($t$)为时间。</p>
@@ -215,7 +215,6 @@
 <blockquote>
 <p><strong>注</strong>：更深层次地，辐射度量学可追溯至麦克斯韦电磁学原理，将电磁场视为矢量场来分析。但在此处，我们采取几何光学近似，侧重能量“射线”形式即可满足后续色彩模型应用。</p>
 </blockquote>
-<hr>
 <h3 id="2-3-光度学的基本概念"><a href="#2-3-光度学的基本概念" class="headerlink" title="2.3 光度学的基本概念"></a>2.3 光度学的基本概念</h3><p>为便于后续建模，引入如下概念</p>
 <ol>
 <li><p><strong>光通量 ($\varPhi_\mathrm{V}$)</strong><br>若某光源在波长 ($\lambda$) 上辐射通量分布为 ($\phi_\mathrm{R}(\lambda)$)，则其光度学加权形式：<br>$$<br>\phi_\mathrm{V}(\lambda) &#x3D; \sigma_\mathrm{m} , V(\lambda), \phi_\mathrm{R}(\lambda)<br>$$<br>积分得总光通量：<br>$$<br>\varPhi_\mathrm{V} &#x3D;<br>\int_0^\infty<br>\sigma_\mathrm{m},V(\lambda),<br>\phi_\mathrm{R}(\lambda),<br>\mathrm{d}\lambda<br>$$<br>其中 ($\sigma_\mathrm{m}\approx 683,[\mathrm{lm&#x2F;W}]$)，常称“最大光谱光视效率”系数。</p>
@@ -229,7 +228,12 @@
 </ol>
 <img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/Photometry_radiometry_units.svg"/>
 
-<hr>
+
+
+
+
+
+
 <h2 id="2-Reference"><a href="#2-Reference" class="headerlink" title="2.Reference"></a>2.Reference</h2><ol>
 <li>颜色的数学理论I——辐射度量学与光度学基础 - 缺心眼的香菜的文章 - 知乎 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/597710417">https://zhuanlan.zhihu.com/p/597710417</a></li>
 <li>Griffiths, David J. <a target="_blank" rel="noopener" href="https://web.archive.org/web/20210417085114/https://www.amazon.com/Introduction-Electrodynamics-3rd-David-Griffiths/dp/013805326X">Introduction to electrodynamics</a> 3. ed., reprint. with corr. Upper Saddle River, NJ [u.a.]: Prentice-Hall. 1999 [2012-04-06]. <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/Special:%E7%BD%91%E7%BB%9C%E4%B9%A6%E6%BA%90/0-13-805326-X">ISBN 0-13-805326-X</a>.</li>
