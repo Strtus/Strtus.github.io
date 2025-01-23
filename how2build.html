@@ -407,7 +407,7 @@
 <p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-23%2021.28.04.png" alt="截屏2025-01-23 21.28.04"></p>
 <p>现在，你可以愉快的写博客了</p>
 <p>本地的markdown编辑器推荐使用Obsidian或Typora，它们都对Latex有很好的支持</p>
-<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>希望这篇文章对你有帮助，任何疑问可以通过<a href="mailto:&#115;&#x74;&#114;&#116;&#x75;&#115;&#64;&#x6f;&#x75;&#116;&#108;&#x6f;&#111;&#x6b;&#x2e;&#x63;&#x6f;&#x6d;">strtus@outlook.com</a>与我联络</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>希望这篇文章对你有帮助，任何疑问可以通过<a href="mailto:&#x73;&#116;&#x72;&#116;&#x75;&#115;&#x40;&#111;&#x75;&#116;&#x6c;&#111;&#x6f;&#107;&#x2e;&#x63;&#x6f;&#x6d;">strtus@outlook.com</a>与我联络</p>
 <p>enjoy😉 ! </p>
 
     </div>
@@ -441,6 +441,29 @@
     </div>
 
 
+
+    <div class="post__comments post__with-toc content-card" id="comment">
+        
+    <h4>Comments</h4>
+    
+    
+    
+    <div id="valine_container" class="valine_thread"></div>
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+
+    </div>
 
 
 
@@ -614,6 +637,64 @@
 
  
 
+
+    
+
+    
+
+    
+    
+    <script>
+        function loadComment() {
+            let e;
+            (e = document.createElement("script")).src = '/%5Bobject%20Object%5D',
+            document.body.appendChild(e);
+            e.onload = () => {
+                var valineConfig = {"appId":"QIYxqxBP5mLVOzEb019mG9ip-gzGzoHsz","appKey":"SQdyLluw7kng5SQNdM4HHDgg","placeholder":null,"path":null,"avatar":null,"meta":["nick","mail"],"pageSize":null,"lang":null,"visitor":null,"highlight":null,"avatarForce":null,"recordIP":null,"serverURLs":null,"enableQQ":null,"requiredFields":["nick"],"emojiCDN":null,"emojiMaps":null};
+                valineConfig.el = '#valine_container';
+                for (var i in valineConfig) {
+                    if (valineConfig[i] === null) delete valineConfig[i];
+                }
+                new Valine(valineConfig);
+            };
+        }
+    
+        var runningOnBrowser = typeof window !== "undefined";
+        var isBot = runningOnBrowser && !("onscroll" in window) || typeof navigator !== "undefined" && /(gle|ing|ro|msn)bot|crawl|spider|yand|duckgo/i.test(navigator.userAgent);
+        var supportsIntersectionObserver = runningOnBrowser && "IntersectionObserver" in window;
+    
+        setTimeout(function () {
+            if (!isBot && supportsIntersectionObserver) {
+                var comment_observer = new IntersectionObserver(function(entries) {
+                    if (entries[0].isIntersecting) {
+                        loadComment();
+                        comment_observer.disconnect();
+                    }
+                }, { threshold: [0] });
+                comment_observer.observe(document.getElementById('comment'));
+            } else {
+                loadComment();
+            }
+        }, 1);
+    </script>
+
+
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+
+    
+    
+    
 
 
 
