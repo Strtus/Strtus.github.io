@@ -45,12 +45,12 @@
 
     <!-- OpenGraph -->
  
-    <meta name="description" content="0.前言Hexo 是一款基于 Node.js 的静态博客框架，能够将网站内容预先渲染为 HTML 文件，从而避免了服务器实时渲染的需求。这与传统的动态博客不同，后者依赖于数据库和服务器端脚本来动态生成内容。因此，静态博客具备更快的加载速度、较低的服务器资源消耗和更高的安全性。 由于内容以静态文件形式存储和分发，静态博客可以通过如 GitHub Pages 等托管服务实现免费部署，降低搭建成本。 此">
+    <meta name="description" content="前言Hexo 是一款基于 Node.js 的静态博客框架，能够将网站内容预先渲染为 HTML 文件，从而避免了服务器实时渲染的需求。这与传统的动态博客不同，后者依赖于数据库和服务器端脚本来动态生成内容。因此，静态博客具备更快的加载速度、较低的服务器资源消耗和更高的安全性。 由于内容以静态文件形式存储和分发，静态博客可以通过如 GitHub Pages 等托管服务实现免费部署，降低搭建成本。 此外，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="利用HEXO+GithubPages搭建自己的静态博客">
 <meta property="og:url" content="https://strtus.github.io/2025/01/23/Users-sqren-Desktop-StrtusJourney-myblog/index.html">
 <meta property="og:site_name" content="Strtus&#39;s Journey">
-<meta property="og:description" content="0.前言Hexo 是一款基于 Node.js 的静态博客框架，能够将网站内容预先渲染为 HTML 文件，从而避免了服务器实时渲染的需求。这与传统的动态博客不同，后者依赖于数据库和服务器端脚本来动态生成内容。因此，静态博客具备更快的加载速度、较低的服务器资源消耗和更高的安全性。 由于内容以静态文件形式存储和分发，静态博客可以通过如 GitHub Pages 等托管服务实现免费部署，降低搭建成本。 此">
+<meta property="og:description" content="前言Hexo 是一款基于 Node.js 的静态博客框架，能够将网站内容预先渲染为 HTML 文件，从而避免了服务器实时渲染的需求。这与传统的动态博客不同，后者依赖于数据库和服务器端脚本来动态生成内容。因此，静态博客具备更快的加载速度、较低的服务器资源消耗和更高的安全性。 由于内容以静态文件形式存储和分发，静态博客可以通过如 GitHub Pages 等托管服务实现免费部署，降低搭建成本。 此外，">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-21%2011.00.40.png">
 <meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-23%2018.36.02.png">
@@ -74,7 +74,7 @@
 <meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-21%2015.07.37.png">
 <meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/image-20250123193652677.png">
 <meta property="article:published_time" content="2025-01-23T11:48:11.000Z">
-<meta property="article:modified_time" content="2025-01-23T11:56:21.455Z">
+<meta property="article:modified_time" content="2025-01-23T12:20:58.278Z">
 <meta property="article:author" content="strtus">
 <meta property="article:tag" content="教程">
 <meta name="twitter:card" content="summary_large_image">
@@ -187,7 +187,7 @@
 
     <aside class="post-side">
         <div class="post-side__toc">
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">0.前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-number">2.</span> <span class="toc-text">1.准备工作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#GitHub-%E8%B4%A6%E5%8F%B7"><span class="toc-number">2.1.</span> <span class="toc-text">GitHub 账号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-Git"><span class="toc-number">2.2.</span> <span class="toc-text">安装 Git</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2Node-js%E7%8E%AF%E5%A2%83"><span class="toc-number">2.3.</span> <span class="toc-text">部署Node.js环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%9F%E5%90%8D%E8%B4%AD%E4%B9%B0%EF%BC%88%E9%9D%9E%E5%BF%85%E8%A6%81"><span class="toc-number">2.4.</span> <span class="toc-text">域名购买（非必要)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A1%AE%E4%BF%9D%E8%87%AA%E5%B7%B1%E6%8B%A5%E6%9C%89%E8%89%AF%E5%A5%BD%E7%9A%84%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91%E7%8E%AF%E5%A2%83"><span class="toc-number">2.5.</span> <span class="toc-text">确保自己拥有良好的科学上网环境</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%AE%89%E8%A3%85HEXO"><span class="toc-number">3.</span> <span class="toc-text">2.安装HEXO</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E9%85%8D%E7%BD%AEHEXO"><span class="toc-number">4.</span> <span class="toc-text">3.配置HEXO</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1%E9%85%8D%E7%BD%AE%E4%B8%BB%E9%A2%98"><span class="toc-number">4.1.</span> <span class="toc-text">3.1配置主题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6"><span class="toc-number">4.2.</span> <span class="toc-text">3.2安装插件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%92%B0%E5%86%99%E6%96%B0%E6%96%87%E7%AB%A0"><span class="toc-number">5.</span> <span class="toc-text">4.撰写新文章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E9%83%A8%E7%BD%B2%E5%88%B0GithubPages"><span class="toc-number">6.</span> <span class="toc-text">5.部署到GithubPages</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-number">2.</span> <span class="toc-text">准备工作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#GitHub-%E8%B4%A6%E5%8F%B7"><span class="toc-number">2.1.</span> <span class="toc-text">GitHub 账号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-Git"><span class="toc-number">2.2.</span> <span class="toc-text">安装 Git</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2Node-js%E7%8E%AF%E5%A2%83"><span class="toc-number">2.3.</span> <span class="toc-text">部署Node.js环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%9F%E5%90%8D%E8%B4%AD%E4%B9%B0%EF%BC%88%E9%9D%9E%E5%BF%85%E8%A6%81"><span class="toc-number">2.4.</span> <span class="toc-text">域名购买（非必要)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A1%AE%E4%BF%9D%E8%87%AA%E5%B7%B1%E6%8B%A5%E6%9C%89%E8%89%AF%E5%A5%BD%E7%9A%84%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91%E7%8E%AF%E5%A2%83"><span class="toc-number">2.5.</span> <span class="toc-text">确保自己拥有良好的科学上网环境</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85HEXO"><span class="toc-number">3.</span> <span class="toc-text">安装HEXO</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEHEXO"><span class="toc-number">4.</span> <span class="toc-text">配置HEXO</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E4%B8%BB%E9%A2%98"><span class="toc-number">4.1.</span> <span class="toc-text">配置主题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6"><span class="toc-number">4.2.</span> <span class="toc-text">安装插件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%92%B0%E5%86%99%E6%96%B0%E6%96%87%E7%AB%A0"><span class="toc-number">5.</span> <span class="toc-text">撰写新文章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2%E5%88%B0GithubPages"><span class="toc-number">6.</span> <span class="toc-text">部署到GithubPages</span></a></li></ol>
         </div>
     </aside>
     <a class="btn-toc button" id="btn-toc" tabindex="0">
@@ -197,17 +197,17 @@
     </a>
     <div class="toc-menus" id="toc-menus">
         <div class="toc-title">Article Directory</div>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">0.前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-number">2.</span> <span class="toc-text">1.准备工作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#GitHub-%E8%B4%A6%E5%8F%B7"><span class="toc-number">2.1.</span> <span class="toc-text">GitHub 账号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-Git"><span class="toc-number">2.2.</span> <span class="toc-text">安装 Git</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2Node-js%E7%8E%AF%E5%A2%83"><span class="toc-number">2.3.</span> <span class="toc-text">部署Node.js环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%9F%E5%90%8D%E8%B4%AD%E4%B9%B0%EF%BC%88%E9%9D%9E%E5%BF%85%E8%A6%81"><span class="toc-number">2.4.</span> <span class="toc-text">域名购买（非必要)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A1%AE%E4%BF%9D%E8%87%AA%E5%B7%B1%E6%8B%A5%E6%9C%89%E8%89%AF%E5%A5%BD%E7%9A%84%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91%E7%8E%AF%E5%A2%83"><span class="toc-number">2.5.</span> <span class="toc-text">确保自己拥有良好的科学上网环境</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%AE%89%E8%A3%85HEXO"><span class="toc-number">3.</span> <span class="toc-text">2.安装HEXO</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E9%85%8D%E7%BD%AEHEXO"><span class="toc-number">4.</span> <span class="toc-text">3.配置HEXO</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1%E9%85%8D%E7%BD%AE%E4%B8%BB%E9%A2%98"><span class="toc-number">4.1.</span> <span class="toc-text">3.1配置主题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6"><span class="toc-number">4.2.</span> <span class="toc-text">3.2安装插件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%92%B0%E5%86%99%E6%96%B0%E6%96%87%E7%AB%A0"><span class="toc-number">5.</span> <span class="toc-text">4.撰写新文章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E9%83%A8%E7%BD%B2%E5%88%B0GithubPages"><span class="toc-number">6.</span> <span class="toc-text">5.部署到GithubPages</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-number">2.</span> <span class="toc-text">准备工作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#GitHub-%E8%B4%A6%E5%8F%B7"><span class="toc-number">2.1.</span> <span class="toc-text">GitHub 账号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-Git"><span class="toc-number">2.2.</span> <span class="toc-text">安装 Git</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2Node-js%E7%8E%AF%E5%A2%83"><span class="toc-number">2.3.</span> <span class="toc-text">部署Node.js环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%9F%E5%90%8D%E8%B4%AD%E4%B9%B0%EF%BC%88%E9%9D%9E%E5%BF%85%E8%A6%81"><span class="toc-number">2.4.</span> <span class="toc-text">域名购买（非必要)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A1%AE%E4%BF%9D%E8%87%AA%E5%B7%B1%E6%8B%A5%E6%9C%89%E8%89%AF%E5%A5%BD%E7%9A%84%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91%E7%8E%AF%E5%A2%83"><span class="toc-number">2.5.</span> <span class="toc-text">确保自己拥有良好的科学上网环境</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85HEXO"><span class="toc-number">3.</span> <span class="toc-text">安装HEXO</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEHEXO"><span class="toc-number">4.</span> <span class="toc-text">配置HEXO</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E4%B8%BB%E9%A2%98"><span class="toc-number">4.1.</span> <span class="toc-text">配置主题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6"><span class="toc-number">4.2.</span> <span class="toc-text">安装插件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%92%B0%E5%86%99%E6%96%B0%E6%96%87%E7%AB%A0"><span class="toc-number">5.</span> <span class="toc-text">撰写新文章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2%E5%88%B0GithubPages"><span class="toc-number">6.</span> <span class="toc-text">部署到GithubPages</span></a></li></ol>
     </div>
 
 
 <article class="post post__with-toc content-card">
     <div class="post__header"></div>
     <div class="post__content">
-        <h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0.前言"></a>0.前言</h2><p>Hexo 是一款基于 Node.js 的静态博客框架，能够将网站内容预先渲染为 HTML 文件，从而避免了服务器实时渲染的需求。这与传统的动态博客不同，后者依赖于数据库和服务器端脚本来动态生成内容。因此，静态博客具备更快的加载速度、较低的服务器资源消耗和更高的安全性。</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Hexo 是一款基于 Node.js 的静态博客框架，能够将网站内容预先渲染为 HTML 文件，从而避免了服务器实时渲染的需求。这与传统的动态博客不同，后者依赖于数据库和服务器端脚本来动态生成内容。因此，静态博客具备更快的加载速度、较低的服务器资源消耗和更高的安全性。</p>
 <p>由于内容以静态文件形式存储和分发，静态博客可以通过如 GitHub Pages 等托管服务实现免费部署，降低搭建成本。</p>
 <p>此外，Hexo 对 Markdown 和 LaTeX 的支持非常友好，渲染速度快，尤其适合构建技术型或知识分享类博客。</p>
-<h2 id="1-准备工作"><a href="#1-准备工作" class="headerlink" title="1.准备工作"></a>1.准备工作</h2><h3 id="GitHub-账号"><a href="#GitHub-账号" class="headerlink" title="GitHub 账号"></a><strong>GitHub 账号</strong></h3><p>我们需要把生成的html文件git到Repository中，你需要前往<a target="_blank" rel="noopener" href="https://github.com/">GitHub官网</a>注册一个账号</p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><h3 id="GitHub-账号"><a href="#GitHub-账号" class="headerlink" title="GitHub 账号"></a><strong>GitHub 账号</strong></h3><p>我们需要把生成的html文件git到Repository中，你需要前往<a target="_blank" rel="noopener" href="https://github.com/">GitHub官网</a>注册一个账号</p>
 <h3 id="安装-Git"><a href="#安装-Git" class="headerlink" title="安装 Git"></a><strong>安装 Git</strong></h3><p>请提前部署好git环境</p>
 <h3 id="部署Node-js环境"><a href="#部署Node-js环境" class="headerlink" title="部署Node.js环境"></a><strong>部署Node.js环境</strong></h3><p>去官网下载即可，不再赘述</p>
 <img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-21%2011.00.40.png"/>
@@ -223,7 +223,7 @@
 <h3 id="确保自己拥有良好的科学上网环境"><a href="#确保自己拥有良好的科学上网环境" class="headerlink" title="确保自己拥有良好的科学上网环境"></a><strong>确保自己拥有良好的科学上网环境</strong></h3><p>我们需要访问github的服务器，而这个过程需要绕过一堵无形的墙，u know</p>
 <p>方法不再赘述，八仙过海各显神通</p>
 <p>比如你甚至可以通过修改hosts来突破DNS污染）</p>
-<h2 id="2-安装HEXO"><a href="#2-安装HEXO" class="headerlink" title="2.安装HEXO"></a>2.安装HEXO</h2><p>1.在本地创建安装目录，比如这是我的目录：</p>
+<h2 id="安装HEXO"><a href="#安装HEXO" class="headerlink" title="安装HEXO"></a>安装HEXO</h2><p>1.在本地创建安装目录，比如这是我的目录：</p>
 <img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-23%2018.38.34.png"/>
 
 <p>通过cd命令切换到该目录：</p>
@@ -309,19 +309,19 @@
 <p>浏览器访问 <a target="_blank" rel="noopener" href="http://localhost:4000/">http://localhost:4000</a></p>
 <p>能进来这个页面就说明安装成功了</p>
 <p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/image-20250123192532341.png" alt="image-20250123192532341"></p>
-<h2 id="3-配置HEXO"><a href="#3-配置HEXO" class="headerlink" title="3.配置HEXO"></a>3.配置HEXO</h2><h3 id="3-1配置主题"><a href="#3-1配置主题" class="headerlink" title="3.1配置主题"></a>3.1配置主题</h3><p>cd到themes目录</p>
+<h2 id="配置HEXO"><a href="#配置HEXO" class="headerlink" title="配置HEXO"></a>配置HEXO</h2><h3 id="配置主题"><a href="#配置主题" class="headerlink" title="配置主题"></a>配置主题</h3><p>cd到themes目录</p>
 <p>直接git clone</p>
 <p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-23%2019.31.02.png" alt="截屏2025-01-23 19.31.02"></p>
 <p>随后修改_config.yml文件中的theme键值为当前主题名称：</p>
 <p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-21%2014.57.41.png" alt="截屏2025-01-21 14.57.41"></p>
 <p>重启本地serve，在浏览器中可以看到主题已经完成了更换</p>
 <p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-21%2014.58.17.png" alt="截屏2025-01-21 14.58.17"></p>
-<h3 id="3-2安装插件"><a href="#3-2安装插件" class="headerlink" title="3.2安装插件"></a>3.2安装插件</h3><p>如若需要安装插件，请使用如下命令：</p>
+<h3 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h3><p>如若需要安装插件，请使用如下命令：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-tag-[tag name] --save</span><br></pre></td></tr></table></figure>
 
 <p>这里以katex为例</p>
 <p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-23%2019.40.41.png" alt="截屏2025-01-23 19.38.07"></p>
-<h2 id="4-撰写新文章"><a href="#4-撰写新文章" class="headerlink" title="4.撰写新文章"></a>4.撰写新文章</h2><p>cd到HEXO目录</p>
+<h2 id="撰写新文章"><a href="#撰写新文章" class="headerlink" title="撰写新文章"></a>撰写新文章</h2><p>cd到HEXO目录</p>
 <p>使用new命令来新建一个带有front-matter的.md文件</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HEXO new &#x27;title&#x27;</span><br></pre></td></tr></table></figure>
 
@@ -341,7 +341,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HEXO serve</span><br></pre></td></tr></table></figure>
 
 <p>即可在浏览器中访问</p>
-<h2 id="5-部署到GithubPages"><a href="#5-部署到GithubPages" class="headerlink" title="5.部署到GithubPages"></a>5.部署到GithubPages</h2>
+<h2 id="部署到GithubPages"><a href="#部署到GithubPages" class="headerlink" title="部署到GithubPages"></a>部署到GithubPages</h2>
     </div>
     
     <div class="post__license">
