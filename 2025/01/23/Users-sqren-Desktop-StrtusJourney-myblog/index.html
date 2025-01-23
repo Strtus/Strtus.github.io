@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--icon-->
+
+    
+        <link rel="shortcut icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="16x16" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="32x32" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon-96x96.png">
+    
+    
+        <link rel="apple-touch-icon" sizes="180x180" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/web-app-manifest-192x192.png">
+    
+    
+        <link rel="mask-icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/apple-touch-icon.png">
+    
+
+
+    <!-- meta -->
+
+
+<title>利用HEXO+GithubPages搭建自己的静态博客 | Strtus&#39;s Journey</title>
+
+
+    <meta name="keywords" content="教程">
+
+
+
+
+    <!-- OpenGraph -->
+ 
+    <meta name="description" content="0.前言Hexo 是一款基于 Node.js 的静态博客框架，能够轻松生成静态网页，并将网站内容预先渲染为 HTML 文件，从而避免了服务器实时渲染的需求。这与传统的动态博客不同，后者依赖于数据库和服务器端脚本来动态生成内容。因此，静态博客具备更快的加载速度、较低的服务器资源消耗和更高的安全性。由于内容以静态文件形式存储和分发，静态博客可以通过如 GitHub Pages 等托管服务实现免费部署，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="利用HEXO+GithubPages搭建自己的静态博客">
+<meta property="og:url" content="https://strtus.github.io/2025/01/23/Users-sqren-Desktop-StrtusJourney-myblog/index.html">
+<meta property="og:site_name" content="Strtus&#39;s Journey">
+<meta property="og:description" content="0.前言Hexo 是一款基于 Node.js 的静态博客框架，能够轻松生成静态网页，并将网站内容预先渲染为 HTML 文件，从而避免了服务器实时渲染的需求。这与传统的动态博客不同，后者依赖于数据库和服务器端脚本来动态生成内容。因此，静态博客具备更快的加载速度、较低的服务器资源消耗和更高的安全性。由于内容以静态文件形式存储和分发，静态博客可以通过如 GitHub Pages 等托管服务实现免费部署，">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-21%2011.00.40.png">
+<meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-23%2018.36.02.png">
+<meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-23%2018.38.34.png">
+<meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-21%2011.04.48.png">
+<meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/image-20250123185042301.png">
+<meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-21%2011.16.56.png">
+<meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-23%2018.53.54.png">
+<meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-23%2019.01.51.png">
+<meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-23%2019.05.29.png">
+<meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-23%2019.05.56.png">
+<meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-23%2019.14.30.png">
+<meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-23%2019.16.51.png">
+<meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-23%2019.19.41.png">
+<meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-23%2019.24.11.png">
+<meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/image-20250123192532341.png">
+<meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-23%2019.31.02.png">
+<meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-21%2014.57.41.png">
+<meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-21%2014.58.17.png">
+<meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-23%2019.40.41.png">
+<meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-21%2015.07.37.png">
+<meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/image-20250123193652677.png">
+<meta property="article:published_time" content="2025-01-23T11:48:11.000Z">
+<meta property="article:modified_time" content="2025-01-23T11:48:57.416Z">
+<meta property="article:author" content="strtus">
+<meta property="article:tag" content="教程">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-21%2011.00.40.png">
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/style/dark.css">
+
+    
+<script src="/js/darkmode.js"></script>
+
+
+
+     
+
+    <!-- custom head -->
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+    <body>
+        <div id="app" tabindex="-1">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">Strtus&#39;s Journey</span>
+        </a>
+    </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">首页</a>
+                
+                    <a href="/about.html" class="navbar-menu button">About</a>
+                
+                    <a href="/tags/" class="navbar-menu button">标签</a>
+                
+                    <a href="/archives/" class="navbar-menu button">归档</a>
+                
+                    <a href="/page/" class="navbar-menu button">Page</a>
+                
+            </div>
+        
+        
+        
+    <a href="/search/" id="btn-search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="24" height="24" fill="currentColor" stroke="currentColor" stroke-width="32"><path d="M192 448c0-141.152 114.848-256 256-256s256 114.848 256 256-114.848 256-256 256-256-114.848-256-256z m710.624 409.376l-206.88-206.88A318.784 318.784 0 0 0 768 448c0-176.736-143.264-320-320-320S128 271.264 128 448s143.264 320 320 320a318.784 318.784 0 0 0 202.496-72.256l206.88 206.88 45.248-45.248z"></path></svg>
+    </a>
+
+
+        
+        
+    <a href="javaScript:void(0);" id="btn-toggle-dark">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </a>
+
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">首页</a>
+                
+                    <a href="/about.html" class="dropdown-menu button">About</a>
+                
+                    <a href="/tags/" class="dropdown-menu button">标签</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">归档</a>
+                
+                    <a href="/page/" class="dropdown-menu button">Page</a>
+                
+            </div>
+        
+    </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        利用HEXO+GithubPages搭建自己的静态博客
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2025/01/" class="post-meta__date button">2025-01-23</a>
+        
+ 
+        
+    
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+    <aside class="post-side">
+        <div class="post-side__toc">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">0.前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-number">2.</span> <span class="toc-text">1.准备工作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#GitHub-%E8%B4%A6%E5%8F%B7"><span class="toc-number">2.0.1.</span> <span class="toc-text">GitHub 账号</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-Git"><span class="toc-number">2.0.2.</span> <span class="toc-text">安装 Git</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2Node-js%E7%8E%AF%E5%A2%83"><span class="toc-number">2.0.3.</span> <span class="toc-text">部署Node.js环境</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%9F%E5%90%8D%E8%B4%AD%E4%B9%B0%EF%BC%88%E9%9D%9E%E5%BF%85%E8%A6%81"><span class="toc-number">2.0.4.</span> <span class="toc-text">域名购买（非必要)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A1%AE%E4%BF%9D%E8%87%AA%E5%B7%B1%E6%8B%A5%E6%9C%89%E8%89%AF%E5%A5%BD%E7%9A%84%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91%E7%8E%AF%E5%A2%83"><span class="toc-number">2.0.5.</span> <span class="toc-text">确保自己拥有良好的科学上网环境</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%AE%89%E8%A3%85HEXO"><span class="toc-number">3.</span> <span class="toc-text">2.安装HEXO</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E9%85%8D%E7%BD%AEHEXO"><span class="toc-number">4.</span> <span class="toc-text">3.配置HEXO</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1%E9%85%8D%E7%BD%AE%E4%B8%BB%E9%A2%98"><span class="toc-number">4.1.</span> <span class="toc-text">3.1配置主题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6"><span class="toc-number">4.2.</span> <span class="toc-text">3.2安装插件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%92%B0%E5%86%99%E6%96%B0%E6%96%87%E7%AB%A0"><span class="toc-number">5.</span> <span class="toc-text">4.撰写新文章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E9%83%A8%E7%BD%B2%E5%88%B0GithubPages"><span class="toc-number">6.</span> <span class="toc-text">5.部署到GithubPages</span></a></li></ol>
+        </div>
+    </aside>
+    <a class="btn-toc button" id="btn-toc" tabindex="0">
+        <svg viewBox="0 0 1024 1024" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M128 256h64V192H128zM320 256h576V192H320zM128 544h64v-64H128zM320 544h576v-64H320zM128 832h64v-64H128zM320 832h576v-64H320z" fill="currentColor"></path>
+        </svg>
+    </a>
+    <div class="toc-menus" id="toc-menus">
+        <div class="toc-title">Article Directory</div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">0.前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-number">2.</span> <span class="toc-text">1.准备工作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#GitHub-%E8%B4%A6%E5%8F%B7"><span class="toc-number">2.0.1.</span> <span class="toc-text">GitHub 账号</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-Git"><span class="toc-number">2.0.2.</span> <span class="toc-text">安装 Git</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2Node-js%E7%8E%AF%E5%A2%83"><span class="toc-number">2.0.3.</span> <span class="toc-text">部署Node.js环境</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%9F%E5%90%8D%E8%B4%AD%E4%B9%B0%EF%BC%88%E9%9D%9E%E5%BF%85%E8%A6%81"><span class="toc-number">2.0.4.</span> <span class="toc-text">域名购买（非必要)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A1%AE%E4%BF%9D%E8%87%AA%E5%B7%B1%E6%8B%A5%E6%9C%89%E8%89%AF%E5%A5%BD%E7%9A%84%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91%E7%8E%AF%E5%A2%83"><span class="toc-number">2.0.5.</span> <span class="toc-text">确保自己拥有良好的科学上网环境</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%AE%89%E8%A3%85HEXO"><span class="toc-number">3.</span> <span class="toc-text">2.安装HEXO</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E9%85%8D%E7%BD%AEHEXO"><span class="toc-number">4.</span> <span class="toc-text">3.配置HEXO</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1%E9%85%8D%E7%BD%AE%E4%B8%BB%E9%A2%98"><span class="toc-number">4.1.</span> <span class="toc-text">3.1配置主题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6"><span class="toc-number">4.2.</span> <span class="toc-text">3.2安装插件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%92%B0%E5%86%99%E6%96%B0%E6%96%87%E7%AB%A0"><span class="toc-number">5.</span> <span class="toc-text">4.撰写新文章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E9%83%A8%E7%BD%B2%E5%88%B0GithubPages"><span class="toc-number">6.</span> <span class="toc-text">5.部署到GithubPages</span></a></li></ol>
+    </div>
+
+
+<article class="post post__with-toc content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0.前言"></a>0.前言</h2><p>Hexo 是一款基于 Node.js 的静态博客框架，能够轻松生成静态网页，并将网站内容预先渲染为 HTML 文件，从而避免了服务器实时渲染的需求。这与传统的动态博客不同，后者依赖于数据库和服务器端脚本来动态生成内容。因此，静态博客具备更快的加载速度、较低的服务器资源消耗和更高的安全性。由于内容以静态文件形式存储和分发，静态博客可以通过如 GitHub Pages 等托管服务实现免费部署，降低搭建成本。此外，Hexo 对 Markdown 和 LaTeX 的支持非常友好，渲染速度快，尤其适合用于构建技术型或知识分享类博客。</p>
+<h2 id="1-准备工作"><a href="#1-准备工作" class="headerlink" title="1.准备工作"></a>1.准备工作</h2><h4 id="GitHub-账号"><a href="#GitHub-账号" class="headerlink" title="GitHub 账号"></a><strong>GitHub 账号</strong></h4><p>我们需要把生成的html文件git到Repository中，你需要前往<a target="_blank" rel="noopener" href="https://github.com/">GitHub官网</a>注册一个账号</p>
+<h4 id="安装-Git"><a href="#安装-Git" class="headerlink" title="安装 Git"></a><strong>安装 Git</strong></h4><p>请提前部署好git环境</p>
+<h4 id="部署Node-js环境"><a href="#部署Node-js环境" class="headerlink" title="部署Node.js环境"></a><strong>部署Node.js环境</strong></h4><p>去官网下载即可，不再赘述</p>
+<img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-21%2011.00.40.png"/>
+
+<p>下载完成后在Terminal中输入以下命令检测版本确保安装成功</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br></pre></td></tr></table></figure>
+
+<p>你应该会得到类似 这样的output</p>
+<img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-23%2018.36.02.png"/>
+
+
+
+<h4 id="域名购买（非必要"><a href="#域名购买（非必要" class="headerlink" title="域名购买（非必要)"></a><strong>域名购买</strong>（非必要)</h4><p>通过国内的云服务供应商购买域名会更便宜，但需要备案，我个人用的是腾讯云</p>
+<p>当然你也可以选择国外的供应商，比如大厂Cloudfare</p>
+<h4 id="确保自己拥有良好的科学上网环境"><a href="#确保自己拥有良好的科学上网环境" class="headerlink" title="确保自己拥有良好的科学上网环境"></a><strong>确保自己拥有良好的科学上网环境</strong></h4><p>我们需要访问github的服务器，而这个过程需要绕过一堵无形的墙，u know</p>
+<p>方法不再赘述，八仙过海各显神通</p>
+<p>比如你甚至可以通过修改hosts来突破DNS污染）</p>
+<h2 id="2-安装HEXO"><a href="#2-安装HEXO" class="headerlink" title="2.安装HEXO"></a>2.安装HEXO</h2><p>1.在本地创建安装目录，比如这是我的目录：</p>
+<img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-23%2018.38.34.png"/>
+
+<p>通过cd命令切换到该目录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /Users/sqren/Desktop/StrtusJourney/myblog</span><br></pre></td></tr></table></figure>
+
+<p>通过npm来安装hexo：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli </span><br></pre></td></tr></table></figure>
+
+<p>如果你和我得到了类似的output：</p>
+<p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-21%2011.04.48.png" alt="截屏2025-01-21 11.04.48"></p>
+<p>这是由于当前用户没有权限在 <code>/usr/local/lib/node_modules</code> 目录下安装全局的npm包，如果不希望在系统目录下安装 npm 包，可以将 npm 的全局安装路径修改为你自己用户目录下的某个位置</p>
+<p>首先，创建一个目录来存放全局安装的 npm 包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> ~/.npm-global</span><br></pre></td></tr></table></figure>
+
+<p>然后，告诉 npm 使用这个新目录来安装全局包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config <span class="built_in">set</span> prefix <span class="string">&#x27;~/.npm-global&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>接着，编辑 <code>.bash_profile</code> 或 <code>.zshrc</code> 文件，加入以下内容：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> PATH=~/.npm-global/bin:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure>
+
+<p>重新加载配置文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.bash_profile</span><br></pre></td></tr></table></figure>
+
+<p>之后再次运行安装命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br></pre></td></tr></table></figure>
+
+
+
+<p>如图：</p>
+<p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/image-20250123185042301.png" alt="image-20250123185042301"></p>
+<p>在我们选定的安装目录下可以看到Hexo CLI：</p>
+<p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-21%2011.16.56.png" alt="截屏2025-01-21 11.16.56"></p>
+<p>BTW，如果你和我一样把HEXO框架安装在了iCloud&#x2F;OneDrive的同步文件夹下，请记得勾选“保留下载&#x2F;使用保留在此设备上”</p>
+<p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-23%2018.53.54.png" alt="截屏2025-01-23 18.53.54"></p>
+<p>安装完成后，初始化我们的博客，输入：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init blog</span><br></pre></td></tr></table></figure>
+
+<p>不出意外的话这个时候又要出意外了</p>
+<p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-23%2019.01.51.png" alt="截屏2025-01-23 19.01.51"></p>
+<p>看报错信息，提示需要在 Hexo 项目的根目录下运行 <code>npm install</code> 来安装项目所需的依赖包</p>
+<p>之前只是安装了 Hexo CLI，现在需要安装 Hexo 的依赖项</p>
+<p>那么，按照它的提示👇</p>
+<p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-23%2019.05.29.png" alt="截屏2025-01-23 19.05.29"></p>
+<p>使用npm install命令根据 <code>package.json</code> 文件中的配置安装所有必需的依赖包</p>
+<p>呐，屁用没有</p>
+<p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-23%2019.05.56.png" alt="截屏2025-01-23 19.05.56"></p>
+<p>根据报错信息，npm 缓存目录（<code>/Users/sqren/.npm</code>）中包含了由 root 用户拥有的文件，这是因为之前我使用 <code>sudo</code> 安装过 npm 包</p>
+<p>现在我们需要将 <code>/Users/sqren/.npm</code> 目录的所有权更改为当前用户：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">chown</span> -R $(<span class="built_in">whoami</span>):$(<span class="built_in">whoami</span>) /Users/sqren/.npm</span><br></pre></td></tr></table></figure>
+
+<p>如果给了这个报错</p>
+<p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-23%2019.14.30.png" alt="截屏2025-01-23 19.14.30"></p>
+<p>说明 <code>$(whoami)</code> 命令返回的用户名与系统中实际存在的用户组不匹配</p>
+<p>检查当前用户的名称和对应的用户组：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">id</span></span><br></pre></td></tr></table></figure>
+
+<p>会看到如下output：</p>
+<p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-23%2019.16.51.png" alt="截屏2025-01-23 19.16.51"></p>
+<p>其中：</p>
+<ul>
+<li><code>uid=501(sqren)</code> 表示当前用户是 <code>sqren</code>。</li>
+<li><code>gid=20(staff)</code> 表示当前用户的用户组是 <code>staff</code>。</li>
+</ul>
+<p>于是修正 <code>chown</code> 命令：</p>
+<p>把 <code>.npm</code> 目录及其所有内容的所有权更改为 <code>sqren</code> 用户和 <code>staff</code> 组。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">chown</span> -R sqren:staff /Users/sqren/.npm</span><br></pre></td></tr></table></figure>
+
+<p>清空 npm 缓存以防出现奇奇怪怪的问题</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm cache clean --force</span><br></pre></td></tr></table></figure>
+
+
+
+<p>接下来就可以愉快的npm install了</p>
+<p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-23%2019.19.41.png" alt="截屏2025-01-23 19.19.41"></p>
+<p>安装完成后运行如下命令初始化HEXO：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HEXO init</span><br></pre></td></tr></table></figure>
+
+<p>随后启动HEXO本地服务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HEXO serve</span><br></pre></td></tr></table></figure>
+
+<p>如图</p>
+<p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-23%2019.24.11.png" alt="截屏2025-01-23 19.24.11"></p>
+<p>浏览器访问 <a target="_blank" rel="noopener" href="http://localhost:4000/">http://localhost:4000</a></p>
+<p>能进来这个页面就说明安装成功了</p>
+<p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/image-20250123192532341.png" alt="image-20250123192532341"></p>
+<h2 id="3-配置HEXO"><a href="#3-配置HEXO" class="headerlink" title="3.配置HEXO"></a>3.配置HEXO</h2><h3 id="3-1配置主题"><a href="#3-1配置主题" class="headerlink" title="3.1配置主题"></a>3.1配置主题</h3><p>cd到themes目录</p>
+<p>直接git clone</p>
+<p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-23%2019.31.02.png" alt="截屏2025-01-23 19.31.02"></p>
+<p>随后修改_config.yml文件中的theme键值为当前主题名称：</p>
+<p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-21%2014.57.41.png" alt="截屏2025-01-21 14.57.41"></p>
+<p>重启本地serve，在浏览器中可以看到主题已经完成了更换</p>
+<p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-21%2014.58.17.png" alt="截屏2025-01-21 14.58.17"></p>
+<h3 id="3-2安装插件"><a href="#3-2安装插件" class="headerlink" title="3.2安装插件"></a>3.2安装插件</h3><p>如若需要安装插件，请使用如下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-tag-[tag name] --save</span><br></pre></td></tr></table></figure>
+
+<p>这里以katex为例</p>
+<p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-23%2019.40.41.png" alt="截屏2025-01-23 19.38.07"></p>
+<h2 id="4-撰写新文章"><a href="#4-撰写新文章" class="headerlink" title="4.撰写新文章"></a>4.撰写新文章</h2><p>cd到HEXO目录</p>
+<p>使用new命令来新建一个带有front-matter的.md文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HEXO new &#x27;title&#x27;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-21%2015.07.37.png" alt="截屏2025-01-21 15.07.37"></p>
+<p>随后你可以在posts目录下打开此文档</p>
+<p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/image-20250123193652677.png" alt="image-20250123193652677"></p>
+<p>撰写完文章后使用如下命令清除缓存：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HEXO clean</span><br></pre></td></tr></table></figure>
+
+<p>生成html文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HEXO g</span><br></pre></td></tr></table></figure>
+
+<p>git</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HEXO d</span><br></pre></td></tr></table></figure>
+
+<p>启动本地服务：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HEXO serve</span><br></pre></td></tr></table></figure>
+
+<p>即可在浏览器中访问</p>
+<h2 id="5-部署到GithubPages"><a href="#5-部署到GithubPages" class="headerlink" title="5.部署到GithubPages"></a>5.部署到GithubPages</h2>
+    </div>
+    
+    <div class="post__license">
+        <p>
+            <strong>Author: </strong>strtus
+        </p>
+        <p>
+            <strong>
+                Permalink: 
+            </strong>
+            <a href="https://strtus.github.io/2025/01/23/Users-sqren-Desktop-StrtusJourney-myblog/">https://strtus.github.io/2025/01/23/Users-sqren-Desktop-StrtusJourney-myblog/</a>
+        </p>
+        
+    </div>
+ 
+    <div class="post-footer__meta"><p>updated at 2025-01-23</p></div> 
+    <div class="post-entry__tags"><a href="/tags/%E6%95%99%E7%A8%8B/" class="post-tags__link button"># 教程</a></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="/2025/01/22/%E8%89%B2%E5%BD%A9%E7%A7%91%E5%AD%A6%E7%9A%84%E6%95%B0%E5%AD%A6%E5%8E%9F%E7%90%86_2.Trichromatic%20Theory%20&amp;%20Grassmann&#39;s%20Law/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            Next Post
+                        </div>
+                        <div class="nav__title">
+                            色彩科学的数学原理_2.Trichromatic Theory &amp; Grassmann&#39;s Law
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
+        </div>
+    </div>
+
+
+
+
+
+</main>
+
+            <footer class="footer">
+     
+    <a href="#" class="button" id="b2t" aria-label="Back to Top" title="Back to Top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M233.376 722.752L278.624 768 512 534.624 745.376 768l45.248-45.248L512 444.128zM192 352h640V288H192z" fill="currentColor"></path>
+        </svg>
+    </a>
+
+    
+
+
+    
+     
+ 
+
+ 
+    
+        
+        <p class="footer-copyright">
+            Strtus's Journry
+        </p>
+    
+    
+</footer>
+
+        </div>
+         
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+    
+ 
+
+ 
+
+
+    <script>
+        if (typeof MathJax === 'undefined') {
+            window.MathJax = {
+                loader: {
+                    source: {
+                        '[tex]/amsCd': '[tex]/amscd',
+                        '[tex]/AMScd': '[tex]/amscd'
+                    }
+                },
+                tex: {
+                    inlineMath: {'[+]': [['$', '$']]},
+                    tags: 'ams'
+                },
+                options: {
+                    renderActions: {
+                        findScript: [10, doc => {
+                            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                                const display = !!node.type.match(/; *mode=display/);
+                                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                                const text = document.createTextNode('');
+                                node.parentNode.replaceChild(text, node);
+                                math.start = {node: text, delim: '', n: 0};
+                                math.end = {node: text, delim: '', n: 0};
+                                doc.math.push(math);
+                            });
+                        }, '', false],
+                        insertedScript: [200, () => {
+                            document.querySelectorAll('mjx-container').forEach(node => {
+                                let target = node.parentNode;
+                                if (target.nodeName.toLowerCase() === 'li') {
+                                    target.parentNode.classList.add('has-jax');
+                                }
+                            });
+                        }, '', false]
+                    }
+                }
+            };
+            (function () {
+                var script = document.createElement('script');
+                script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js";
+                script.defer = true;
+                document.head.appendChild(script);
+            })();
+        } else {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+        }
+    </script>
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+
+    </body>
+</html>
