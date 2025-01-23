@@ -407,7 +407,7 @@
 <p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-23%2021.28.04.png" alt="截屏2025-01-23 21.28.04"></p>
 <p>现在，你可以愉快的写博客了</p>
 <p>本地的markdown编辑器推荐使用Obsidian或Typora，它们都对Latex有很好的支持</p>
-<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>希望这篇文章对你有帮助，任何疑问可以通过<a href="mailto:&#115;&#x74;&#114;&#x74;&#x75;&#115;&#x40;&#x6f;&#x75;&#x74;&#108;&#x6f;&#x6f;&#x6b;&#46;&#x63;&#111;&#109;">strtus@outlook.com</a>与我联络</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>希望这篇文章对你有帮助，任何疑问可以通过<a href="mailto:&#115;&#x74;&#x72;&#116;&#117;&#115;&#64;&#111;&#117;&#116;&#108;&#111;&#x6f;&#x6b;&#x2e;&#x63;&#111;&#x6d;">strtus@outlook.com</a>与我联络</p>
 <p>enjoy😉 ! </p>
 
     </div>
@@ -494,6 +494,41 @@
     
  
 
+
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.css">
+
+    
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.js"></script>
+
+    <script>
+        let lazyloadT = Boolean('false'),
+            auto_fancybox = Boolean('true')
+        if (auto_fancybox) {
+            $(".post__content").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        } else {
+            $(".post__content").find("fancybox").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        }
+    </script>
  
 
 
