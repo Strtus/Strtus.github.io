@@ -35,7 +35,7 @@
     <!-- meta -->
 
 
-<title>色彩科学中的数学原理_3.Planckian locus的绘制方法 | Strtus&#39;s Journey</title>
+<title>色彩科学的数学原理_李群方法推导Rodrigues公式 | Strtus&#39;s Journey</title>
 
 
     <meta name="keywords" content="色彩科学">
@@ -45,21 +45,18 @@
 
     <!-- OpenGraph -->
  
-    <meta name="description" content="前言在上一章节中，基于前述辐射度量学与光度学的基础，讨论了如何通过实验数据构建色域马蹄图 本章节介绍Planckian locus的绘制方法，并由此引出相关色温的概念，这是三刺激值计算的典型案例 Planckian locus与色温黑体辐射的辐亮度分布函数为： $$\mathcal{L}\left(\lambda; T\right) &#x3D; \frac{2hc^2}{\lambda^5}\f">
+    <meta name="description" content="旋转矩阵的无穷小变换首先，从绕单位向量 $\boldsymbol{n}$ 的旋转矩阵入手，设旋转角度为 $\delta \alpha$ 时，旋转矩阵的变化量为： $$\delta \boldsymbol{r} &#x3D; \boldsymbol{n} \times \boldsymbol{r} , \delta \alpha$$ 这里，$\boldsymbol{r}$ 表示旋转前的矢量，而 $\">
 <meta property="og:type" content="article">
-<meta property="og:title" content="色彩科学中的数学原理_3.Planckian locus的绘制方法">
-<meta property="og:url" content="https://strtus.github.io/2025/01/26/%E5%A6%88%E7%9A%84%E6%88%91%E8%AE%A8%E5%8E%8C%E6%95%B0%E5%AD%A6%EF%BC%8C%E8%BF%87%E5%87%A0%E5%A4%A9%E5%9C%A8%E6%9B%B4/index.html">
+<meta property="og:title" content="色彩科学的数学原理_李群方法推导Rodrigues公式">
+<meta property="og:url" content="https://strtus.github.io/2025/01/30/%E6%9D%8E%E7%BE%A4%E6%96%B9%E6%B3%95%E6%8E%A8%E5%AF%BCRodrigues%E5%85%AC%E5%BC%8F/index.html">
 <meta property="og:site_name" content="Strtus&#39;s Journey">
-<meta property="og:description" content="前言在上一章节中，基于前述辐射度量学与光度学的基础，讨论了如何通过实验数据构建色域马蹄图 本章节介绍Planckian locus的绘制方法，并由此引出相关色温的概念，这是三刺激值计算的典型案例 Planckian locus与色温黑体辐射的辐亮度分布函数为： $$\mathcal{L}\left(\lambda; T\right) &#x3D; \frac{2hc^2}{\lambda^5}\f">
+<meta property="og:description" content="旋转矩阵的无穷小变换首先，从绕单位向量 $\boldsymbol{n}$ 的旋转矩阵入手，设旋转角度为 $\delta \alpha$ 时，旋转矩阵的变化量为： $$\delta \boldsymbol{r} &#x3D; \boldsymbol{n} \times \boldsymbol{r} , \delta \alpha$$ 这里，$\boldsymbol{r}$ 表示旋转前的矢量，而 $\">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/PlanckianLocus.png">
-<meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/CIE_1976_UCS.png">
-<meta property="article:published_time" content="2025-01-26T15:01:53.000Z">
-<meta property="article:modified_time" content="2025-01-30T15:23:02.645Z">
+<meta property="article:published_time" content="2025-01-30T15:56:36.000Z">
+<meta property="article:modified_time" content="2025-01-30T15:57:36.306Z">
 <meta property="article:author" content="strtus">
 <meta property="article:tag" content="色彩科学">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/PlanckianLocus.png">
 
 
     
@@ -155,10 +152,10 @@
 
 <div class="post-title">
     <h1 class="post-title__text">
-        色彩科学中的数学原理_3.Planckian locus的绘制方法
+        色彩科学的数学原理_李群方法推导Rodrigues公式
     </h1>
     <div class="post-title__meta">
-        <a href="/archives/2025/01/" class="post-meta__date button">2025-01-26</a>
+        <a href="/archives/2025/01/" class="post-meta__date button">2025-01-30</a>
         
  
         
@@ -175,7 +172,7 @@
 
     <aside class="post-side">
         <div class="post-side__toc">
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Planckian-locus%E4%B8%8E%E8%89%B2%E6%B8%A9"><span class="toc-number">2.</span> <span class="toc-text">Planckian locus与色温</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E8%89%B2%E6%B8%A9"><span class="toc-number">2.1.</span> <span class="toc-text">相关色温</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9D%87%E5%8C%80%E9%A2%9C%E8%89%B2%E7%A9%BA%E9%97%B4"><span class="toc-number">2.2.</span> <span class="toc-text">均匀颜色空间</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%8B%E8%BD%AC%E7%9F%A9%E9%98%B5%E7%9A%84%E6%97%A0%E7%A9%B7%E5%B0%8F%E5%8F%98%E6%8D%A2"><span class="toc-number">1.</span> <span class="toc-text">旋转矩阵的无穷小变换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%8B%E8%BD%AC%E7%9F%A9%E9%98%B5%E7%9A%84%E6%8C%87%E6%95%B0%E6%98%A0%E5%B0%84"><span class="toc-number">2.</span> <span class="toc-text">旋转矩阵的指数映射</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E7%9F%A9%E9%98%B5%E6%8C%87%E6%95%B0"><span class="toc-number">3.</span> <span class="toc-text">计算矩阵指数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E5%90%88-boldsymbol-Omega-2-%E7%9A%84%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">4.</span> <span class="toc-text">结合 $\boldsymbol{\Omega}^2$ 的表达式</span></a></li></ol>
         </div>
     </aside>
     <a class="btn-toc button" id="btn-toc" tabindex="0">
@@ -185,27 +182,32 @@
     </a>
     <div class="toc-menus" id="toc-menus">
         <div class="toc-title">Article Directory</div>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Planckian-locus%E4%B8%8E%E8%89%B2%E6%B8%A9"><span class="toc-number">2.</span> <span class="toc-text">Planckian locus与色温</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E8%89%B2%E6%B8%A9"><span class="toc-number">2.1.</span> <span class="toc-text">相关色温</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9D%87%E5%8C%80%E9%A2%9C%E8%89%B2%E7%A9%BA%E9%97%B4"><span class="toc-number">2.2.</span> <span class="toc-text">均匀颜色空间</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%8B%E8%BD%AC%E7%9F%A9%E9%98%B5%E7%9A%84%E6%97%A0%E7%A9%B7%E5%B0%8F%E5%8F%98%E6%8D%A2"><span class="toc-number">1.</span> <span class="toc-text">旋转矩阵的无穷小变换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%8B%E8%BD%AC%E7%9F%A9%E9%98%B5%E7%9A%84%E6%8C%87%E6%95%B0%E6%98%A0%E5%B0%84"><span class="toc-number">2.</span> <span class="toc-text">旋转矩阵的指数映射</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E7%9F%A9%E9%98%B5%E6%8C%87%E6%95%B0"><span class="toc-number">3.</span> <span class="toc-text">计算矩阵指数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E5%90%88-boldsymbol-Omega-2-%E7%9A%84%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">4.</span> <span class="toc-text">结合 $\boldsymbol{\Omega}^2$ 的表达式</span></a></li></ol>
     </div>
 
 
 <article class="post post__with-toc content-card">
     <div class="post__header"></div>
     <div class="post__content">
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在上一章节中，基于前述辐射度量学与光度学的基础，讨论了如何通过实验数据构建色域马蹄图</p>
-<p>本章节介绍Planckian locus的绘制方法，并由此引出相关色温的概念，这是三刺激值计算的典型案例</p>
-<h2 id="Planckian-locus与色温"><a href="#Planckian-locus与色温" class="headerlink" title="Planckian locus与色温"></a>Planckian locus与色温</h2><p>黑体辐射的辐亮度分布函数为：</p>
-<p>$$<br>\mathcal{L}\left(\lambda; T\right) &#x3D; \frac{2hc^2}{\lambda^5}\frac{1}{\mathrm{e}^{\frac{hc}{\lambda kT}}-1}<br>$$</p>
-<p>通过积分计算三刺激值后，得到色度坐标随温度$T$变化的轨迹——Planckian locus。</p>
-<p>相关色温（CCT）定义为色度坐标最接近Planckian locus点的温度值。</p>
-<img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/PlanckianLocus.png"/>
-
-<h3 id="相关色温"><a href="#相关色温" class="headerlink" title="相关色温"></a>相关色温</h3><p>对于自然界中的许多光源，其色度坐标并不完全落在Planckian locus上，但可以通过计算其与Planckian locus的最近点来确定其相关色温（CCT）。相关色温广泛应用于摄影、照明等领域，用于描述光源的颜色特性。</p>
-<h3 id="均匀颜色空间"><a href="#均匀颜色空间" class="headerlink" title="均匀颜色空间"></a>均匀颜色空间</h3><p>虽然CIE 1931 xy色度图能够直观地表示颜色的色相和饱和度，但其上的欧式距离并不能很好地反映人眼对颜色差异的感知。为了解决这一问题，研究者提出了均匀颜色空间的概念，例如CIE 1976 UCS（Uniform Chromaticity Scale）图。在均匀颜色空间中，颜色的差异与人眼的感知更加一致。</p>
-<img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/CIE_1976_UCS.png"/>
-
-
-
+        <h3 id="旋转矩阵的无穷小变换"><a href="#旋转矩阵的无穷小变换" class="headerlink" title="旋转矩阵的无穷小变换"></a>旋转矩阵的无穷小变换</h3><p>首先，从绕单位向量 $\boldsymbol{n}$ 的旋转矩阵入手，设旋转角度为 $\delta \alpha$ 时，旋转矩阵的变化量为：</p>
+<p>$$<br>\delta \boldsymbol{r} &#x3D; \boldsymbol{n} \times \boldsymbol{r} , \delta \alpha<br>$$</p>
+<p>这里，$\boldsymbol{r}$ 表示旋转前的矢量，而 $\boldsymbol{n}$ 是旋转轴的单位向量，$\boldsymbol{n} \times \boldsymbol{r}$ 是 $\boldsymbol{r}$ 在 $\boldsymbol{n}$ 轴上的垂直部分，表示旋转轴垂直方向上的分量。</p>
+<p>在这种情况下，旋转矩阵的变化量可以表示为：</p>
+<p>$$<br>\boldsymbol{R}(\boldsymbol{n}, \delta \alpha) &#x3D; \boldsymbol{I} + \delta \alpha \begin{bmatrix} 0 &amp; -n_z &amp; n_y \ n_z &amp; 0 &amp; -n_x \ -n_y &amp; n_x &amp; 0 \end{bmatrix}<br>$$</p>
+<p>其中，$\boldsymbol{I}$ 是单位矩阵，$\boldsymbol{\Omega} &#x3D; \begin{bmatrix} 0 &amp; -n_z &amp; n_y \ n_z &amp; 0 &amp; -n_x \ -n_y &amp; n_x &amp; 0 \end{bmatrix}$ 是反对称矩阵。</p>
+<h3 id="旋转矩阵的指数映射"><a href="#旋转矩阵的指数映射" class="headerlink" title="旋转矩阵的指数映射"></a>旋转矩阵的指数映射</h3><p>旋转矩阵的最终表达式可以通过无穷小旋转的指数映射来表示。对于有限旋转角度 $\alpha$，可以将其分解为无穷次无穷小旋转的连续作用：</p>
+<p>$$<br>\boldsymbol{R}(\boldsymbol{n}, \alpha) &#x3D; \lim_{N \to \infty} \left( \boldsymbol{I} + \frac{\alpha}{N} \boldsymbol{\Omega} \right)^N &#x3D; e^{\alpha \boldsymbol{\Omega}}<br>$$</p>
+<p>这里，$\boldsymbol{\Omega}$ 是描述旋转的反对称矩阵。通过指数映射，我们可以得到旋转矩阵 $\boldsymbol{R}(\boldsymbol{n}, \alpha)$。</p>
+<h3 id="计算矩阵指数"><a href="#计算矩阵指数" class="headerlink" title="计算矩阵指数"></a>计算矩阵指数</h3><p>接下来，我们需要计算矩阵指数 $e^{\alpha \boldsymbol{\Omega}}$。通过矩阵的幂级数展开：</p>
+<p>$$<br>e^{\alpha \boldsymbol{\Omega}} &#x3D; \sum_{k&#x3D;0}^{\infty} \frac{(\alpha \boldsymbol{\Omega})^k}{k!}<br>$$</p>
+<p>由于 $\boldsymbol{\Omega}$ 是一个反对称矩阵，并且满足 $\boldsymbol{\Omega}^3 &#x3D; -\boldsymbol{\Omega}$，可以通过分解 $\boldsymbol{\Omega}$ 的幂次来简化计算。具体地，$\boldsymbol{\Omega}$ 的幂次满足以下关系：</p>
+<p>$$<br>\boldsymbol{\Omega}^{2k} &#x3D; (-1)^{k-1} \boldsymbol{\Omega}^2, \quad \boldsymbol{\Omega}^{2k+1} &#x3D; (-1)^k \boldsymbol{\Omega}<br>$$</p>
+<p>因此，矩阵指数展开式可以写为：</p>
+<p>$$<br>e^{\alpha \boldsymbol{\Omega}} &#x3D; \boldsymbol{I} + \boldsymbol{\Omega} \sin \alpha + \boldsymbol{\Omega}^2 (1 - \cos \alpha)<br>$$</p>
+<h3 id="结合-boldsymbol-Omega-2-的表达式"><a href="#结合-boldsymbol-Omega-2-的表达式" class="headerlink" title="结合 $\boldsymbol{\Omega}^2$ 的表达式"></a>结合 $\boldsymbol{\Omega}^2$ 的表达式</h3><p>由于 $\boldsymbol{\Omega}^2 &#x3D; \boldsymbol{n} \boldsymbol{n}^T - \boldsymbol{I}$，我们可以将其代入矩阵指数的展开式中，得到：</p>
+<p>$$<br>e^{\alpha \boldsymbol{\Omega}} &#x3D; \boldsymbol{I} + (\boldsymbol{n} \boldsymbol{n}^T - \boldsymbol{I}) (1 - \cos \alpha) + \boldsymbol{\Omega} \sin \alpha<br>$$</p>
+<p>通过整理，可以得到最终的 Rodrigues 旋转公式：</p>
+<p>$$<br>\boldsymbol{R}(\boldsymbol{n}, \alpha) &#x3D; \boldsymbol{I} \cos \alpha + (1 - \cos \alpha) \boldsymbol{n} \boldsymbol{n}^T + \sin \alpha \begin{bmatrix} 0 &amp; -n_z &amp; n_y \ n_z &amp; 0 &amp; -n_x \ -n_y &amp; n_x &amp; 0 \end{bmatrix}<br>$$</p>
 
     </div>
      
@@ -217,30 +219,16 @@
     <div class="nav">
         <div class="nav__prev">
             
-                <a href="/2025/01/30/%E6%9D%8E%E7%BE%A4%E6%96%B9%E6%B3%95%E6%8E%A8%E5%AF%BCRodrigues%E5%85%AC%E5%BC%8F/" class="nav__link">
-                    <div>
-                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
-                    </div>
-                    <div>
-                        <div class="nav__label">
-                            Previous Post
-                        </div>
-                        <div class="nav__title">
-                            色彩科学的数学原理_李群方法推导Rodrigues公式
-                        </div>
-                    </div>
-                </a>
-            
         </div>
         <div class="nav__next">
             
-                <a href="/how2build.html" class="nav__link">
+                <a href="/2025/01/26/%E5%A6%88%E7%9A%84%E6%88%91%E8%AE%A8%E5%8E%8C%E6%95%B0%E5%AD%A6%EF%BC%8C%E8%BF%87%E5%87%A0%E5%A4%A9%E5%9C%A8%E6%9B%B4/" class="nav__link">
                     <div>
                         <div class="nav__label">
                             Next Post
                         </div>
                         <div class="nav__title">
-                            利用HEXO+GithubPages搭建自己的静态博客
+                            色彩科学中的数学原理_3.Planckian locus的绘制方法
                         </div>
                     </div>
                     <div>
