@@ -63,9 +63,20 @@
 <meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/image-20250131202425507.png">
 <meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-01-31%20174209.png">
 <meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/image-20250131203051641.png">
+<meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-01-31%20204402.png">
 <meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-01-31%20205152.png">
+<meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-01-31%20205235.png">
+<meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-01-31%20224753.png">
+<meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-01-31%20222603.png">
+<meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-01-31%20222609.png">
+<meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-01-31%20222703.png">
+<meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-01-31%20223404.png">
+<meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-01-31%20223608.png">
+<meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-01-31%20223615.png">
+<meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-01-31%20223620.png">
+<meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-01-31%20223631.png">
 <meta property="article:published_time" content="2025-01-31T12:57:39.000Z">
-<meta property="article:modified_time" content="2025-01-31T14:56:14.131Z">
+<meta property="article:modified_time" content="2025-01-31T15:02:19.165Z">
 <meta property="article:author" content="strtus">
 <meta property="article:tag" content="教程">
 <meta name="twitter:card" content="summary_large_image">
@@ -261,36 +272,36 @@
 <p><strong>1.安装Docker</strong></p>
 <p>我们进入<a target="_blank" rel="noopener" href="https://docker.p2hp.com/">docker 官网</a>，根据自己电脑的操作系统下载对应的版本的DockerDesktop</p>
 <p>下载完成后，你可能会被提醒需要更新子系统，因为服务器在海外，请使用科学上网的方法更换节点</p>
-<p>![屏幕截图 2025-01-31 204402](&#x2F;Users&#x2F;sqren&#x2F;Library&#x2F;CloudStorage&#x2F;OneDrive-个人&#x2F;Pictures&#x2F;Screenshots&#x2F;屏幕截图 2025-01-31 204402.png)</p>
+<p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-01-31%20204402.png" alt="屏幕截图 2025-01-31 204402"></p>
 <p>完成更新后打开DockerDesktop</p>
 <p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-01-31%20205152.png" alt="屏幕截图 2025-01-31 205152"></p>
 <p>点击右下角Terminal，输入下面命令，然后等待安装完成</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d -p 3000:8080 --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:main</span><br></pre></td></tr></table></figure>
 
 <p>因为GFW正式DNS污染+SNI阻断了docker.com及其相关域名，你仍然需要确保自己是在科学上网的环境</p>
-<p>![屏幕截图 2025-01-31 205235](&#x2F;Users&#x2F;sqren&#x2F;Library&#x2F;CloudStorage&#x2F;OneDrive-个人&#x2F;Pictures&#x2F;Screenshots&#x2F;屏幕截图 2025-01-31 205235.png)</p>
+<p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-01-31%20205235.png" alt="屏幕截图 2025-01-31 205235"></p>
 <p>这一步耗时很久，需耐心等待</p>
 <p>可以看到我们已经pull了open webui</p>
-<p>![屏幕截图 2025-01-31 224753](&#x2F;Users&#x2F;sqren&#x2F;Library&#x2F;CloudStorage&#x2F;OneDrive-个人&#x2F;Pictures&#x2F;Screenshots&#x2F;屏幕截图 2025-01-31 224753.png)</p>
+<p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-01-31%20224753.png" alt="屏幕截图 2025-01-31 224753"></p>
 <p>我们之前已经将本机的端口3000映射到容器内的端口8080，这意味着可以通过访问 <code>http://localhost:3000</code>来访问运行在容器内的服务</p>
-<p>![屏幕截图 2025-01-31 222603](&#x2F;Users&#x2F;sqren&#x2F;Library&#x2F;CloudStorage&#x2F;OneDrive-个人&#x2F;Pictures&#x2F;Screenshots&#x2F;屏幕截图 2025-01-31 222603.png)</p>
+<p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-01-31%20222603.png" alt="屏幕截图 2025-01-31 222603"></p>
 <p>根据提示完成初始化</p>
-<p>![屏幕截图 2025-01-31 222609](&#x2F;Users&#x2F;sqren&#x2F;Library&#x2F;CloudStorage&#x2F;OneDrive-个人&#x2F;Pictures&#x2F;Screenshots&#x2F;屏幕截图 2025-01-31 222609.png)</p>
+<p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-01-31%20222609.png" alt="屏幕截图 2025-01-31 222609"></p>
 <p>完成后可以选择已经pull到本地的模型</p>
-<p>![屏幕截图 2025-01-31 222703](&#x2F;Users&#x2F;sqren&#x2F;Library&#x2F;CloudStorage&#x2F;OneDrive-个人&#x2F;Pictures&#x2F;Screenshots&#x2F;屏幕截图 2025-01-31 222703.png)</p>
+<p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-01-31%20222703.png" alt="屏幕截图 2025-01-31 222703"></p>
 <p>我觉得它很蠢</p>
-<p>![屏幕截图 2025-01-31 223404](&#x2F;Users&#x2F;sqren&#x2F;Library&#x2F;CloudStorage&#x2F;OneDrive-个人&#x2F;Pictures&#x2F;Screenshots&#x2F;屏幕截图 2025-01-31 223404.png)</p>
+<p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-01-31%20223404.png" alt="屏幕截图 2025-01-31 223404"></p>
 <p>可以同时运行多个模型，换deepseek试试，听说它使用了弱智吧的数据集</p>
-<p>![屏幕截图 2025-01-31 223608](&#x2F;Users&#x2F;sqren&#x2F;Library&#x2F;CloudStorage&#x2F;OneDrive-个人&#x2F;Pictures&#x2F;Screenshots&#x2F;屏幕截图 2025-01-31 223608.png)</p>
+<p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-01-31%20223608.png" alt="屏幕截图 2025-01-31 223608"></p>
 <p>同时运行多个模型，风扇拼尽全力无法战胜</p>
-<p>![屏幕截图 2025-01-31 223615](&#x2F;Users&#x2F;sqren&#x2F;Library&#x2F;CloudStorage&#x2F;OneDrive-个人&#x2F;Pictures&#x2F;Screenshots&#x2F;屏幕截图 2025-01-31 223615.png)</p>
+<p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-01-31%20223615.png" alt="屏幕截图 2025-01-31 223615"></p>
 <p>我的处理器是臭名昭著的13代酷睿，需要手动在BIOS中关闭E核避免调度问题</p>
 <p>CPU满载的情况还是第一次见🤔</p>
-<p>![屏幕截图 2025-01-31 223620](&#x2F;Users&#x2F;sqren&#x2F;Library&#x2F;CloudStorage&#x2F;OneDrive-个人&#x2F;Pictures&#x2F;Screenshots&#x2F;屏幕截图 2025-01-31 223620.png)</p>
+<p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-01-31%20223620.png" alt="屏幕截图 2025-01-31 223620"></p>
 <p>好吧DeepSeek也没聪明到哪去，这还是14b的版本</p>
-<p>![屏幕截图 2025-01-31 223631](&#x2F;Users&#x2F;sqren&#x2F;Library&#x2F;CloudStorage&#x2F;OneDrive-个人&#x2F;Pictures&#x2F;Screenshots&#x2F;屏幕截图 2025-01-31 223631.png)</p>
+<p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-01-31%20223631.png" alt="屏幕截图 2025-01-31 223631"></p>
 <p>以上</p>
-<h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>希望这篇文章对你有帮助，任何疑问可以通过<a href="mailto:&#x73;&#x74;&#x72;&#x74;&#117;&#x73;&#64;&#111;&#x75;&#116;&#108;&#111;&#111;&#x6b;&#x2e;&#99;&#111;&#x6d;">strtus@outlook.com</a>与我联络</p>
+<h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>希望这篇文章对你有帮助，任何疑问可以通过<a href="mailto:&#115;&#116;&#x72;&#116;&#x75;&#x73;&#x40;&#111;&#x75;&#116;&#x6c;&#111;&#x6f;&#107;&#46;&#99;&#111;&#x6d;">strtus@outlook.com</a>与我联络</p>
 <p>enjoy😉 ! </p>
 
     </div>
