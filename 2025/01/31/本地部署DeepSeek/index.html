@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--icon-->
+
+    
+        <link rel="shortcut icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="16x16" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="32x32" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon-96x96.png">
+    
+    
+        <link rel="apple-touch-icon" sizes="180x180" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/web-app-manifest-192x192.png">
+    
+    
+        <link rel="mask-icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/apple-touch-icon.png">
+    
+
+
+    <!-- meta -->
+
+
+<title>本地部署DeepSeek | Strtus&#39;s Journey</title>
+
+
+    <meta name="keywords" content="教程">
+
+
+
+
+    <!-- OpenGraph -->
+ 
+    <meta name="description" content="前言DeepSeek 因为这几天访问DeepSeek的时候总是遇到服务繁忙，加上蒸馏后参数量大大减小，已经可以部署在本地了 这篇文章记录了我部署的过程，如果你也希望本地使用DeepSeek，希望它能够帮到你😉 ok那我们开始吧 前期准备检查显存大小对于Win用户在powershell中输入如下命令： nvidia-smi  会得到类似的output  我的显存是8188MB 请记住你的显存大小，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="本地部署DeepSeek">
+<meta property="og:url" content="https://strtus.github.io/2025/01/31/%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2DeepSeek/index.html">
+<meta property="og:site_name" content="Strtus&#39;s Journey">
+<meta property="og:description" content="前言DeepSeek 因为这几天访问DeepSeek的时候总是遇到服务繁忙，加上蒸馏后参数量大大减小，已经可以部署在本地了 这篇文章记录了我部署的过程，如果你也希望本地使用DeepSeek，希望它能够帮到你😉 ok那我们开始吧 前期准备检查显存大小对于Win用户在powershell中输入如下命令： nvidia-smi  会得到类似的output  我的显存是8188MB 请记住你的显存大小，">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-01-31%20145234.png">
+<meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-31%2019.47.56.png">
+<meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/image-20250131200524979.png">
+<meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-01-31%20144330.png">
+<meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-01-31%20145904.png">
+<meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-01-31%20150022.png">
+<meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-31%2020.12.11.png">
+<meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-01-31%20175141.png">
+<meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/image-20250131202425507.png">
+<meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-01-31%20174209.png">
+<meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/image-20250131203051641.png">
+<meta property="article:published_time" content="2025-01-31T12:57:39.000Z">
+<meta property="article:modified_time" content="2025-01-31T13:04:25.112Z">
+<meta property="article:author" content="strtus">
+<meta property="article:tag" content="教程">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-01-31%20145234.png">
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/highlight.css" media="none" >
+        
+            <link rel="stylesheet" id="hl-dark-theme" href="/css/highlight/highlight.dark.css" media="none">
+        
+    
+
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/style/dark.css">
+
+    
+<script src="/js/darkmode.js"></script>
+
+
+
+     
+
+    <!-- custom head -->
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+    <body>
+        <div id="app" tabindex="-1">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">Strtus&#39;s Journey</span>
+        </a>
+    </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">首页</a>
+                
+                    <a href="/about.html" class="navbar-menu button">About</a>
+                
+                    <a href="/tags/" class="navbar-menu button">标签</a>
+                
+                    <a href="/archives/" class="navbar-menu button">归档</a>
+                
+                    <a href="/page/" class="navbar-menu button">Page</a>
+                
+            </div>
+        
+        
+        
+    <a href="/search/" id="btn-search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="24" height="24" fill="currentColor" stroke="currentColor" stroke-width="32"><path d="M192 448c0-141.152 114.848-256 256-256s256 114.848 256 256-114.848 256-256 256-256-114.848-256-256z m710.624 409.376l-206.88-206.88A318.784 318.784 0 0 0 768 448c0-176.736-143.264-320-320-320S128 271.264 128 448s143.264 320 320 320a318.784 318.784 0 0 0 202.496-72.256l206.88 206.88 45.248-45.248z"></path></svg>
+    </a>
+
+
+        
+        
+    <a href="javaScript:void(0);" id="btn-toggle-dark">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </a>
+
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">首页</a>
+                
+                    <a href="/about.html" class="dropdown-menu button">About</a>
+                
+                    <a href="/tags/" class="dropdown-menu button">标签</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">归档</a>
+                
+                    <a href="/page/" class="dropdown-menu button">Page</a>
+                
+            </div>
+        
+    </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        本地部署DeepSeek
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2025/01/" class="post-meta__date button">2025-01-31</a>
+        
+ 
+        
+    
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+    <aside class="post-side">
+        <div class="post-side__toc">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5%E6%98%BE%E5%AD%98%E5%A4%A7%E5%B0%8F"><span class="toc-number">1.</span> <span class="toc-text">检查显存大小</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E4%BA%8EWin%E7%94%A8%E6%88%B7"><span class="toc-number">1.1.</span> <span class="toc-text">对于Win用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E4%BA%8EMacOS%E7%94%A8%E6%88%B7"><span class="toc-number">1.2.</span> <span class="toc-text">对于MacOS用户</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Ollama%E6%A1%86%E6%9E%B6"><span class="toc-number">2.</span> <span class="toc-text">安装Ollama框架</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E6%A8%A1%E5%9E%8B"><span class="toc-number">3.</span> <span class="toc-text">选择模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E6%A8%A1%E5%9E%8B"><span class="toc-number">4.</span> <span class="toc-text">下载模型</span></a></li></ol>
+        </div>
+    </aside>
+    <a class="btn-toc button" id="btn-toc" tabindex="0">
+        <svg viewBox="0 0 1024 1024" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M128 256h64V192H128zM320 256h576V192H320zM128 544h64v-64H128zM320 544h576v-64H320zM128 832h64v-64H128zM320 832h576v-64H320z" fill="currentColor"></path>
+        </svg>
+    </a>
+    <div class="toc-menus" id="toc-menus">
+        <div class="toc-title">Article Directory</div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5%E6%98%BE%E5%AD%98%E5%A4%A7%E5%B0%8F"><span class="toc-number">1.</span> <span class="toc-text">检查显存大小</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E4%BA%8EWin%E7%94%A8%E6%88%B7"><span class="toc-number">1.1.</span> <span class="toc-text">对于Win用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E4%BA%8EMacOS%E7%94%A8%E6%88%B7"><span class="toc-number">1.2.</span> <span class="toc-text">对于MacOS用户</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Ollama%E6%A1%86%E6%9E%B6"><span class="toc-number">2.</span> <span class="toc-text">安装Ollama框架</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E6%A8%A1%E5%9E%8B"><span class="toc-number">3.</span> <span class="toc-text">选择模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E6%A8%A1%E5%9E%8B"><span class="toc-number">4.</span> <span class="toc-text">下载模型</span></a></li></ol>
+    </div>
+
+
+<article class="post post__with-toc content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>DeepSeek</p>
+<p>因为这几天访问DeepSeek的时候总是遇到服务繁忙，加上蒸馏后参数量大大减小，已经可以部署在本地了</p>
+<p>这篇文章记录了我部署的过程，如果你也希望本地使用DeepSeek，希望它能够帮到你😉</p>
+<p>ok那我们开始吧</p>
+<h1 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h1><h2 id="检查显存大小"><a href="#检查显存大小" class="headerlink" title="检查显存大小"></a>检查显存大小</h2><h3 id="对于Win用户"><a href="#对于Win用户" class="headerlink" title="对于Win用户"></a>对于Win用户</h3><p>在powershell中输入如下命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">nvidia-smi</span><br></pre></td></tr></table></figure>
+
+<p>会得到类似的output</p>
+<p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-01-31%20145234.png" alt="屏幕截图 2025-01-31 145234"></p>
+<p>我的显存是8188MB</p>
+<p>请记住你的显存大小，这是我们选择模型参数大小的主要依据。</p>
+<h3 id="对于MacOS用户"><a href="#对于MacOS用户" class="headerlink" title="对于MacOS用户"></a>对于MacOS用户</h3><p>在[设置-关于本机]界面，查看搭载的芯片组型号</p>
+<p>如果是M系列芯片，则内存大小即为显存大小大小，因为M系列芯片引入了统一内存架构</p>
+<p>如果是Intel架构的芯片，则本教程不适用，因为装不上Ollama框架</p>
+<p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-31%2019.47.56.png" alt="截屏2025-01-31 19.47.56"> </p>
+<h2 id="安装Ollama框架"><a href="#安装Ollama框架" class="headerlink" title="安装Ollama框架"></a>安装Ollama框架</h2><p>访问<a target="_blank" rel="noopener" href="https://ollama.com/download">Oll</a><a target="_blank" rel="noopener" href="https://ollama.com/download">ama 官</a><a target="_blank" rel="noopener" href="https://ollama.com/download">网</a> ，根据你的操作系统选择对应的安装包进行下载。</p>
+<p>由于服务器在国外，下载速度一般都很慢，可尝试如下方案：</p>
+<p><strong>1.启动多线程下载</strong></p>
+<p>在chrome的地址栏输入如下命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">chrome://flags/#enable-parallel-downloading</span><br></pre></td></tr></table></figure>
+
+<p>使Parallel downloading的状态为Enable</p>
+<p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/image-20250131200524979.png" alt="image-20250131200524979"></p>
+<p>启动前：</p>
+<p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-01-31%20144330.png" alt="屏幕截图 2025-01-31 144330"></p>
+<p>启动后：</p>
+<p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-01-31%20145904.png" alt="屏幕截图 2025-01-31 145904"></p>
+<p><strong>2.选择合适的科学上网节点</strong></p>
+<p>部分美国节点配合多线程下载可以跑到25MB&#x2F;s，Amazing！</p>
+<p>下载完成后，会默认安装至C盘，会占用大概10G的空间</p>
+<p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-01-31%20150022.png" alt="屏幕截图 2025-01-31 150022"></p>
+<p>为了验证Ollama成功安装，在PowerShell中输入如下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ollama -v</span><br></pre></td></tr></table></figure>
+
+<p>如果安装正确，会输出 Ollama的版本号，如下图所示</p>
+<p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-31%2020.12.11.png" alt="截屏2025-01-31 20.12.11"></p>
+<h1 id="模型部署"><a href="#模型部署" class="headerlink" title="模型部署"></a>模型部署</h1><h2 id="选择模型"><a href="#选择模型" class="headerlink" title="选择模型"></a>选择模型</h2><p>我们今天要部署的Distill版本，是在阿里的QWEN千问和META的LLAMA基础上再训练实现的蒸馏版本</p>
+<p>（btw，满血版的deepseek-R1基于deepseek-v3再训练实现，具有671B参数，理论上起码需要350G以上显存才能够部署）</p>
+<p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-01-31%20175141.png" alt="屏幕截图 2025-01-31 175141"></p>
+<p>一般来说，8G显存可以部署8B级别模型；24G显存可以刚好适配到32B的模型，请根据自身电脑硬件配置来选择合适的模型版本</p>
+<h2 id="下载模型"><a href="#下载模型" class="headerlink" title="下载模型"></a>下载模型</h2><p>根据显存大小，我选择下载8B参数的量化模型：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ollama run deepseek-r1:8b</span><br></pre></td></tr></table></figure>
+
+<p>如果想下载其他参数量的，只需要将8B修改为新的参数值</p>
+<p>如选择 32B 版本，则改为ollama run deepseek-r1:32b</p>
+<p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/image-20250131202425507.png" alt="image-20250131202425507"></p>
+<p>耐心的等待下载即可</p>
+<h1 id="开始对话"><a href="#开始对话" class="headerlink" title="开始对话"></a>开始对话</h1><p>使用如下命令启动DeepSeek：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ollama run deepseek-r1:8b</span><br></pre></td></tr></table></figure>
+
+<p>即可与DeepSeek对话：</p>
+<p>可以看到显存只用了6GB</p>
+<p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-01-31%20174209.png" alt="屏幕截图 2025-01-31 174209"></p>
+<p>对于MacOS用户，大同小异</p>
+<p>M1的GPU基本被4060按在地上摩擦🤣（不过最近看很多youtuber使用MacMiniM4组成的集群跑LLM，效果也不错）</p>
+<p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/image-20250131203051641.png" alt="image-20250131203051641"></p>
+<h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>希望这篇文章对你有帮助，任何疑问可以通过<a href="mailto:&#x73;&#x74;&#114;&#x74;&#x75;&#115;&#x40;&#111;&#x75;&#x74;&#108;&#111;&#x6f;&#107;&#46;&#x63;&#x6f;&#x6d;">strtus@outlook.com</a>与我联络</p>
+<p>enjoy😉 ! </p>
+
+    </div>
+     
+    <div class="post-footer__meta"><p>updated at 2025-01-31</p></div> 
+    <div class="post-entry__tags"><a href="/tags/%E6%95%99%E7%A8%8B/" class="post-tags__link button"># 教程</a></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="/2025/01/30/%E6%9D%8E%E7%BE%A4%E6%96%B9%E6%B3%95%E6%8E%A8%E5%AF%BCRodrigues%E5%85%AC%E5%BC%8F/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            Next Post
+                        </div>
+                        <div class="nav__title">
+                            色彩科学的数学原理_4.李群方法推导Rodrigues公式
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
+        </div>
+    </div>
+
+
+
+
+
+</main>
+
+            <footer class="footer">
+     
+    <a href="#" class="button" id="b2t" aria-label="Back to Top" title="Back to Top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M233.376 722.752L278.624 768 512 534.624 745.376 768l45.248-45.248L512 444.128zM192 352h640V288H192z" fill="currentColor"></path>
+        </svg>
+    </a>
+
+    
+
+
+    
+     
+ 
+
+ 
+    
+        
+        <p class="footer-copyright">
+            Strtus's Journry
+        </p>
+    
+    
+</footer>
+
+        </div>
+         
+
+ 
+    <script>
+        window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+        ga('create', 'G-5ERPC280ZB', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+ 
+
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5ERPC280ZB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-5ERPC280ZB');
+    </script>
+ 
+
+ 
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement('script');
+            hm.src = 'https://hm.baidu.com/hm.js?8da6411546e903e478a9d82d2a4d0c60';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+    
+ 
+
+
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.css">
+
+    
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.js"></script>
+
+    <script>
+        let lazyloadT = Boolean('false'),
+            auto_fancybox = Boolean('true')
+        if (auto_fancybox) {
+            $(".post__content").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        } else {
+            $(".post__content").find("fancybox").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        }
+    </script>
+ 
+
+
+    <script>
+        if (typeof MathJax === 'undefined') {
+            window.MathJax = {
+                loader: {
+                    source: {
+                        '[tex]/amsCd': '[tex]/amscd',
+                        '[tex]/AMScd': '[tex]/amscd'
+                    }
+                },
+                tex: {
+                    inlineMath: {'[+]': [['$', '$']]},
+                    tags: 'ams'
+                },
+                options: {
+                    renderActions: {
+                        findScript: [10, doc => {
+                            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                                const display = !!node.type.match(/; *mode=display/);
+                                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                                const text = document.createTextNode('');
+                                node.parentNode.replaceChild(text, node);
+                                math.start = {node: text, delim: '', n: 0};
+                                math.end = {node: text, delim: '', n: 0};
+                                doc.math.push(math);
+                            });
+                        }, '', false],
+                        insertedScript: [200, () => {
+                            document.querySelectorAll('mjx-container').forEach(node => {
+                                let target = node.parentNode;
+                                if (target.nodeName.toLowerCase() === 'li') {
+                                    target.parentNode.classList.add('has-jax');
+                                }
+                            });
+                        }, '', false]
+                    }
+                }
+            };
+            (function () {
+                var script = document.createElement('script');
+                script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js";
+                script.defer = true;
+                document.head.appendChild(script);
+            })();
+        } else {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+        }
+    </script>
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+
+    </body>
+</html>
