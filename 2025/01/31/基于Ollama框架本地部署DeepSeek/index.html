@@ -45,12 +45,12 @@
 
     <!-- OpenGraph -->
  
-    <meta name="description" content="前言因为这几天访问DeepSeek的时候总是遇到服务繁忙，加上蒸馏后参数量大大减小，已经可以部署在本地了 这篇文章记录了我部署的过程，如果你也希望本地使用DeepSeek，希望它能够帮到你😉 ok那我们开始吧 前期准备检查显存大小对于Win用户在powershell中输入如下命令： nvidia-smi  会得到类似的output  我的显存是8188MB 请记住你的显存大小，这是我们选择模型参">
+    <meta name="description" content="前言因为这几天访问DeepSeek的时候总是遇到服务繁忙，加上蒸馏后参数量大大减小，已经可以部署在本地了 这篇文章记录了我部署的过程，如果你也希望本地使用DeepSeek，希望它能够帮到你😉 ok那我们开始吧 前期准备检查显存大小对于Win用户在powershell中输入如下命令： nvidia-smi  会得到类似的output  可以看到我的显存是8188MB 请记住你的显存大小，这是我们选">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基于Ollama框架本地部署DeepSeek">
 <meta property="og:url" content="https://strtus.github.io/2025/01/31/%E5%9F%BA%E4%BA%8EOllama%E6%A1%86%E6%9E%B6%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2DeepSeek/index.html">
 <meta property="og:site_name" content="Strtus&#39;s Journey">
-<meta property="og:description" content="前言因为这几天访问DeepSeek的时候总是遇到服务繁忙，加上蒸馏后参数量大大减小，已经可以部署在本地了 这篇文章记录了我部署的过程，如果你也希望本地使用DeepSeek，希望它能够帮到你😉 ok那我们开始吧 前期准备检查显存大小对于Win用户在powershell中输入如下命令： nvidia-smi  会得到类似的output  我的显存是8188MB 请记住你的显存大小，这是我们选择模型参">
+<meta property="og:description" content="前言因为这几天访问DeepSeek的时候总是遇到服务繁忙，加上蒸馏后参数量大大减小，已经可以部署在本地了 这篇文章记录了我部署的过程，如果你也希望本地使用DeepSeek，希望它能够帮到你😉 ok那我们开始吧 前期准备检查显存大小对于Win用户在powershell中输入如下命令： nvidia-smi  会得到类似的output  可以看到我的显存是8188MB 请记住你的显存大小，这是我们选">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-01-31%20145234.png">
 <meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-31%2019.47.56.png">
@@ -64,7 +64,7 @@
 <meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-01-31%20174209.png">
 <meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/image-20250131203051641.png">
 <meta property="article:published_time" content="2025-01-31T12:57:39.000Z">
-<meta property="article:modified_time" content="2025-01-31T13:08:07.828Z">
+<meta property="article:modified_time" content="2025-01-31T13:17:53.318Z">
 <meta property="article:author" content="strtus">
 <meta property="article:tag" content="教程">
 <meta name="twitter:card" content="summary_large_image">
@@ -184,7 +184,7 @@
 
     <aside class="post-side">
         <div class="post-side__toc">
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5%E6%98%BE%E5%AD%98%E5%A4%A7%E5%B0%8F"><span class="toc-number">1.</span> <span class="toc-text">检查显存大小</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E4%BA%8EWin%E7%94%A8%E6%88%B7"><span class="toc-number">1.1.</span> <span class="toc-text">对于Win用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E4%BA%8EMacOS%E7%94%A8%E6%88%B7"><span class="toc-number">1.2.</span> <span class="toc-text">对于MacOS用户</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Ollama%E6%A1%86%E6%9E%B6"><span class="toc-number">2.</span> <span class="toc-text">安装Ollama框架</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E6%A8%A1%E5%9E%8B"><span class="toc-number">3.</span> <span class="toc-text">选择模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E6%A8%A1%E5%9E%8B"><span class="toc-number">4.</span> <span class="toc-text">下载模型</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5%E6%98%BE%E5%AD%98%E5%A4%A7%E5%B0%8F"><span class="toc-number">1.</span> <span class="toc-text">检查显存大小</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E4%BA%8EWin%E7%94%A8%E6%88%B7"><span class="toc-number">1.1.</span> <span class="toc-text">对于Win用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E4%BA%8EMacOS%E7%94%A8%E6%88%B7"><span class="toc-number">1.2.</span> <span class="toc-text">对于MacOS用户</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Ollama%E6%A1%86%E6%9E%B6"><span class="toc-number">2.</span> <span class="toc-text">安装Ollama框架</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E6%A8%A1%E5%9E%8B"><span class="toc-number">3.</span> <span class="toc-text">选择模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E6%A8%A1%E5%9E%8B"><span class="toc-number">4.</span> <span class="toc-text">下载模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="toc-number">5.</span> <span class="toc-text">部署客户端</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2web-ui"><span class="toc-number">6.</span> <span class="toc-text">部署web ui</span></a></li></ol>
         </div>
     </aside>
     <a class="btn-toc button" id="btn-toc" tabindex="0">
@@ -194,7 +194,7 @@
     </a>
     <div class="toc-menus" id="toc-menus">
         <div class="toc-title">Article Directory</div>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5%E6%98%BE%E5%AD%98%E5%A4%A7%E5%B0%8F"><span class="toc-number">1.</span> <span class="toc-text">检查显存大小</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E4%BA%8EWin%E7%94%A8%E6%88%B7"><span class="toc-number">1.1.</span> <span class="toc-text">对于Win用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E4%BA%8EMacOS%E7%94%A8%E6%88%B7"><span class="toc-number">1.2.</span> <span class="toc-text">对于MacOS用户</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Ollama%E6%A1%86%E6%9E%B6"><span class="toc-number">2.</span> <span class="toc-text">安装Ollama框架</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E6%A8%A1%E5%9E%8B"><span class="toc-number">3.</span> <span class="toc-text">选择模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E6%A8%A1%E5%9E%8B"><span class="toc-number">4.</span> <span class="toc-text">下载模型</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5%E6%98%BE%E5%AD%98%E5%A4%A7%E5%B0%8F"><span class="toc-number">1.</span> <span class="toc-text">检查显存大小</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E4%BA%8EWin%E7%94%A8%E6%88%B7"><span class="toc-number">1.1.</span> <span class="toc-text">对于Win用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E4%BA%8EMacOS%E7%94%A8%E6%88%B7"><span class="toc-number">1.2.</span> <span class="toc-text">对于MacOS用户</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Ollama%E6%A1%86%E6%9E%B6"><span class="toc-number">2.</span> <span class="toc-text">安装Ollama框架</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E6%A8%A1%E5%9E%8B"><span class="toc-number">3.</span> <span class="toc-text">选择模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E6%A8%A1%E5%9E%8B"><span class="toc-number">4.</span> <span class="toc-text">下载模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="toc-number">5.</span> <span class="toc-text">部署客户端</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2web-ui"><span class="toc-number">6.</span> <span class="toc-text">部署web ui</span></a></li></ol>
     </div>
 
 
@@ -209,14 +209,14 @@
 
 <p>会得到类似的output</p>
 <p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-01-31%20145234.png" alt="屏幕截图 2025-01-31 145234"></p>
-<p>我的显存是8188MB</p>
-<p>请记住你的显存大小，这是我们选择模型参数大小的主要依据。</p>
+<p>可以看到我的显存是8188MB</p>
+<p>请记住你的显存大小，这是我们选择模型参数量大小的重要参考因素</p>
 <h3 id="对于MacOS用户"><a href="#对于MacOS用户" class="headerlink" title="对于MacOS用户"></a>对于MacOS用户</h3><p>在[设置-关于本机]界面，查看搭载的芯片组型号</p>
-<p>如果是M系列芯片，则内存大小即为显存大小大小，因为M系列芯片引入了统一内存架构</p>
+<p>如果是M系列芯片，由于引入了统一内存架构，内存即为显存，可以看到我的内存是8GB</p>
 <p>如果是Intel架构的芯片，则本教程不适用，因为装不上Ollama框架</p>
 <p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-31%2019.47.56.png" alt="截屏2025-01-31 19.47.56"> </p>
 <h2 id="安装Ollama框架"><a href="#安装Ollama框架" class="headerlink" title="安装Ollama框架"></a>安装Ollama框架</h2><p>访问<a target="_blank" rel="noopener" href="https://ollama.com/download">Oll</a><a target="_blank" rel="noopener" href="https://ollama.com/download">ama 官</a><a target="_blank" rel="noopener" href="https://ollama.com/download">网</a> ，根据你的操作系统选择对应的安装包进行下载。</p>
-<p>由于服务器在国外，下载速度一般都很慢，可尝试如下方案：</p>
+<p>因为服务器在国外，下载速度会很慢，可尝试如下方案：</p>
 <p><strong>1.启动多线程下载</strong></p>
 <p>在chrome的地址栏输入如下命令：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">chrome://flags/#enable-parallel-downloading</span><br></pre></td></tr></table></figure>
@@ -229,12 +229,12 @@
 <p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-01-31%20145904.png" alt="屏幕截图 2025-01-31 145904"></p>
 <p><strong>2.选择合适的科学上网节点</strong></p>
 <p>部分美国节点配合多线程下载可以跑到25MB&#x2F;s，Amazing！</p>
-<p>下载完成后，会默认安装至C盘，会占用大概10G的空间</p>
+<p>下载完成后，会默认安装至C盘，约占用10G空间</p>
 <p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-01-31%20150022.png" alt="屏幕截图 2025-01-31 150022"></p>
 <p>为了验证Ollama成功安装，在PowerShell中输入如下命令：</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ollama -v</span><br></pre></td></tr></table></figure>
 
-<p>如果安装正确，会输出 Ollama的版本号，如下图所示</p>
+<p>如果安装正确，会输出Ollama的版本号，如下图所示</p>
 <p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-31%2020.12.11.png" alt="截屏2025-01-31 20.12.11"></p>
 <h1 id="模型部署"><a href="#模型部署" class="headerlink" title="模型部署"></a>模型部署</h1><h2 id="选择模型"><a href="#选择模型" class="headerlink" title="选择模型"></a>选择模型</h2><p>我们今天要部署的Distill版本，是在阿里的QWEN千问和META的LLAMA基础上再训练实现的蒸馏版本</p>
 <p>（btw，满血版的deepseek-R1基于deepseek-v3再训练实现，具有671B参数，理论上起码需要350G以上显存才能够部署）</p>
@@ -256,7 +256,7 @@
 <p>对于MacOS用户，大同小异</p>
 <p>M1的GPU基本被4060按在地上摩擦🤣（不过最近看很多youtuber使用MacMiniM4组成的集群跑LLM，效果也不错）</p>
 <p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/image-20250131203051641.png" alt="image-20250131203051641"></p>
-<h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>希望这篇文章对你有帮助，任何疑问可以通过<a href="mailto:&#115;&#x74;&#x72;&#116;&#117;&#115;&#x40;&#x6f;&#117;&#x74;&#x6c;&#111;&#111;&#x6b;&#x2e;&#x63;&#x6f;&#x6d;">strtus@outlook.com</a>与我联络</p>
+<h1 id="进阶使用"><a href="#进阶使用" class="headerlink" title="进阶使用"></a>进阶使用</h1><h2 id="部署客户端"><a href="#部署客户端" class="headerlink" title="部署客户端"></a>部署客户端</h2><h2 id="部署web-ui"><a href="#部署web-ui" class="headerlink" title="部署web ui"></a>部署web ui</h2><h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>希望这篇文章对你有帮助，任何疑问可以通过<a href="mailto:&#115;&#116;&#x72;&#116;&#x75;&#115;&#64;&#x6f;&#117;&#x74;&#108;&#111;&#111;&#107;&#x2e;&#99;&#111;&#109;">strtus@outlook.com</a>与我联络</p>
 <p>enjoy😉 ! </p>
 
     </div>
