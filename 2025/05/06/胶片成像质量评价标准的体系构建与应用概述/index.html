@@ -62,7 +62,7 @@
 <meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%25E8%2583%25B6%25E7%2589%2587%25E5%259B%25BE%25E5%2583%258F%25E8%25B4%25A8%25E9%2587%258F%25E6%25B5%258B%25E8%25AF%2595%25E6%25A0%2587%25E5%2587%2586%25E7%25AE%2580%25E8%25BF%25B0_7.webp">
 <meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%25E8%2583%25B6%25E7%2589%2587%25E5%259B%25BE%25E5%2583%258F%25E8%25B4%25A8%25E9%2587%258F%25E6%25B5%258B%25E8%25AF%2595%25E6%25A0%2587%25E5%2587%2586%25E7%25AE%2580%25E8%25BF%25B0_8.webp">
 <meta property="article:published_time" content="2025-05-06T06:58:17.000Z">
-<meta property="article:modified_time" content="2025-05-06T07:58:23.872Z">
+<meta property="article:modified_time" content="2025-05-06T09:01:49.150Z">
 <meta property="article:author" content="strtus">
 <meta property="article:tag" content="胶片摄影理论">
 <meta name="twitter:card" content="summary_large_image">
@@ -226,8 +226,9 @@
 <p>2.<strong>查找对数亮度值</strong>：</p>
 <p>通过胶片或感光材料的特性曲线（通常为密度-对数曝光曲线），查找对应的对数亮度值。特性曲线给出了一定范围内的光学密度与特定曝光量（即对数亮度，通常用$\lg H$表示）之间的关系。</p>
 <p>3.<strong>求解线性亮度值</strong>：</p>
-<p>假设特性曲线给出的对数曝光值为 $\lg H$$，其中$$H$为线性曝光值。为了将对数曝光值转换为线性曝光值，需要进行指数运算，以便从对数曝光值$lg H$求解出线性曝光值$H$。</p>
-<p>接下去就可以利用该空间频率下测得的最高曝光值$H(u)<em>{\mathrm{high}}$与最低曝光值$H(u)</em>{\mathrm{low}}$，计算得到该空间频率下的调制值$M(u)$（可以理解为当前空间频率下正弦函数的振幅），公式如下：<br>$$<br>M(u) &#x3D; \frac{H(u)<em>{\mathrm{high}} - H(u)</em>{\mathrm{low}}}{H(u)<em>{\mathrm{high}} + H(u)</em>{\mathrm{low}}}<br>$$<br>再利用如下公式分别计算归一化每个空间频率下的$M(u)$（$M(o)$代表空间频率为0时的调制值，即测试母版原生对比度），绘制得到MTF曲线。<br>$$<br>MTF(f) &#x3D; 100% \times \frac{M(u)}{M(0)}<br>$$<br><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%25E8%2583%25B6%25E7%2589%2587%25E5%259B%25BE%25E5%2583%258F%25E8%25B4%25A8%25E9%2587%258F%25E6%25B5%258B%25E8%25AF%2595%25E6%25A0%2587%25E5%2587%2586%25E7%25AE%2580%25E8%25BF%25B0_4.webp" alt="img"></p>
+<p>假设特性曲线给出的对数曝光值为 $\log_{10} H$，其中 $H$ 为线性曝光值。为了将对数曝光值转换为线性曝光值，需要进行指数运算，以便从对数曝光值 $\log_{10} H$ 求解出线性曝光值 $H$。</p>
+<p>利用该空间频率下测得的最高曝光值$H(u)<em>{\mathrm{high}}$ 与最低曝光值 $H(u)</em>{\mathrm{low}}$ 可以计算该空间频率下的调制值 $M(u)$（亦可理解为当前空间频率下正弦函数的振幅）：</p>
+<p>$$<br>M(u) &#x3D; \frac{H(u)<em>{\mathrm{high}} - H(u)</em>{\mathrm{low}}}{H(u)<em>{\mathrm{high}} + H(u)</em>{\mathrm{low}}}<br>$$<br>再利用如下公式分别计算归一化每个空间频率下的$M(u)$（ $M(0)$ 代表空间频率为0时的调制值，即测试母版原生对比度 ），绘制得到MTF曲线。<br>$$<br>MTF(f) &#x3D; 100%\times\frac{M(u)}{M(0)}<br>$$<br><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%25E8%2583%25B6%25E7%2589%2587%25E5%259B%25BE%25E5%2583%258F%25E8%25B4%25A8%25E9%2587%258F%25E6%25B5%258B%25E8%25AF%2595%25E6%25A0%2587%25E5%2587%2586%25E7%25AE%2580%25E8%25BF%25B0_4.webp" alt="img"></p>
 <p>在MTF曲线图中，特定空间频率下的响应值越高，意味着图像还原得越好。同时还可以比较不同胶片的MTF曲线图来分析他们对不同频率细节的再现能力。</p>
 <h2 id="颗粒度"><a href="#颗粒度" class="headerlink" title="颗粒度"></a>颗粒度</h2><p>在将胶片负片放大显影在较大尺寸相片上时，胶片的颗粒结构会变得明显；而在普通尺寸的相片中这种情况并不明显。</p>
 <p>虽然需要大约50倍的放大才能用肉眼看到感光乳剂中的单个晶体，但由于所谓的“团聚”现象，通常在较低的放大倍率下就能看到颗粒。“团聚”是由颗粒在乳剂中分布不均造成的现象。这在观看者的感知中产生了一种被称为“颗粒感”的感觉。</p>
@@ -431,58 +432,11 @@
     </script>
  
 
-
-    <script>
-        if (typeof MathJax === 'undefined') {
-            window.MathJax = {
-                loader: {
-                    source: {
-                        '[tex]/amsCd': '[tex]/amscd',
-                        '[tex]/AMScd': '[tex]/amscd'
-                    }
-                },
-                tex: {
-                    inlineMath: {'[+]': [['$', '$']]},
-                    tags: 'ams'
-                },
-                options: {
-                    renderActions: {
-                        findScript: [10, doc => {
-                            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-                                const display = !!node.type.match(/; *mode=display/);
-                                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-                                const text = document.createTextNode('');
-                                node.parentNode.replaceChild(text, node);
-                                math.start = {node: text, delim: '', n: 0};
-                                math.end = {node: text, delim: '', n: 0};
-                                doc.math.push(math);
-                            });
-                        }, '', false],
-                        insertedScript: [200, () => {
-                            document.querySelectorAll('mjx-container').forEach(node => {
-                                let target = node.parentNode;
-                                if (target.nodeName.toLowerCase() === 'li') {
-                                    target.parentNode.classList.add('has-jax');
-                                }
-                            });
-                        }, '', false]
-                    }
-                }
-            };
-            (function () {
-                var script = document.createElement('script');
-                script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js";
-                script.defer = true;
-                document.head.appendChild(script);
-            })();
-        } else {
-            MathJax.startup.document.state(0);
-            MathJax.texReset();
-            MathJax.typeset();
-        }
-    </script>
  
 
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" crossorigin="anonymous"></script>
  
 
  
