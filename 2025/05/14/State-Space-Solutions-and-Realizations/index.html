@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--icon-->
+
+    
+        <link rel="shortcut icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="16x16" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="32x32" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon-96x96.png">
+    
+    
+        <link rel="apple-touch-icon" sizes="180x180" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/web-app-manifest-192x192.png">
+    
+    
+        <link rel="mask-icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/apple-touch-icon.png">
+    
+
+
+    <!-- meta -->
+
+
+<title>State-Space Solutions and Realizations | Strtus&#39;s Journey</title>
+
+
+    <meta name="keywords" content="课程笔记">
+
+
+
+
+    <!-- OpenGraph -->
+ 
+    <meta name="description" content="Chapter 4: State-Space Solutions and Realizations状态空间的求解和实现 4.1 Introduction 简介线性系统可由卷积和状态空间方程描述（若为集总系统）。本章目标：研究如何求解这些状态空间表示。  数值方法最常见但精度可能不足； 对于 LTI 系统，可利用拉氏变换和部分分式展开得到解析解； 更好的方式是将传递函数转换为状态方程，再求解状态变量">
+<meta property="og:type" content="article">
+<meta property="og:title" content="State-Space Solutions and Realizations">
+<meta property="og:url" content="https://strtus.github.io/2025/05/14/State-Space-Solutions-and-Realizations/index.html">
+<meta property="og:site_name" content="Strtus&#39;s Journey">
+<meta property="og:description" content="Chapter 4: State-Space Solutions and Realizations状态空间的求解和实现 4.1 Introduction 简介线性系统可由卷积和状态空间方程描述（若为集总系统）。本章目标：研究如何求解这些状态空间表示。  数值方法最常见但精度可能不足； 对于 LTI 系统，可利用拉氏变换和部分分式展开得到解析解； 更好的方式是将传递函数转换为状态方程，再求解状态变量">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-05-14T12:07:55.000Z">
+<meta property="article:modified_time" content="2025-05-14T12:10:11.326Z">
+<meta property="article:author" content="strtus">
+<meta property="article:tag" content="课程笔记">
+<meta name="twitter:card" content="summary_large_image">
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/highlight.css" media="none" >
+        
+            <link rel="stylesheet" id="hl-dark-theme" href="/css/highlight/highlight.dark.css" media="none">
+        
+    
+
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/style/dark.css">
+
+    
+<script src="/js/darkmode.js"></script>
+
+
+
+     
+
+    <!-- custom head -->
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+    <body>
+        <div id="app" tabindex="-1">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">Strtus&#39;s Journey</span>
+        </a>
+    </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">首页</a>
+                
+                    <a href="/about.html" class="navbar-menu button">About</a>
+                
+                    <a href="/categories/" class="navbar-menu button">分类</a>
+                
+                    <a href="/tags/" class="navbar-menu button">标签</a>
+                
+                    <a href="/archives/" class="navbar-menu button">归档</a>
+                
+            </div>
+        
+        
+        
+    <a href="/search/" id="btn-search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="24" height="24" fill="currentColor" stroke="currentColor" stroke-width="32"><path d="M192 448c0-141.152 114.848-256 256-256s256 114.848 256 256-114.848 256-256 256-256-114.848-256-256z m710.624 409.376l-206.88-206.88A318.784 318.784 0 0 0 768 448c0-176.736-143.264-320-320-320S128 271.264 128 448s143.264 320 320 320a318.784 318.784 0 0 0 202.496-72.256l206.88 206.88 45.248-45.248z"></path></svg>
+    </a>
+
+
+        
+        
+    <a href="javaScript:void(0);" id="btn-toggle-dark">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </a>
+
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">首页</a>
+                
+                    <a href="/about.html" class="dropdown-menu button">About</a>
+                
+                    <a href="/categories/" class="dropdown-menu button">分类</a>
+                
+                    <a href="/tags/" class="dropdown-menu button">标签</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">归档</a>
+                
+            </div>
+        
+    </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        State-Space Solutions and Realizations
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2025/05/" class="post-meta__date button">2025-05-14</a>
+        
+    <span class="separate-dot"></span><a href="/categories/Linear-System-Theory-and-Design/" class="button">Linear System Theory and Design</a>
+
+ 
+        
+    
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+    <aside class="post-side">
+        <div class="post-side__toc">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-Introduction-%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">4.1 Introduction 简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-Solution-of-LTI-State-Equations"><span class="toc-number">2.</span> <span class="toc-text">4.2 Solution of LTI State Equations</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#LTI%E7%8A%B6%E6%80%81%E6%96%B9%E7%A8%8B%E7%9A%84%E6%B1%82%E8%A7%A3"><span class="toc-number">2.1.</span> <span class="toc-text">LTI状态方程的求解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B1%82%E8%A7%A3-e-At-%E7%9A%84%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="toc-number">2.2.</span> <span class="toc-text">求解 $e^{At}$ 的方法：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Example-4-1%E3%80%814-2"><span class="toc-number">2.3.</span> <span class="toc-text">Example 4.1、4.2</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-1-Discretization-%E7%A6%BB%E6%95%A3%E5%8C%96"><span class="toc-number">3.</span> <span class="toc-text">4.2.1 Discretization 离散化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-2-Solution-of-Discrete-Time-Equations"><span class="toc-number">4.</span> <span class="toc-text">4.2.2 Solution of Discrete-Time Equations</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A6%BB%E6%95%A3%E6%97%B6%E9%97%B4%E7%B3%BB%E7%BB%9F%E8%A7%A3"><span class="toc-number">4.1.</span> <span class="toc-text">离散时间系统解</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-Equivalent-State-Equations-%E7%AD%89%E4%BB%B7%E7%8A%B6%E6%80%81%E6%96%B9%E7%A8%8B"><span class="toc-number">5.</span> <span class="toc-text">4.3 Equivalent State Equations 等价状态方程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-4-1"><span class="toc-number">5.1.</span> <span class="toc-text">定理 4.1</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-1-Canonical-Forms-%E6%A0%87%E5%87%86%E5%9E%8B"><span class="toc-number">6.</span> <span class="toc-text">4.3.1 Canonical Forms 标准型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-2-Magnitude-Scaling-in-Op-Amp-Circuits-%E8%BF%90%E6%94%BE%E7%94%B5%E8%B7%AF%E7%9A%84%E9%87%8F%E6%B5%8B%E8%8C%83%E5%9B%B4%E8%B0%83%E6%95%B4"><span class="toc-number">7.</span> <span class="toc-text">4.3.2 Magnitude Scaling in Op-Amp Circuits 运放电路的量测范围调整</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-4-Realizations-%E5%AE%9E%E7%8E%B0"><span class="toc-number">8.</span> <span class="toc-text">4.4 Realizations 实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-4-2"><span class="toc-number">8.1.</span> <span class="toc-text">定理 4.2</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-5-Solution-of-Linear-Time-Varying-Equations"><span class="toc-number">9.</span> <span class="toc-text">4.5 Solution of Linear Time-Varying Equations</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E6%97%B6%E5%8F%98%E7%B3%BB%E7%BB%9F%E6%B1%82%E8%A7%A3"><span class="toc-number">9.1.</span> <span class="toc-text">线性时变系统求解</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-5-1-Discrete-Time-Case-%E7%A6%BB%E6%95%A3%E6%97%B6%E5%8F%98%E7%B3%BB%E7%BB%9F"><span class="toc-number">10.</span> <span class="toc-text">4.5.1 Discrete-Time Case 离散时变系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-6-Equivalent-Time-Varying-Equations-%E7%AD%89%E4%BB%B7%E6%97%B6%E5%8F%98%E7%B3%BB%E7%BB%9F"><span class="toc-number">11.</span> <span class="toc-text">4.6 Equivalent Time-Varying Equations 等价时变系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-4-4%EF%BC%88Floquet-%E5%AE%9A%E7%90%86%EF%BC%89"><span class="toc-number">11.1.</span> <span class="toc-text">定理 4.4（Floquet 定理）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-7-Time-Varying-Realizations-%E6%97%B6%E5%8F%98%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-number">12.</span> <span class="toc-text">4.7 Time-Varying Realizations 时变系统的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-4-5"><span class="toc-number">12.1.</span> <span class="toc-text">定理 4.5</span></a></li></ol></li></ol>
+        </div>
+    </aside>
+    <a class="btn-toc button" id="btn-toc" tabindex="0">
+        <svg viewBox="0 0 1024 1024" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M128 256h64V192H128zM320 256h576V192H320zM128 544h64v-64H128zM320 544h576v-64H320zM128 832h64v-64H128zM320 832h576v-64H320z" fill="currentColor"></path>
+        </svg>
+    </a>
+    <div class="toc-menus" id="toc-menus">
+        <div class="toc-title">Article Directory</div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-Introduction-%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">4.1 Introduction 简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-Solution-of-LTI-State-Equations"><span class="toc-number">2.</span> <span class="toc-text">4.2 Solution of LTI State Equations</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#LTI%E7%8A%B6%E6%80%81%E6%96%B9%E7%A8%8B%E7%9A%84%E6%B1%82%E8%A7%A3"><span class="toc-number">2.1.</span> <span class="toc-text">LTI状态方程的求解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B1%82%E8%A7%A3-e-At-%E7%9A%84%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="toc-number">2.2.</span> <span class="toc-text">求解 $e^{At}$ 的方法：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Example-4-1%E3%80%814-2"><span class="toc-number">2.3.</span> <span class="toc-text">Example 4.1、4.2</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-1-Discretization-%E7%A6%BB%E6%95%A3%E5%8C%96"><span class="toc-number">3.</span> <span class="toc-text">4.2.1 Discretization 离散化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-2-Solution-of-Discrete-Time-Equations"><span class="toc-number">4.</span> <span class="toc-text">4.2.2 Solution of Discrete-Time Equations</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A6%BB%E6%95%A3%E6%97%B6%E9%97%B4%E7%B3%BB%E7%BB%9F%E8%A7%A3"><span class="toc-number">4.1.</span> <span class="toc-text">离散时间系统解</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-Equivalent-State-Equations-%E7%AD%89%E4%BB%B7%E7%8A%B6%E6%80%81%E6%96%B9%E7%A8%8B"><span class="toc-number">5.</span> <span class="toc-text">4.3 Equivalent State Equations 等价状态方程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-4-1"><span class="toc-number">5.1.</span> <span class="toc-text">定理 4.1</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-1-Canonical-Forms-%E6%A0%87%E5%87%86%E5%9E%8B"><span class="toc-number">6.</span> <span class="toc-text">4.3.1 Canonical Forms 标准型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-2-Magnitude-Scaling-in-Op-Amp-Circuits-%E8%BF%90%E6%94%BE%E7%94%B5%E8%B7%AF%E7%9A%84%E9%87%8F%E6%B5%8B%E8%8C%83%E5%9B%B4%E8%B0%83%E6%95%B4"><span class="toc-number">7.</span> <span class="toc-text">4.3.2 Magnitude Scaling in Op-Amp Circuits 运放电路的量测范围调整</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-4-Realizations-%E5%AE%9E%E7%8E%B0"><span class="toc-number">8.</span> <span class="toc-text">4.4 Realizations 实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-4-2"><span class="toc-number">8.1.</span> <span class="toc-text">定理 4.2</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-5-Solution-of-Linear-Time-Varying-Equations"><span class="toc-number">9.</span> <span class="toc-text">4.5 Solution of Linear Time-Varying Equations</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E6%97%B6%E5%8F%98%E7%B3%BB%E7%BB%9F%E6%B1%82%E8%A7%A3"><span class="toc-number">9.1.</span> <span class="toc-text">线性时变系统求解</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-5-1-Discrete-Time-Case-%E7%A6%BB%E6%95%A3%E6%97%B6%E5%8F%98%E7%B3%BB%E7%BB%9F"><span class="toc-number">10.</span> <span class="toc-text">4.5.1 Discrete-Time Case 离散时变系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-6-Equivalent-Time-Varying-Equations-%E7%AD%89%E4%BB%B7%E6%97%B6%E5%8F%98%E7%B3%BB%E7%BB%9F"><span class="toc-number">11.</span> <span class="toc-text">4.6 Equivalent Time-Varying Equations 等价时变系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-4-4%EF%BC%88Floquet-%E5%AE%9A%E7%90%86%EF%BC%89"><span class="toc-number">11.1.</span> <span class="toc-text">定理 4.4（Floquet 定理）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-7-Time-Varying-Realizations-%E6%97%B6%E5%8F%98%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-number">12.</span> <span class="toc-text">4.7 Time-Varying Realizations 时变系统的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-4-5"><span class="toc-number">12.1.</span> <span class="toc-text">定理 4.5</span></a></li></ol></li></ol>
+    </div>
+
+
+<article class="post post__with-toc content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <h1 id="Chapter-4-State-Space-Solutions-and-Realizations"><a href="#Chapter-4-State-Space-Solutions-and-Realizations" class="headerlink" title="Chapter 4: State-Space Solutions and Realizations"></a>Chapter 4: State-Space Solutions and Realizations</h1><h1 id="状态空间的求解和实现"><a href="#状态空间的求解和实现" class="headerlink" title="状态空间的求解和实现"></a>状态空间的求解和实现</h1><hr>
+<h2 id="4-1-Introduction-简介"><a href="#4-1-Introduction-简介" class="headerlink" title="4.1 Introduction 简介"></a>4.1 Introduction 简介</h2><p>线性系统可由卷积和状态空间方程描述（若为集总系统）。<br>本章目标：研究如何求解这些状态空间表示。</p>
+<ul>
+<li>数值方法最常见但精度可能不足；</li>
+<li>对于 LTI 系统，可利用拉氏变换和部分分式展开得到解析解；</li>
+<li>更好的方式是将传递函数转换为状态方程，再求解状态变量。</li>
+</ul>
+<hr>
+<h2 id="4-2-Solution-of-LTI-State-Equations"><a href="#4-2-Solution-of-LTI-State-Equations" class="headerlink" title="4.2 Solution of LTI State Equations"></a>4.2 Solution of LTI State Equations</h2><h3 id="LTI状态方程的求解"><a href="#LTI状态方程的求解" class="headerlink" title="LTI状态方程的求解"></a>LTI状态方程的求解</h3><p>考虑：</p>
+<p>$$<br>\dot{x}(t) &#x3D; Ax(t) + Bu(t) \tag{4.2}<br>$$</p>
+<p>$$<br>y(t) &#x3D; Cx(t) + Du(t) \tag{4.3}<br>$$</p>
+<p>其中 $A, B, C, D$ 分别为 $n \times n, n \times p, q \times n, q \times p$ 的常数矩阵。<br>求解：给定初始状态 $x(0)$ 与输入 $u(t)$。</p>
+<p>基于矩阵指数的通解为：</p>
+<p>$$<br>x(t) &#x3D; e^{At} x(0) + \int_0^t e^{A(t-\tau)} B u(\tau) d\tau \tag{4.5}<br>$$</p>
+<p>可验证满足初始条件：</p>
+<p>$$<br>x(0) &#x3D; e^{A \cdot 0} x(0) + \int_0^0 \cdots &#x3D; x(0)<br>$$</p>
+<p>对(4.5)求导得到：</p>
+<p>$$<br>\dot{x}(t) &#x3D; A e^{At} x(0) + A \int_0^t e^{A(t-\tau)} B u(\tau) d\tau + Bu(t) \tag{4.7}<br>$$</p>
+<hr>
+<h3 id="求解-e-At-的方法："><a href="#求解-e-At-的方法：" class="headerlink" title="求解 $e^{At}$ 的方法："></a>求解 $e^{At}$ 的方法：</h3><ol>
+<li>使用定理 3.5；</li>
+<li>利用 $A$ 的 Jordan 形式；</li>
+<li>幂级数展开：<br>$$<br>e^{At} &#x3D; \sum_{k&#x3D;0}^\infty \frac{A^k t^k}{k!}<br>$$</li>
+<li>Leverrier 算法；</li>
+<li>数值方法（如 MATLAB）</li>
+</ol>
+<hr>
+<h3 id="Example-4-1、4-2"><a href="#Example-4-1、4-2" class="headerlink" title="Example 4.1、4.2"></a>Example 4.1、4.2</h3><ul>
+<li>展示如何计算零输入响应；</li>
+<li>探讨 $A$ 的特征值对系统响应的影响。</li>
+</ul>
+<p>若 $A$ 所有特征值实部为负，$x(t)$ 将趋于零。<br>若含正实部，$x(t)$ 发散。<br>若实部为零但代数重数大于1，也可能发散。</p>
+<hr>
+<h2 id="4-2-1-Discretization-离散化"><a href="#4-2-1-Discretization-离散化" class="headerlink" title="4.2.1 Discretization 离散化"></a>4.2.1 Discretization 离散化</h2><p>最简单方法：</p>
+<p>$$<br>x[k+1] &#x3D; (I + AT) x[k] + BT u[k]<br>$$</p>
+<p>更精确方法（无近似）：</p>
+<p>$$<br>x[k+1] &#x3D; \Phi x[k] + \Gamma u[k]<br>$$</p>
+<p>其中：</p>
+<p>$$<br>\Phi &#x3D; e^{AT},\quad \Gamma &#x3D; \int_0^T e^{A\tau} B d\tau<br>$$</p>
+<hr>
+<h2 id="4-2-2-Solution-of-Discrete-Time-Equations"><a href="#4-2-2-Solution-of-Discrete-Time-Equations" class="headerlink" title="4.2.2 Solution of Discrete-Time Equations"></a>4.2.2 Solution of Discrete-Time Equations</h2><h3 id="离散时间系统解"><a href="#离散时间系统解" class="headerlink" title="离散时间系统解"></a>离散时间系统解</h3><p>离散状态方程：</p>
+<p>$$<br>x[k+1] &#x3D; Ax[k] + Bu[k] \tag{4.19}<br>$$</p>
+<p>$$<br>y[k] &#x3D; Cx[k] + Du[k]<br>$$</p>
+<p>递推解形式：</p>
+<p>$$<br>x[k] &#x3D; A^k x[0] + \sum_{i&#x3D;0}^{k-1} A^{k-1-i} B u[i] \tag{4.20}<br>$$</p>
+<hr>
+<h2 id="4-3-Equivalent-State-Equations-等价状态方程"><a href="#4-3-Equivalent-State-Equations-等价状态方程" class="headerlink" title="4.3 Equivalent State Equations 等价状态方程"></a>4.3 Equivalent State Equations 等价状态方程</h2><p>定义：若存在非奇异变换 $P$，使得：</p>
+<p>$$<br>\tilde{x} &#x3D; P x,\quad \tilde{A} &#x3D; PAP^{-1},\quad \tilde{B} &#x3D; PB,\quad \tilde{C} &#x3D; CP^{-1},\quad \tilde{D} &#x3D; D<br>$$</p>
+<p>则两系统是<strong>代数等价的</strong>。</p>
+<hr>
+<h3 id="定理-4-1"><a href="#定理-4-1" class="headerlink" title="定理 4.1"></a>定理 4.1</h3><p>两组状态方程 ${A,B,C,D}$ 和 ${\tilde{A}, \tilde{B}, \tilde{C}, \tilde{D}}$ <strong>零状态等价</strong>（有相同传递矩阵）的充要条件是存在非奇异矩阵 $P$ 使得上述等式成立。</p>
+<p>代数等价 $\Rightarrow$ 零状态等价<br>反之不成立，维度可能不同。</p>
+<hr>
+<h2 id="4-3-1-Canonical-Forms-标准型"><a href="#4-3-1-Canonical-Forms-标准型" class="headerlink" title="4.3.1 Canonical Forms 标准型"></a>4.3.1 Canonical Forms 标准型</h2><p>除了友矩阵，还可构造：</p>
+<ul>
+<li><strong>模态型 Modal Form</strong>  </li>
+<li><strong>对角型</strong>（若可对角化）</li>
+</ul>
+<p>例子见公式 (4.28)</p>
+<hr>
+<h2 id="4-3-2-Magnitude-Scaling-in-Op-Amp-Circuits-运放电路的量测范围调整"><a href="#4-3-2-Magnitude-Scaling-in-Op-Amp-Circuits-运放电路的量测范围调整" class="headerlink" title="4.3.2 Magnitude Scaling in Op-Amp Circuits 运放电路的量测范围调整"></a>4.3.2 Magnitude Scaling in Op-Amp Circuits 运放电路的量测范围调整</h2><p>采用状态等价变换 $x &#x3D; Px’$ 来缩放各状态变量大小。</p>
+<hr>
+<h2 id="4-4-Realizations-实现"><a href="#4-4-Realizations-实现" class="headerlink" title="4.4 Realizations 实现"></a>4.4 Realizations 实现</h2><p>给定传递函数（矩阵）$G(s)$，求状态空间模型 ${A,B,C,D}$，使得：</p>
+<p>$$<br>G(s) &#x3D; C(sI - A)^{-1}B + D<br>$$</p>
+<p>称 $G(s)$ 是<strong>可实现的</strong>。</p>
+<hr>
+<h3 id="定理-4-2"><a href="#定理-4-2" class="headerlink" title="定理 4.2"></a>定理 4.2</h3><p>传递矩阵 $G(s)$ 可实现 $\Leftrightarrow$ $G(s)$ 是正则有理矩阵。</p>
+<ul>
+<li>最小公倍分母（Least Common Denominator）用于统一分母；</li>
+<li>可控标准型（Controllable Canonical Form）常用于实现构造。</li>
+</ul>
+<hr>
+<h2 id="4-5-Solution-of-Linear-Time-Varying-Equations"><a href="#4-5-Solution-of-Linear-Time-Varying-Equations" class="headerlink" title="4.5 Solution of Linear Time-Varying Equations"></a>4.5 Solution of Linear Time-Varying Equations</h2><h3 id="线性时变系统求解"><a href="#线性时变系统求解" class="headerlink" title="线性时变系统求解"></a>线性时变系统求解</h3><p>时变状态方程：</p>
+<p>$$<br>\dot{x}(t) &#x3D; A(t)x(t) + B(t)u(t) \tag{4.45}<br>$$</p>
+<p>状态转移矩阵 $\Phi(t,t_0)$ 定义为：</p>
+<p>$$<br>x(t) &#x3D; \Phi(t,t_0) x(t_0) + \int_{t_0}^t \Phi(t, \tau) B(\tau) u(\tau) d\tau \tag{4.57}<br>$$</p>
+<p>$\Phi(t,t_0)$ 满足：</p>
+<ol>
+<li>$\Phi(t_0,t_0) &#x3D; I$  </li>
+<li>$\frac{d}{dt} \Phi(t,t_0) &#x3D; A(t)\Phi(t,t_0)$  </li>
+<li>传递性：$\Phi(t,t_1)\Phi(t_1,t_0) &#x3D; \Phi(t,t_0)$</li>
+</ol>
+<hr>
+<h2 id="4-5-1-Discrete-Time-Case-离散时变系统"><a href="#4-5-1-Discrete-Time-Case-离散时变系统" class="headerlink" title="4.5.1 Discrete-Time Case 离散时变系统"></a>4.5.1 Discrete-Time Case 离散时变系统</h2><p>递推形式：</p>
+<p>$$<br>x[k+1] &#x3D; A[k] x[k] + B[k] u[k]<br>$$</p>
+<p>$$<br>x[k] &#x3D; \Phi[k,0] x[0] + \sum_{i&#x3D;0}^{k-1} \Phi[k,i+1] B[i] u[i]<br>$$</p>
+<hr>
+<h2 id="4-6-Equivalent-Time-Varying-Equations-等价时变系统"><a href="#4-6-Equivalent-Time-Varying-Equations-等价时变系统" class="headerlink" title="4.6 Equivalent Time-Varying Equations 等价时变系统"></a>4.6 Equivalent Time-Varying Equations 等价时变系统</h2><p>设变换 $x(t) &#x3D; P(t)\tilde{x}(t)$，且 $P(t)$ 非奇异，连续。</p>
+<p>变换后系统为：</p>
+<p>$$<br>\dot{\tilde{x}} &#x3D; \left[P^{-1}(t)A(t)P(t) - P^{-1}(t)\dot{P}(t)\right] \tilde{x} + P^{-1}(t)B(t) u<br>$$</p>
+<p>该变换称为<strong>等价变换</strong>或<strong>李亚普诺夫变换</strong>（若 $P(t)$ 连续、有界）。</p>
+<hr>
+<h3 id="定理-4-4（Floquet-定理）"><a href="#定理-4-4（Floquet-定理）" class="headerlink" title="定理 4.4（Floquet 定理）"></a>定理 4.4（Floquet 定理）</h3><p>若 $A(t)$ 周期，系统可李氏等价于一个常系数系统。</p>
+<hr>
+<h2 id="4-7-Time-Varying-Realizations-时变系统的实现"><a href="#4-7-Time-Varying-Realizations-时变系统的实现" class="headerlink" title="4.7 Time-Varying Realizations 时变系统的实现"></a>4.7 Time-Varying Realizations 时变系统的实现</h2><p>拉氏变换不可用于时变系统，因此在时域处理。</p>
+<h3 id="定理-4-5"><a href="#定理-4-5" class="headerlink" title="定理 4.5"></a>定理 4.5</h3><p>一个脉冲响应矩阵 $g(t,\tau)$ 可实现的充要条件是可分解为：</p>
+<p>$$<br>g(t,\tau) &#x3D; C(t)\Phi(t,\tau)B(\tau)<br>$$</p>
+<p>其中 $\Phi(t,\tau)$ 为状态转移矩阵。</p>
+<hr>
+
+    </div>
+     
+    <div class="post-footer__meta"><p>updated at 2025-05-14</p></div> 
+    <div class="post-entry__tags"><a href="/tags/%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0/" class="post-tags__link button"># 课程笔记</a></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="/2025/05/14/Minimal-Realizations-and-Coprime-Fractions/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            Next Post
+                        </div>
+                        <div class="nav__title">
+                            Minimal Realizations and Coprime Fractions
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
+        </div>
+    </div>
+
+
+
+
+
+</main>
+
+            <footer class="footer">
+     
+    <a href="#" class="button" id="b2t" aria-label="Back to Top" title="Back to Top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M233.376 722.752L278.624 768 512 534.624 745.376 768l45.248-45.248L512 444.128zM192 352h640V288H192z" fill="currentColor"></path>
+        </svg>
+    </a>
+
+    
+
+
+    
+     
+ 
+
+ 
+    
+        
+        <p class="footer-copyright">
+            Strtus's Journry
+        </p>
+    
+    
+        
+            
+        
+            
+        
+            <p>保持对世界的输出🙌</p>
+
+        
+    
+</footer>
+
+        </div>
+         
+
+ 
+    <script>
+        window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+        ga('create', 'G-5ERPC280ZB', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+ 
+
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5ERPC280ZB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-5ERPC280ZB');
+    </script>
+ 
+
+ 
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement('script');
+            hm.src = 'https://hm.baidu.com/hm.js?8da6411546e903e478a9d82d2a4d0c60';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+    
+ 
+
+
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.css">
+
+    
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.js"></script>
+
+    <script>
+        let lazyloadT = Boolean('false'),
+            auto_fancybox = Boolean('true')
+        if (auto_fancybox) {
+            $(".post__content").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        } else {
+            $(".post__content").find("fancybox").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        }
+    </script>
+ 
+
+
+    <script>
+        if (typeof MathJax === 'undefined') {
+            window.MathJax = {
+                loader: {
+                    source: {
+                        '[tex]/amsCd': '[tex]/amscd',
+                        '[tex]/AMScd': '[tex]/amscd'
+                    }
+                },
+                tex: {
+                    inlineMath: {'[+]': [['$', '$']]},
+                    tags: 'ams'
+                },
+                options: {
+                    renderActions: {
+                        findScript: [10, doc => {
+                            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                                const display = !!node.type.match(/; *mode=display/);
+                                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                                const text = document.createTextNode('');
+                                node.parentNode.replaceChild(text, node);
+                                math.start = {node: text, delim: '', n: 0};
+                                math.end = {node: text, delim: '', n: 0};
+                                doc.math.push(math);
+                            });
+                        }, '', false],
+                        insertedScript: [200, () => {
+                            document.querySelectorAll('mjx-container').forEach(node => {
+                                let target = node.parentNode;
+                                if (target.nodeName.toLowerCase() === 'li') {
+                                    target.parentNode.classList.add('has-jax');
+                                }
+                            });
+                        }, '', false]
+                    }
+                }
+            };
+            (function () {
+                var script = document.createElement('script');
+                script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js";
+                script.defer = true;
+                document.head.appendChild(script);
+            })();
+        } else {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+        }
+    </script>
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+
+    </body>
+</html>

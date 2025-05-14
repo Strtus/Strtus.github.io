@@ -53,7 +53,7 @@
 <meta property="og:description" content="Chapter 7: Minimal Realizations and Coprime Fractions最小实现和既约分式 7.1 Introduction 简介最小维数的实现被称为最小维实现或最小实现。传递函数分式的互质性在状态空间中起着类似于能控性和能观性的作用。  7.2 Implications of Coprimeness 互质的含义我们仅考虑严格正则的有理函数。为简化讨论，假设分母阶">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-05-14T11:58:51.000Z">
-<meta property="article:modified_time" content="2025-05-14T12:03:10.062Z">
+<meta property="article:modified_time" content="2025-05-14T12:04:11.584Z">
 <meta property="article:author" content="strtus">
 <meta property="article:tag" content="课程笔记">
 <meta name="twitter:card" content="summary_large_image">
@@ -174,7 +174,7 @@
 
     <aside class="post-side">
         <div class="post-side__toc">
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Chapter-7-Minimal-Realizations-and-Coprime-Fractions"><span class="toc-number">1.</span> <span class="toc-text">Chapter 7: Minimal Realizations and Coprime Fractions</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E5%B0%8F%E5%AE%9E%E7%8E%B0%E5%92%8C%E6%97%A2%E7%BA%A6%E5%88%86%E5%BC%8F"><span class="toc-number">2.</span> <span class="toc-text">最小实现和既约分式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-1-Introduction-%E7%AE%80%E4%BB%8B"><span class="toc-number">3.</span> <span class="toc-text">7.1 Introduction 简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-2-Implications-of-Coprimeness-%E4%BA%92%E8%B4%A8%E7%9A%84%E5%90%AB%E4%B9%89"><span class="toc-number">4.</span> <span class="toc-text">7.2 Implications of Coprimeness 互质的含义</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F%EF%BC%9A"><span class="toc-number">4.1.</span> <span class="toc-text">定义变量：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E7%8A%B6%E6%80%81%E5%8F%98%E9%87%8F%E4%B8%BA%EF%BC%9A"><span class="toc-number">4.2.</span> <span class="toc-text">定义状态变量为：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-7-1"><span class="toc-number">4.3.</span> <span class="toc-text">定理 7.1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A5%E5%85%85%E6%9C%AF%E8%AF%AD"><span class="toc-number">4.4.</span> <span class="toc-text">补充术语</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-2-1-Minimal-Realizations-%E6%9C%80%E5%B0%8F%E5%AE%9E%E7%8E%B0"><span class="toc-number">5.</span> <span class="toc-text">7.2.1 Minimal Realizations 最小实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-7-2"><span class="toc-number">5.1.</span> <span class="toc-text">定理 7.2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-7-3"><span class="toc-number">5.2.</span> <span class="toc-text">定理 7.3</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-number">6.</span> <span class="toc-text">结论</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Chapter-7-Minimal-Realizations-and-Coprime-Fractions"><span class="toc-number">1.</span> <span class="toc-text">Chapter 7: Minimal Realizations and Coprime Fractions</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E5%B0%8F%E5%AE%9E%E7%8E%B0%E5%92%8C%E6%97%A2%E7%BA%A6%E5%88%86%E5%BC%8F"><span class="toc-number">2.</span> <span class="toc-text">最小实现和既约分式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-1-Introduction-%E7%AE%80%E4%BB%8B"><span class="toc-number">3.</span> <span class="toc-text">7.1 Introduction 简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-2-Implications-of-Coprimeness-%E4%BA%92%E8%B4%A8%E7%9A%84%E5%90%AB%E4%B9%89"><span class="toc-number">4.</span> <span class="toc-text">7.2 Implications of Coprimeness 互质的含义</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F%EF%BC%9A"><span class="toc-number">4.1.</span> <span class="toc-text">定义变量：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E7%8A%B6%E6%80%81%E5%8F%98%E9%87%8F%E4%B8%BA%EF%BC%9A"><span class="toc-number">4.2.</span> <span class="toc-text">定义状态变量为：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-7-1"><span class="toc-number">4.3.</span> <span class="toc-text">定理 7.1</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-2-1-Minimal-Realizations-%E6%9C%80%E5%B0%8F%E5%AE%9E%E7%8E%B0"><span class="toc-number">5.</span> <span class="toc-text">7.2.1 Minimal Realizations 最小实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-7-2"><span class="toc-number">5.1.</span> <span class="toc-text">定理 7.2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-7-3"><span class="toc-number">5.2.</span> <span class="toc-text">定理 7.3</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-number">6.</span> <span class="toc-text">结论</span></a></li></ol>
         </div>
     </aside>
     <a class="btn-toc button" id="btn-toc" tabindex="0">
@@ -184,7 +184,7 @@
     </a>
     <div class="toc-menus" id="toc-menus">
         <div class="toc-title">Article Directory</div>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Chapter-7-Minimal-Realizations-and-Coprime-Fractions"><span class="toc-number">1.</span> <span class="toc-text">Chapter 7: Minimal Realizations and Coprime Fractions</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E5%B0%8F%E5%AE%9E%E7%8E%B0%E5%92%8C%E6%97%A2%E7%BA%A6%E5%88%86%E5%BC%8F"><span class="toc-number">2.</span> <span class="toc-text">最小实现和既约分式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-1-Introduction-%E7%AE%80%E4%BB%8B"><span class="toc-number">3.</span> <span class="toc-text">7.1 Introduction 简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-2-Implications-of-Coprimeness-%E4%BA%92%E8%B4%A8%E7%9A%84%E5%90%AB%E4%B9%89"><span class="toc-number">4.</span> <span class="toc-text">7.2 Implications of Coprimeness 互质的含义</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F%EF%BC%9A"><span class="toc-number">4.1.</span> <span class="toc-text">定义变量：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E7%8A%B6%E6%80%81%E5%8F%98%E9%87%8F%E4%B8%BA%EF%BC%9A"><span class="toc-number">4.2.</span> <span class="toc-text">定义状态变量为：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-7-1"><span class="toc-number">4.3.</span> <span class="toc-text">定理 7.1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A5%E5%85%85%E6%9C%AF%E8%AF%AD"><span class="toc-number">4.4.</span> <span class="toc-text">补充术语</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-2-1-Minimal-Realizations-%E6%9C%80%E5%B0%8F%E5%AE%9E%E7%8E%B0"><span class="toc-number">5.</span> <span class="toc-text">7.2.1 Minimal Realizations 最小实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-7-2"><span class="toc-number">5.1.</span> <span class="toc-text">定理 7.2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-7-3"><span class="toc-number">5.2.</span> <span class="toc-text">定理 7.3</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-number">6.</span> <span class="toc-text">结论</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Chapter-7-Minimal-Realizations-and-Coprime-Fractions"><span class="toc-number">1.</span> <span class="toc-text">Chapter 7: Minimal Realizations and Coprime Fractions</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E5%B0%8F%E5%AE%9E%E7%8E%B0%E5%92%8C%E6%97%A2%E7%BA%A6%E5%88%86%E5%BC%8F"><span class="toc-number">2.</span> <span class="toc-text">最小实现和既约分式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-1-Introduction-%E7%AE%80%E4%BB%8B"><span class="toc-number">3.</span> <span class="toc-text">7.1 Introduction 简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-2-Implications-of-Coprimeness-%E4%BA%92%E8%B4%A8%E7%9A%84%E5%90%AB%E4%B9%89"><span class="toc-number">4.</span> <span class="toc-text">7.2 Implications of Coprimeness 互质的含义</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F%EF%BC%9A"><span class="toc-number">4.1.</span> <span class="toc-text">定义变量：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E7%8A%B6%E6%80%81%E5%8F%98%E9%87%8F%E4%B8%BA%EF%BC%9A"><span class="toc-number">4.2.</span> <span class="toc-text">定义状态变量为：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-7-1"><span class="toc-number">4.3.</span> <span class="toc-text">定理 7.1</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-2-1-Minimal-Realizations-%E6%9C%80%E5%B0%8F%E5%AE%9E%E7%8E%B0"><span class="toc-number">5.</span> <span class="toc-text">7.2.1 Minimal Realizations 最小实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-7-2"><span class="toc-number">5.1.</span> <span class="toc-text">定理 7.2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-7-3"><span class="toc-number">5.2.</span> <span class="toc-text">定理 7.3</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-number">6.</span> <span class="toc-text">结论</span></a></li></ol>
     </div>
 
 
@@ -220,12 +220,6 @@
 <hr>
 <h3 id="定理-7-1"><a href="#定理-7-1" class="headerlink" title="定理 7.1"></a>定理 7.1</h3><p>式（7.9）的能控标准型<strong>能观的充分必要条件</strong>是：<br>$$D(s) \text{ 与 } N(s) \text{ 互质，即最大公因式为常数}$$</p>
 <hr>
-<h3 id="补充术语"><a href="#补充术语" class="headerlink" title="补充术语"></a>补充术语</h3><ul>
-<li>Common factor：公因式  </li>
-<li>Greatest common divisor：最大公约式  </li>
-<li>Coprime：互质</li>
-</ul>
-<hr>
 <h2 id="7-2-1-Minimal-Realizations-最小实现"><a href="#7-2-1-Minimal-Realizations-最小实现" class="headerlink" title="7.2.1 Minimal Realizations 最小实现"></a>7.2.1 Minimal Realizations 最小实现</h2><ul>
 <li>Polynomial fraction：多项式分式  </li>
 <li>Coprime fraction：既约分式（互质分式）</li>
@@ -253,6 +247,20 @@
 
     <div class="nav">
         <div class="nav__prev">
+            
+                <a href="/2025/05/14/State-Space-Solutions-and-Realizations/" class="nav__link">
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
+                    </div>
+                    <div>
+                        <div class="nav__label">
+                            Previous Post
+                        </div>
+                        <div class="nav__title">
+                            State-Space Solutions and Realizations
+                        </div>
+                    </div>
+                </a>
             
         </div>
         <div class="nav__next">
