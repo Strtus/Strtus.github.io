@@ -198,9 +198,10 @@
         <p>Clohessy-Wiltshire 方程最初由 William H. Clohessy 和 Richard S. Wiltshire 于 1960 年建立。该方程的提出是为了简化复杂的轨道交会问题，这对于涉及多航天器的太空任务至关重要。CW方程为两艘航天器之间的相对运动提供了线性化的近似解，这使得人们能够更精确地设计和执行交会机动。</p>
 <p>由于航天器均在中心天体的引力场中运动，其相对运动表现出与地面环境显著不同的非直观特性。本文系统地推导描述该相对运动的动力学方程，从惯性空间中的二体问题出发，通过坐标变换将运动方程在以目标为原点的LVLH旋转坐标系中表示，并最终通过线性化处理，得到通用的Hill’s Equations及其在近圆轨道下的特例——CW Equation</p>
 <hr>
-<h2 id="建立动力学模型"><a href="#建立动力学模型" class="headerlink" title="建立动力学模型"></a>建立动力学模型</h2><h3 id="惯性系下的绝对运动"><a href="#惯性系下的绝对运动" class="headerlink" title="惯性系下的绝对运动"></a>惯性系下的绝对运动</h3><p>在以中心天体质心为原点的地心惯性坐标系中，假设Target与追踪航天器Chaser的运动分别遵循二体问题动力学：<br>$$<br>\ddot{\mathbf{r}}_t + \frac{\mu}{r_t^3}\mathbf{r}_t &#x3D; \mathbf{0}<br>$$</p>
-<p>$$<br>\ddot{\mathbf{r}}_c + \frac{\mu}{r_c^3}\mathbf{r}_c &#x3D; \mathbf{a}_c<br>$$</p>
-<p>其中：</p>
+<h2 id="建立动力学模型"><a href="#建立动力学模型" class="headerlink" title="建立动力学模型"></a>建立动力学模型</h2><h3 id="惯性系下的绝对运动"><a href="#惯性系下的绝对运动" class="headerlink" title="惯性系下的绝对运动"></a>惯性系下的绝对运动</h3><p>在以中心天体质心为原点的地心惯性坐标系中，假设Target与追踪航天器Chaser的运动分别遵循二体问题动力学：</p>
+<script type="math/tex; mode=display">
+\ddot{\mathbf{r}}_t + \frac{\mu}{r_t^3}\mathbf{r}_t = \mathbf{0}</script><script type="math/tex; mode=display">
+\ddot{\mathbf{r}}_c + \frac{\mu}{r_c^3}\mathbf{r}_c = \mathbf{a}_c</script><p>其中：</p>
 <ul>
 <li>$\mathbf{r}_t$ 和 $\mathbf{r}_c$ 分别是目标和追踪航天器的惯性位置矢量。</li>
 <li>$\mu$ 是中心天体的引力常数。</li>
@@ -210,35 +211,82 @@
 <ul>
 <li>原点 $O$: 目标航天器质心</li>
 <li>$Oy$ 轴: 沿 $\mathbf{r}_t$ 方向，即径向</li>
-<li>$Oz$ 轴: 沿轨道角动量方向 $\mathbf{h} &#x3D; \mathbf{r}_t \times \dot{\mathbf{r}}_t$，即法向&#x2F;跨轨向 Cross-track</li>
-<li>$Ox$ 轴: 与 $Oy$ 和 $Oz$ 构成右手坐标系，大致指向轨道速度方向，即切向&#x2F;沿轨向，aka In-track</li>
+<li>$Oz$ 轴: 沿轨道角动量方向 $\mathbf{h} = \mathbf{r}_t \times \dot{\mathbf{r}}_t$，即法向/跨轨向 Cross-track</li>
+<li>$Ox$ 轴: 与 $Oy$ 和 $Oz$ 构成右手坐标系，大致指向轨道速度方向，即切向/沿轨向，aka In-track</li>
 </ul>
 <p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/hills-equations.png" alt="img"></p>
-<p>该坐标系以角速度 $\mathbf{\omega}$ 随目标在惯性空间中转动。相对位置矢量定义为 $\mathbf{\rho} &#x3D; \mathbf{r}_c - \mathbf{r}_t$。根据旋转坐标系下的矢量求导法则，相对加速度 $\ddot{\mathbf{\rho}}$ 可表示为：<br>$$<br>\ddot{\mathbf{\rho}} &#x3D; \mathring{\mathring{\mathbf{\rho}}} + 2(\mathbf{\omega} \times \mathring{\mathbf{\rho}}) + \dot{\mathbf{\omega}} \times \mathbf{\rho} + \mathbf{\omega} \times (\mathbf{\omega} \times \mathbf{\rho})<br>$$<br>其中 $\mathring{(\cdot)}$ 表示在LVLH系下对时间的求导。将$\ddot{\mathbf{\rho}} &#x3D; \ddot{\mathbf{r}}_c - \ddot{\mathbf{r}}_t$代入绝对运动方程，得到：<br>$$<br>\mathring{\mathring{\mathbf{\rho}}} + 2(\mathbf{\omega} \times \mathring{\mathbf{\rho}}) + \dot{\mathbf{\omega}} \times \mathbf{\rho} + \mathbf{\omega} \times (\mathbf{\omega} \times \mathbf{\rho}) &#x3D; \frac{\mu}{r_t^3}\mathbf{r}_t - \frac{\mu}{r_c^3}\mathbf{r}_c + \mathbf{a}_c<br>$$<br>该方程是描述相对运动的、精确的非线性动力学方程</p>
+<p>该坐标系以角速度 $\mathbf{\omega}$ 随目标在惯性空间中转动。相对位置矢量定义为 $\mathbf{\rho} = \mathbf{r}_c - \mathbf{r}_t$。根据旋转坐标系下的矢量求导法则，相对加速度 $\ddot{\mathbf{\rho}}$ 可表示为：</p>
+<script type="math/tex; mode=display">
+\ddot{\mathbf{\rho}} = \mathring{\mathring{\mathbf{\rho}}} + 2(\mathbf{\omega} \times \mathring{\mathbf{\rho}}) + \dot{\mathbf{\omega}} \times \mathbf{\rho} + \mathbf{\omega} \times (\mathbf{\omega} \times \mathbf{\rho})</script><p>其中 $\mathring{(\cdot)}$ 表示在LVLH系下对时间的求导。将$\ddot{\mathbf{\rho}} = \ddot{\mathbf{r}}_c - \ddot{\mathbf{r}}_t$代入绝对运动方程，得到：</p>
+<script type="math/tex; mode=display">
+\mathring{\mathring{\mathbf{\rho}}} + 2(\mathbf{\omega} \times \mathring{\mathbf{\rho}}) + \dot{\mathbf{\omega}} \times \mathbf{\rho} + \mathbf{\omega} \times (\mathbf{\omega} \times \mathbf{\rho}) = \frac{\mu}{r_t^3}\mathbf{r}_t - \frac{\mu}{r_c^3}\mathbf{r}_c + \mathbf{a}_c</script><p>该方程是描述相对运动的、精确的非线性动力学方程</p>
 <p>左侧为相对运动的运动学项（科里奥利加速度、欧拉加速度、向心加速度），右侧为动力学项（引力差和控制力）</p>
 <hr>
 <h2 id="方程线性化"><a href="#方程线性化" class="headerlink" title="方程线性化"></a>方程线性化</h2><p>为了获得能够解析分析的线性模型，我们做出以下假设：相对距离远小于轨道半径，即 $||\mathbf{\rho}|| \ll r_t$</p>
-<h3 id="引力梯度项的近似"><a href="#引力梯度项的近似" class="headerlink" title="引力梯度项的近似"></a>引力梯度项的近似</h3><p>引力差项 $\Delta\mathbf{g} &#x3D; \frac{\mu}{r_t^3}\mathbf{r}_t - \frac{\mu}{r_c^3}\mathbf{r}_c$ 是方程非线性的主要来源，将其整理为：<br>$$<br>\Delta\mathbf{g} &#x3D; -\frac{\mu}{r_c^3}\mathbf{\rho} - \left( \frac{\mu}{r_c^3} - \frac{\mu}{r_t^3} \right)\mathbf{r}_t<br>$$<br>由于 $\mathbf{r}_c &#x3D; \mathbf{r}_t + \mathbf{\rho}$，有 $r_c^2 &#x3D; \mathbf{r}_c \cdot \mathbf{r}_c &#x3D; (\mathbf{r}_t + \mathbf{\rho}) \cdot (\mathbf{r}_t + \mathbf{\rho}) &#x3D; r_t^2 + 2(\mathbf{r}_t \cdot \mathbf{\rho}) + \rho^2$。</p>
-<p>在定义的LVLH坐标系中，$\mathbf{\rho}&#x3D;(x,y,z)^T$ 且 $\mathbf{r}_t &#x3D; (0, r_t, 0)^T$，则 $\mathbf{r}_t \cdot \mathbf{\rho} &#x3D; r_t y$。因此：<br>$$<br>r_c^2 &#x3D; r_t^2 + 2r_t y + \rho^2 &#x3D; r_t^2 \left( 1 + \frac{2y}{r_t} + \frac{\rho^2}{r_t^2} \right)<br>$$<br>由于 $||\mathbf{\rho}|| \ll r_t$，$\rho^2&#x2F;r_t^2$ 是二阶小量，可以忽略。<br>$$<br>r_c \approx r_t \left( 1 + \frac{2y}{r_t} \right)^{1&#x2F;2}<br>$$<br>利用泰勒展开 $(1+\epsilon)^k \approx 1+k\epsilon$，对 $r_c^{-3}$ 进行一阶近似：<br>$$<br>r_c^{-3} &#x3D; (r_c^2)^{-3&#x2F;2} \approx [r_t^2(1 + \frac{2y}{r_t})]^{-3&#x2F;2} &#x3D; r_t^{-3} \left( 1 + \frac{2y}{r_t} \right)^{-3&#x2F;2} \approx r_t^{-3} \left( 1 - \frac{3y}{r_t} \right)<br>$$<br>将此近似代回到引力差项的表达式中。<br>$$<br>\Delta\mathbf{g} \approx -\frac{\mu}{r_t^3}\left(1 - \frac{3y}{r_t}\right)\mathbf{r}_c + \frac{\mu}{r_t^3}\mathbf{r}_t<br>$$<br>将 $\mathbf{r}_c &#x3D; \mathbf{r}_t + \mathbf{\rho}$ 代入:<br>$$<br>\begin{aligned}<br>\Delta\mathbf{g} &amp;\approx -\frac{\mu}{r_t^3}\left(1 - \frac{3y}{r_t}\right)(\mathbf{r}_t + \mathbf{\rho}) + \frac{\mu}{r_t^3}\mathbf{r}_t \<br>&amp;&#x3D; -\frac{\mu}{r_t^3} \left( \mathbf{r}_t + \mathbf{\rho} - \frac{3y}{r_t}\mathbf{r}_t - \frac{3y}{r_t}\mathbf{\rho} \right) + \frac{\mu}{r_t^3}\mathbf{r}_t \<br>&amp;&#x3D; -\frac{\mu}{r_t^3} \left( \mathbf{\rho} - \frac{3y}{r_t}\mathbf{r}_t \right) \quad (\text{忽略二阶小量 } y\mathbf{\rho}) \<br>&amp;&#x3D; -\frac{\mu}{r_t^3}\mathbf{\rho} + \frac{3\mu y}{r_t^4}\mathbf{r}_t<br>\end{aligned}<br>$$<br>将矢量在LVLH坐标系中展开 $\mathbf{\rho}&#x3D;(x,y,z)^T$ 和 $\mathbf{r}_t &#x3D; (0, r_t, 0)^T$:<br>$$<br>\begin{aligned}<br>\Delta\mathbf{g} &amp;\approx -\frac{\mu}{r_t^3}(x\mathbf{i} + y\mathbf{j} + z\mathbf{k}) + \frac{3\mu y}{r_t^4}(r_t \mathbf{j}) \<br>&amp;&#x3D; -\frac{\mu}{r_t^3}x\mathbf{i} + \left(-\frac{\mu y}{r_t^3} + \frac{3\mu y}{r_t^3}\right)\mathbf{j} - \frac{\mu}{r_t^3}z\mathbf{k} \<br>&amp;&#x3D; \frac{\mu}{r_t^3}(-x\mathbf{i} + 2y\mathbf{j} - z\mathbf{k})<br>\end{aligned}<br>$$<br>线性化后的引力差项展示了引力梯度对相对运动的影响</p>
-<h3 id="通用-Hill’s-Equations"><a href="#通用-Hill’s-Equations" class="headerlink" title="通用 Hill’s Equations"></a>通用 Hill’s Equations</h3><p>将线性化后的引力项代入精确的非线性动力学方程，并写出其在LVLH坐标系中的分量形式（ $\mathbf{\omega}&#x3D;(0,0,\omega)^T$），即可得到适用于一般椭圆轨道的通用Hill’s Equations：<br>$$<br>\begin{cases}<br>\ddot{x} - 2\omega\dot{y} - \dot{\omega}y - \omega^2x &#x3D; -\frac{\mu}{r_t^3}x + a_x \<br>\ddot{y} + 2\omega\dot{x} + \dot{\omega}x - \omega^2y &#x3D; \frac{2\mu}{r_t^3}y + a_y \<br>\ddot{z} &#x3D; -\frac{\mu}{r_t^3}z + a_z<br>\end{cases}<br>$$<br>整理后得到：<br>$$<br>\begin{cases}<br>\ddot{x} - 2\omega\dot{y} - (\omega^2 - \frac{\mu}{r_t^3})x - \dot{\omega}y &#x3D; a_x \<br>\ddot{y} + 2\omega\dot{x} + \dot{\omega}x - (\omega^2 + \frac{2\mu}{r_t^3})y &#x3D; a_y \<br>\ddot{z} + \frac{\mu}{r_t^3}z &#x3D; a_z<br>\end{cases}<br>$$<br>该方程的系数中含有时变量 $r_t, \omega, \dot{\omega}$，是一个线性时变LTV系统，虽然精确但求解复杂，为了便于求解，进行圆轨道简化</p>
+<h3 id="引力梯度项的近似"><a href="#引力梯度项的近似" class="headerlink" title="引力梯度项的近似"></a>引力梯度项的近似</h3><p>引力差项 $\Delta\mathbf{g} = \frac{\mu}{r_t^3}\mathbf{r}_t - \frac{\mu}{r_c^3}\mathbf{r}_c$ 是方程非线性的主要来源，将其整理为：</p>
+<script type="math/tex; mode=display">
+\Delta\mathbf{g} = -\frac{\mu}{r_c^3}\mathbf{\rho} - \left( \frac{\mu}{r_c^3} - \frac{\mu}{r_t^3} \right)\mathbf{r}_t</script><p>由于 $\mathbf{r}_c = \mathbf{r}_t + \mathbf{\rho}$，有 $r_c^2 = \mathbf{r}_c \cdot \mathbf{r}_c = (\mathbf{r}_t + \mathbf{\rho}) \cdot (\mathbf{r}_t + \mathbf{\rho}) = r_t^2 + 2(\mathbf{r}_t \cdot \mathbf{\rho}) + \rho^2$。</p>
+<p>在定义的LVLH坐标系中，$\mathbf{\rho}=(x,y,z)^T$ 且 $\mathbf{r}_t = (0, r_t, 0)^T$，则 $\mathbf{r}_t \cdot \mathbf{\rho} = r_t y$。因此：</p>
+<script type="math/tex; mode=display">
+r_c^2 = r_t^2 + 2r_t y + \rho^2 = r_t^2 \left( 1 + \frac{2y}{r_t} + \frac{\rho^2}{r_t^2} \right)</script><p>由于 $||\mathbf{\rho}|| \ll r_t$，$\rho^2/r_t^2$ 是二阶小量，可以忽略。</p>
+<script type="math/tex; mode=display">
+r_c \approx r_t \left( 1 + \frac{2y}{r_t} \right)^{1/2}</script><p>利用泰勒展开 $(1+\epsilon)^k \approx 1+k\epsilon$，对 $r_c^{-3}$ 进行一阶近似：</p>
+<script type="math/tex; mode=display">
+r_c^{-3} = (r_c^2)^{-3/2} \approx [r_t^2(1 + \frac{2y}{r_t})]^{-3/2} = r_t^{-3} \left( 1 + \frac{2y}{r_t} \right)^{-3/2} \approx r_t^{-3} \left( 1 - \frac{3y}{r_t} \right)</script><p>将此近似代回到引力差项的表达式中。</p>
+<script type="math/tex; mode=display">
+\Delta\mathbf{g} \approx -\frac{\mu}{r_t^3}\left(1 - \frac{3y}{r_t}\right)\mathbf{r}_c + \frac{\mu}{r_t^3}\mathbf{r}_t</script><p>将 $\mathbf{r}_c = \mathbf{r}_t + \mathbf{\rho}$ 代入:</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\Delta\mathbf{g} &\approx -\frac{\mu}{r_t^3}\left(1 - \frac{3y}{r_t}\right)(\mathbf{r}_t + \mathbf{\rho}) + \frac{\mu}{r_t^3}\mathbf{r}_t \\
+&= -\frac{\mu}{r_t^3} \left( \mathbf{r}_t + \mathbf{\rho} - \frac{3y}{r_t}\mathbf{r}_t - \frac{3y}{r_t}\mathbf{\rho} \right) + \frac{\mu}{r_t^3}\mathbf{r}_t \\
+&= -\frac{\mu}{r_t^3} \left( \mathbf{\rho} - \frac{3y}{r_t}\mathbf{r}_t \right) \quad (\text{忽略二阶小量 } y\mathbf{\rho}) \\
+&= -\frac{\mu}{r_t^3}\mathbf{\rho} + \frac{3\mu y}{r_t^4}\mathbf{r}_t
+\end{aligned}</script><p>将矢量在LVLH坐标系中展开 $\mathbf{\rho}=(x,y,z)^T$ 和 $\mathbf{r}_t = (0, r_t, 0)^T$:</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\Delta\mathbf{g} &\approx -\frac{\mu}{r_t^3}(x\mathbf{i} + y\mathbf{j} + z\mathbf{k}) + \frac{3\mu y}{r_t^4}(r_t \mathbf{j}) \\
+&= -\frac{\mu}{r_t^3}x\mathbf{i} + \left(-\frac{\mu y}{r_t^3} + \frac{3\mu y}{r_t^3}\right)\mathbf{j} - \frac{\mu}{r_t^3}z\mathbf{k} \\
+&= \frac{\mu}{r_t^3}(-x\mathbf{i} + 2y\mathbf{j} - z\mathbf{k})
+\end{aligned}</script><p>线性化后的引力差项展示了引力梯度对相对运动的影响</p>
+<h3 id="通用-Hill’s-Equations"><a href="#通用-Hill’s-Equations" class="headerlink" title="通用 Hill’s Equations"></a>通用 Hill’s Equations</h3><p>将线性化后的引力项代入精确的非线性动力学方程，并写出其在LVLH坐标系中的分量形式（ $\mathbf{\omega}=(0,0,\omega)^T$），即可得到适用于一般椭圆轨道的通用Hill’s Equations：</p>
+<script type="math/tex; mode=display">
+\begin{cases}
+\ddot{x} - 2\omega\dot{y} - \dot{\omega}y - \omega^2x = -\frac{\mu}{r_t^3}x + a_x \\
+\ddot{y} + 2\omega\dot{x} + \dot{\omega}x - \omega^2y = \frac{2\mu}{r_t^3}y + a_y \\
+\ddot{z} = -\frac{\mu}{r_t^3}z + a_z
+\end{cases}</script><p>整理后得到：</p>
+<script type="math/tex; mode=display">
+\begin{cases}
+\ddot{x} - 2\omega\dot{y} - (\omega^2 - \frac{\mu}{r_t^3})x - \dot{\omega}y = a_x \\
+\ddot{y} + 2\omega\dot{x} + \dot{\omega}x - (\omega^2 + \frac{2\mu}{r_t^3})y = a_y \\
+\ddot{z} + \frac{\mu}{r_t^3}z = a_z
+\end{cases}</script><p>该方程的系数中含有时变量 $r_t, \omega, \dot{\omega}$，是一个线性时变LTV系统，虽然精确但求解复杂，为了便于求解，进行圆轨道简化</p>
 <hr>
 <h2 id="圆轨道简化"><a href="#圆轨道简化" class="headerlink" title="圆轨道简化"></a>圆轨道简化</h2><h3 id="圆轨道假设"><a href="#圆轨道假设" class="headerlink" title="圆轨道假设"></a>圆轨道假设</h3><p>在实际任务中，目标轨道通常是近圆形的。为了获得一个极简且实用的模型，我们引入理想圆轨道假设。在此条件下，系统参数得到极大简化：</p>
 <ul>
 <li>轨道半径 $r_t$ 为常数 $r$。</li>
-<li>角速度 $\omega$ 为常数 $n$（平近点角速度），因此角加速度 $\dot{\omega} &#x3D; 0$。</li>
-<li>中心天体引力完全充当向心力，满足 $\omega^2 &#x3D; n^2 &#x3D; \mu&#x2F;r^3$。</li>
+<li>角速度 $\omega$ 为常数 $n$（平近点角速度），因此角加速度 $\dot{\omega} = 0$。</li>
+<li>中心天体引力完全充当向心力，满足 $\omega^2 = n^2 = \mu/r^3$。</li>
 </ul>
 <h3 id="C-W方程组"><a href="#C-W方程组" class="headerlink" title="C-W方程组"></a>C-W方程组</h3><p>将以上三个条件代入通用Hill’s Equations，即可得到经典的、常系数的Clohessy-Wiltshire Equation：</p>
-<p><strong>切向方程:</strong><br>$$<br>\ddot{x} - 2n\dot{y} - (n^2 - \frac{\mu}{r^3})x - 0 &#x3D; a_x \implies \ddot{x} - 2n\dot{y} &#x3D; a_x<br>$$</p>
-<p><strong>径向方程:</strong><br>$$<br>\ddot{y} + 2n\dot{x} + 0 - (n^2 + \frac{2\mu}{r^3})y &#x3D; a_y \implies \ddot{y} + 2n\dot{x} - 3n^2y &#x3D; a_y<br>$$</p>
-<p><strong>法向方程:</strong><br>$$<br>\ddot{z} + \frac{\mu}{r^3}z &#x3D; a_z \implies \ddot{z} + n^2z &#x3D; a_z<br>$$</p>
-<p>最终的C-W方程组为：<br>$$<br>\begin{cases}<br>\ddot{x} - 2n\dot{y} &#x3D; a_x \<br>\ddot{y} + 2n\dot{x} - 3n^2y &#x3D; a_y \<br>\ddot{z} + n^2z &#x3D; a_z<br>\end{cases}<br>$$</p>
-<h3 id="物理项分析"><a href="#物理项分析" class="headerlink" title="物理项分析"></a>物理项分析</h3><p>C-W方程揭示了近地轨道相对运动的核心物理特性：</p>
+<p><strong>切向方程:</strong></p>
+<script type="math/tex; mode=display">
+\ddot{x} - 2n\dot{y} - (n^2 - \frac{\mu}{r^3})x - 0 = a_x \implies \ddot{x} - 2n\dot{y} = a_x</script><p><strong>径向方程:</strong></p>
+<script type="math/tex; mode=display">
+\ddot{y} + 2n\dot{x} + 0 - (n^2 + \frac{2\mu}{r^3})y = a_y \implies \ddot{y} + 2n\dot{x} - 3n^2y = a_y</script><p><strong>法向方程:</strong></p>
+<script type="math/tex; mode=display">
+\ddot{z} + \frac{\mu}{r^3}z = a_z \implies \ddot{z} + n^2z = a_z</script><p>最终的C-W方程组为：</p>
+<script type="math/tex; mode=display">
+\begin{cases}
+\ddot{x} - 2n\dot{y} = a_x \\
+\ddot{y} + 2n\dot{x} - 3n^2y = a_y \\
+\ddot{z} + n^2z = a_z
+\end{cases}</script><h3 id="物理项分析"><a href="#物理项分析" class="headerlink" title="物理项分析"></a>物理项分析</h3><p>C-W方程揭示了近地轨道相对运动的核心物理特性：</p>
 <ul>
 <li><strong>科里奥利加速度 ($-2n\dot{y}$ 和 $+2n\dot{x}$)</strong>: 这是由LVLH旋转坐标系的非惯性效应引起。当追踪器有径向速度$\dot{y}$时，会产生切向的科里奥利加速度；当有切向速度 $\dot{x}$ 时，会产生径向的科里奥利加速度。这是导致轨道运动非直观行为的关键耦合项</li>
 <li><strong>引力梯度与离心力组合项 ($-3n^2y$)</strong>: 这一项源于两个物理效应的叠加。<ol>
-<li><strong>引力梯度 ($ -2n^2y $)</strong>: 当追踪器在径向上偏离目标 $y$ 距离时，它受到的地球引力与目标受到的引力不同。这个引力差的线性部分是 $ -2\mu y &#x2F; r^3 &#x3D; -2n^2y $。</li>
-<li><strong>离心力差异 ($ -n^2y $)</strong>: 在LVLH系中，追踪器跟随目标以角速度 <code>n</code> 旋转，其位置是 $(x, r+y, z)$。径向上的离心力约为 $n^2(r+y)$，而目标的离心力为 $n^2r$。两者之差的线性部分是 $n^2y$。<br>  这两个效应在径向上都起“排斥”作用，总和为 $-3n^2y$。</li>
+<li><strong>引力梯度 ($ -2n^2y $)</strong>: 当追踪器在径向上偏离目标 $y$ 距离时，它受到的地球引力与目标受到的引力不同。这个引力差的线性部分是 $ -2\mu y / r^3 = -2n^2y $。</li>
+<li><strong>离心力差异 ($ -n^2y $)</strong>: 在LVLH系中，追踪器跟随目标以角速度 <code>n</code> 旋转，其位置是 $(x, r+y, z)$。径向上的离心力约为 $n^2(r+y)$，而目标的离心力为 $n^2r$。两者之差的线性部分是 $n^2y$。<br>这两个效应在径向上都起“排斥”作用，总和为 $-3n^2y$。</li>
 </ol>
 </li>
 <li><strong>轨道平面恢复力 (<code>+n^2z</code>)</strong>: 法向运动是解耦的，表现为一个简单的谐振子。$n^2z$ 项是引力在法向的分量，它始终将偏离轨道平面的航天器拉回平面，形成稳定的振荡。</li>

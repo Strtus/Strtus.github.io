@@ -45,12 +45,12 @@
 
     <!-- OpenGraph -->
  
-    <meta name="description" content="前言因为这几天访问DeepSeek的时候总是遇到服务繁忙，加上蒸馏后参数量大大减小，已经可以部署在本地了 这篇文章记录了我部署的过程，如果你也希望本地使用DeepSeek，希望它能够帮到你😉 ok那我们开始吧 前期准备检查显存大小对于Win用户在powershell中输入如下命令： nvidia-smi  会得到类似的output  可以看到我的显存是8188MB 请记住你的显存大小，这是我们选">
+    <meta name="description" content="前言因为这几天访问DeepSeek的时候总是遇到服务繁忙，加上蒸馏后参数量大大减小，已经可以部署在本地了 这篇文章记录了我部署的过程，如果你也希望本地使用DeepSeek，希望它能够帮到你😉 ok那我们开始吧 前期准备检查显存大小对于Win用户在powershell中输入如下命令： nvidia-smi 会得到类似的output  可以看到我的显存是8188MB 请记住你的显存大小，这是我们选择">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基于Ollama框架本地部署DeepSeek">
 <meta property="og:url" content="https://strtus.github.io/2025/01/31/%E5%9F%BA%E4%BA%8EOllama%E6%A1%86%E6%9E%B6%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2DeepSeek/index.html">
 <meta property="og:site_name" content="Strtus&#39;s Journey">
-<meta property="og:description" content="前言因为这几天访问DeepSeek的时候总是遇到服务繁忙，加上蒸馏后参数量大大减小，已经可以部署在本地了 这篇文章记录了我部署的过程，如果你也希望本地使用DeepSeek，希望它能够帮到你😉 ok那我们开始吧 前期准备检查显存大小对于Win用户在powershell中输入如下命令： nvidia-smi  会得到类似的output  可以看到我的显存是8188MB 请记住你的显存大小，这是我们选">
+<meta property="og:description" content="前言因为这几天访问DeepSeek的时候总是遇到服务繁忙，加上蒸馏后参数量大大减小，已经可以部署在本地了 这篇文章记录了我部署的过程，如果你也希望本地使用DeepSeek，希望它能够帮到你😉 ok那我们开始吧 前期准备检查显存大小对于Win用户在powershell中输入如下命令： nvidia-smi 会得到类似的output  可以看到我的显存是8188MB 请记住你的显存大小，这是我们选择">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-01-31%20145234.png">
 <meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-31%2019.47.56.png">
@@ -220,7 +220,6 @@
 <p>ok那我们开始吧</p>
 <h1 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h1><h2 id="检查显存大小"><a href="#检查显存大小" class="headerlink" title="检查显存大小"></a>检查显存大小</h2><h3 id="对于Win用户"><a href="#对于Win用户" class="headerlink" title="对于Win用户"></a>对于Win用户</h3><p>在powershell中输入如下命令：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">nvidia-smi</span><br></pre></td></tr></table></figure>
-
 <p>会得到类似的output</p>
 <p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-01-31%20145234.png" alt="屏幕截图 2025-01-31 145234"></p>
 <p>可以看到我的显存是8188MB</p>
@@ -234,7 +233,6 @@
 <p><strong>1.启动多线程下载</strong></p>
 <p>在chrome的地址栏输入如下命令：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">chrome://flags/#enable-parallel-downloading</span><br></pre></td></tr></table></figure>
-
 <p>使Parallel downloading的状态为Enable</p>
 <p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/image-20250131200524979.png" alt="image-20250131200524979"></p>
 <p>启动前：</p>
@@ -242,13 +240,12 @@
 <p>启动后：</p>
 <p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-01-31%20145904.png" alt="屏幕截图 2025-01-31 145904"></p>
 <p><strong>2.选择合适的科学上网节点</strong></p>
-<p>部分美国节点配合多线程下载可以跑到25MB&#x2F;s，Amazing！</p>
+<p>部分美国节点配合多线程下载可以跑到25MB/s，Amazing！</p>
 <hr>
 <p>下载完成后，会默认安装至C盘，约占用10G空间</p>
 <p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-01-31%20150022.png" alt="屏幕截图 2025-01-31 150022"></p>
 <p>为了验证Ollama成功安装，在PowerShell中输入如下命令：</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ollama -v</span><br></pre></td></tr></table></figure>
-
 <p>如果安装正确，会输出Ollama的版本号，如下图所示</p>
 <p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E6%88%AA%E5%B1%8F2025-01-31%2020.12.11.png" alt="截屏2025-01-31 20.12.11"></p>
 <h1 id="模型部署"><a href="#模型部署" class="headerlink" title="模型部署"></a>模型部署</h1><h2 id="选择模型"><a href="#选择模型" class="headerlink" title="选择模型"></a>选择模型</h2><p>我们今天要部署的Distill版本，是在阿里的QWEN千问和META的LLAMA基础上再训练实现的蒸馏版本</p>
@@ -257,14 +254,12 @@
 <p>一般来说，8G显存可以部署8B级别模型；24G显存可以刚好适配到32B的模型，请根据自身电脑硬件配置来选择合适的模型版本</p>
 <h2 id="下载模型"><a href="#下载模型" class="headerlink" title="下载模型"></a>下载模型</h2><p>根据显存大小，我选择下载8B参数的量化模型：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ollama run deepseek-r1:8b</span><br></pre></td></tr></table></figure>
-
 <p>如果想下载其他参数量的，只需要将8B修改为新的参数值</p>
 <p>如选择 32B 版本，则改为ollama run deepseek-r1:32b</p>
 <p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/image-20250131202425507.png" alt="image-20250131202425507"></p>
 <p>耐心的等待下载即可</p>
 <h1 id="开始对话"><a href="#开始对话" class="headerlink" title="开始对话"></a>开始对话</h1><p>使用如下命令启动DeepSeek：</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ollama run deepseek-r1:8b</span><br></pre></td></tr></table></figure>
-
 <p>即可与DeepSeek对话：</p>
 <p>可以看到显存只用了6GB</p>
 <p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-01-31%20174209.png" alt="屏幕截图 2025-01-31 174209"></p>
@@ -280,7 +275,6 @@
 <p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-01-31%20205152.png" alt="屏幕截图 2025-01-31 205152"></p>
 <p>点击右下角Terminal，输入下面命令，然后等待安装完成</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d -p 3000:8080 --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:main</span><br></pre></td></tr></table></figure>
-
 <p>因为GFW正式DNS污染+SNI阻断了docker.com及其相关域名，你仍然需要确保自己是在科学上网的环境</p>
 <p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-01-31%20205235.png" alt="屏幕截图 2025-01-31 205235"></p>
 <p>这一步耗时很久，需耐心等待</p>
@@ -311,7 +305,7 @@
 <p>我明明上午还在用的啊</p>
 <p>chatGPT账号注册一年多了快？每个月都冲plus会员，和Claude账号一样都绑定了Google账户，梯子的节点也干净</p>
 <p>我没话说🤷</p>
-<h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>希望这篇文章对你有帮助，任何疑问可以通过<a href="mailto:&#x73;&#x74;&#x72;&#x74;&#117;&#115;&#x40;&#x6f;&#117;&#116;&#108;&#111;&#x6f;&#107;&#x2e;&#99;&#111;&#109;">strtus@outlook.com</a>与我联络</p>
+<h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>希望这篇文章对你有帮助，任何疑问可以通过strtus@outlook.com与我联络</p>
 <p>enjoy😉 ! </p>
 
     </div>

@@ -202,8 +202,7 @@
 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>辐射度量学和光度学为颜色的定量描述奠定了理论框架，本篇文章将围绕Trichromacy理论、色光混合实验和Grassmann’s law对色度学做进一步深入的讨论，进而阐述色彩空间的数学结构</p>
 <h2 id="Trichromatic-Theory-与颜色匹配实验"><a href="#Trichromatic-Theory-与颜色匹配实验" class="headerlink" title="Trichromatic Theory 与颜色匹配实验"></a>Trichromatic Theory 与颜色匹配实验</h2><p>学过大雾后我们会知道，颜色并不是物体本身所具备的固有属性，而是光线在特定波长下的反射或发射所引起的视觉反应。这种视觉反应通过眼睛中的视锥细胞( cone cell )捕捉，并由大脑进行解读，最终呈现为我们所感知到的颜色。</p>
 <h3 id="三色刺激值"><a href="#三色刺激值" class="headerlink" title="三色刺激值"></a>三色刺激值</h3><p>人类眼睛有对于短（420-440nm）、中（530-540nm）和长（560-580nm）波长的光感受器。根据三种视锥细胞的刺激比例，便能描述任一种颜色的感觉，此称为LMS空间</p>
-<img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/Cone_cell_eng.png" style="zoom: 67%;" />
-
+<p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/Cone_cell_eng.png" style="zoom: 67%;" /></p>
 <h3 id="牛顿色散实验"><a href="#牛顿色散实验" class="headerlink" title="牛顿色散实验"></a>牛顿色散实验</h3><p>1666年，英国科学家艾萨克·牛顿通过实验揭示了光的色散现象。在其经典的色散实验中，牛顿将白光通过三棱镜分解为七种颜色（红、橙、黄、绿、蓝、靛、紫）。牛顿进一步实验发现，单一颜色的光无法被再度分解，得出了白光是由多种单色光混合而成的结论。</p>
 <p>通过这些实验，牛顿首次证明了白光的复合性，并推测了在可见光谱外的颜色，如品红色和紫红色。</p>
 <p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/Light_dispersion_conceptual_waves.gif" alt="牛顿色散实验示意图"></p>
@@ -211,12 +210,10 @@
 <p>该理论提出，人眼的视网膜上存在三种不同类型的感光细胞，分别对红、绿、蓝光最为敏感。</p>
 <p>基于这一生理学发现，科学家们通过实验验证了人眼对于颜色的感知依赖于三种光的混合。这三种光被称为三基色，分别为红（R）、绿（G）和蓝（B）。</p>
 <p>在现代的生理学中，这三种色光的感知分别对应于L-视锥细胞、M-视锥细胞和S-视锥细胞。</p>
-<img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/eye-color-cones.webp"/>
-
+<p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/eye-color-cones.webp"/></p>
 <h3 id="颜色匹配实验与颜色匹配函数"><a href="#颜色匹配实验与颜色匹配函数" class="headerlink" title="颜色匹配实验与颜色匹配函数"></a>颜色匹配实验与颜色匹配函数</h3><p>基于Trichromatic Theory ，科学家进一步发展了颜色匹配实验，以验证通过三基色混合可以再现所有颜色。在这些实验中，研究人员使用色光匹配的方式，测量并记录了不同颜色下三基色的亮度比值。这些实验结果被表示为颜色匹配函数，它们定义了不同波长光在三基色光源下的组合比例。1931年，CIE（国际照明委员会）通过结合Wright和Guild的实验数据，提出了标准的三基色（红光：700 nm、绿光：546.1 nm、蓝光：435.8 nm）。</p>
 <p>下图展示了Wright和Guild的颜色匹配实验数据：</p>
-<img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/CIE1931_RGBCMF.svg"/>
-
+<p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/CIE1931_RGBCMF.svg"/></p>
 <h2 id="Grassmann’s-law"><a href="#Grassmann’s-law" class="headerlink" title="Grassmann’s law"></a>Grassmann’s law</h2><p>Grassmann’s law是描述色光混合的基本定律之一，它不仅是色度学中的基础理论，也是计算机图形学、色彩管理系统等领域中的核心原理。Grassmann’s law由四个核心命题构成，描述了色光混合过程中的亮度加法和色相、饱和度的恒定性。</p>
 <h3 id="色相、饱和度与亮度的数学定义"><a href="#色相、饱和度与亮度的数学定义" class="headerlink" title="色相、饱和度与亮度的数学定义"></a>色相、饱和度与亮度的数学定义</h3><p>首先我们明确一下颜色的三要素：色相（hue）、饱和度（saturation）和亮度（luminance）。</p>
 <ul>
@@ -224,49 +221,52 @@
 <li><strong>饱和度（saturation）</strong> 表示颜色的纯度，饱和度越高，颜色越纯。</li>
 <li><strong>亮度（luminance）</strong> 表示颜色的亮度强度，即颜色的明暗程度。</li>
 </ul>
-<p>设两个色光 ( C_1 ) 和 ( $C_2$ ) 的亮度分别为 ( $L_1 $ ) 和 ( $L_2  $ )，色相为 ( H_1 ) 和 ( H_2 )，饱和度为 ( $S_1 $) 和 ( $S_2$ )。在Grassmann’s law的框架下，混合后的颜色 ( $C_{\text{mix}} $) 的亮度 ( $L_{\text{mix}} $)、色相 ( $H_{\text{mix}}$ ) 和饱和度 ( $S_{\text{mix}}$ ) 满足以下关系：</p>
+<p>设两个色光 ( C<em>1 ) 和 ( $C_2$ ) 的亮度分别为 ( $L_1 $ ) 和 ( $L_2  $ )，色相为 ( H_1 ) 和 ( H_2 )，饱和度为 ( $S_1 $) 和 ( $S_2$ )。在Grassmann’s law的框架下，混合后的颜色 ( $C</em>{\text{mix}} $) 的亮度 ( $L<em>{\text{mix}} $)、色相 ( $H</em>{\text{mix}}$ ) 和饱和度 ( $S_{\text{mix}}$ ) 满足以下关系：</p>
 <ul>
-<li><p><strong>亮度加法定律</strong>：<br>$$<br>L_{\text{mix}} &#x3D; L_1 + L_2<br>$$</p>
-</li>
-<li><p><strong>色相与饱和度恒定</strong>：<br>$$<br>H_{\text{mix}} &#x3D; H_1 &#x3D; H_2<br>$$</p>
-<p>$$<br>S_{\text{mix}} &#x3D; S_1 &#x3D; S_2<br>$$</p>
-</li>
+<li><p><strong>亮度加法定律</strong>：</p>
+<script type="math/tex; mode=display">
+L_{\text{mix}} = L_1 + L_2</script></li>
+<li><p><strong>色相与饱和度恒定</strong>：</p>
+<script type="math/tex; mode=display">
+H_{\text{mix}} = H_1 = H_2</script><script type="math/tex; mode=display">
+S_{\text{mix}} = S_1 = S_2</script></li>
 </ul>
 <p>这表明，Grassmann’s law假定在混合过程中，色相和饱和度是恒定的，只有亮度发生变化。</p>
 <h3 id="亮度加法定律的数学推导"><a href="#亮度加法定律的数学推导" class="headerlink" title="亮度加法定律的数学推导"></a>亮度加法定律的数学推导</h3><p>为了从数学上推导亮度加法定律，我们首先假设光的亮度 ($L $) 是光谱功率分布$SPD$</p>
-<p>($P(\lambda) $ 与人眼感光曲线 $ \overline{V}(\lambda) $ 的加权积分。假设有两种色光 ($ C_1 $) 和 ($C_2$)，它们的亮度分别为 ($L_1 $) 和 ($L_2 $)，则：<br>$$<br>L_1 &#x3D; \int_{\lambda} P_1(\lambda) \overline{V}(\lambda) , d\lambda<br>$$</p>
-<p>$$<br>L_2 &#x3D; \int_{\lambda} P_2(\lambda) \overline{V}(\lambda) , d\lambda<br>$$</p>
-<p>在Grassmann’s law下，混合后的亮度 ( $L_{\text{mix}} $ ) 是两个色光亮度之和：</p>
-<p>$$<br>L_{\text{mix}} &#x3D; L_1 + L_2 &#x3D; \int_{\lambda} \left( P_1(\lambda) + P_2(\lambda) \right) \overline{V}(\lambda) , d\lambda<br>$$</p>
-<p>这表明，亮度加法是光谱响应和视觉响应的线性组合。</p>
-<h3 id="色光混合的线性加法性质"><a href="#色光混合的线性加法性质" class="headerlink" title="色光混合的线性加法性质"></a>色光混合的线性加法性质</h3><p>Grassmann’s law不仅仅描述了亮度的加法，也揭示了颜色混合过程的线性性质。假设有两个色光 ( $C_1 &#x3D; \left( a_R [\mathrm{R}] + a_G [\mathrm{G}] + a_B [\mathrm{B}] \right) $) 和 ( $C_2 &#x3D; \left( b_R [\mathrm{R}] + b_G [\mathrm{G}] + b_B [\mathrm{B}] \right) $)，其混合后的结果 ($ C_{\text{mix}} $) 可通过加法得到：</p>
-<p>$$<br>C_{\text{mix}} &#x3D; C_1 + C_2 &#x3D; \left( a_R + b_R \right) [\mathrm{R}] + \left( a_G + b_G \right) [\mathrm{G}] + \left( a_B + b_B \right) [\mathrm{B}]<br>$$</p>
-<p>从数学上看，颜色的加法就是三个基色 ( $[\mathrm{R}]$ )、( $[\mathrm{G}] $ )、( $[\mathrm{B}] $) 的线性组合。这种线性加法性质说明了色彩空间的线性结构，且颜色的合成是无穷维空间中的线性变换。</p>
+<p>($P(\lambda) $ 与人眼感光曲线 $ \overline{V}(\lambda) $ 的加权积分。假设有两种色光 ($ C_1 $) 和 ($C_2$)，它们的亮度分别为 ($L_1 $) 和 ($L_2 $)，则：</p>
+<script type="math/tex; mode=display">
+L_1 = \int_{\lambda} P_1(\lambda) \overline{V}(\lambda) \, d\lambda</script><script type="math/tex; mode=display">
+L_2 = \int_{\lambda} P_2(\lambda) \overline{V}(\lambda) \, d\lambda</script><p>在Grassmann’s law下，混合后的亮度 ( $L_{\text{mix}} $ ) 是两个色光亮度之和：</p>
+<script type="math/tex; mode=display">
+L_{\text{mix}} = L_1 + L_2 = \int_{\lambda} \left( P_1(\lambda) + P_2(\lambda) \right) \overline{V}(\lambda) \, d\lambda</script><p>这表明，亮度加法是光谱响应和视觉响应的线性组合。</p>
+<h3 id="色光混合的线性加法性质"><a href="#色光混合的线性加法性质" class="headerlink" title="色光混合的线性加法性质"></a>色光混合的线性加法性质</h3><p>Grassmann’s law不仅仅描述了亮度的加法，也揭示了颜色混合过程的线性性质。假设有两个色光 ( $C<em>1 = \left( a_R [\mathrm{R}] + a_G [\mathrm{G}] + a_B [\mathrm{B}] \right) $) 和 ( $C_2 = \left( b_R [\mathrm{R}] + b_G [\mathrm{G}] + b_B [\mathrm{B}] \right) $)，其混合后的结果 ($ C</em>{\text{mix}} $) 可通过加法得到：</p>
+<script type="math/tex; mode=display">
+C_{\text{mix}} = C_1 + C_2 = \left( a_R + b_R \right) [\mathrm{R}] + \left( a_G + b_G \right) [\mathrm{G}] + \left( a_B + b_B \right) [\mathrm{B}]</script><p>从数学上看，颜色的加法就是三个基色 ( $[\mathrm{R}]$ )、( $[\mathrm{G}] $ )、( $[\mathrm{B}] $) 的线性组合。这种线性加法性质说明了色彩空间的线性结构，且颜色的合成是无穷维空间中的线性变换。</p>
 <h3 id="负值和色彩空间的对偶性质"><a href="#负值和色彩空间的对偶性质" class="headerlink" title="负值和色彩空间的对偶性质"></a>负值和色彩空间的对偶性质</h3><p>在色光混合实验中，我们会遇到某些情况下基色的系数为负数。这意味着，在某些条件下，参考域中必须“减去”某些色光分量才能匹配目标色光。这种现象对应着色彩空间的对偶性，具体表现为：</p>
-<p>$$<br>C_{\text{ref}} &#x3D; C_{\text{target}} - \left( a_R [\mathrm{R}] + a_G [\mathrm{G}] + a_B [\mathrm{B}] \right)<br>$$</p>
-<p>这种负值是色光混合实验中的一项数学特征，它表明色光的混合不仅仅是正向合成，还可以通过某些特定方式进行负向补偿。</p>
+<script type="math/tex; mode=display">
+C_{\text{ref}} = C_{\text{target}} - \left( a_R [\mathrm{R}] + a_G [\mathrm{G}] + a_B [\mathrm{B}] \right)</script><p>这种负值是色光混合实验中的一项数学特征，它表明色光的混合不仅仅是正向合成，还可以通过某些特定方式进行负向补偿。</p>
 <h2 id="色彩空间的线性结构"><a href="#色彩空间的线性结构" class="headerlink" title="色彩空间的线性结构"></a>色彩空间的线性结构</h2><p>色彩空间是一个描述颜色的多维数学空间，其中每个颜色都可以表示为基色的线性组合。通过线性空间的理论，我们可以对色彩空间进行深入分析，理解其数学结构。</p>
 <h3 id="色彩空间的定义与基色"><a href="#色彩空间的定义与基色" class="headerlink" title="色彩空间的定义与基色"></a>色彩空间的定义与基色</h3><p>设定色彩空间 ( $\mathscr{C} $) 为三维空间，且其基底由三个基色 ( $[\mathrm{R}]$ )、( $[\mathrm{G}]$ )、( $[\mathrm{B}] $) 构成。任意颜色 ( $C$ ) 都可以表示为这三个基色的线性组合：</p>
-<p>$$<br>C &#x3D; a_R [\mathrm{R}] + a_G [\mathrm{G}] + a_B [\mathrm{B}]<br>$$</p>
-<p>其中，( $a_R$ )、($ a_G$ )、( $a_B$ ) 是标量，分别表示颜色 ( $C $ ) 在三基色上的分量。这些分量确定了颜色的色相、饱和度和亮度。</p>
+<script type="math/tex; mode=display">
+C = a_R [\mathrm{R}] + a_G [\mathrm{G}] + a_B [\mathrm{B}]</script><p>其中，( $a_R$ )、($ a_G$ )、( $a_B$ ) 是标量，分别表示颜色 ( $C $ ) 在三基色上的分量。这些分量确定了颜色的色相、饱和度和亮度。</p>
 <h3 id="色彩空间的线性运算"><a href="#色彩空间的线性运算" class="headerlink" title="色彩空间的线性运算"></a>色彩空间的线性运算</h3><p>在色彩空间中，颜色的加法和数乘操作是封闭的，这意味着：</p>
 <ol>
 <li><strong>加法运算</strong>：若 ( $C_1$ ) 和 ( $C_2$ ) 分别表示为：</li>
 </ol>
-<p>$$<br>C_1 &#x3D; a_R [\mathrm{R}] + a_G [\mathrm{G}] + a_B [\mathrm{B}]<br>$$</p>
-<p>$$<br>C_2 &#x3D; b_R [\mathrm{R}] + b_G [\mathrm{G}] + b_B [\mathrm{B}]<br>$$</p>
-<p>则它们的加法结果是：</p>
-<p>$$<br>C_{\text{mix}} &#x3D; C_1 + C_2 &#x3D; (a_R + b_R) [\mathrm{R}] + (a_G + b_G) [\mathrm{G}] + (a_B + b_B) [\mathrm{B}]<br>$$</p>
-<ol start="2">
+<script type="math/tex; mode=display">
+C_1 = a_R [\mathrm{R}] + a_G [\mathrm{G}] + a_B [\mathrm{B}]</script><script type="math/tex; mode=display">
+C_2 = b_R [\mathrm{R}] + b_G [\mathrm{G}] + b_B [\mathrm{B}]</script><p>则它们的加法结果是：</p>
+<script type="math/tex; mode=display">
+C_{\text{mix}} = C_1 + C_2 = (a_R + b_R) [\mathrm{R}] + (a_G + b_G) [\mathrm{G}] + (a_B + b_B) [\mathrm{B}]</script><ol>
 <li><strong>数乘运算</strong>：若 ( $C$ ) 表示颜色，且标量 ( $k$ ) 为一个实数，则数乘结果为：</li>
 </ol>
-<p>$$<br>k C &#x3D; k \cdot \left( a_R [\mathrm{R}] + a_G [\mathrm{G}] + a_B [\mathrm{B}] \right) &#x3D; (k a_R) [\mathrm{R}] + (k a_G) [\mathrm{G}] + (k a_B) [\mathrm{B}]<br>$$</p>
-<h3 id="色彩空间的亮度与色度分离"><a href="#色彩空间的亮度与色度分离" class="headerlink" title="色彩空间的亮度与色度分离"></a>色彩空间的亮度与色度分离</h3><p>在色彩空间中，我们可以将亮度和色度分离。假设亮度 ( $L$ ) 是颜色的加权平均值，而色度 ( $\theta $ ) 表示色光的混合比例。则，色彩空间中的每个点都可以通过亮度和色度来描述：</p>
-<p>$$<br>C &#x3D; L \cdot \theta<br>$$</p>
-<p>其中，( $L $ ) 为颜色的亮度，( $\theta$ ) 为颜色的色度分量。通过这种方式，色彩空间中的颜色可以被分解为亮度和色度的乘积，从而实现色彩的亮度与色度的独立控制。</p>
+<script type="math/tex; mode=display">
+k C = k \cdot \left( a_R [\mathrm{R}] + a_G [\mathrm{G}] + a_B [\mathrm{B}] \right) = (k a_R) [\mathrm{R}] + (k a_G) [\mathrm{G}] + (k a_B) [\mathrm{B}]</script><h3 id="色彩空间的亮度与色度分离"><a href="#色彩空间的亮度与色度分离" class="headerlink" title="色彩空间的亮度与色度分离"></a>色彩空间的亮度与色度分离</h3><p>在色彩空间中，我们可以将亮度和色度分离。假设亮度 ( $L$ ) 是颜色的加权平均值，而色度 ( $\theta $ ) 表示色光的混合比例。则，色彩空间中的每个点都可以通过亮度和色度来描述：</p>
+<script type="math/tex; mode=display">
+C = L \cdot \theta</script><p>其中，( $L $ ) 为颜色的亮度，( $\theta$ ) 为颜色的色度分量。通过这种方式，色彩空间中的颜色可以被分解为亮度和色度的乘积，从而实现色彩的亮度与色度的独立控制。</p>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
 <li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/77580788">三色视者与四色视者身后的理论基础:色彩原理-周陆军的文章 - 知乎</a></li>
-<li>Wikipedia contributors, “CIE 1931 color space,” <em>Wikipedia, The Free Encyclopedia,</em> <a target="_blank" rel="noopener" href="https://en.wikipedia.org/w/index.php?title=CIE_1931_color_space&oldid=1270650643">https://en.wikipedia.org/w/index.php?title=CIE_1931_color_space&amp;oldid=1270650643</a> (accessed January 22, 2025).</li>
+<li>Wikipedia contributors, “CIE 1931 color space,” <em>Wikipedia, The Free Encyclopedia,</em> <a target="_blank" rel="noopener" href="https://en.wikipedia.org/w/index.php?title=CIE_1931_color_space&amp;oldid=1270650643">https://en.wikipedia.org/w/index.php?title=CIE_1931_color_space&amp;oldid=1270650643</a> (accessed January 22, 2025).</li>
 <li>Malacara A D. <em>Color Vision and Colorimetry: Theory and Applications, Second Edition.</em> 2011.</li>
 <li><a target="_blank" rel="noopener" href="https://www.simplypsychology.org/what-is-the-trichromatic-theory-of-color-vision.html">The Trichromatic Theory Of Color Vision</a></li>
 <li><a target="_blank" rel="noopener" href="https://study.com/academy/lesson/young-helmholtzs-trichromatic-theory-of-color-vision.html">Trichromatic Theory of Color Vision | Overview &amp; Definition</a></li>

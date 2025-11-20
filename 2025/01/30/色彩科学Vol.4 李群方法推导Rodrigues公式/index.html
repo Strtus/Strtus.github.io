@@ -45,12 +45,12 @@
 
     <!-- OpenGraph -->
  
-    <meta name="description" content="旋转矩阵的无穷小变换首先，从旋转矩阵入手，设旋转角度为 $\delta \alpha$ 时，旋转矩阵的变化量为： $$\delta \boldsymbol{r} &#x3D; \boldsymbol{n} \times \boldsymbol{r} , \delta \alpha$$ 旋转矩阵的变化量可以表示为： $$\boldsymbol{R}(\boldsymbol{n}, \delta \a">
+    <meta name="description" content="旋转矩阵的无穷小变换首先，从旋转矩阵入手，设旋转角度为 $\delta \alpha$ 时，旋转矩阵的变化量为：  \delta \boldsymbol{r} &#x3D; \boldsymbol{n} \times \boldsymbol{r} \, \delta \alpha旋转矩阵的变化量可以表示为：  \boldsymbol{R}(\boldsymbol{n}, \delta \alpha) &#x3D; \">
 <meta property="og:type" content="article">
 <meta property="og:title" content="色彩科学Vol.4 李群方法推导Rodrigues公式">
 <meta property="og:url" content="https://strtus.github.io/2025/01/30/%E8%89%B2%E5%BD%A9%E7%A7%91%E5%AD%A6Vol.4%20%E6%9D%8E%E7%BE%A4%E6%96%B9%E6%B3%95%E6%8E%A8%E5%AF%BCRodrigues%E5%85%AC%E5%BC%8F/index.html">
 <meta property="og:site_name" content="Strtus&#39;s Journey">
-<meta property="og:description" content="旋转矩阵的无穷小变换首先，从旋转矩阵入手，设旋转角度为 $\delta \alpha$ 时，旋转矩阵的变化量为： $$\delta \boldsymbol{r} &#x3D; \boldsymbol{n} \times \boldsymbol{r} , \delta \alpha$$ 旋转矩阵的变化量可以表示为： $$\boldsymbol{R}(\boldsymbol{n}, \delta \a">
+<meta property="og:description" content="旋转矩阵的无穷小变换首先，从旋转矩阵入手，设旋转角度为 $\delta \alpha$ 时，旋转矩阵的变化量为：  \delta \boldsymbol{r} &#x3D; \boldsymbol{n} \times \boldsymbol{r} \, \delta \alpha旋转矩阵的变化量可以表示为：  \boldsymbol{R}(\boldsymbol{n}, \delta \alpha) &#x3D; \">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-01-30T15:56:36.000Z">
 <meta property="article:modified_time" content="2025-05-06T08:28:55.451Z">
@@ -192,24 +192,24 @@
     <div class="post__header"></div>
     <div class="post__content">
         <h3 id="旋转矩阵的无穷小变换"><a href="#旋转矩阵的无穷小变换" class="headerlink" title="旋转矩阵的无穷小变换"></a>旋转矩阵的无穷小变换</h3><p>首先，从旋转矩阵入手，设旋转角度为 $\delta \alpha$ 时，旋转矩阵的变化量为：</p>
-<p>$$<br>\delta \boldsymbol{r} &#x3D; \boldsymbol{n} \times \boldsymbol{r} , \delta \alpha<br>$$</p>
-<p>旋转矩阵的变化量可以表示为：</p>
-<p>$$<br>\boldsymbol{R}(\boldsymbol{n}, \delta \alpha) &#x3D; \boldsymbol{I} + \delta \alpha \begin{bmatrix} 0 &amp; -n_z &amp; n_y \ n_z &amp; 0 &amp; -n_x \ -n_y &amp; n_x &amp; 0 \end{bmatrix}<br>$$</p>
-<p>其中，$\boldsymbol{I}$ 是单位矩阵，$\boldsymbol{\Omega} &#x3D; \begin{bmatrix} 0 &amp; -n_z &amp; n_y \ n_z &amp; 0 &amp; -n_x \ -n_y &amp; n_x &amp; 0 \end{bmatrix}$ 是反对称矩阵。</p>
+<script type="math/tex; mode=display">
+\delta \boldsymbol{r} = \boldsymbol{n} \times \boldsymbol{r} \, \delta \alpha</script><p>旋转矩阵的变化量可以表示为：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{R}(\boldsymbol{n}, \delta \alpha) = \boldsymbol{I} + \delta \alpha \begin{bmatrix} 0 & -n_z & n_y \\ n_z & 0 & -n_x \\ -n_y & n_x & 0 \end{bmatrix}</script><p>其中，$\boldsymbol{I}$ 是单位矩阵，$\boldsymbol{\Omega} = \begin{bmatrix} 0 &amp; -n_z &amp; n_y \ n_z &amp; 0 &amp; -n_x \ -n_y &amp; n_x &amp; 0 \end{bmatrix}$ 是反对称矩阵。</p>
 <h3 id="旋转矩阵的指数映射"><a href="#旋转矩阵的指数映射" class="headerlink" title="旋转矩阵的指数映射"></a>旋转矩阵的指数映射</h3><p>旋转矩阵的最终表达式可以通过无穷小旋转的指数映射来表示。对于有限旋转角度 $\alpha$，可以将其分解为无穷次无穷小旋转的连续作用：</p>
-<p>$$<br>\boldsymbol{R}(\boldsymbol{n}, \alpha) &#x3D; \lim_{N \to \infty} \left( \boldsymbol{I} + \frac{\alpha}{N} \boldsymbol{\Omega} \right)^N &#x3D; e^{\alpha \boldsymbol{\Omega}}<br>$$</p>
-<p>通过指数映射，可以得到旋转矩阵 $\boldsymbol{R}(\boldsymbol{n}, \alpha)$。</p>
+<script type="math/tex; mode=display">
+\boldsymbol{R}(\boldsymbol{n}, \alpha) = \lim_{N \to \infty} \left( \boldsymbol{I} + \frac{\alpha}{N} \boldsymbol{\Omega} \right)^N = e^{\alpha \boldsymbol{\Omega}}</script><p>通过指数映射，可以得到旋转矩阵 $\boldsymbol{R}(\boldsymbol{n}, \alpha)$。</p>
 <h3 id="计算矩阵指数"><a href="#计算矩阵指数" class="headerlink" title="计算矩阵指数"></a>计算矩阵指数</h3><p>通过矩阵的幂级数展开：</p>
-<p>$$<br>e^{\alpha \boldsymbol{\Omega}} &#x3D; \sum_{k&#x3D;0}^{\infty} \frac{(\alpha \boldsymbol{\Omega})^k}{k!}<br>$$</p>
-<p>由于 $\boldsymbol{\Omega}$ 是一个反对称矩阵，并且满足 $\boldsymbol{\Omega}^3 &#x3D; -\boldsymbol{\Omega}$，可以通过分解 $\boldsymbol{\Omega}$ 的幂次来简化计算</p>
-<p>$$<br>\boldsymbol{\Omega}^{2k} &#x3D; (-1)^{k-1} \boldsymbol{\Omega}^2, \quad \boldsymbol{\Omega}^{2k+1} &#x3D; (-1)^k \boldsymbol{\Omega}<br>$$</p>
-<p>矩阵指数展开式可以写为：</p>
-<p>$$<br>e^{\alpha \boldsymbol{\Omega}} &#x3D; \boldsymbol{I} + \boldsymbol{\Omega} \sin \alpha + \boldsymbol{\Omega}^2 (1 - \cos \alpha)<br>$$</p>
-<h3 id="结合-boldsymbol-Omega-2-的表达式"><a href="#结合-boldsymbol-Omega-2-的表达式" class="headerlink" title="结合 $\boldsymbol{\Omega}^2$ 的表达式"></a>结合 $\boldsymbol{\Omega}^2$ 的表达式</h3><p>由于 $\boldsymbol{\Omega}^2 &#x3D; \boldsymbol{n} \boldsymbol{n}^T - \boldsymbol{I}$，将其代入矩阵指数的展开式中，得到：</p>
-<p>$$<br>e^{\alpha \boldsymbol{\Omega}} &#x3D; \boldsymbol{I} + (\boldsymbol{n} \boldsymbol{n}^T - \boldsymbol{I}) (1 - \cos \alpha) + \boldsymbol{\Omega} \sin \alpha<br>$$</p>
-<p>得到最终的 Rodrigues 旋转公式：</p>
-<p>$$<br>\boldsymbol{R}(\boldsymbol{n}, \alpha) &#x3D; \boldsymbol{I} \cos \alpha + (1 - \cos \alpha) \boldsymbol{n} \boldsymbol{n}^T + \sin \alpha \begin{bmatrix} 0 &amp; -n_z &amp; n_y \ n_z &amp; 0 &amp; -n_x \ -n_y &amp; n_x &amp; 0 \end{bmatrix}<br>$$</p>
-
+<script type="math/tex; mode=display">
+e^{\alpha \boldsymbol{\Omega}} = \sum_{k=0}^{\infty} \frac{(\alpha \boldsymbol{\Omega})^k}{k!}</script><p>由于 $\boldsymbol{\Omega}$ 是一个反对称矩阵，并且满足 $\boldsymbol{\Omega}^3 = -\boldsymbol{\Omega}$，可以通过分解 $\boldsymbol{\Omega}$ 的幂次来简化计算</p>
+<script type="math/tex; mode=display">
+\boldsymbol{\Omega}^{2k} = (-1)^{k-1} \boldsymbol{\Omega}^2, \quad \boldsymbol{\Omega}^{2k+1} = (-1)^k \boldsymbol{\Omega}</script><p>矩阵指数展开式可以写为：</p>
+<script type="math/tex; mode=display">
+e^{\alpha \boldsymbol{\Omega}} = \boldsymbol{I} + \boldsymbol{\Omega} \sin \alpha + \boldsymbol{\Omega}^2 (1 - \cos \alpha)</script><h3 id="结合-boldsymbol-Omega-2-的表达式"><a href="#结合-boldsymbol-Omega-2-的表达式" class="headerlink" title="结合 $\boldsymbol{\Omega}^2$ 的表达式"></a>结合 $\boldsymbol{\Omega}^2$ 的表达式</h3><p>由于 $\boldsymbol{\Omega}^2 = \boldsymbol{n} \boldsymbol{n}^T - \boldsymbol{I}$，将其代入矩阵指数的展开式中，得到：</p>
+<script type="math/tex; mode=display">
+e^{\alpha \boldsymbol{\Omega}} = \boldsymbol{I} + (\boldsymbol{n} \boldsymbol{n}^T - \boldsymbol{I}) (1 - \cos \alpha) + \boldsymbol{\Omega} \sin \alpha</script><p>得到最终的 Rodrigues 旋转公式：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{R}(\boldsymbol{n}, \alpha) = \boldsymbol{I} \cos \alpha + (1 - \cos \alpha) \boldsymbol{n} \boldsymbol{n}^T + \sin \alpha \begin{bmatrix} 0 & -n_z & n_y \\ n_z & 0 & -n_x \\ -n_y & n_x & 0 \end{bmatrix}</script>
     </div>
      
     <div class="post-footer__meta"><p>updated at 2025-05-06</p></div> 

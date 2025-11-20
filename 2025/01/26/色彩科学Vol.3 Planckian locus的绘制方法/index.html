@@ -45,12 +45,12 @@
 
     <!-- OpenGraph -->
  
-    <meta name="description" content="前言在上一章节中，基于前述辐射度量学与光度学的基础，讨论了如何通过实验数据构建色域马蹄图 本章节介绍Planckian locus的绘制方法，并由此引出相关色温的概念，这是三刺激值计算的典型案例 Planckian locus与色温黑体辐射的辐亮度分布函数为： $$\mathcal{L}\left(\lambda; T\right) &#x3D; \frac{2hc^2}{\lambda^5}\f">
+    <meta name="description" content="前言在上一章节中，基于前述辐射度量学与光度学的基础，讨论了如何通过实验数据构建色域马蹄图 本章节介绍Planckian locus的绘制方法，并由此引出相关色温的概念，这是三刺激值计算的典型案例 Planckian locus与色温黑体辐射的辐亮度分布函数为：  \mathcal{L}\left(\lambda; T\right) &#x3D; \frac{2hc^2}{\lambda^5}\frac{1}">
 <meta property="og:type" content="article">
 <meta property="og:title" content="色彩科学的数学原理_3.Planckian locus的绘制方法">
 <meta property="og:url" content="https://strtus.github.io/2025/01/26/%E8%89%B2%E5%BD%A9%E7%A7%91%E5%AD%A6Vol.3%20Planckian%20locus%E7%9A%84%E7%BB%98%E5%88%B6%E6%96%B9%E6%B3%95/index.html">
 <meta property="og:site_name" content="Strtus&#39;s Journey">
-<meta property="og:description" content="前言在上一章节中，基于前述辐射度量学与光度学的基础，讨论了如何通过实验数据构建色域马蹄图 本章节介绍Planckian locus的绘制方法，并由此引出相关色温的概念，这是三刺激值计算的典型案例 Planckian locus与色温黑体辐射的辐亮度分布函数为： $$\mathcal{L}\left(\lambda; T\right) &#x3D; \frac{2hc^2}{\lambda^5}\f">
+<meta property="og:description" content="前言在上一章节中，基于前述辐射度量学与光度学的基础，讨论了如何通过实验数据构建色域马蹄图 本章节介绍Planckian locus的绘制方法，并由此引出相关色温的概念，这是三刺激值计算的典型案例 Planckian locus与色温黑体辐射的辐亮度分布函数为：  \mathcal{L}\left(\lambda; T\right) &#x3D; \frac{2hc^2}{\lambda^5}\frac{1}">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/PlanckianLocus.png">
 <meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/CIE_1976_UCS.png">
@@ -195,17 +195,13 @@
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在上一章节中，基于前述辐射度量学与光度学的基础，讨论了如何通过实验数据构建色域马蹄图</p>
 <p>本章节介绍Planckian locus的绘制方法，并由此引出相关色温的概念，这是三刺激值计算的典型案例</p>
 <h2 id="Planckian-locus与色温"><a href="#Planckian-locus与色温" class="headerlink" title="Planckian locus与色温"></a>Planckian locus与色温</h2><p>黑体辐射的辐亮度分布函数为：</p>
-<p>$$<br>\mathcal{L}\left(\lambda; T\right) &#x3D; \frac{2hc^2}{\lambda^5}\frac{1}{\mathrm{e}^{\frac{hc}{\lambda kT}}-1}<br>$$</p>
-<p>通过积分计算三刺激值后，得到色度坐标随温度$T$变化的轨迹——Planckian locus。</p>
+<script type="math/tex; mode=display">
+\mathcal{L}\left(\lambda; T\right) = \frac{2hc^2}{\lambda^5}\frac{1}{\mathrm{e}^{\frac{hc}{\lambda kT}}-1}</script><p>通过积分计算三刺激值后，得到色度坐标随温度$T$变化的轨迹——Planckian locus。</p>
 <p>相关色温（CCT）定义为色度坐标最接近Planckian locus点的温度值。</p>
-<img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/PlanckianLocus.png"/>
-
+<p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/PlanckianLocus.png"/></p>
 <h3 id="相关色温"><a href="#相关色温" class="headerlink" title="相关色温"></a>相关色温</h3><p>对于自然界中的许多光源，其色度坐标并不完全落在Planckian locus上，但可以通过计算其与Planckian locus的最近点来确定其相关色温（CCT）。相关色温广泛应用于摄影、照明等领域，用于描述光源的颜色特性。</p>
 <h3 id="均匀颜色空间"><a href="#均匀颜色空间" class="headerlink" title="均匀颜色空间"></a>均匀颜色空间</h3><p>虽然CIE 1931 xy色度图能够直观地表示颜色的色相和饱和度，但其上的欧式距离并不能很好地反映人眼对颜色差异的感知。为了解决这一问题，研究者提出了均匀颜色空间的概念，例如CIE 1976 UCS（Uniform Chromaticity Scale）图。在均匀颜色空间中，颜色的差异与人眼的感知更加一致。</p>
-<img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/CIE_1976_UCS.png"/>
-
-
-
+<p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/CIE_1976_UCS.png"/></p>
 
     </div>
      

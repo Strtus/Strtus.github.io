@@ -199,26 +199,28 @@
 <p>有鉴于此，本文从电磁学与光学和视觉生理学的角度出发，对辐射度量学与光度学做简要阐述。这两大学科共同构成了量化光与色觉的基础框架。鉴于色彩理论所涉及之范畴极其广泛，本文仅聚焦辐射度量学和光度学的核心概念，为后续“颜色匹配实验”“三基色理论”“CIE 1931 XYZ 色度图”等内容奠定基础。</p>
 <p>本文的前置基知识为：微积分、矩阵理论</p>
 <h2 id="辐射度量学与光度学基础"><a href="#辐射度量学与光度学基础" class="headerlink" title="辐射度量学与光度学基础"></a>辐射度量学与光度学基础</h2><h3 id="辐射度量学与光度学简介"><a href="#辐射度量学与光度学简介" class="headerlink" title="辐射度量学与光度学简介"></a>辐射度量学与光度学简介</h3><p>辐射度量学（radiometry）主要研究电磁辐射的能量度量与分布规律。电磁辐射涵盖极宽广的波长范围，包括伽马射线、X 射线、紫外光、可见光、红外光、微波与无线电波等。然而，人眼仅能对其中约 390–780 nm 的波段产生视觉感受，故可见光只占整个电磁波谱的极小部分。</p>
-<img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/EM_spectrum_zh-hans.svg" style="zoom:150%;" />
-
+<p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/EM_spectrum_zh-hans.svg" style="zoom:150%;" /></p>
 <p>光度学（photometry）则侧重研究可见光对人眼视觉系统所带来的主观亮度刺激，因为虽然同为可见光，不同波长对于人眼的刺激也是不同的。</p>
 <p>大量实验证明，人眼对 555 $nm$ 单色光（黄绿色）最敏感，若在该波长定义其视觉响应系数为 1，则其他波长光的视见效率可用函数 ($V(\lambda)$)来表征。</p>
 <p>在将物理辐射量换算成人眼主观亮度的过程中，视见函数起到了加权的作用，某种意义上，视见函数构建了联结光度学和辐射度量学的桥梁。</p>
-<img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/LuminosityCurve3.svg"/>
-
-
-
-
-
+<p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/LuminosityCurve3.svg"/></p>
 <h3 id="辐射度量学的基本概念"><a href="#辐射度量学的基本概念" class="headerlink" title="辐射度量学的基本概念"></a>辐射度量学的基本概念</h3><p>为便于后续建模，引入如下概念</p>
 <ol>
-<li><p>**辐射通量($\varPhi_\mathrm{R}$) **<br>表示单位时间内穿过某截面的电磁辐射能量，单位为瓦（$W$）：<br>$$<br>\varPhi_\mathrm{R} &#x3D; \frac{\mathrm{d}Q}{\mathrm{d}t}<br>$$<br>其中 ($Q$) 代表辐射能量，($t$)为时间。</p>
+<li><p><strong>辐射通量($\varPhi_\mathrm{R}$) </strong><br>表示单位时间内穿过某截面的电磁辐射能量，单位为瓦（$W$）：</p>
+<script type="math/tex; mode=display">
+\varPhi_\mathrm{R} = \frac{\mathrm{d}Q}{\mathrm{d}t}</script><p>其中 ($Q$) 代表辐射能量，($t$)为时间。</p>
 </li>
-<li><p><strong>辐射强度 ($I$)</strong><br>对点状辐射源而言，为在给定方向(单位立体角)上的辐射通量密度，单位为 ($\mathrm{W&#x2F;sr}$)：<br>$$<br>I &#x3D; \frac{\mathrm{d}\varPhi_\mathrm{R}}{\mathrm{d}\varOmega}<br>$$</p>
+<li><p><strong>辐射强度 ($I$)</strong><br>对点状辐射源而言，为在给定方向(单位立体角)上的辐射通量密度，单位为 ($\mathrm{W/sr}$)：</p>
+<script type="math/tex; mode=display">
+I = \frac{\mathrm{d}\varPhi_\mathrm{R}}{\mathrm{d}\varOmega}</script></li>
+<li><p><strong>辐照度 ($E$)</strong><br>当研究辐射能量如何“照射”到表面时，就引入辐照度：</p>
+<script type="math/tex; mode=display">
+E = \frac{\mathrm{d}\varPhi_\mathrm{R}}{\mathrm{d}A}</script><p>其单位为 ($\mathrm{W/m^2}$)。</p>
 </li>
-<li><p><strong>辐照度 ($E$)</strong><br>当研究辐射能量如何“照射”到表面时，就引入辐照度：<br>$$<br>E &#x3D; \frac{\mathrm{d}\varPhi_\mathrm{R}}{\mathrm{d}A}<br>$$<br>其单位为 ($\mathrm{W&#x2F;m^2}$)。</p>
-</li>
-<li><p><strong>辐亮度 ($L$)</strong><br>指某表面微元在特定方向的出射辐射强度与其面积正交分量之比：<br>$$<br>L &#x3D; \frac{\mathrm{d}I}{\mathrm{d}A^\perp}<br>&#x3D; \frac{\mathrm{d}^2\varPhi_\mathrm{R}}{\mathrm{d}\varOmega ,\mathrm{d}A \cos\theta}<br>$$<br>在无能量损耗的理想条件下，沿光线传播方向，辐亮度恒定不变。这一性质常用于图形学渲染算法中的光能传递计算。</p>
+<li><p><strong>辐亮度 ($L$)</strong><br>指某表面微元在特定方向的出射辐射强度与其面积正交分量之比：</p>
+<script type="math/tex; mode=display">
+L = \frac{\mathrm{d}I}{\mathrm{d}A^\perp}
+= \frac{\mathrm{d}^2\varPhi_\mathrm{R}}{\mathrm{d}\varOmega \,\mathrm{d}A \cos\theta}</script><p>在无能量损耗的理想条件下，沿光线传播方向，辐亮度恒定不变。这一性质常用于图形学渲染算法中的光能传递计算。</p>
 </li>
 </ol>
 <blockquote>
@@ -226,31 +228,37 @@
 </blockquote>
 <h3 id="光度学的基本概念"><a href="#光度学的基本概念" class="headerlink" title="光度学的基本概念"></a>光度学的基本概念</h3><p>为便于后续建模，引入如下概念</p>
 <ol>
-<li><p><strong>光通量 ($\varPhi_\mathrm{V}$)</strong><br>若某光源在波长 ($\lambda$) 上辐射通量分布为 ($\phi_\mathrm{R}(\lambda)$)，则其光度学加权形式：<br>$$<br>\phi_\mathrm{V}(\lambda) &#x3D; \sigma_\mathrm{m} , V(\lambda), \phi_\mathrm{R}(\lambda)<br>$$<br>积分得总光通量：<br>$$<br>\varPhi_\mathrm{V} &#x3D;<br>\int_0^\infty<br>\sigma_\mathrm{m},V(\lambda),<br>\phi_\mathrm{R}(\lambda),<br>\mathrm{d}\lambda<br>$$<br>其中 ($\sigma_\mathrm{m}\approx 683,[\mathrm{lm&#x2F;W}]$)，常称“最大光谱光视效率”系数。</p>
+<li><p><strong>光通量 ($\varPhi_\mathrm{V}$)</strong><br>若某光源在波长 ($\lambda$) 上辐射通量分布为 ($\phi_\mathrm{R}(\lambda)$)，则其光度学加权形式：</p>
+<script type="math/tex; mode=display">
+\phi_\mathrm{V}(\lambda) = \sigma_\mathrm{m} \, V(\lambda)\, \phi_\mathrm{R}(\lambda)</script><p>积分得总光通量：</p>
+<script type="math/tex; mode=display">
+\varPhi_\mathrm{V} = 
+\int_0^\infty
+\sigma_\mathrm{m}\,V(\lambda)\,
+\phi_\mathrm{R}(\lambda)\,
+\mathrm{d}\lambda</script><p>其中 ($\sigma_\mathrm{m}\approx 683\,[\mathrm{lm/W}]$)，常称“最大光谱光视效率”系数。</p>
 </li>
-<li><p><strong>发光强度 ($I_\mathrm{V}$)</strong><br>对应点光源在单位立体角内的光通量，单位为坎德拉($cd$)。若光源辐射555 nm波长光，功率强度为 ($\tfrac{1}{683},\mathrm{W&#x2F;sr}$)，则发光强度为 1 $cd$。</p>
+<li><p><strong>发光强度 ($I_\mathrm{V}$)</strong><br>对应点光源在单位立体角内的光通量，单位为坎德拉($cd$)。若光源辐射555 nm波长光，功率强度为 ($\tfrac{1}{683}\,\mathrm{W/sr}$)，则发光强度为 1 $cd$。</p>
 </li>
-<li><p><strong>光照度 ($E_\mathrm{V}$)</strong><br>表示照射在单位面积上的光通量，单位勒克斯($lx$)：<br>$$<br>E_\mathrm{V} &#x3D; \frac{\mathrm{d}\varPhi_\mathrm{V}}{\mathrm{d}A}<br>$$</p>
-</li>
-<li><p><strong>光亮度 ($L_\mathrm{V}$)</strong><br>在光度学中，定义与辐亮度平行，只是换成光度学加权：<br>$$<br>L_\mathrm{V}<br>&#x3D; \frac{\mathrm{d}I_\mathrm{V}}{\mathrm{d}A^\perp}<br>&#x3D; \frac{\mathrm{d}^2 \varPhi_\mathrm{V}}{\mathrm{d}\varOmega,\mathrm{d}A \cos\theta}<br>$$<br>单位为 $cd&#x2F;m²$（通常亦称 $nit$）。这在显示器规格中常被提及，例如“500 $nit$”亮度。</p>
+<li><p><strong>光照度 ($E_\mathrm{V}$)</strong><br>表示照射在单位面积上的光通量，单位勒克斯($lx$)：</p>
+<script type="math/tex; mode=display">
+E_\mathrm{V} = \frac{\mathrm{d}\varPhi_\mathrm{V}}{\mathrm{d}A}</script></li>
+<li><p><strong>光亮度 ($L_\mathrm{V}$)</strong><br>在光度学中，定义与辐亮度平行，只是换成光度学加权：</p>
+<script type="math/tex; mode=display">
+L_\mathrm{V} 
+= \frac{\mathrm{d}I_\mathrm{V}}{\mathrm{d}A^\perp}
+= \frac{\mathrm{d}^2 \varPhi_\mathrm{V}}{\mathrm{d}\varOmega\,\mathrm{d}A \cos\theta}</script><p>单位为 $cd/m²$（通常亦称 $nit$）。这在显示器规格中常被提及，例如“500 $nit$”亮度。</p>
 </li>
 </ol>
-<img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/Photometry_radiometry_units.svg"/>
-
-
-
-
-
-
-
+<p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/Photometry_radiometry_units.svg"/></p>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
 <li>颜色的数学理论I——辐射度量学与光度学基础 - 缺心眼的香菜的文章 - 知乎 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/597710417">https://zhuanlan.zhihu.com/p/597710417</a></li>
-<li>Griffiths, David J. <a target="_blank" rel="noopener" href="https://web.archive.org/web/20210417085114/https://www.amazon.com/Introduction-Electrodynamics-3rd-David-Griffiths/dp/013805326X">Introduction to electrodynamics</a> 3. ed., reprint. with corr. Upper Saddle River, NJ [u.a.]: Prentice-Hall. 1999 [2012-04-06]. <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/Special:%E7%BD%91%E7%BB%9C%E4%B9%A6%E6%BA%90/0-13-805326-X">ISBN 0-13-805326-X</a>.</li>
-<li><em>维基百科, 自由的百科全书,</em> s.v. “輻照度” (by Wikipedia contributors), <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/w/index.php?title=%E8%BC%BB%E7%85%A7%E5%BA%A6&oldid=72880072">https://zh.wikipedia.org/w/index.php?title=%E8%BC%BB%E7%85%A7%E5%BA%A6&amp;oldid=72880072</a> (accessed July 25, 2022).</li>
-<li>Wikipedia contributors, “Luminous efficiency function,” <em>Wikipedia, The Free Encyclopedia,</em> <a target="_blank" rel="noopener" href="https://en.wikipedia.org/w/index.php?title=Luminous_efficiency_function&oldid=1255266869">https://en.wikipedia.org/w/index.php?title=Luminous_efficiency_function&amp;oldid=1255266869</a> (accessed January 22, 2025).</li>
+<li>Griffiths, David J. <a target="_blank" rel="noopener" href="https://web.archive.org/web/20210417085114/https://www.amazon.com/Introduction-Electrodynamics-3rd-David-Griffiths/dp/013805326X">Introduction to electrodynamics</a> 3. ed., reprint. with corr. Upper Saddle River, NJ [u.a.]: Prentice-Hall. 1999 [2012-04-06]. <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/Special:网络书源/0-13-805326-X">ISBN 0-13-805326-X</a>.</li>
+<li><em>维基百科, 自由的百科全书,</em> s.v. “輻照度” (by Wikipedia contributors), <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/w/index.php?title=輻照度&amp;oldid=72880072">https://zh.wikipedia.org/w/index.php?title=%E8%BC%BB%E7%85%A7%E5%BA%A6&amp;oldid=72880072</a> (accessed July 25, 2022).</li>
+<li>Wikipedia contributors, “Luminous efficiency function,” <em>Wikipedia, The Free Encyclopedia,</em> <a target="_blank" rel="noopener" href="https://en.wikipedia.org/w/index.php?title=Luminous_efficiency_function&amp;oldid=1255266869">https://en.wikipedia.org/w/index.php?title=Luminous_efficiency_function&amp;oldid=1255266869</a> (accessed January 22, 2025).</li>
 <li><strong>CIE</strong>. Commission Internationale de l’Éclairage. <em>Colorimetry</em> (CIE 15:2004). Vienna: CIE Central Bureau, 2004.  </li>
 <li>Malacara A. D. <em>Color Vision and Colorimetry: Theory and Applications, Second Edition</em>. SPIE Press, 2011.  </li>
-<li>Marschner S, Shirley P, Ashikhmin M, et al. <em>Fundamentals of Computer Graphics</em>. CRC Press, 2018.</li>
+<li>Marschner S, Shirley P, Ashikhmin M, et al. <em>Fundamentals of Computer Graphics</em>. CRC Press, 2018.  </li>
 </ol>
 
     </div>
