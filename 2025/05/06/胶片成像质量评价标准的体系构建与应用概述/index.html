@@ -227,8 +227,8 @@ D = \log_{10} \left( \frac{I_0}{I_t} \right)</script><p>其中，$I_0<script typ
 <p>2.<strong>查找对数亮度值</strong>：</p>
 <p>通过胶片或感光材料的特性曲线（通常为密度-对数曝光曲线），查找对应的对数亮度值。特性曲线给出了一定范围内的光学密度与特定曝光量（即对数亮度，通常用$\lg H$表示）之间的关系。</p>
 <p>3.<strong>求解线性亮度值</strong>：</p>
-<p>假设特性曲线给出的对数曝光值为 $\log<em>{10} H$，其中 $H$ 为线性曝光值。为了将对数曝光值转换为线性曝光值，需要进行指数运算，以便从对数曝光值 $\log</em>{10} H$ 求解出线性曝光值 $H$。</p>
-<p>利用该空间频率下测得的最高曝光值$H(u)<em>{\mathrm{high}}$ 与最低曝光值 $H(u)</em>{\mathrm{low}}$ 可以计算该空间频率下的调制值 $M(u)$（亦可理解为当前空间频率下正弦函数的振幅）：</p>
+<p>假设特性曲线给出的对数曝光值为 $\log_{10} H$，其中 $H$ 为线性曝光值。为了将对数曝光值转换为线性曝光值，需要进行指数运算，以便从对数曝光值 $\log_{10} H$ 求解出线性曝光值 $H$。</p>
+<p>利用该空间频率下测得的最高曝光值$H(u)_{\mathrm{high}}$ 与最低曝光值 $H(u)_{\mathrm{low}}$ 可以计算该空间频率下的调制值 $M(u)$（亦可理解为当前空间频率下正弦函数的振幅）：</p>
 <script type="math/tex; mode=display">
 M(u) = \frac{H(u)_{\mathrm{high}} - H(u)_{\mathrm{low}}}{H(u)_{\mathrm{high}} + H(u)_{\mathrm{low}}}</script><p>再利用如下公式分别计算归一化每个空间频率下的$M(u)$（ $M(0)$ 代表空间频率为0时的调制值，即测试母版原生对比度 ），绘制得到MTF曲线。</p>
 <script type="math/tex; mode=display">
@@ -245,7 +245,9 @@ MTF(f) = 100\%\times\frac{M(u)}{M(0)}</script><p><img src="https://obsidian-1306
 <p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/%25E8%2583%25B6%25E7%2589%2587%25E5%259B%25BE%25E5%2583%258F%25E8%25B4%25A8%25E9%2587%258F%25E6%25B5%258B%25E8%25AF%2595%25E6%25A0%2587%25E5%2587%2586%25E7%25AE%2580%25E8%25BF%25B0_6.webp" alt="img"></p>
 <p>具体的RMS计算公式如下：</p>
 <script type="math/tex; mode=display">
-RMS = \sqrt{ \frac{(D_1 - \overline{D})^2 + (D_2 - \overline{D})^2 + \cdots + (D_n - \overline{D})^2}{n - 1} }</script><p>其中，$n$表示测定的密度值总数，$\overline{D}$﻿表示测得的所有密度的平均值$<br>\overline{D} = \frac{\sum<em>{i=1}^{n} D_i}{n}<br>$,$D</em>{n}﻿$代表每次测得的密度值。</p>
+RMS = \sqrt{ \frac{(D_1 - \overline{D})^2 + (D_2 - \overline{D})^2 + \cdots + (D_n - \overline{D})^2}{n - 1} }</script><p>其中，$n$表示测定的密度值总数，$\overline{D}$﻿表示测得的所有密度的平均值$
+\overline{D} = \frac{\sum_{i=1}^{n} D_i}{n}
+$,$D_{n}﻿$代表每次测得的密度值。</p>
 <h2 id="动态范围"><a href="#动态范围" class="headerlink" title="动态范围"></a>动态范围</h2><p>动态范围（Dynamic Range, DR）指相机可捕捉的光强的范围，通常表示为f-Stops或EV（曝光值）。通俗来讲，动态范围描述的是画面从具有影调细节的最暗的阴影部分，到最亮的高光部分的光强度分布范围。当拍摄的场景在亮度上有较大差异时，具有更大动态范围的胶片就能记录更多的影像细节。</p>
 <p>胶片的动态范围可以通过分析H&amp;D图像得到，在此之前，先让我们来理解一下H&amp;D曲线。</p>
 <h3 id="H-amp-D曲线与测量方法"><a href="#H-amp-D曲线与测量方法" class="headerlink" title="H&amp;D曲线与测量方法"></a>H&amp;D曲线与测量方法</h3><p>感光材料的乳剂层经曝光和显影加工后，它的透明程度会由于金属银的淀积而降低。乳剂层透明度的降低与许多因素有关，在冲洗过程标准化的前提下，曝光量(H)就成了影响透明度最重要的因素。</p>
@@ -264,7 +266,7 @@ RMS = \sqrt{ \frac{(D_1 - \overline{D})^2 + (D_2 - \overline{D})^2 + \cdots + (D
 <p>实际上，特性曲线描述的就是胶片显影后不同曝光量与相应密度的关系。密度值来源于一系列胶片试条，这些试条经精确校正的感光计（Sensitometer）曝光，然后在严格标准下进行冲洗。每个试条上的照度（$E$，单位是勒克斯）乘以曝光时间（$t$，单位是秒）得到曝光量（$H$）：</p>
 <script type="math/tex; mode=display">
 H = E \times t</script><p>其单位是勒克斯-秒（lux-sec），也就是单位面积乳剂层上接受的光的总量。</p>
-<p>用密度计测量每个试条上的透光率（Transmittance, T），即透过胶片的光通量$Q<em>{t}$﻿与投射到材料上的光通量（入射光）$Q</em>{o}$﻿之比，计算出阻光率（Opacity, O）。阻光率O等于透光率的倒数，即：</p>
+<p>用密度计测量每个试条上的透光率（Transmittance, T），即透过胶片的光通量$Q_{t}$﻿与投射到材料上的光通量（入射光）$Q_{o}$﻿之比，计算出阻光率（Opacity, O）。阻光率O等于透光率的倒数，即：</p>
 <script type="math/tex; mode=display">
 O = \frac{1}{T} = \frac{Q_o}{Q_t}</script><p>胶片依沉积银颗粒的多少，光线穿透率可以是100%、50%、25%、10%……0.01%，相对的透光率是 1.0、0.5、0.25、0.1……0.0001；相应地，阻光率是1、2、4、10……10,000。这样巨大的数字在制作曲线时很不方便，标尺过小会造成不够精确，故取阻光率O的以10为底的对数，称为密度(Density，D)，即：</p>
 <script type="math/tex; mode=display">

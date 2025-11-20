@@ -195,7 +195,7 @@
 <script type="math/tex; mode=display">
 \delta \boldsymbol{r} = \boldsymbol{n} \times \boldsymbol{r} \, \delta \alpha</script><p>旋转矩阵的变化量可以表示为：</p>
 <script type="math/tex; mode=display">
-\boldsymbol{R}(\boldsymbol{n}, \delta \alpha) = \boldsymbol{I} + \delta \alpha \begin{bmatrix} 0 & -n_z & n_y \\ n_z & 0 & -n_x \\ -n_y & n_x & 0 \end{bmatrix}</script><p>其中，$\boldsymbol{I}$ 是单位矩阵，$\boldsymbol{\Omega} = \begin{bmatrix} 0 &amp; -n_z &amp; n_y \ n_z &amp; 0 &amp; -n_x \ -n_y &amp; n_x &amp; 0 \end{bmatrix}$ 是反对称矩阵。</p>
+\boldsymbol{R}(\boldsymbol{n}, \delta \alpha) = \boldsymbol{I} + \delta \alpha \begin{bmatrix} 0 & -n_z & n_y \\ n_z & 0 & -n_x \\ -n_y & n_x & 0 \end{bmatrix}</script><p>其中，$\boldsymbol{I}$ 是单位矩阵，$\boldsymbol{\Omega} = \begin{bmatrix} 0 &amp; -n_z &amp; n_y \\ n_z &amp; 0 &amp; -n_x \\ -n_y &amp; n_x &amp; 0 \end{bmatrix}$ 是反对称矩阵。</p>
 <h3 id="旋转矩阵的指数映射"><a href="#旋转矩阵的指数映射" class="headerlink" title="旋转矩阵的指数映射"></a>旋转矩阵的指数映射</h3><p>旋转矩阵的最终表达式可以通过无穷小旋转的指数映射来表示。对于有限旋转角度 $\alpha$，可以将其分解为无穷次无穷小旋转的连续作用：</p>
 <script type="math/tex; mode=display">
 \boldsymbol{R}(\boldsymbol{n}, \alpha) = \lim_{N \to \infty} \left( \boldsymbol{I} + \frac{\alpha}{N} \boldsymbol{\Omega} \right)^N = e^{\alpha \boldsymbol{\Omega}}</script><p>通过指数映射，可以得到旋转矩阵 $\boldsymbol{R}(\boldsymbol{n}, \alpha)$。</p>

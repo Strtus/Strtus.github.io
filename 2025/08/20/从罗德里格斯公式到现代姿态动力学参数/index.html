@@ -202,20 +202,23 @@
 <p>公式的最终形式如下：</p>
 <script type="math/tex; mode=display">\mathbf{v}_{\text{rot}} = \mathbf{v} \cos\theta + (\mathbf{k} \times \mathbf{v}) \sin\theta + \mathbf{k}(\mathbf{k} \cdot \mathbf{v})(1 - \cos\theta)</script><p>旋转被分解为三个具向量分量的和，每个分量都具有明确的几何意义</p>
 <p>要我说，这真是太他妈酷了，比四元数有意思多了</p>
-<h3 id="公式推导"><a href="#公式推导" class="headerlink" title="公式推导"></a>公式推导</h3><p>首先，将向量<strong>v</strong>分解为平行于旋转轴<strong>k</strong>的分量 $\mathbf{v}<em>{|}$ 和垂直于<strong>k</strong>的分量 $\mathbf{v}</em>{\perp}$</p>
+<h3 id="公式推导"><a href="#公式推导" class="headerlink" title="公式推导"></a>公式推导</h3><p>首先，将向量<strong>v</strong>分解为平行于旋转轴<strong>k</strong>的分量 $\mathbf{v}_{|}$ 和垂直于<strong>k</strong>的分量 $\mathbf{v}_{\perp}$</p>
 <script type="math/tex; mode=display">\mathbf{v} = \mathbf{v}_{\|} + \mathbf{v}_{\perp}</script><ul>
-<li><p><strong>平行分量 $\mathbf{v}_{|}$</strong>：<br><strong>v</strong>在<strong>k</strong>上的投影。根据向量投影的定义，有：</p>
-<script type="math/tex; mode=display">\mathbf{v}_{\|} = (\mathbf{v} \cdot \mathbf{k})\mathbf{k}</script><p>由于这个分量本身就在旋转轴上，因此旋转对它没有影响，即 $\mathbf{v}<em>{|,\text{rot}} = \mathbf{v}</em>{|}$。</p>
+<li><p><strong>平行分量 $\mathbf{v}_{|}$</strong>：
+<strong>v</strong>在<strong>k</strong>上的投影。根据向量投影的定义，有：</p>
+<script type="math/tex; mode=display">\mathbf{v}_{\|} = (\mathbf{v} \cdot \mathbf{k})\mathbf{k}</script><p>由于这个分量本身就在旋转轴上，因此旋转对它没有影响，即 $\mathbf{v}_{|,\text{rot}} = \mathbf{v}_{|}$。</p>
 </li>
-<li><p><strong>垂直分量 $\mathbf{v}_{\perp}$</strong>：<br>垂直分量可以通过从原向量<strong>v</strong>中减去平行分量得到：</p>
-<script type="math/tex; mode=display">\mathbf{v}_{\perp} = \mathbf{v} - \mathbf{v}_{\|} = \mathbf{v} - (\mathbf{v} \cdot \mathbf{k})\mathbf{k}</script><p>分量位于一个垂直于<strong>k</strong>的平面上，所有的旋转都发生在这个平面内。当$\mathbf{v}<em>{\perp}$旋转$\theta$角时，可以将其旋转后的向量$\mathbf{v}</em>{\perp,\text{rot}}$分解。</p>
-<p>为了描述这个平面内的旋转，我们需要一个与$\mathbf{v}<em>{\perp}$正交且长度相同的基向量。向量叉乘 $\mathbf{k} \times \mathbf{v}$ 恰好满足这个要求。由于<strong>k</strong>是单位向量且垂直于$\mathbf{v}</em>{\perp}$，所以 $|\mathbf{k} \times \mathbf{v}<em>{\perp}| = |\mathbf{k}||\mathbf{v}</em>{\perp}|\sin(90^\circ) = |\mathbf{v}<em>{\perp}|$。同时，我们知道 $\mathbf{k} \times \mathbf{v} = \mathbf{k} \times (\mathbf{v}</em>{|} + \mathbf{v}<em>{\perp}) = \mathbf{k} \times \mathbf{v}</em>{|} + \mathbf{k} \times \mathbf{v}<em>{\perp} = \mathbf{0} + \mathbf{k} \times \mathbf{v}</em>{\perp}$，所以我们可以使用 $\mathbf{k} \times \mathbf{v}$ 作为这个正交基向量。</p>
-<p>在由 $\mathbf{v}<em>{\perp}$ 和 $\mathbf{k} \times \mathbf{v}$ 构成的二维平面中，旋转后的向量 $\mathbf{v}</em>{\perp, \text{rot}}$ 可以表示为：</p>
+<li><p><strong>垂直分量 $\mathbf{v}_{\perp}$</strong>：
+垂直分量可以通过从原向量<strong>v</strong>中减去平行分量得到：</p>
+<script type="math/tex; mode=display">\mathbf{v}_{\perp} = \mathbf{v} - \mathbf{v}_{\|} = \mathbf{v} - (\mathbf{v} \cdot \mathbf{k})\mathbf{k}</script><p>分量位于一个垂直于<strong>k</strong>的平面上，所有的旋转都发生在这个平面内。当$\mathbf{v}_{\perp}$旋转$\theta$角时，可以将其旋转后的向量$\mathbf{v}_{\perp,\text{rot}}$分解。</p>
+<p>为了描述这个平面内的旋转，我们需要一个与$\mathbf{v}_{\perp}$正交且长度相同的基向量。向量叉乘 $\mathbf{k} \times \mathbf{v}$ 恰好满足这个要求。由于<strong>k</strong>是单位向量且垂直于$\mathbf{v}_{\perp}$，所以 $|\mathbf{k} \times \mathbf{v}_{\perp}| = |\mathbf{k}||\mathbf{v}_{\perp}|\sin(90^\circ) = |\mathbf{v}_{\perp}|$。同时，我们知道 $\mathbf{k} \times \mathbf{v} = \mathbf{k} \times (\mathbf{v}_{|} + \mathbf{v}_{\perp}) = \mathbf{k} \times \mathbf{v}_{|} + \mathbf{k} \times \mathbf{v}_{\perp} = \mathbf{0} + \mathbf{k} \times \mathbf{v}_{\perp}$，所以我们可以使用 $\mathbf{k} \times \mathbf{v}$ 作为这个正交基向量。</p>
+<p>在由 $\mathbf{v}_{\perp}$ 和 $\mathbf{k} \times \mathbf{v}$ 构成的二维平面中，旋转后的向量 $\mathbf{v}_{\perp, \text{rot}}$ 可以表示为：</p>
 <script type="math/tex; mode=display">\mathbf{v}_{\perp, \text{rot}} = \mathbf{v}_{\perp} \cos\theta + (\mathbf{k} \times \mathbf{v}) \sin\theta</script></li>
 </ul>
 <p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/Orthogonal_decomposition_unit_vector_rodrigues_rotation_formula%20(1" alt="Orthogonal_decomposition_unit_vector_rodrigues_rotation_formula (1)">.svg)</p>
 <ul>
-<li><strong>组合结果</strong>：<br>旋转后的总向量 $\mathbf{v}_{\text{rot}}$ 是其旋转后平行与垂直分量的和：<script type="math/tex; mode=display">\mathbf{v}_{\text{rot}} = \mathbf{v}_{\|,\text{rot}} + \mathbf{v}_{\perp, \text{rot}}</script><script type="math/tex; mode=display">\mathbf{v}_{\text{rot}} = \mathbf{v}_{\|} + \mathbf{v}_{\perp} \cos\theta + (\mathbf{k} \times \mathbf{v}) \sin\theta</script>将 $\mathbf{v}<em>{|} = (\mathbf{v} \cdot \mathbf{k})\mathbf{k}$ 和 $\mathbf{v}</em>{\perp} = \mathbf{v} - \mathbf{v}_{|}$ 代入上式：<script type="math/tex; mode=display">\mathbf{v}_{\text{rot}} = (\mathbf{v} \cdot \mathbf{k})\mathbf{k} + (\mathbf{v} - (\mathbf{v} \cdot \mathbf{k})\mathbf{k}) \cos\theta + (\mathbf{k} \times \mathbf{v}) \sin\theta</script>整理后即可得到最终的罗德里格斯旋转公式：<script type="math/tex; mode=display">\mathbf{v}_{\text{rot}} = \mathbf{v} \cos\theta + (\mathbf{k} \times \mathbf{v}) \sin\theta + \mathbf{k}(\mathbf{k} \cdot \mathbf{v})(1 - \cos\theta)</script></li>
+<li><strong>组合结果</strong>：
+旋转后的总向量 $\mathbf{v}_{\text{rot}}$ 是其旋转后平行与垂直分量的和：<script type="math/tex; mode=display">\mathbf{v}_{\text{rot}} = \mathbf{v}_{\|,\text{rot}} + \mathbf{v}_{\perp, \text{rot}}</script><script type="math/tex; mode=display">\mathbf{v}_{\text{rot}} = \mathbf{v}_{\|} + \mathbf{v}_{\perp} \cos\theta + (\mathbf{k} \times \mathbf{v}) \sin\theta</script>将 $\mathbf{v}_{|} = (\mathbf{v} \cdot \mathbf{k})\mathbf{k}$ 和 $\mathbf{v}_{\perp} = \mathbf{v} - \mathbf{v}_{|}$ 代入上式：<script type="math/tex; mode=display">\mathbf{v}_{\text{rot}} = (\mathbf{v} \cdot \mathbf{k})\mathbf{k} + (\mathbf{v} - (\mathbf{v} \cdot \mathbf{k})\mathbf{k}) \cos\theta + (\mathbf{k} \times \mathbf{v}) \sin\theta</script>整理后即可得到最终的罗德里格斯旋转公式：<script type="math/tex; mode=display">\mathbf{v}_{\text{rot}} = \mathbf{v} \cos\theta + (\mathbf{k} \times \mathbf{v}) \sin\theta + \mathbf{k}(\mathbf{k} \cdot \mathbf{v})(1 - \cos\theta)</script></li>
 </ul>
 <h3 id="矩阵形式"><a href="#矩阵形式" class="headerlink" title="矩阵形式"></a>矩阵形式</h3><p>为了便于求解和计算，我们通常将旋转表示为矩阵形式</p>
 <p>叉乘运算 $\mathbf{k} \times \mathbf{v}$ 可以用一个反对称矩阵 $\mathbf{K}$ 与向量 $\mathbf{v}$ 的乘积来表示：</p>
