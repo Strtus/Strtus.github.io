@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--icon-->
+
+    
+        <link rel="shortcut icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="16x16" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="32x32" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon-96x96.png">
+    
+    
+        <link rel="apple-touch-icon" sizes="180x180" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/web-app-manifest-192x192.png">
+    
+    
+        <link rel="mask-icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/apple-touch-icon.png">
+    
+
+
+    <!-- meta -->
+
+
+<title>胶片理论Vol.2 潜影理论：Gurney-Mott机制与互易律失效 | Strtus&#39;s Journey</title>
+
+
+    <meta name="keywords" content="潜影, 胶片理论, 互易律失效, 量子物理">
+
+
+
+
+    <!-- OpenGraph -->
+ 
+    <meta name="description" content="引言当快门开启的瞬间，光子撞击胶片，图像被“捕获”了。但此时胶片上并没有可见的图像，只有一个看不见的潜影 (Latent Image)。 潜影是如何形成的？为什么曝光时间太长或太短会导致感光度下降（互易律失效）？本章将利用量子物理模型——Gurney-Mott 理论来解答这些问题。  Gurney-Mott 理论：潜影形成的四步舞1938年，R.W. Gurney 和 N.F. Mott 提出了经">
+<meta property="og:type" content="article">
+<meta property="og:title" content="胶片理论Vol.2 潜影理论：Gurney-Mott机制与互易律失效">
+<meta property="og:url" content="https://strtus.github.io/2025/10/02/%E8%83%B6%E7%89%87%E7%90%86%E8%AE%BAVol.2-%E6%BD%9C%E5%BD%B1%E7%90%86%E8%AE%BA%EF%BC%9AGurney-Mott%E6%9C%BA%E5%88%B6%E4%B8%8E%E4%BA%92%E6%98%93%E5%BE%8B%E5%A4%B1%E6%95%88/index.html">
+<meta property="og:site_name" content="Strtus&#39;s Journey">
+<meta property="og:description" content="引言当快门开启的瞬间，光子撞击胶片，图像被“捕获”了。但此时胶片上并没有可见的图像，只有一个看不见的潜影 (Latent Image)。 潜影是如何形成的？为什么曝光时间太长或太短会导致感光度下降（互易律失效）？本章将利用量子物理模型——Gurney-Mott 理论来解答这些问题。  Gurney-Mott 理论：潜影形成的四步舞1938年，R.W. Gurney 和 N.F. Mott 提出了经">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-10-02T02:00:00.000Z">
+<meta property="article:modified_time" content="2025-11-21T11:53:48.385Z">
+<meta property="article:author" content="strtus">
+<meta property="article:tag" content="潜影">
+<meta property="article:tag" content="胶片理论">
+<meta property="article:tag" content="互易律失效">
+<meta property="article:tag" content="量子物理">
+<meta name="twitter:card" content="summary_large_image">
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/highlight.css" media="none" >
+        
+            <link rel="stylesheet" id="hl-dark-theme" href="/css/highlight/highlight.dark.css" media="none">
+        
+    
+
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/style/dark.css">
+
+    
+<script src="/js/darkmode.js"></script>
+
+
+
+     
+
+    <!-- custom head -->
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+    <body>
+        <div id="app" tabindex="-1">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">Strtus&#39;s Journey</span>
+        </a>
+    </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">首页</a>
+                
+                    <a href="/about.html" class="navbar-menu button">About</a>
+                
+                    <a href="/categories/" class="navbar-menu button">分类</a>
+                
+                    <a href="/tags/" class="navbar-menu button">标签</a>
+                
+                    <a href="/archives/" class="navbar-menu button">归档</a>
+                
+            </div>
+        
+        
+        
+    <a href="/search/" id="btn-search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="24" height="24" fill="currentColor" stroke="currentColor" stroke-width="32"><path d="M192 448c0-141.152 114.848-256 256-256s256 114.848 256 256-114.848 256-256 256-256-114.848-256-256z m710.624 409.376l-206.88-206.88A318.784 318.784 0 0 0 768 448c0-176.736-143.264-320-320-320S128 271.264 128 448s143.264 320 320 320a318.784 318.784 0 0 0 202.496-72.256l206.88 206.88 45.248-45.248z"></path></svg>
+    </a>
+
+
+        
+        
+    <a href="javaScript:void(0);" id="btn-toggle-dark">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </a>
+
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">首页</a>
+                
+                    <a href="/about.html" class="dropdown-menu button">About</a>
+                
+                    <a href="/categories/" class="dropdown-menu button">分类</a>
+                
+                    <a href="/tags/" class="dropdown-menu button">标签</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">归档</a>
+                
+            </div>
+        
+    </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        胶片理论Vol.2 潜影理论：Gurney-Mott机制与互易律失效
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2025/10/" class="post-meta__date button">2025-10-02</a>
+        
+    <span class="separate-dot"></span><a href="/categories/%E8%83%B6%E7%89%87%E6%91%84%E5%BD%B1%E7%90%86%E8%AE%BA/" class="button">胶片摄影理论</a>
+
+ 
+        
+    
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+    <aside class="post-side">
+        <div class="post-side__toc">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Gurney-Mott-%E7%90%86%E8%AE%BA%EF%BC%9A%E6%BD%9C%E5%BD%B1%E5%BD%A2%E6%88%90%E7%9A%84%E5%9B%9B%E6%AD%A5%E8%88%9E"><span class="toc-number">2.</span> <span class="toc-text">Gurney-Mott 理论：潜影形成的四步舞</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%85%89%E5%90%B8%E6%94%B6%E4%B8%8E%E7%94%B5%E5%AD%90%E6%BF%80%E5%8F%91"><span class="toc-number">2.1.</span> <span class="toc-text">1. 光吸收与电子激发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E7%94%B5%E5%AD%90%E9%99%B7%E9%98%B1%E6%8D%95%E8%8E%B7"><span class="toc-number">2.2.</span> <span class="toc-text">2. 电子陷阱捕获</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E7%A6%BB%E5%AD%90%E8%BF%81%E7%A7%BB"><span class="toc-number">2.3.</span> <span class="toc-text">3. 离子迁移</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%BE%AA%E7%8E%AF%E4%B8%8E%E7%A7%AF%E7%B4%AF"><span class="toc-number">2.4.</span> <span class="toc-text">4. 循环与积累</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%92%E6%98%93%E5%BE%8B%E5%A4%B1%E6%95%88-Reciprocity-Failure"><span class="toc-number">3.</span> <span class="toc-text">互易律失效 (Reciprocity Failure)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%BD%8E%E7%85%A7%E5%BA%A6%E5%A4%B1%E6%95%88-Low-Intensity-Failure"><span class="toc-number">3.1.</span> <span class="toc-text">1. 低照度失效 (Low Intensity Failure)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E9%AB%98%E7%85%A7%E5%BA%A6%E5%A4%B1%E6%95%88-High-Intensity-Failure"><span class="toc-number">3.2.</span> <span class="toc-text">2. 高照度失效 (High Intensity Failure)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BD%9C%E5%BD%B1%E7%9A%84%E9%80%80%E5%8C%96-Latent-Image-Regression"><span class="toc-number">4.</span> <span class="toc-text">潜影的退化 (Latent Image Regression)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a></li></ol>
+        </div>
+    </aside>
+    <a class="btn-toc button" id="btn-toc" tabindex="0">
+        <svg viewBox="0 0 1024 1024" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M128 256h64V192H128zM320 256h576V192H320zM128 544h64v-64H128zM320 544h576v-64H320zM128 832h64v-64H128zM320 832h576v-64H320z" fill="currentColor"></path>
+        </svg>
+    </a>
+    <div class="toc-menus" id="toc-menus">
+        <div class="toc-title">Article Directory</div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Gurney-Mott-%E7%90%86%E8%AE%BA%EF%BC%9A%E6%BD%9C%E5%BD%B1%E5%BD%A2%E6%88%90%E7%9A%84%E5%9B%9B%E6%AD%A5%E8%88%9E"><span class="toc-number">2.</span> <span class="toc-text">Gurney-Mott 理论：潜影形成的四步舞</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%85%89%E5%90%B8%E6%94%B6%E4%B8%8E%E7%94%B5%E5%AD%90%E6%BF%80%E5%8F%91"><span class="toc-number">2.1.</span> <span class="toc-text">1. 光吸收与电子激发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E7%94%B5%E5%AD%90%E9%99%B7%E9%98%B1%E6%8D%95%E8%8E%B7"><span class="toc-number">2.2.</span> <span class="toc-text">2. 电子陷阱捕获</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E7%A6%BB%E5%AD%90%E8%BF%81%E7%A7%BB"><span class="toc-number">2.3.</span> <span class="toc-text">3. 离子迁移</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%BE%AA%E7%8E%AF%E4%B8%8E%E7%A7%AF%E7%B4%AF"><span class="toc-number">2.4.</span> <span class="toc-text">4. 循环与积累</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%92%E6%98%93%E5%BE%8B%E5%A4%B1%E6%95%88-Reciprocity-Failure"><span class="toc-number">3.</span> <span class="toc-text">互易律失效 (Reciprocity Failure)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%BD%8E%E7%85%A7%E5%BA%A6%E5%A4%B1%E6%95%88-Low-Intensity-Failure"><span class="toc-number">3.1.</span> <span class="toc-text">1. 低照度失效 (Low Intensity Failure)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E9%AB%98%E7%85%A7%E5%BA%A6%E5%A4%B1%E6%95%88-High-Intensity-Failure"><span class="toc-number">3.2.</span> <span class="toc-text">2. 高照度失效 (High Intensity Failure)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BD%9C%E5%BD%B1%E7%9A%84%E9%80%80%E5%8C%96-Latent-Image-Regression"><span class="toc-number">4.</span> <span class="toc-text">潜影的退化 (Latent Image Regression)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a></li></ol>
+    </div>
+
+
+<article class="post post__with-toc content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>当快门开启的瞬间，光子撞击胶片，图像被“捕获”了。但此时胶片上并没有可见的图像，只有一个看不见的<strong>潜影 (Latent Image)</strong>。</p>
+<p>潜影是如何形成的？为什么曝光时间太长或太短会导致感光度下降（互易律失效）？本章将利用量子物理模型——<strong>Gurney-Mott 理论</strong>来解答这些问题。</p>
+<hr>
+<h2 id="Gurney-Mott-理论：潜影形成的四步舞"><a href="#Gurney-Mott-理论：潜影形成的四步舞" class="headerlink" title="Gurney-Mott 理论：潜影形成的四步舞"></a>Gurney-Mott 理论：潜影形成的四步舞</h2><p>1938年，R.W. Gurney 和 N.F. Mott 提出了经典的潜影形成机理，至今仍是解释感光过程的基础模型。</p>
+<h3 id="1-光吸收与电子激发"><a href="#1-光吸收与电子激发" class="headerlink" title="1. 光吸收与电子激发"></a>1. 光吸收与电子激发</h3><p>当一个光子（能量 $h\nu$）撞击卤化银晶体时，它将卤素离子（$Br^-$）的一个电子激发到导带（Conduction Band）：</p>
+<script type="math/tex; mode=display">
+Br^- + h\nu \rightarrow Br + e^-</script><p>此时，晶体中产生了一个自由电子 ($e^-$) 和一个正空穴 ($Br$ 原子)。</p>
+<h3 id="2-电子陷阱捕获"><a href="#2-电子陷阱捕获" class="headerlink" title="2. 电子陷阱捕获"></a>2. 电子陷阱捕获</h3><p>自由电子在晶体中快速移动，直到被<strong>感光中心 (Sensitivity Speck)</strong> 捕获。感光中心通常是晶体表面的硫化银 ($Ag_2S$) 杂质或晶格缺陷，它们充当了“电子陷阱”。
+被捕获的电子使感光中心带上了负电荷。</p>
+<h3 id="3-离子迁移"><a href="#3-离子迁移" class="headerlink" title="3. 离子迁移"></a>3. 离子迁移</h3><p>带负电的感光中心吸引晶体内部可移动的间隙银离子 ($Ag_i^+$)。银离子迁移到感光中心，与电子结合，还原为金属银原子 ($Ag$)：</p>
+<script type="math/tex; mode=display">
+Ag_i^+ + e^- \rightarrow Ag</script><h3 id="4-循环与积累"><a href="#4-循环与积累" class="headerlink" title="4. 循环与积累"></a>4. 循环与积累</h3><p>一个银原子是不稳定的，容易分解。要形成稳定的潜影中心，上述过程必须重复多次。</p>
+<ul>
+<li>第二个光子产生第二个电子 $\rightarrow$ 捕获 $\rightarrow$ 吸引第二个银离子 $\rightarrow$ 形成 $Ag_2$。</li>
+<li>通常认为，<strong>3-4 个银原子</strong>聚集在一起 ($Ag_3$ 或 $Ag_4$) 才能构成一个稳定的、可显影的潜影中心。</li>
+</ul>
+<hr>
+<h2 id="互易律失效-Reciprocity-Failure"><a href="#互易律失效-Reciprocity-Failure" class="headerlink" title="互易律失效 (Reciprocity Failure)"></a>互易律失效 (Reciprocity Failure)</h2><p>根据互易律（Bunsen-Roscoe Law），曝光量 $H = E \times t$。只要总量 $H$ 不变，照度 $E$ 和时间 $t$ 应该可以互换。但在胶片摄影中，当 $t$ 极短或极长时，这一通过失效，称为<strong>施瓦西效应 (Schwarzschild Effect)</strong>。</p>
+<h3 id="1-低照度失效-Low-Intensity-Failure"><a href="#1-低照度失效-Low-Intensity-Failure" class="headerlink" title="1. 低照度失效 (Low Intensity Failure)"></a>1. 低照度失效 (Low Intensity Failure)</h3><ul>
+<li><strong>现象</strong>：当光线极弱，曝光时间很长（如星空摄影，t &gt; 1s）时，胶片感光度显著下降。</li>
+<li><strong>Gurney-Mott 解释</strong>：
+光子到达的间隔时间太长。第一个光子形成的单银原子 ($Ag$) 是不稳定的，具有热不稳定性。如果在第二个光子到达之前，第一个银原子已经热分解 ($Ag \rightarrow Ag_i^+ + e^-$)，那么潜影就无法积累。
+<strong>后果</strong>：需要大幅增加曝光时间。例如测光 10秒，实际可能需要 30-50秒。</li>
+</ul>
+<h3 id="2-高照度失效-High-Intensity-Failure"><a href="#2-高照度失效-High-Intensity-Failure" class="headerlink" title="2. 高照度失效 (High Intensity Failure)"></a>2. 高照度失效 (High Intensity Failure)</h3><ul>
+<li><strong>现象</strong>：当光线极强，曝光时间极短（如高速闪光摄影，t &lt; 1/10000s）时，感光度也会下降。</li>
+<li><strong>Gurney-Mott 解释</strong>：
+大量光子在极短时间内涌入，产生了大量自由电子。电子陷阱（感光中心）来不及处理这么多电子，或者间隙银离子 ($Ag_i^+$) 的迁移速度跟不上电子的积累速度。
+这导致电子在晶体内部其他浅陷阱处被捕获，形成了许多微小的、分散的银原子簇（如 $Ag_2$），而不是集中在一个大的、可显影的潜影中心上。这些微小簇无法触发显影。
+<strong>后果</strong>：反差降低，最大密度 ($D_{max}$) 下降。</li>
+</ul>
+<hr>
+<h2 id="潜影的退化-Latent-Image-Regression"><a href="#潜影的退化-Latent-Image-Regression" class="headerlink" title="潜影的退化 (Latent Image Regression)"></a>潜影的退化 (Latent Image Regression)</h2><p>潜影形成后并非永久不变。随着时间推移，银原子簇可能会因热运动或氧化而重新分解为离子，导致影像消失。</p>
+<ul>
+<li><strong>影响因素</strong>：高温、高湿会加速潜影退化。</li>
+<li><strong>应用</strong>：这就是为什么拍摄后的胶片应尽快冲洗，或者放入冰箱冷藏保存。</li>
+</ul>
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>Gurney-Mott 理论揭示了摄影的量子本质：它是一场电子与离子的赛跑。只有当光子的到达频率与离子的迁移速度完美匹配时，潜影才能高效形成。</p>
+<p>理解了潜影的形成，我们就可以通过数学工具来量化胶片对光的响应特性。下一章，我们将进入<strong>感光测定学</strong>的核心——特性曲线。</p>
+
+    </div>
+     
+    <div class="post-footer__meta"><p>updated at 2025-11-21</p></div> 
+    <div class="post-entry__tags"><a href="/tags/%E6%BD%9C%E5%BD%B1/" class="post-tags__link button"># 潜影</a><a href="/tags/%E8%83%B6%E7%89%87%E7%90%86%E8%AE%BA/" class="post-tags__link button"># 胶片理论</a><a href="/tags/%E4%BA%92%E6%98%93%E5%BE%8B%E5%A4%B1%E6%95%88/" class="post-tags__link button"># 互易律失效</a><a href="/tags/%E9%87%8F%E5%AD%90%E7%89%A9%E7%90%86/" class="post-tags__link button"># 量子物理</a></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
+            
+                <a href="/2025/10/03/%E8%83%B6%E7%89%87%E7%90%86%E8%AE%BAVol.3-%E6%84%9F%E5%85%89%E6%B5%8B%E5%AE%9A%E5%AD%A6(I)%EF%BC%9A%E7%89%B9%E6%80%A7%E6%9B%B2%E7%BA%BF%E4%B8%8E%E5%8F%8D%E5%B7%AE%E6%8E%A7%E5%88%B6%E6%A8%A1%E5%9E%8B/" class="nav__link">
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
+                    </div>
+                    <div>
+                        <div class="nav__label">
+                            Previous Post
+                        </div>
+                        <div class="nav__title">
+                            胶片理论Vol.3 感光测定学(I)：特性曲线与反差控制模型
+                        </div>
+                    </div>
+                </a>
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="/2025/10/01/%E8%83%B6%E7%89%87%E7%90%86%E8%AE%BAVol.1-%E8%83%B6%E7%89%87%E5%BE%AE%E8%A7%82%E7%BB%93%E6%9E%84%EF%BC%9A%E5%8D%A4%E5%8C%96%E9%93%B6%E6%99%B6%E4%BD%93%E4%B8%8E%E4%B9%B3%E5%89%82%E5%B7%A5%E7%A8%8B/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            Next Post
+                        </div>
+                        <div class="nav__title">
+                            胶片理论Vol.1 胶片微观结构：卤化银晶体与乳剂工程
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
+        </div>
+    </div>
+
+
+
+
+
+</main>
+
+            <footer class="footer">
+     
+    <a href="#" class="button" id="b2t" aria-label="Back to Top" title="Back to Top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M233.376 722.752L278.624 768 512 534.624 745.376 768l45.248-45.248L512 444.128zM192 352h640V288H192z" fill="currentColor"></path>
+        </svg>
+    </a>
+
+    
+
+
+    
+     
+ 
+
+ 
+    
+        
+        <p class="footer-copyright">
+            Strtus's Journry
+        </p>
+    
+    
+        
+            
+        
+            
+        
+            <p>保持对世界的输出🙌</p>
+
+        
+    
+</footer>
+
+        </div>
+         
+
+ 
+    <script>
+        window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+        ga('create', 'G-5ERPC280ZB', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+ 
+
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5ERPC280ZB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-5ERPC280ZB');
+    </script>
+ 
+
+ 
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement('script');
+            hm.src = 'https://hm.baidu.com/hm.js?8da6411546e903e478a9d82d2a4d0c60';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+    
+ 
+
+
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.css">
+
+    
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.js"></script>
+
+    <script>
+        let lazyloadT = Boolean('false'),
+            auto_fancybox = Boolean('true')
+        if (auto_fancybox) {
+            $(".post__content").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        } else {
+            $(".post__content").find("fancybox").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        }
+    </script>
+ 
+
+
+    <script>
+        if (typeof MathJax === 'undefined') {
+            window.MathJax = {
+                loader: {
+                    source: {
+                        '[tex]/amsCd': '[tex]/amscd',
+                        '[tex]/AMScd': '[tex]/amscd'
+                    }
+                },
+                tex: {
+                    inlineMath: {'[+]': [['$', '$']]},
+                    tags: 'ams'
+                },
+                options: {
+                    renderActions: {
+                        findScript: [10, doc => {
+                            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                                const display = !!node.type.match(/; *mode=display/);
+                                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                                const text = document.createTextNode('');
+                                node.parentNode.replaceChild(text, node);
+                                math.start = {node: text, delim: '', n: 0};
+                                math.end = {node: text, delim: '', n: 0};
+                                doc.math.push(math);
+                            });
+                        }, '', false],
+                        insertedScript: [200, () => {
+                            document.querySelectorAll('mjx-container').forEach(node => {
+                                let target = node.parentNode;
+                                if (target.nodeName.toLowerCase() === 'li') {
+                                    target.parentNode.classList.add('has-jax');
+                                }
+                            });
+                        }, '', false]
+                    }
+                }
+            };
+            (function () {
+                var script = document.createElement('script');
+                script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js";
+                script.defer = true;
+                document.head.appendChild(script);
+            })();
+        } else {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+        }
+    </script>
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+
+    </body>
+</html>

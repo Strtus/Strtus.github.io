@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--icon-->
+
+    
+        <link rel="shortcut icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="16x16" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="32x32" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon-96x96.png">
+    
+    
+        <link rel="apple-touch-icon" sizes="180x180" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/web-app-manifest-192x192.png">
+    
+    
+        <link rel="mask-icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/apple-touch-icon.png">
+    
+
+
+    <!-- meta -->
+
+
+<title>胶片理论Vol.6 图像清晰度评价：调制传递函数(MTF)与邻苯二酚效应 | Strtus&#39;s Journey</title>
+
+
+    <meta name="keywords" content="胶片理论, MTF, 清晰度, 邻接效应">
+
+
+
+
+    <!-- OpenGraph -->
+ 
+    <meta name="description" content="引言“这张照片很锐！”——摄影师常这样评价。但“锐度 (Sharpness)”是一个主观感受。在科学上，我们用分辨率 (Resolution) 和 反差传递 (Contrast Transfer) 来量化它。 胶片作为一个光学系统，其清晰度受限于光在乳剂中的散射（光渗）和显影时的化学扩散。本章将介绍描述这一特性的调制传递函数 (MTF)，并探讨一种神奇的化学现象——邻接效应，它是胶片“自带锐化”的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="胶片理论Vol.6 图像清晰度评价：调制传递函数(MTF)与邻苯二酚效应">
+<meta property="og:url" content="https://strtus.github.io/2025/10/06/%E8%83%B6%E7%89%87%E7%90%86%E8%AE%BAVol.6-%E5%9B%BE%E5%83%8F%E6%B8%85%E6%99%B0%E5%BA%A6%E8%AF%84%E4%BB%B7%EF%BC%9A%E8%B0%83%E5%88%B6%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0(MTF)%E4%B8%8E%E9%82%BB%E8%8B%AF%E4%BA%8C%E9%85%9A%E6%95%88%E5%BA%94/index.html">
+<meta property="og:site_name" content="Strtus&#39;s Journey">
+<meta property="og:description" content="引言“这张照片很锐！”——摄影师常这样评价。但“锐度 (Sharpness)”是一个主观感受。在科学上，我们用分辨率 (Resolution) 和 反差传递 (Contrast Transfer) 来量化它。 胶片作为一个光学系统，其清晰度受限于光在乳剂中的散射（光渗）和显影时的化学扩散。本章将介绍描述这一特性的调制传递函数 (MTF)，并探讨一种神奇的化学现象——邻接效应，它是胶片“自带锐化”的">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-10-06T02:00:00.000Z">
+<meta property="article:modified_time" content="2025-11-21T11:53:56.685Z">
+<meta property="article:author" content="strtus">
+<meta property="article:tag" content="胶片理论">
+<meta property="article:tag" content="MTF">
+<meta property="article:tag" content="清晰度">
+<meta property="article:tag" content="邻接效应">
+<meta name="twitter:card" content="summary_large_image">
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/highlight.css" media="none" >
+        
+            <link rel="stylesheet" id="hl-dark-theme" href="/css/highlight/highlight.dark.css" media="none">
+        
+    
+
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/style/dark.css">
+
+    
+<script src="/js/darkmode.js"></script>
+
+
+
+     
+
+    <!-- custom head -->
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+    <body>
+        <div id="app" tabindex="-1">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">Strtus&#39;s Journey</span>
+        </a>
+    </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">首页</a>
+                
+                    <a href="/about.html" class="navbar-menu button">About</a>
+                
+                    <a href="/categories/" class="navbar-menu button">分类</a>
+                
+                    <a href="/tags/" class="navbar-menu button">标签</a>
+                
+                    <a href="/archives/" class="navbar-menu button">归档</a>
+                
+            </div>
+        
+        
+        
+    <a href="/search/" id="btn-search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="24" height="24" fill="currentColor" stroke="currentColor" stroke-width="32"><path d="M192 448c0-141.152 114.848-256 256-256s256 114.848 256 256-114.848 256-256 256-256-114.848-256-256z m710.624 409.376l-206.88-206.88A318.784 318.784 0 0 0 768 448c0-176.736-143.264-320-320-320S128 271.264 128 448s143.264 320 320 320a318.784 318.784 0 0 0 202.496-72.256l206.88 206.88 45.248-45.248z"></path></svg>
+    </a>
+
+
+        
+        
+    <a href="javaScript:void(0);" id="btn-toggle-dark">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </a>
+
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">首页</a>
+                
+                    <a href="/about.html" class="dropdown-menu button">About</a>
+                
+                    <a href="/categories/" class="dropdown-menu button">分类</a>
+                
+                    <a href="/tags/" class="dropdown-menu button">标签</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">归档</a>
+                
+            </div>
+        
+    </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        胶片理论Vol.6 图像清晰度评价：调制传递函数(MTF)与邻苯二酚效应
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2025/10/" class="post-meta__date button">2025-10-06</a>
+        
+    <span class="separate-dot"></span><a href="/categories/%E8%83%B6%E7%89%87%E6%91%84%E5%BD%B1%E7%90%86%E8%AE%BA/" class="button">胶片摄影理论</a>
+
+ 
+        
+    
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+    <aside class="post-side">
+        <div class="post-side__toc">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B0%83%E5%88%B6%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0-MTF"><span class="toc-number">2.</span> <span class="toc-text">调制传递函数 (MTF)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5%E5%9B%9E%E9%A1%BE"><span class="toc-number">2.1.</span> <span class="toc-text">概念回顾</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%83%B6%E7%89%87-MTF-%E7%9A%84%E6%88%90%E5%9B%A0"><span class="toc-number">2.2.</span> <span class="toc-text">胶片 MTF 的成因</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%82%BB%E6%8E%A5%E6%95%88%E5%BA%94-Adjacency-Effects-%E8%BE%B9%E7%BC%98%E6%95%88%E5%BA%94"><span class="toc-number">3.</span> <span class="toc-text">邻接效应 (Adjacency Effects) &#x2F; 边缘效应</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%BA%E7%90%86%EF%BC%9A%E6%98%BE%E5%BD%B1%E5%89%82%E7%9A%84%E5%BE%AE%E8%A7%82%E6%89%A9%E6%95%A3"><span class="toc-number">3.1.</span> <span class="toc-text">机理：显影剂的微观扩散</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E6%9E%9C%EF%BC%9A%E8%BE%B9%E7%BC%98%E5%A2%9E%E5%BC%BA"><span class="toc-number">3.2.</span> <span class="toc-text">结果：边缘增强</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%82%BB%E8%8B%AF%E4%BA%8C%E9%85%9A-Pyrocatechol-%E4%B8%8E%E6%9F%93%E8%89%B2%E6%98%BE%E5%BD%B1"><span class="toc-number">3.3.</span> <span class="toc-text">邻苯二酚 (Pyrocatechol) 与染色显影</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E7%BA%A7-MTF"><span class="toc-number">4.</span> <span class="toc-text">系统级 MTF</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a></li></ol>
+        </div>
+    </aside>
+    <a class="btn-toc button" id="btn-toc" tabindex="0">
+        <svg viewBox="0 0 1024 1024" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M128 256h64V192H128zM320 256h576V192H320zM128 544h64v-64H128zM320 544h576v-64H320zM128 832h64v-64H128zM320 832h576v-64H320z" fill="currentColor"></path>
+        </svg>
+    </a>
+    <div class="toc-menus" id="toc-menus">
+        <div class="toc-title">Article Directory</div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B0%83%E5%88%B6%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0-MTF"><span class="toc-number">2.</span> <span class="toc-text">调制传递函数 (MTF)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5%E5%9B%9E%E9%A1%BE"><span class="toc-number">2.1.</span> <span class="toc-text">概念回顾</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%83%B6%E7%89%87-MTF-%E7%9A%84%E6%88%90%E5%9B%A0"><span class="toc-number">2.2.</span> <span class="toc-text">胶片 MTF 的成因</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%82%BB%E6%8E%A5%E6%95%88%E5%BA%94-Adjacency-Effects-%E8%BE%B9%E7%BC%98%E6%95%88%E5%BA%94"><span class="toc-number">3.</span> <span class="toc-text">邻接效应 (Adjacency Effects) &#x2F; 边缘效应</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%BA%E7%90%86%EF%BC%9A%E6%98%BE%E5%BD%B1%E5%89%82%E7%9A%84%E5%BE%AE%E8%A7%82%E6%89%A9%E6%95%A3"><span class="toc-number">3.1.</span> <span class="toc-text">机理：显影剂的微观扩散</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E6%9E%9C%EF%BC%9A%E8%BE%B9%E7%BC%98%E5%A2%9E%E5%BC%BA"><span class="toc-number">3.2.</span> <span class="toc-text">结果：边缘增强</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%82%BB%E8%8B%AF%E4%BA%8C%E9%85%9A-Pyrocatechol-%E4%B8%8E%E6%9F%93%E8%89%B2%E6%98%BE%E5%BD%B1"><span class="toc-number">3.3.</span> <span class="toc-text">邻苯二酚 (Pyrocatechol) 与染色显影</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E7%BA%A7-MTF"><span class="toc-number">4.</span> <span class="toc-text">系统级 MTF</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a></li></ol>
+    </div>
+
+
+<article class="post post__with-toc content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>“这张照片很锐！”——摄影师常这样评价。但“锐度 (Sharpness)”是一个主观感受。在科学上，我们用<strong>分辨率 (Resolution)</strong> 和 <strong>反差传递 (Contrast Transfer)</strong> 来量化它。</p>
+<p>胶片作为一个光学系统，其清晰度受限于光在乳剂中的散射（光渗）和显影时的化学扩散。本章将介绍描述这一特性的<strong>调制传递函数 (MTF)</strong>，并探讨一种神奇的化学现象——<strong>邻接效应</strong>，它是胶片“自带锐化”的秘密。</p>
+<hr>
+<h2 id="调制传递函数-MTF"><a href="#调制传递函数-MTF" class="headerlink" title="调制传递函数 (MTF)"></a>调制传递函数 (MTF)</h2><h3 id="概念回顾"><a href="#概念回顾" class="headerlink" title="概念回顾"></a>概念回顾</h3><p>在《胶片成像质量评价标准》一文中，我们简要介绍了 MTF。MTF 描述了系统对不同空间频率的正弦波信号的对比度传递能力。</p>
+<script type="math/tex; mode=display">
+MTF(\nu) = \frac{M_{out}(\nu)}{M_{in}(\nu)}</script><p>其中 $\nu$ 是空间频率（线对/毫米, lp/mm）。</p>
+<h3 id="胶片-MTF-的成因"><a href="#胶片-MTF-的成因" class="headerlink" title="胶片 MTF 的成因"></a>胶片 MTF 的成因</h3><p>胶片的 MTF 曲线通常随频率增加而下降。主要原因：</p>
+<ol>
+<li><strong>光渗 (Light Scattering)</strong>：光线射入乳剂层后，会被卤化银晶体散射。一个理想的点光源在胶片上会形成一个扩散的光斑（点扩散函数 PSF）。频率越高（细节越密），散射光越容易相互干扰，导致对比度下降。</li>
+<li><strong>光晕 (Halation)</strong>：光线穿过乳剂在片基背面反射，造成大范围的模糊（低频反差下降）。</li>
+</ol>
+<hr>
+<h2 id="邻接效应-Adjacency-Effects-边缘效应"><a href="#邻接效应-Adjacency-Effects-边缘效应" class="headerlink" title="邻接效应 (Adjacency Effects) / 边缘效应"></a>邻接效应 (Adjacency Effects) / 边缘效应</h2><p>在某些情况下，胶片的 MTF 值可以<strong>超过 100%</strong>（即 $MTF &gt; 1.0$）。这意味着输出的反差比输入还高！这在物理光学系统中是不可能的（透镜 MTF 永远 $\le 1$），但在化学系统中是可能的。</p>
+<p>这就是<strong>邻接效应</strong>，也称为<strong>埃伯哈德效应 (Eberhard Effect)</strong> 或 <strong>麦基线 (Mackie Lines)</strong>。</p>
+<h3 id="机理：显影剂的微观扩散"><a href="#机理：显影剂的微观扩散" class="headerlink" title="机理：显影剂的微观扩散"></a>机理：显影剂的微观扩散</h3><p>假设底片上有一个高密度区（强光）紧邻一个低密度区（弱光）。</p>
+<ol>
+<li><strong>高密度区</strong>：显影反应剧烈，消耗大量显影剂，产生大量抑制剂（如溴化物）。</li>
+<li><strong>低密度区</strong>：显影反应微弱，显影剂浓度高，抑制剂少。</li>
+<li><strong>扩散</strong>：<ul>
+<li><strong>新鲜显影剂</strong>从低密度区扩散到高密度区的边缘 $\rightarrow$ 导致边缘显影过度（密度更高）。</li>
+<li><strong>抑制剂</strong>从高密度区扩散到低密度区的边缘 $\rightarrow$ 导致边缘显影受到抑制（密度更低）。</li>
+</ul>
+</li>
+</ol>
+<h3 id="结果：边缘增强"><a href="#结果：边缘增强" class="headerlink" title="结果：边缘增强"></a>结果：边缘增强</h3><p>这种交互扩散导致在明暗交界处形成了一道“亮边”和一道“黑边”。这在视觉上极大地增强了边缘的反差，产生了极高的<strong>锐度感 (Acutance)</strong>。</p>
+<h3 id="邻苯二酚-Pyrocatechol-与染色显影"><a href="#邻苯二酚-Pyrocatechol-与染色显影" class="headerlink" title="邻苯二酚 (Pyrocatechol) 与染色显影"></a>邻苯二酚 (Pyrocatechol) 与染色显影</h3><p>某些显影剂（如邻苯二酚、连苯三酚）具有显著的<strong>鞣制 (Tanning)</strong> 作用。它们在还原银的同时，会使周围的明胶硬化。硬化的明胶阻碍了化学物质的扩散，从而将邻接效应局限在极窄的边缘范围内，产生极其锐利的线条。这就是为什么《暗房理论》中推崇染色显影液的原因。</p>
+<hr>
+<h2 id="系统级-MTF"><a href="#系统级-MTF" class="headerlink" title="系统级 MTF"></a>系统级 MTF</h2><p>摄影系统的总 MTF 是各环节 MTF 的乘积：</p>
+<script type="math/tex; mode=display">
+MTF_{sys} = MTF_{lens} \times MTF_{film} \times MTF_{motion} \times \dots</script><ul>
+<li><strong>短板效应</strong>：系统的最终分辨率受限于最差的那个环节。</li>
+<li><strong>胶片 vs 数码</strong>：数码传感器的 MTF 受限于像素孔径（Sinc 函数）和低通滤镜，通常在奈奎斯特频率处截断。而胶片的 MTF 延伸得更远，虽然反差很低，但保留了极高频的纹理信息，这赋予了胶片独特的“有机”质感。</li>
+</ul>
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>MTF 是评价清晰度的客观标尺，而邻接效应则是胶片摄影师手中的“化学锐化滤镜”。通过选择合适的显影液（如高锐度配方 Rodinal 或 PMK），我们可以人为地提升胶片的 MTF 响应。</p>
+<p>至此，我们讨论的都是黑白胶片。世界是彩色的，彩色胶片是如何在一个平面上记录色彩的？下一章，我们将揭开<strong>彩色胶片多层乳剂与染料云</strong>的奥秘。</p>
+
+    </div>
+     
+    <div class="post-footer__meta"><p>updated at 2025-11-21</p></div> 
+    <div class="post-entry__tags"><a href="/tags/%E8%83%B6%E7%89%87%E7%90%86%E8%AE%BA/" class="post-tags__link button"># 胶片理论</a><a href="/tags/MTF/" class="post-tags__link button"># MTF</a><a href="/tags/%E6%B8%85%E6%99%B0%E5%BA%A6/" class="post-tags__link button"># 清晰度</a><a href="/tags/%E9%82%BB%E6%8E%A5%E6%95%88%E5%BA%94/" class="post-tags__link button"># 邻接效应</a></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
+            
+                <a href="/2025/10/07/%E8%83%B6%E7%89%87%E7%90%86%E8%AE%BAVol.7-%E5%BD%A9%E8%89%B2%E8%83%B6%E7%89%87%E5%8E%9F%E7%90%86%EF%BC%9A%E5%A4%9A%E5%B1%82%E4%B9%B3%E5%89%82%E4%B8%8E%E6%9F%93%E6%96%99%E4%BA%91/" class="nav__link">
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
+                    </div>
+                    <div>
+                        <div class="nav__label">
+                            Previous Post
+                        </div>
+                        <div class="nav__title">
+                            胶片理论Vol.7 彩色胶片原理：多层乳剂与染料云
+                        </div>
+                    </div>
+                </a>
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="/2025/10/05/%E8%83%B6%E7%89%87%E7%90%86%E8%AE%BAVol.5-%E5%9B%BE%E5%83%8F%E7%BB%93%E6%9E%84%E8%AF%84%E4%BB%B7%EF%BC%9A%E9%A2%97%E7%B2%92%E5%BA%A6(RMS)%E4%B8%8E%E7%BB%B4%E7%BA%B3%E9%A2%91%E8%B0%B1/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            Next Post
+                        </div>
+                        <div class="nav__title">
+                            胶片理论Vol.5 图像结构评价：颗粒度(RMS)与维纳频谱
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
+        </div>
+    </div>
+
+
+
+
+
+</main>
+
+            <footer class="footer">
+     
+    <a href="#" class="button" id="b2t" aria-label="Back to Top" title="Back to Top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M233.376 722.752L278.624 768 512 534.624 745.376 768l45.248-45.248L512 444.128zM192 352h640V288H192z" fill="currentColor"></path>
+        </svg>
+    </a>
+
+    
+
+
+    
+     
+ 
+
+ 
+    
+        
+        <p class="footer-copyright">
+            Strtus's Journry
+        </p>
+    
+    
+        
+            
+        
+            
+        
+            <p>保持对世界的输出🙌</p>
+
+        
+    
+</footer>
+
+        </div>
+         
+
+ 
+    <script>
+        window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+        ga('create', 'G-5ERPC280ZB', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+ 
+
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5ERPC280ZB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-5ERPC280ZB');
+    </script>
+ 
+
+ 
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement('script');
+            hm.src = 'https://hm.baidu.com/hm.js?8da6411546e903e478a9d82d2a4d0c60';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+    
+ 
+
+
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.css">
+
+    
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.js"></script>
+
+    <script>
+        let lazyloadT = Boolean('false'),
+            auto_fancybox = Boolean('true')
+        if (auto_fancybox) {
+            $(".post__content").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        } else {
+            $(".post__content").find("fancybox").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        }
+    </script>
+ 
+
+
+    <script>
+        if (typeof MathJax === 'undefined') {
+            window.MathJax = {
+                loader: {
+                    source: {
+                        '[tex]/amsCd': '[tex]/amscd',
+                        '[tex]/AMScd': '[tex]/amscd'
+                    }
+                },
+                tex: {
+                    inlineMath: {'[+]': [['$', '$']]},
+                    tags: 'ams'
+                },
+                options: {
+                    renderActions: {
+                        findScript: [10, doc => {
+                            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                                const display = !!node.type.match(/; *mode=display/);
+                                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                                const text = document.createTextNode('');
+                                node.parentNode.replaceChild(text, node);
+                                math.start = {node: text, delim: '', n: 0};
+                                math.end = {node: text, delim: '', n: 0};
+                                doc.math.push(math);
+                            });
+                        }, '', false],
+                        insertedScript: [200, () => {
+                            document.querySelectorAll('mjx-container').forEach(node => {
+                                let target = node.parentNode;
+                                if (target.nodeName.toLowerCase() === 'li') {
+                                    target.parentNode.classList.add('has-jax');
+                                }
+                            });
+                        }, '', false]
+                    }
+                }
+            };
+            (function () {
+                var script = document.createElement('script');
+                script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js";
+                script.defer = true;
+                document.head.appendChild(script);
+            })();
+        } else {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+        }
+    </script>
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+
+    </body>
+</html>

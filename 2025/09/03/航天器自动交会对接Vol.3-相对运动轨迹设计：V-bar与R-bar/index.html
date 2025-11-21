@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--icon-->
+
+    
+        <link rel="shortcut icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="16x16" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="32x32" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon-96x96.png">
+    
+    
+        <link rel="apple-touch-icon" sizes="180x180" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/web-app-manifest-192x192.png">
+    
+    
+        <link rel="mask-icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/apple-touch-icon.png">
+    
+
+
+    <!-- meta -->
+
+
+<title>航天器自动交会对接Vol.3 相对运动轨迹设计：V-bar与R-bar | Strtus&#39;s Journey</title>
+
+
+    <meta name="keywords" content="自动交会对接, 轨迹规划, V-bar, R-bar">
+
+
+
+
+    <!-- OpenGraph -->
+ 
+    <meta name="description" content="引言在 Vol.2 中，我们推导了 HCW 方程，揭示了相对运动的动力学特性。本章将利用 HCW 方程的解析解，探讨几种经典的近距离接近策略：V-bar 接近、R-bar 接近以及足球轨道 (Football Orbit)。 这些策略不仅是数学上的解，更是工程实践中为了保证安全性（Safety）和可观测性（Observability）而精心设计的。  HCW 方程的解析解对于无控运动（$f&#x3D;0$）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="航天器自动交会对接Vol.3 相对运动轨迹设计：V-bar与R-bar">
+<meta property="og:url" content="https://strtus.github.io/2025/09/03/%E8%88%AA%E5%A4%A9%E5%99%A8%E8%87%AA%E5%8A%A8%E4%BA%A4%E4%BC%9A%E5%AF%B9%E6%8E%A5Vol.3-%E7%9B%B8%E5%AF%B9%E8%BF%90%E5%8A%A8%E8%BD%A8%E8%BF%B9%E8%AE%BE%E8%AE%A1%EF%BC%9AV-bar%E4%B8%8ER-bar/index.html">
+<meta property="og:site_name" content="Strtus&#39;s Journey">
+<meta property="og:description" content="引言在 Vol.2 中，我们推导了 HCW 方程，揭示了相对运动的动力学特性。本章将利用 HCW 方程的解析解，探讨几种经典的近距离接近策略：V-bar 接近、R-bar 接近以及足球轨道 (Football Orbit)。 这些策略不仅是数学上的解，更是工程实践中为了保证安全性（Safety）和可观测性（Observability）而精心设计的。  HCW 方程的解析解对于无控运动（$f&#x3D;0$）">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-09-03T02:00:00.000Z">
+<meta property="article:modified_time" content="2025-11-21T11:48:11.106Z">
+<meta property="article:author" content="strtus">
+<meta property="article:tag" content="自动交会对接">
+<meta property="article:tag" content="轨迹规划">
+<meta property="article:tag" content="V-bar">
+<meta property="article:tag" content="R-bar">
+<meta name="twitter:card" content="summary_large_image">
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/highlight.css" media="none" >
+        
+            <link rel="stylesheet" id="hl-dark-theme" href="/css/highlight/highlight.dark.css" media="none">
+        
+    
+
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/style/dark.css">
+
+    
+<script src="/js/darkmode.js"></script>
+
+
+
+     
+
+    <!-- custom head -->
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+    <body>
+        <div id="app" tabindex="-1">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">Strtus&#39;s Journey</span>
+        </a>
+    </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">首页</a>
+                
+                    <a href="/about.html" class="navbar-menu button">About</a>
+                
+                    <a href="/categories/" class="navbar-menu button">分类</a>
+                
+                    <a href="/tags/" class="navbar-menu button">标签</a>
+                
+                    <a href="/archives/" class="navbar-menu button">归档</a>
+                
+            </div>
+        
+        
+        
+    <a href="/search/" id="btn-search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="24" height="24" fill="currentColor" stroke="currentColor" stroke-width="32"><path d="M192 448c0-141.152 114.848-256 256-256s256 114.848 256 256-114.848 256-256 256-256-114.848-256-256z m710.624 409.376l-206.88-206.88A318.784 318.784 0 0 0 768 448c0-176.736-143.264-320-320-320S128 271.264 128 448s143.264 320 320 320a318.784 318.784 0 0 0 202.496-72.256l206.88 206.88 45.248-45.248z"></path></svg>
+    </a>
+
+
+        
+        
+    <a href="javaScript:void(0);" id="btn-toggle-dark">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </a>
+
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">首页</a>
+                
+                    <a href="/about.html" class="dropdown-menu button">About</a>
+                
+                    <a href="/categories/" class="dropdown-menu button">分类</a>
+                
+                    <a href="/tags/" class="dropdown-menu button">标签</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">归档</a>
+                
+            </div>
+        
+    </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        航天器自动交会对接Vol.3 相对运动轨迹设计：V-bar与R-bar
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2025/09/" class="post-meta__date button">2025-09-03</a>
+        
+    <span class="separate-dot"></span><a href="/categories/%E8%88%AA%E5%A4%A9%E5%99%A8%E8%87%AA%E5%8A%A8%E4%BA%A4%E4%BC%9A%E5%AF%B9%E6%8E%A5%E7%90%86%E8%AE%BA/" class="button">航天器自动交会对接理论</a>
+
+ 
+        
+    
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+    <aside class="post-side">
+        <div class="post-side__toc">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HCW-%E6%96%B9%E7%A8%8B%E7%9A%84%E8%A7%A3%E6%9E%90%E8%A7%A3"><span class="toc-number">2.</span> <span class="toc-text">HCW 方程的解析解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#V-bar-%E6%8E%A5%E8%BF%91-V-bar-Approach"><span class="toc-number">3.</span> <span class="toc-text">V-bar 接近 (V-bar Approach)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A8%E5%8A%9B%E5%AD%A6%E6%9D%A1%E4%BB%B6"><span class="toc-number">3.1.</span> <span class="toc-text">动力学条件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E6%96%BD%E7%AD%96%E7%95%A5"><span class="toc-number">3.2.</span> <span class="toc-text">实施策略</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#R-bar-%E6%8E%A5%E8%BF%91-R-bar-Approach"><span class="toc-number">4.</span> <span class="toc-text">R-bar 接近 (R-bar Approach)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A8%E5%8A%9B%E5%AD%A6%E7%89%B9%E6%80%A7"><span class="toc-number">4.1.</span> <span class="toc-text">动力学特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E6%96%BD%E7%AD%96%E7%95%A5-1"><span class="toc-number">4.2.</span> <span class="toc-text">实施策略</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B6%B3%E7%90%83%E8%BD%A8%E9%81%93-Football-Orbit-%E7%9B%B8%E5%AF%B9%E7%BB%95%E9%A3%9E"><span class="toc-number">5.</span> <span class="toc-text">足球轨道 (Football Orbit) &#x2F; 相对绕飞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">6.</span> <span class="toc-text">总结</span></a></li></ol>
+        </div>
+    </aside>
+    <a class="btn-toc button" id="btn-toc" tabindex="0">
+        <svg viewBox="0 0 1024 1024" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M128 256h64V192H128zM320 256h576V192H320zM128 544h64v-64H128zM320 544h576v-64H320zM128 832h64v-64H128zM320 832h576v-64H320z" fill="currentColor"></path>
+        </svg>
+    </a>
+    <div class="toc-menus" id="toc-menus">
+        <div class="toc-title">Article Directory</div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HCW-%E6%96%B9%E7%A8%8B%E7%9A%84%E8%A7%A3%E6%9E%90%E8%A7%A3"><span class="toc-number">2.</span> <span class="toc-text">HCW 方程的解析解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#V-bar-%E6%8E%A5%E8%BF%91-V-bar-Approach"><span class="toc-number">3.</span> <span class="toc-text">V-bar 接近 (V-bar Approach)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A8%E5%8A%9B%E5%AD%A6%E6%9D%A1%E4%BB%B6"><span class="toc-number">3.1.</span> <span class="toc-text">动力学条件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E6%96%BD%E7%AD%96%E7%95%A5"><span class="toc-number">3.2.</span> <span class="toc-text">实施策略</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#R-bar-%E6%8E%A5%E8%BF%91-R-bar-Approach"><span class="toc-number">4.</span> <span class="toc-text">R-bar 接近 (R-bar Approach)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A8%E5%8A%9B%E5%AD%A6%E7%89%B9%E6%80%A7"><span class="toc-number">4.1.</span> <span class="toc-text">动力学特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E6%96%BD%E7%AD%96%E7%95%A5-1"><span class="toc-number">4.2.</span> <span class="toc-text">实施策略</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B6%B3%E7%90%83%E8%BD%A8%E9%81%93-Football-Orbit-%E7%9B%B8%E5%AF%B9%E7%BB%95%E9%A3%9E"><span class="toc-number">5.</span> <span class="toc-text">足球轨道 (Football Orbit) &#x2F; 相对绕飞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">6.</span> <span class="toc-text">总结</span></a></li></ol>
+    </div>
+
+
+<article class="post post__with-toc content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>在 Vol.2 中，我们推导了 HCW 方程，揭示了相对运动的动力学特性。本章将利用 HCW 方程的解析解，探讨几种经典的近距离接近策略：<strong>V-bar 接近</strong>、<strong>R-bar 接近</strong>以及<strong>足球轨道 (Football Orbit)</strong>。</p>
+<p>这些策略不仅是数学上的解，更是工程实践中为了保证安全性（Safety）和可观测性（Observability）而精心设计的。</p>
+<hr>
+<h2 id="HCW-方程的解析解"><a href="#HCW-方程的解析解" class="headerlink" title="HCW 方程的解析解"></a>HCW 方程的解析解</h2><p>对于无控运动（$f=0$），HCW 方程的通解为：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+x(t) &= (4-3\cos nt)x_0 + \frac{\sin nt}{n}\dot{x}_0 + \frac{2}{n}(1-\cos nt)\dot{y}_0 \\
+y(t) &= 6(\sin nt - nt)x_0 + y_0 + \frac{2}{n}(\cos nt - 1)\dot{x}_0 + \frac{4\sin nt - 3nt}{n}\dot{y}_0 \\
+z(t) &= z_0 \cos nt + \frac{\dot{z}_0}{n} \sin nt
+\end{aligned}</script><p>这个解看起来很复杂，但我们可以通过选择特殊的初始条件 $(x_0, y_0, \dot{x}_0, \dot{y}_0)$ 来设计出特殊的轨迹。</p>
+<hr>
+<h2 id="V-bar-接近-V-bar-Approach"><a href="#V-bar-接近-V-bar-Approach" class="headerlink" title="V-bar 接近 (V-bar Approach)"></a>V-bar 接近 (V-bar Approach)</h2><p><strong>V-bar</strong> 指的是 LVLH 坐标系的 $y$ 轴（速度矢量方向）。
+V-bar 接近是指追踪器沿目标器的速度方向（通常是从后方）直线接近。</p>
+<h3 id="动力学条件"><a href="#动力学条件" class="headerlink" title="动力学条件"></a>动力学条件</h3><p>要在 $x$ 轴方向保持静止（$x(t) \equiv 0$），必须满足：</p>
+<script type="math/tex; mode=display">
+x_0 = 0, \quad \dot{x}_0 = 0, \quad \dot{y}_0 = 0</script><p>代入通解，得到：</p>
+<script type="math/tex; mode=display">
+x(t) = 0, \quad y(t) = y_0</script><p>这说明：<strong>在圆轨道上，只要追踪器和目标器在同一轨道上（$x=0$）且切向速度相同，它们就能保持相对静止。</strong></p>
+<h3 id="实施策略"><a href="#实施策略" class="headerlink" title="实施策略"></a>实施策略</h3><p>追踪器在 V-bar 轴上施加微小的推力，使其获得一个向前的漂移速度。</p>
+<ul>
+<li><strong>优点</strong>：直观，易于控制。</li>
+<li><strong>缺点</strong>：<strong>安全性差</strong>。如果制动发动机故障，追踪器会直接撞向目标器（因为在同一轨道上）。此外，尾焰可能会污染目标器的光学敏感器。</li>
+</ul>
+<hr>
+<h2 id="R-bar-接近-R-bar-Approach"><a href="#R-bar-接近-R-bar-Approach" class="headerlink" title="R-bar 接近 (R-bar Approach)"></a>R-bar 接近 (R-bar Approach)</h2><p><strong>R-bar</strong> 指的是 LVLH 坐标系的 $x$ 轴（径向，地心方向）。
+R-bar 接近是指追踪器从目标器的正下方（或正上方），沿径向向上（或向下）接近。</p>
+<h3 id="动力学特性"><a href="#动力学特性" class="headerlink" title="动力学特性"></a>动力学特性</h3><p>如果我们希望追踪器沿 $x$ 轴直线运动（$y(t) \equiv 0$），这在无控状态下是<strong>不可能</strong>的。
+由 HCW 方程 $\ddot{y} + 2n\dot{x} = 0$ 可知，只要有径向速度 $\dot{x}$，就会产生切向加速度（科里奥利力），导致追踪器偏离 R-bar。</p>
+<h3 id="实施策略-1"><a href="#实施策略-1" class="headerlink" title="实施策略"></a>实施策略</h3><p>为了维持在 R-bar 上，追踪器必须不断施加切向推力来抵消科里奥利力。</p>
+<ul>
+<li><strong>自然制动效应</strong>：如果发动机故障，推力停止，科里奥利力会使追踪器偏离 R-bar，并落后于目标器（如果从下方接近）。这种<strong>被动安全性 (Passive Safety)</strong> 是 R-bar 接近最大的优势。</li>
+<li><strong>应用</strong>：航天飞机 (Space Shuttle) 和 国际空间站 (ISS) 的对接通常采用 R-bar 接近。</li>
+</ul>
+<hr>
+<h2 id="足球轨道-Football-Orbit-相对绕飞"><a href="#足球轨道-Football-Orbit-相对绕飞" class="headerlink" title="足球轨道 (Football Orbit) / 相对绕飞"></a>足球轨道 (Football Orbit) / 相对绕飞</h2><p>如果我们要让追踪器在目标器附近待机（Hold），而不是立即对接，我们可以设计一个<strong>相对绕飞轨道</strong>。
+在 HCW 解中，消除长期漂移项（即 $t$ 的系数为 0），需满足初始条件：</p>
+<script type="math/tex; mode=display">
+\dot{y}_0 = -2n x_0</script><p>此时，相对运动轨迹变为一个椭圆：</p>
+<script type="math/tex; mode=display">
+\frac{x^2}{A_x^2} + \frac{(y-y_c)^2}{A_y^2} = 1</script><p>其中长轴 $A_y$ 是短轴 $A_x$ 的 2 倍（$2:1$ 椭圆）。
+因为形状像美式足球，所以被称为<strong>足球轨道</strong>。</p>
+<ul>
+<li><strong>应用</strong>：在对接前的最后检查阶段，追踪器通常会进入足球轨道，绕着目标器飞行，利用不同角度的传感器确认目标状态。</li>
+</ul>
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li><strong>V-bar</strong>：沿切向接近，控制简单，但安全性较低。</li>
+<li><strong>R-bar</strong>：沿径向接近，利用重力梯度实现被动安全，是现代空间站对接的首选策略。</li>
+<li><strong>足球轨道</strong>：用于待机和绕飞观测。</li>
+</ul>
+<p>这些轨迹的设计都基于圆轨道假设。如果目标器在椭圆轨道上，HCW 方程失效，上述策略需要修正。下一章，我们将介绍处理椭圆轨道相对运动的 <strong>Tschauner-Hempel (T-H) 方程</strong>。</p>
+
+    </div>
+     
+    <div class="post-footer__meta"><p>updated at 2025-11-21</p></div> 
+    <div class="post-entry__tags"><a href="/tags/%E8%87%AA%E5%8A%A8%E4%BA%A4%E4%BC%9A%E5%AF%B9%E6%8E%A5/" class="post-tags__link button"># 自动交会对接</a><a href="/tags/%E8%BD%A8%E8%BF%B9%E8%A7%84%E5%88%92/" class="post-tags__link button"># 轨迹规划</a><a href="/tags/V-bar/" class="post-tags__link button"># V-bar</a><a href="/tags/R-bar/" class="post-tags__link button"># R-bar</a></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
+            
+                <a href="/2025/09/03/%E5%A7%BF%E6%80%81%E5%8A%A8%E5%8A%9B%E5%AD%A6Vol.3-%E5%9B%9B%E5%85%83%E6%95%B0(Quaternion)%E4%BB%A3%E6%95%B0%E4%B8%8E%E5%A7%BF%E6%80%81%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B/" class="nav__link">
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
+                    </div>
+                    <div>
+                        <div class="nav__label">
+                            Previous Post
+                        </div>
+                        <div class="nav__title">
+                            姿态动力学Vol.3 四元数(Quaternion)代数与姿态微分方程
+                        </div>
+                    </div>
+                </a>
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="/2025/09/02/%E5%A7%BF%E6%80%81%E5%8A%A8%E5%8A%9B%E5%AD%A6Vol.2-%E6%AC%A7%E6%8B%89%E8%A7%92(Euler-Angles)%E4%BD%93%E7%B3%BB%E4%B8%8E%E4%B8%87%E5%90%91%E8%8A%82%E6%AD%BB%E9%94%81%E7%9A%84%E6%95%B0%E5%AD%A6%E6%9C%AC%E8%B4%A8/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            Next Post
+                        </div>
+                        <div class="nav__title">
+                            姿态动力学Vol.2 欧拉角(Euler Angles)体系与万向节死锁的数学本质
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
+        </div>
+    </div>
+
+
+
+
+
+</main>
+
+            <footer class="footer">
+     
+    <a href="#" class="button" id="b2t" aria-label="Back to Top" title="Back to Top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M233.376 722.752L278.624 768 512 534.624 745.376 768l45.248-45.248L512 444.128zM192 352h640V288H192z" fill="currentColor"></path>
+        </svg>
+    </a>
+
+    
+
+
+    
+     
+ 
+
+ 
+    
+        
+        <p class="footer-copyright">
+            Strtus's Journry
+        </p>
+    
+    
+        
+            
+        
+            
+        
+            <p>保持对世界的输出🙌</p>
+
+        
+    
+</footer>
+
+        </div>
+         
+
+ 
+    <script>
+        window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+        ga('create', 'G-5ERPC280ZB', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+ 
+
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5ERPC280ZB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-5ERPC280ZB');
+    </script>
+ 
+
+ 
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement('script');
+            hm.src = 'https://hm.baidu.com/hm.js?8da6411546e903e478a9d82d2a4d0c60';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+    
+ 
+
+
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.css">
+
+    
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.js"></script>
+
+    <script>
+        let lazyloadT = Boolean('false'),
+            auto_fancybox = Boolean('true')
+        if (auto_fancybox) {
+            $(".post__content").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        } else {
+            $(".post__content").find("fancybox").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        }
+    </script>
+ 
+
+
+    <script>
+        if (typeof MathJax === 'undefined') {
+            window.MathJax = {
+                loader: {
+                    source: {
+                        '[tex]/amsCd': '[tex]/amscd',
+                        '[tex]/AMScd': '[tex]/amscd'
+                    }
+                },
+                tex: {
+                    inlineMath: {'[+]': [['$', '$']]},
+                    tags: 'ams'
+                },
+                options: {
+                    renderActions: {
+                        findScript: [10, doc => {
+                            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                                const display = !!node.type.match(/; *mode=display/);
+                                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                                const text = document.createTextNode('');
+                                node.parentNode.replaceChild(text, node);
+                                math.start = {node: text, delim: '', n: 0};
+                                math.end = {node: text, delim: '', n: 0};
+                                doc.math.push(math);
+                            });
+                        }, '', false],
+                        insertedScript: [200, () => {
+                            document.querySelectorAll('mjx-container').forEach(node => {
+                                let target = node.parentNode;
+                                if (target.nodeName.toLowerCase() === 'li') {
+                                    target.parentNode.classList.add('has-jax');
+                                }
+                            });
+                        }, '', false]
+                    }
+                }
+            };
+            (function () {
+                var script = document.createElement('script');
+                script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js";
+                script.defer = true;
+                document.head.appendChild(script);
+            })();
+        } else {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+        }
+    </script>
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+
+    </body>
+</html>

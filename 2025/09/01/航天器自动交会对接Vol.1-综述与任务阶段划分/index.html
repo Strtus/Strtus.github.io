@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--icon-->
+
+    
+        <link rel="shortcut icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="16x16" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="32x32" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon-96x96.png">
+    
+    
+        <link rel="apple-touch-icon" sizes="180x180" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/web-app-manifest-192x192.png">
+    
+    
+        <link rel="mask-icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/apple-touch-icon.png">
+    
+
+
+    <!-- meta -->
+
+
+<title>航天器自动交会对接Vol.1 综述与任务阶段划分 | Strtus&#39;s Journey</title>
+
+
+    <meta name="keywords" content="GNC, 自动交会对接, 任务规划">
+
+
+
+
+    <!-- OpenGraph -->
+ 
+    <meta name="description" content="引言在之前的《轨道动力学》系列中，我们讨论了航天器如何在惯性空间中运行（二体问题、摄动理论）以及如何从一点转移到另一点（兰伯特问题）。然而，在空间站补给、在轨服务、登月任务等场景中，我们不仅要求航天器到达目标附近，还要求其与目标位置重合、速度同步，并最终实现机械连接。这就是空间交会对接 (Rendezvous and Docking, RVD) 技术。 RVD 被称为“万里穿针”，是航天技术中复杂">
+<meta property="og:type" content="article">
+<meta property="og:title" content="航天器自动交会对接Vol.1 综述与任务阶段划分">
+<meta property="og:url" content="https://strtus.github.io/2025/09/01/%E8%88%AA%E5%A4%A9%E5%99%A8%E8%87%AA%E5%8A%A8%E4%BA%A4%E4%BC%9A%E5%AF%B9%E6%8E%A5Vol.1-%E7%BB%BC%E8%BF%B0%E4%B8%8E%E4%BB%BB%E5%8A%A1%E9%98%B6%E6%AE%B5%E5%88%92%E5%88%86/index.html">
+<meta property="og:site_name" content="Strtus&#39;s Journey">
+<meta property="og:description" content="引言在之前的《轨道动力学》系列中，我们讨论了航天器如何在惯性空间中运行（二体问题、摄动理论）以及如何从一点转移到另一点（兰伯特问题）。然而，在空间站补给、在轨服务、登月任务等场景中，我们不仅要求航天器到达目标附近，还要求其与目标位置重合、速度同步，并最终实现机械连接。这就是空间交会对接 (Rendezvous and Docking, RVD) 技术。 RVD 被称为“万里穿针”，是航天技术中复杂">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-09-01T02:00:00.000Z">
+<meta property="article:modified_time" content="2025-11-21T11:48:06.966Z">
+<meta property="article:author" content="strtus">
+<meta property="article:tag" content="GNC">
+<meta property="article:tag" content="自动交会对接">
+<meta property="article:tag" content="任务规划">
+<meta name="twitter:card" content="summary_large_image">
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/highlight.css" media="none" >
+        
+            <link rel="stylesheet" id="hl-dark-theme" href="/css/highlight/highlight.dark.css" media="none">
+        
+    
+
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/style/dark.css">
+
+    
+<script src="/js/darkmode.js"></script>
+
+
+
+     
+
+    <!-- custom head -->
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+    <body>
+        <div id="app" tabindex="-1">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">Strtus&#39;s Journey</span>
+        </a>
+    </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">首页</a>
+                
+                    <a href="/about.html" class="navbar-menu button">About</a>
+                
+                    <a href="/categories/" class="navbar-menu button">分类</a>
+                
+                    <a href="/tags/" class="navbar-menu button">标签</a>
+                
+                    <a href="/archives/" class="navbar-menu button">归档</a>
+                
+            </div>
+        
+        
+        
+    <a href="/search/" id="btn-search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="24" height="24" fill="currentColor" stroke="currentColor" stroke-width="32"><path d="M192 448c0-141.152 114.848-256 256-256s256 114.848 256 256-114.848 256-256 256-256-114.848-256-256z m710.624 409.376l-206.88-206.88A318.784 318.784 0 0 0 768 448c0-176.736-143.264-320-320-320S128 271.264 128 448s143.264 320 320 320a318.784 318.784 0 0 0 202.496-72.256l206.88 206.88 45.248-45.248z"></path></svg>
+    </a>
+
+
+        
+        
+    <a href="javaScript:void(0);" id="btn-toggle-dark">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </a>
+
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">首页</a>
+                
+                    <a href="/about.html" class="dropdown-menu button">About</a>
+                
+                    <a href="/categories/" class="dropdown-menu button">分类</a>
+                
+                    <a href="/tags/" class="dropdown-menu button">标签</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">归档</a>
+                
+            </div>
+        
+    </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        航天器自动交会对接Vol.1 综述与任务阶段划分
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2025/09/" class="post-meta__date button">2025-09-01</a>
+        
+    <span class="separate-dot"></span><a href="/categories/%E8%88%AA%E5%A4%A9%E5%99%A8%E8%87%AA%E5%8A%A8%E4%BA%A4%E4%BC%9A%E5%AF%B9%E6%8E%A5%E7%90%86%E8%AE%BA/" class="button">航天器自动交会对接理论</a>
+
+ 
+        
+    
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+    <aside class="post-side">
+        <div class="post-side__toc">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E4%BA%A4%E4%BC%9A%E5%AF%B9%E6%8E%A5%EF%BC%9F"><span class="toc-number">2.</span> <span class="toc-text">什么是交会对接？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E9%98%B6%E6%AE%B5%E5%88%92%E5%88%86"><span class="toc-number">3.</span> <span class="toc-text">任务阶段划分</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%8F%91%E5%B0%84%E4%B8%8E%E5%85%A5%E8%BD%A8%E6%AE%B5-Launch-and-Injection"><span class="toc-number">3.1.</span> <span class="toc-text">1. 发射与入轨段 (Launch and Injection)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E8%BF%9C%E8%B7%9D%E7%A6%BB%E5%AF%BC%E5%BC%95%E6%AE%B5-Far-Range-Rendezvous-Phasing"><span class="toc-number">3.2.</span> <span class="toc-text">2. 远距离导引段 (Far-Range Rendezvous &#x2F; Phasing)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E8%BF%91%E8%B7%9D%E7%A6%BB%E5%AF%BC%E5%BC%95%E6%AE%B5-Close-Range-Rendezvous-Homing"><span class="toc-number">3.3.</span> <span class="toc-text">3. 近距离导引段 (Close-Range Rendezvous &#x2F; Homing)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E7%BB%88%E9%80%BC%E8%BF%91%E6%AE%B5-Final-Approach"><span class="toc-number">3.4.</span> <span class="toc-text">4. 终逼近段 (Final Approach)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E5%AF%B9%E6%8E%A5%E4%B8%8E%E9%94%81%E7%B4%A7%E6%AE%B5-Docking-and-Locking"><span class="toc-number">3.5.</span> <span class="toc-text">5. 对接与锁紧段 (Docking and Locking)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E6%A6%82%E8%A7%88"><span class="toc-number">4.</span> <span class="toc-text">知识体系概览</span></a></li></ol>
+        </div>
+    </aside>
+    <a class="btn-toc button" id="btn-toc" tabindex="0">
+        <svg viewBox="0 0 1024 1024" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M128 256h64V192H128zM320 256h576V192H320zM128 544h64v-64H128zM320 544h576v-64H320zM128 832h64v-64H128zM320 832h576v-64H320z" fill="currentColor"></path>
+        </svg>
+    </a>
+    <div class="toc-menus" id="toc-menus">
+        <div class="toc-title">Article Directory</div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E4%BA%A4%E4%BC%9A%E5%AF%B9%E6%8E%A5%EF%BC%9F"><span class="toc-number">2.</span> <span class="toc-text">什么是交会对接？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E9%98%B6%E6%AE%B5%E5%88%92%E5%88%86"><span class="toc-number">3.</span> <span class="toc-text">任务阶段划分</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%8F%91%E5%B0%84%E4%B8%8E%E5%85%A5%E8%BD%A8%E6%AE%B5-Launch-and-Injection"><span class="toc-number">3.1.</span> <span class="toc-text">1. 发射与入轨段 (Launch and Injection)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E8%BF%9C%E8%B7%9D%E7%A6%BB%E5%AF%BC%E5%BC%95%E6%AE%B5-Far-Range-Rendezvous-Phasing"><span class="toc-number">3.2.</span> <span class="toc-text">2. 远距离导引段 (Far-Range Rendezvous &#x2F; Phasing)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E8%BF%91%E8%B7%9D%E7%A6%BB%E5%AF%BC%E5%BC%95%E6%AE%B5-Close-Range-Rendezvous-Homing"><span class="toc-number">3.3.</span> <span class="toc-text">3. 近距离导引段 (Close-Range Rendezvous &#x2F; Homing)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E7%BB%88%E9%80%BC%E8%BF%91%E6%AE%B5-Final-Approach"><span class="toc-number">3.4.</span> <span class="toc-text">4. 终逼近段 (Final Approach)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E5%AF%B9%E6%8E%A5%E4%B8%8E%E9%94%81%E7%B4%A7%E6%AE%B5-Docking-and-Locking"><span class="toc-number">3.5.</span> <span class="toc-text">5. 对接与锁紧段 (Docking and Locking)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E6%A6%82%E8%A7%88"><span class="toc-number">4.</span> <span class="toc-text">知识体系概览</span></a></li></ol>
+    </div>
+
+
+<article class="post post__with-toc content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>在之前的《轨道动力学》系列中，我们讨论了航天器如何在惯性空间中运行（二体问题、摄动理论）以及如何从一点转移到另一点（兰伯特问题）。然而，在空间站补给、在轨服务、登月任务等场景中，我们不仅要求航天器到达目标附近，还要求其与目标<strong>位置重合、速度同步</strong>，并最终实现<strong>机械连接</strong>。这就是<strong>空间交会对接 (Rendezvous and Docking, RVD)</strong> 技术。</p>
+<p>RVD 被称为“万里穿针”，是航天技术中复杂度最高、风险最大的环节之一。本系列文章将建立在《轨道动力学》的基础上，深入探讨 RVD 的动力学模型、制导导航与控制 (GNC) 算法以及对接机构设计。</p>
+<hr>
+<h2 id="什么是交会对接？"><a href="#什么是交会对接？" class="headerlink" title="什么是交会对接？"></a>什么是交会对接？</h2><p><strong>交会 (Rendezvous)</strong> 是指两个航天器（追踪器 Chaser 和 目标器 Target）在预定的时刻、预定的位置，以预定的相对速度和姿态相遇的过程。
+<strong>对接 (Docking)</strong> 是指在交会完成后，两个航天器通过专门的机构在机械上连接成一个整体，并在电气、液路等方面实现连通的过程。
+<strong>停靠 (Berthing)</strong> 则是指追踪器被目标器（或空间站）上的机械臂捕获，并由机械臂辅助完成连接的过程（如 SpaceX Dragon 1 代）。</p>
+<hr>
+<h2 id="任务阶段划分"><a href="#任务阶段划分" class="headerlink" title="任务阶段划分"></a>任务阶段划分</h2><p>一个典型的 RVD 任务通常持续数天，可以划分为以下几个阶段：</p>
+<h3 id="1-发射与入轨段-Launch-and-Injection"><a href="#1-发射与入轨段-Launch-and-Injection" class="headerlink" title="1. 发射与入轨段 (Launch and Injection)"></a>1. 发射与入轨段 (Launch and Injection)</h3><p>追踪器发射入轨。为了节省燃料，追踪器通常进入一个比目标器轨道略低（周期更短）的<strong>相位调整轨道 (Phasing Orbit)</strong>。</p>
+<ul>
+<li><em>关联知识</em>：霍曼转移（轨道动力学 Vol.3）。</li>
+</ul>
+<h3 id="2-远距离导引段-Far-Range-Rendezvous-Phasing"><a href="#2-远距离导引段-Far-Range-Rendezvous-Phasing" class="headerlink" title="2. 远距离导引段 (Far-Range Rendezvous / Phasing)"></a>2. 远距离导引段 (Far-Range Rendezvous / Phasing)</h3><p><strong>范围</strong>：几千公里 $\to$ 几十公里。
+<strong>目标</strong>：消除初始的相位差。
+<strong>策略</strong>：利用轨道周期差（低轨快、高轨慢）进行追赶。通过多次变轨，使追踪器在预定时刻到达目标器后方或下方的特定点（如“艾梅点”）。</p>
+<ul>
+<li><em>动力学模型</em>：绝对轨道动力学（二体模型 + J2 摄动）。</li>
+</ul>
+<h3 id="3-近距离导引段-Close-Range-Rendezvous-Homing"><a href="#3-近距离导引段-Close-Range-Rendezvous-Homing" class="headerlink" title="3. 近距离导引段 (Close-Range Rendezvous / Homing)"></a>3. 近距离导引段 (Close-Range Rendezvous / Homing)</h3><p><strong>范围</strong>：几十公里 $\to$ 几百米。
+<strong>目标</strong>：建立相对导航，消除相对位置和速度偏差。
+<strong>策略</strong>：此时相对距离远小于轨道半径，可以使用<strong>相对运动动力学</strong>（如 HCW 方程）来描述。追踪器通常采用双脉冲或多脉冲机动，沿特定轨迹（如足球轨道 Football Orbit）接近目标。</p>
+<ul>
+<li><em>关键技术</em>：相对导航传感器（微波雷达、GPS差分）。</li>
+</ul>
+<h3 id="4-终逼近段-Final-Approach"><a href="#4-终逼近段-Final-Approach" class="headerlink" title="4. 终逼近段 (Final Approach)"></a>4. 终逼近段 (Final Approach)</h3><p><strong>范围</strong>：几百米 $\to$ 接触。
+<strong>目标</strong>：精细控制相对位置、速度和姿态，满足对接初始条件。
+<strong>策略</strong>：</p>
+<ul>
+<li><strong>R-bar 接近</strong>：沿地球半径方向（径向）由下向上接近。优点是重力梯度自然制动，安全性好。</li>
+<li><strong>V-bar 接近</strong>：沿速度矢量方向（切向）由后向前接近。</li>
+<li><em>控制方法</em>：直线导引律 (Glideslope)、人工势场法。</li>
+</ul>
+<h3 id="5-对接与锁紧段-Docking-and-Locking"><a href="#5-对接与锁紧段-Docking-and-Locking" class="headerlink" title="5. 对接与锁紧段 (Docking and Locking)"></a>5. 对接与锁紧段 (Docking and Locking)</h3><p><strong>范围</strong>：接触 $\to$ 刚性连接。
+<strong>目标</strong>：缓冲撞击能量，校正微小误差，实现密封。
+<strong>策略</strong>：依靠对接机构（如异体同构周边式 APAS）的机械柔顺性。</p>
+<hr>
+<h2 id="知识体系概览"><a href="#知识体系概览" class="headerlink" title="知识体系概览"></a>知识体系概览</h2><p>本系列将按照以下逻辑展开：</p>
+<ol>
+<li><strong>动力学</strong>：从惯性系下的二体运动（轨道动力学 Vol.1）转变为非惯性系下的<strong>相对运动</strong>（HCW 方程、T-H 方程）。</li>
+<li><strong>制导 (Guidance)</strong>：如何设计相对运动轨迹？（V-bar/R-bar, 脉冲制导, 连续推力）。</li>
+<li><strong>导航 (Navigation)</strong>：如何测量相对状态？（雷达, 视觉, 相对滤波）。</li>
+<li><strong>控制 (Control)</strong>：如何执行指令？（RCS 推力分配, 6-DOF 控制）。</li>
+<li><strong>机构 (Mechanism)</strong>：硬连接的物理实现。</li>
+</ol>
+<p>下一章，我们将推导描述相对运动最经典的数学模型——<strong>Hill-Clohessy-Wiltshire (HCW) 方程</strong>。</p>
+
+    </div>
+     
+    <div class="post-footer__meta"><p>updated at 2025-11-21</p></div> 
+    <div class="post-entry__tags"><a href="/tags/GNC/" class="post-tags__link button"># GNC</a><a href="/tags/%E8%87%AA%E5%8A%A8%E4%BA%A4%E4%BC%9A%E5%AF%B9%E6%8E%A5/" class="post-tags__link button"># 自动交会对接</a><a href="/tags/%E4%BB%BB%E5%8A%A1%E8%A7%84%E5%88%92/" class="post-tags__link button"># 任务规划</a></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
+            
+                <a href="/2025/09/01/%E5%A7%BF%E6%80%81%E5%8A%A8%E5%8A%9B%E5%AD%A6Vol.1-%E5%A7%BF%E6%80%81%E8%BF%90%E5%8A%A8%E5%AD%A6%E6%A0%B8%E5%BF%83%EF%BC%9A%E5%8F%82%E8%80%83%E7%B3%BB%E5%AE%9A%E4%B9%89%E4%B8%8E%E6%96%B9%E5%90%91%E4%BD%99%E5%BC%A6%E7%9F%A9%E9%98%B5(DCM)/" class="nav__link">
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
+                    </div>
+                    <div>
+                        <div class="nav__label">
+                            Previous Post
+                        </div>
+                        <div class="nav__title">
+                            姿态动力学Vol.1 姿态运动学核心：参考系定义与方向余弦矩阵(DCM)
+                        </div>
+                    </div>
+                </a>
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="/2025/08/30/%E8%BD%A8%E9%81%93%E5%8A%A8%E5%8A%9B%E5%AD%A6Vol.10-%E5%88%9D%E8%BD%A8%E7%A1%AE%E5%AE%9A%EF%BC%9A%E5%90%89%E5%B8%83%E6%96%AF(Gibbs)%E6%96%B9%E6%B3%95%E4%B8%8E%E9%AB%98%E6%96%AF(Gauss)%E6%96%B9%E6%B3%95/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            Next Post
+                        </div>
+                        <div class="nav__title">
+                            轨道动力学Vol.10 初轨确定：吉布斯(Gibbs)方法与高斯(Gauss)方法
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
+        </div>
+    </div>
+
+
+
+
+
+</main>
+
+            <footer class="footer">
+     
+    <a href="#" class="button" id="b2t" aria-label="Back to Top" title="Back to Top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M233.376 722.752L278.624 768 512 534.624 745.376 768l45.248-45.248L512 444.128zM192 352h640V288H192z" fill="currentColor"></path>
+        </svg>
+    </a>
+
+    
+
+
+    
+     
+ 
+
+ 
+    
+        
+        <p class="footer-copyright">
+            Strtus's Journry
+        </p>
+    
+    
+        
+            
+        
+            
+        
+            <p>保持对世界的输出🙌</p>
+
+        
+    
+</footer>
+
+        </div>
+         
+
+ 
+    <script>
+        window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+        ga('create', 'G-5ERPC280ZB', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+ 
+
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5ERPC280ZB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-5ERPC280ZB');
+    </script>
+ 
+
+ 
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement('script');
+            hm.src = 'https://hm.baidu.com/hm.js?8da6411546e903e478a9d82d2a4d0c60';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+    
+ 
+
+
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.css">
+
+    
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.js"></script>
+
+    <script>
+        let lazyloadT = Boolean('false'),
+            auto_fancybox = Boolean('true')
+        if (auto_fancybox) {
+            $(".post__content").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        } else {
+            $(".post__content").find("fancybox").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        }
+    </script>
+ 
+
+
+    <script>
+        if (typeof MathJax === 'undefined') {
+            window.MathJax = {
+                loader: {
+                    source: {
+                        '[tex]/amsCd': '[tex]/amscd',
+                        '[tex]/AMScd': '[tex]/amscd'
+                    }
+                },
+                tex: {
+                    inlineMath: {'[+]': [['$', '$']]},
+                    tags: 'ams'
+                },
+                options: {
+                    renderActions: {
+                        findScript: [10, doc => {
+                            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                                const display = !!node.type.match(/; *mode=display/);
+                                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                                const text = document.createTextNode('');
+                                node.parentNode.replaceChild(text, node);
+                                math.start = {node: text, delim: '', n: 0};
+                                math.end = {node: text, delim: '', n: 0};
+                                doc.math.push(math);
+                            });
+                        }, '', false],
+                        insertedScript: [200, () => {
+                            document.querySelectorAll('mjx-container').forEach(node => {
+                                let target = node.parentNode;
+                                if (target.nodeName.toLowerCase() === 'li') {
+                                    target.parentNode.classList.add('has-jax');
+                                }
+                            });
+                        }, '', false]
+                    }
+                }
+            };
+            (function () {
+                var script = document.createElement('script');
+                script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js";
+                script.defer = true;
+                document.head.appendChild(script);
+            })();
+        } else {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+        }
+    </script>
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+
+    </body>
+</html>

@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--icon-->
+
+    
+        <link rel="shortcut icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="16x16" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="32x32" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon-96x96.png">
+    
+    
+        <link rel="apple-touch-icon" sizes="180x180" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/web-app-manifest-192x192.png">
+    
+    
+        <link rel="mask-icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/apple-touch-icon.png">
+    
+
+
+    <!-- meta -->
+
+
+<title>胶片理论Vol.3 感光测定学(I)：特性曲线与反差控制模型 | Strtus&#39;s Journey</title>
+
+
+    <meta name="keywords" content="反差, 胶片理论, 感光测定, H&amp;D曲线">
+
+
+
+
+    <!-- OpenGraph -->
+ 
+    <meta name="description" content="引言在《暗房理论 Vol.5》中，我们初步接触了反差控制。本章将从感光测定学 (Sensitometry) 的专业角度，深入剖析胶片的“指纹”——特性曲线（H&amp;D 曲线），并建立反差控制的数学模型。 感光测定学是胶片摄影的定量基础，它由 Hurter 和 Driffield 于 19 世纪末创立，旨在回答一个问题：给胶片多少光，它能产生多黑的银？  特性曲线的数学描述特性曲线描述了对数曝光">
+<meta property="og:type" content="article">
+<meta property="og:title" content="胶片理论Vol.3 感光测定学(I)：特性曲线与反差控制模型">
+<meta property="og:url" content="https://strtus.github.io/2025/10/03/%E8%83%B6%E7%89%87%E7%90%86%E8%AE%BAVol.3-%E6%84%9F%E5%85%89%E6%B5%8B%E5%AE%9A%E5%AD%A6(I)%EF%BC%9A%E7%89%B9%E6%80%A7%E6%9B%B2%E7%BA%BF%E4%B8%8E%E5%8F%8D%E5%B7%AE%E6%8E%A7%E5%88%B6%E6%A8%A1%E5%9E%8B/index.html">
+<meta property="og:site_name" content="Strtus&#39;s Journey">
+<meta property="og:description" content="引言在《暗房理论 Vol.5》中，我们初步接触了反差控制。本章将从感光测定学 (Sensitometry) 的专业角度，深入剖析胶片的“指纹”——特性曲线（H&amp;D 曲线），并建立反差控制的数学模型。 感光测定学是胶片摄影的定量基础，它由 Hurter 和 Driffield 于 19 世纪末创立，旨在回答一个问题：给胶片多少光，它能产生多黑的银？  特性曲线的数学描述特性曲线描述了对数曝光">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-10-03T02:00:00.000Z">
+<meta property="article:modified_time" content="2025-11-21T11:53:50.426Z">
+<meta property="article:author" content="strtus">
+<meta property="article:tag" content="反差">
+<meta property="article:tag" content="胶片理论">
+<meta property="article:tag" content="感光测定">
+<meta property="article:tag" content="H&amp;D曲线">
+<meta name="twitter:card" content="summary_large_image">
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/highlight.css" media="none" >
+        
+            <link rel="stylesheet" id="hl-dark-theme" href="/css/highlight/highlight.dark.css" media="none">
+        
+    
+
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/style/dark.css">
+
+    
+<script src="/js/darkmode.js"></script>
+
+
+
+     
+
+    <!-- custom head -->
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+    <body>
+        <div id="app" tabindex="-1">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">Strtus&#39;s Journey</span>
+        </a>
+    </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">首页</a>
+                
+                    <a href="/about.html" class="navbar-menu button">About</a>
+                
+                    <a href="/categories/" class="navbar-menu button">分类</a>
+                
+                    <a href="/tags/" class="navbar-menu button">标签</a>
+                
+                    <a href="/archives/" class="navbar-menu button">归档</a>
+                
+            </div>
+        
+        
+        
+    <a href="/search/" id="btn-search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="24" height="24" fill="currentColor" stroke="currentColor" stroke-width="32"><path d="M192 448c0-141.152 114.848-256 256-256s256 114.848 256 256-114.848 256-256 256-256-114.848-256-256z m710.624 409.376l-206.88-206.88A318.784 318.784 0 0 0 768 448c0-176.736-143.264-320-320-320S128 271.264 128 448s143.264 320 320 320a318.784 318.784 0 0 0 202.496-72.256l206.88 206.88 45.248-45.248z"></path></svg>
+    </a>
+
+
+        
+        
+    <a href="javaScript:void(0);" id="btn-toggle-dark">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </a>
+
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">首页</a>
+                
+                    <a href="/about.html" class="dropdown-menu button">About</a>
+                
+                    <a href="/categories/" class="dropdown-menu button">分类</a>
+                
+                    <a href="/tags/" class="dropdown-menu button">标签</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">归档</a>
+                
+            </div>
+        
+    </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        胶片理论Vol.3 感光测定学(I)：特性曲线与反差控制模型
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2025/10/" class="post-meta__date button">2025-10-03</a>
+        
+    <span class="separate-dot"></span><a href="/categories/%E8%83%B6%E7%89%87%E6%91%84%E5%BD%B1%E7%90%86%E8%AE%BA/" class="button">胶片摄影理论</a>
+
+ 
+        
+    
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+    <aside class="post-side">
+        <div class="post-side__toc">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%B9%E6%80%A7%E6%9B%B2%E7%BA%BF%E7%9A%84%E6%95%B0%E5%AD%A6%E6%8F%8F%E8%BF%B0"><span class="toc-number">2.</span> <span class="toc-text">特性曲线的数学描述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9D%90%E6%A0%87%E7%B3%BB%E5%AE%9A%E4%B9%89"><span class="toc-number">2.1.</span> <span class="toc-text">坐标系定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%B2%E7%BA%BF%E5%88%86%E5%8C%BA%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.2.</span> <span class="toc-text">曲线分区模型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E5%B7%AE%E5%8F%82%E6%95%B0%E8%AF%A6%E8%A7%A3"><span class="toc-number">3.</span> <span class="toc-text">反差参数详解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Gamma-gamma"><span class="toc-number">3.1.</span> <span class="toc-text">1. Gamma ($\gamma$)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%B9%B3%E5%9D%87%E6%A2%AF%E5%BA%A6-bar-G-Average-Gradient"><span class="toc-number">3.2.</span> <span class="toc-text">2. 平均梯度 ($\bar{G}$ &#x2F; Average Gradient)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%8F%8D%E5%B7%AE%E6%8C%87%E6%95%B0-Contrast-Index-CI"><span class="toc-number">3.3.</span> <span class="toc-text">3. 反差指数 (Contrast Index, CI)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%98%BE%E5%BD%B1%E6%97%B6%E9%97%B4%E4%B8%8E%E5%8F%8D%E5%B7%AE%E7%9A%84%E5%85%B3%E7%B3%BB%E6%A8%A1%E5%9E%8B"><span class="toc-number">4.</span> <span class="toc-text">显影时间与反差的关系模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8C%BA%E5%9F%9F%E6%9B%9D%E5%85%89%E6%B3%95%E7%9A%84%E6%95%B0%E5%AD%A6%E6%9C%AC%E8%B4%A8"><span class="toc-number">4.1.</span> <span class="toc-text">区域曝光法的数学本质</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a></li></ol>
+        </div>
+    </aside>
+    <a class="btn-toc button" id="btn-toc" tabindex="0">
+        <svg viewBox="0 0 1024 1024" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M128 256h64V192H128zM320 256h576V192H320zM128 544h64v-64H128zM320 544h576v-64H320zM128 832h64v-64H128zM320 832h576v-64H320z" fill="currentColor"></path>
+        </svg>
+    </a>
+    <div class="toc-menus" id="toc-menus">
+        <div class="toc-title">Article Directory</div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%B9%E6%80%A7%E6%9B%B2%E7%BA%BF%E7%9A%84%E6%95%B0%E5%AD%A6%E6%8F%8F%E8%BF%B0"><span class="toc-number">2.</span> <span class="toc-text">特性曲线的数学描述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9D%90%E6%A0%87%E7%B3%BB%E5%AE%9A%E4%B9%89"><span class="toc-number">2.1.</span> <span class="toc-text">坐标系定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%B2%E7%BA%BF%E5%88%86%E5%8C%BA%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.2.</span> <span class="toc-text">曲线分区模型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E5%B7%AE%E5%8F%82%E6%95%B0%E8%AF%A6%E8%A7%A3"><span class="toc-number">3.</span> <span class="toc-text">反差参数详解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Gamma-gamma"><span class="toc-number">3.1.</span> <span class="toc-text">1. Gamma ($\gamma$)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%B9%B3%E5%9D%87%E6%A2%AF%E5%BA%A6-bar-G-Average-Gradient"><span class="toc-number">3.2.</span> <span class="toc-text">2. 平均梯度 ($\bar{G}$ &#x2F; Average Gradient)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%8F%8D%E5%B7%AE%E6%8C%87%E6%95%B0-Contrast-Index-CI"><span class="toc-number">3.3.</span> <span class="toc-text">3. 反差指数 (Contrast Index, CI)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%98%BE%E5%BD%B1%E6%97%B6%E9%97%B4%E4%B8%8E%E5%8F%8D%E5%B7%AE%E7%9A%84%E5%85%B3%E7%B3%BB%E6%A8%A1%E5%9E%8B"><span class="toc-number">4.</span> <span class="toc-text">显影时间与反差的关系模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8C%BA%E5%9F%9F%E6%9B%9D%E5%85%89%E6%B3%95%E7%9A%84%E6%95%B0%E5%AD%A6%E6%9C%AC%E8%B4%A8"><span class="toc-number">4.1.</span> <span class="toc-text">区域曝光法的数学本质</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a></li></ol>
+    </div>
+
+
+<article class="post post__with-toc content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>在《暗房理论 Vol.5》中，我们初步接触了反差控制。本章将从<strong>感光测定学 (Sensitometry)</strong> 的专业角度，深入剖析胶片的“指纹”——特性曲线（H&amp;D 曲线），并建立反差控制的数学模型。</p>
+<p>感光测定学是胶片摄影的定量基础，它由 Hurter 和 Driffield 于 19 世纪末创立，旨在回答一个问题：<strong>给胶片多少光，它能产生多黑的银？</strong></p>
+<hr>
+<h2 id="特性曲线的数学描述"><a href="#特性曲线的数学描述" class="headerlink" title="特性曲线的数学描述"></a>特性曲线的数学描述</h2><p>特性曲线描述了<strong>对数曝光量 ($\log H$)</strong> 与 <strong>光学密度 ($D$)</strong> 之间的关系。</p>
+<h3 id="坐标系定义"><a href="#坐标系定义" class="headerlink" title="坐标系定义"></a>坐标系定义</h3><ul>
+<li><strong>横轴</strong>：$\log_{10} H$（单位：lux·s）。摄影中，$\Delta \log H = 0.3$ 对应 1 档光圈（Stop）。</li>
+<li><strong>纵轴</strong>：$D = \log_{10} (1/T)$，其中 $T$ 是透射率。</li>
+</ul>
+<h3 id="曲线分区模型"><a href="#曲线分区模型" class="headerlink" title="曲线分区模型"></a>曲线分区模型</h3><p>一条典型的负片特性曲线可以分为四个区域，我们可以用分段函数来近似：</p>
+<ol>
+<li><p><strong>基底灰雾区 (Base + Fog)</strong>：</p>
+<script type="math/tex; mode=display">D = D_{min} \quad (\text{for } \log H < \text{Threshold})</script><p>这是胶片未曝光时的固有密度，由片基密度和化学灰雾组成。</p>
+</li>
+<li><p><strong>趾部 (Toe)</strong>：
+非线性上升区。这是阴影细节的记录区。其形状决定了胶片对暗部的分离能力。
+数学上常近似为指数函数或多项式。</p>
+</li>
+<li><p><strong>直线部 (Straight Line)</strong>：
+线性响应区。</p>
+<script type="math/tex; mode=display">D = \gamma (\log H - \log H_0) + D_0</script><p>其中斜率 $\gamma$ (Gamma) 代表胶片的<strong>反差</strong>。这是胶片工作的核心区域，对应中灰和纹理区域。</p>
+</li>
+<li><p><strong>肩部 (Shoulder)</strong>：
+响应饱和区。密度增长放缓，最终达到 $D_{max}$。肩部的形状决定了高光过度的平滑程度（Highlight Roll-off）。</p>
+</li>
+</ol>
+<hr>
+<h2 id="反差参数详解"><a href="#反差参数详解" class="headerlink" title="反差参数详解"></a>反差参数详解</h2><h3 id="1-Gamma-gamma"><a href="#1-Gamma-gamma" class="headerlink" title="1. Gamma ($\gamma$)"></a>1. Gamma ($\gamma$)</h3><p>直线部的斜率。</p>
+<ul>
+<li>$\gamma = \tan \alpha = \frac{\Delta D}{\Delta \log H}$</li>
+<li><strong>意义</strong>：$\gamma &gt; 1$ 夸大反差；$\gamma &lt; 1$ 压缩反差。</li>
+<li><strong>局限</strong>：现代胶片（尤其是 T-Grain 胶片）往往没有明显的直线部，或者呈“S”形，此时 $\gamma$ 值难以准确定义。</li>
+</ul>
+<h3 id="2-平均梯度-bar-G-Average-Gradient"><a href="#2-平均梯度-bar-G-Average-Gradient" class="headerlink" title="2. 平均梯度 ($\bar{G}$ / Average Gradient)"></a>2. 平均梯度 ($\bar{G}$ / Average Gradient)</h3><p>连接曲线上两点（通常是阴影点 $D_{min}+0.1$ 和高光点 $D_{min}+1.3$）的直线斜率。</p>
+<script type="math/tex; mode=display">\bar{G} = \frac{D_2 - D_1}{\log H_2 - \log H_1}</script><p>这是更实用的指标，涵盖了趾部和直线部。</p>
+<h3 id="3-反差指数-Contrast-Index-CI"><a href="#3-反差指数-Contrast-Index-CI" class="headerlink" title="3. 反差指数 (Contrast Index, CI)"></a>3. 反差指数 (Contrast Index, CI)</h3><p>Kodak 提出的改进指标。它通过一个特定的几何作图法（同心圆法）来确定测量点，更能反映底片在放大机上的实际打印反差。通常 CI 目标值为 0.56 - 0.62（对应聚光式放大机）。</p>
+<hr>
+<h2 id="显影时间与反差的关系模型"><a href="#显影时间与反差的关系模型" class="headerlink" title="显影时间与反差的关系模型"></a>显影时间与反差的关系模型</h2><p>反差不是固定的，它随显影时间 $t$ 变化。我们可以建立经验模型：</p>
+<script type="math/tex; mode=display">\gamma(t) = \gamma_{\infty} (1 - e^{-k(t - t_0)})</script><ul>
+<li>$\gamma_{\infty}$：该胶片-显影液组合能达到的最大反差。</li>
+<li>$k$：显影速率常数。</li>
+<li>$t_0$：诱导期（Induction Period），显影开始前的延迟。</li>
+</ul>
+<h3 id="区域曝光法的数学本质"><a href="#区域曝光法的数学本质" class="headerlink" title="区域曝光法的数学本质"></a>区域曝光法的数学本质</h3><p>区域曝光法（Zone System）中的 N, N+1, N-1 显影，本质上就是在调整 $t$ 以改变 $\gamma$。</p>
+<ul>
+<li><strong>N (Normal)</strong>：$\gamma \approx 0.7$。</li>
+<li><strong>N+1 (Expansion)</strong>：提高 $\gamma$，使 $\Delta D$ 在较窄的 $\Delta \log H$ 范围内拉开。</li>
+<li><strong>N-1 (Contraction)</strong>：降低 $\gamma$，将宽广的场景亮度范围压缩进底片的密度范围。</li>
+</ul>
+<p>通过测定不同时间下的特性曲线，我们可以绘制 <strong>时间-伽马曲线 (Time-Gamma Curve)</strong>，这是暗房工作者最重要的控制图表。</p>
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>特性曲线是胶片的灵魂。它不仅告诉我们感光度（ISO），还揭示了胶片的影调映射逻辑。掌握了特性曲线，我们就掌握了从场景亮度到底片密度的转换钥匙。</p>
+<p>然而，特性曲线通常是在白光下测定的。如果光源颜色改变，或者加了滤镜，胶片的响应会如何？下一章，我们将探讨<strong>光谱响应与滤镜因子</strong>。</p>
+
+    </div>
+     
+    <div class="post-footer__meta"><p>updated at 2025-11-21</p></div> 
+    <div class="post-entry__tags"><a href="/tags/%E5%8F%8D%E5%B7%AE/" class="post-tags__link button"># 反差</a><a href="/tags/%E8%83%B6%E7%89%87%E7%90%86%E8%AE%BA/" class="post-tags__link button"># 胶片理论</a><a href="/tags/%E6%84%9F%E5%85%89%E6%B5%8B%E5%AE%9A/" class="post-tags__link button"># 感光测定</a><a href="/tags/H-D%E6%9B%B2%E7%BA%BF/" class="post-tags__link button"># H&amp;D曲线</a></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
+            
+                <a href="/2025/10/04/%E8%83%B6%E7%89%87%E7%90%86%E8%AE%BAVol.4-%E6%84%9F%E5%85%89%E6%B5%8B%E5%AE%9A%E5%AD%A6(II)%EF%BC%9A%E5%85%89%E8%B0%B1%E5%93%8D%E5%BA%94%E4%B8%8E%E6%BB%A4%E9%95%9C%E5%9B%A0%E5%AD%90/" class="nav__link">
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
+                    </div>
+                    <div>
+                        <div class="nav__label">
+                            Previous Post
+                        </div>
+                        <div class="nav__title">
+                            胶片理论Vol.4 感光测定学(II)：光谱响应与滤镜因子
+                        </div>
+                    </div>
+                </a>
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="/2025/10/02/%E8%83%B6%E7%89%87%E7%90%86%E8%AE%BAVol.2-%E6%BD%9C%E5%BD%B1%E7%90%86%E8%AE%BA%EF%BC%9AGurney-Mott%E6%9C%BA%E5%88%B6%E4%B8%8E%E4%BA%92%E6%98%93%E5%BE%8B%E5%A4%B1%E6%95%88/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            Next Post
+                        </div>
+                        <div class="nav__title">
+                            胶片理论Vol.2 潜影理论：Gurney-Mott机制与互易律失效
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
+        </div>
+    </div>
+
+
+
+
+
+</main>
+
+            <footer class="footer">
+     
+    <a href="#" class="button" id="b2t" aria-label="Back to Top" title="Back to Top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M233.376 722.752L278.624 768 512 534.624 745.376 768l45.248-45.248L512 444.128zM192 352h640V288H192z" fill="currentColor"></path>
+        </svg>
+    </a>
+
+    
+
+
+    
+     
+ 
+
+ 
+    
+        
+        <p class="footer-copyright">
+            Strtus's Journry
+        </p>
+    
+    
+        
+            
+        
+            
+        
+            <p>保持对世界的输出🙌</p>
+
+        
+    
+</footer>
+
+        </div>
+         
+
+ 
+    <script>
+        window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+        ga('create', 'G-5ERPC280ZB', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+ 
+
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5ERPC280ZB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-5ERPC280ZB');
+    </script>
+ 
+
+ 
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement('script');
+            hm.src = 'https://hm.baidu.com/hm.js?8da6411546e903e478a9d82d2a4d0c60';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+    
+ 
+
+
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.css">
+
+    
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.js"></script>
+
+    <script>
+        let lazyloadT = Boolean('false'),
+            auto_fancybox = Boolean('true')
+        if (auto_fancybox) {
+            $(".post__content").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        } else {
+            $(".post__content").find("fancybox").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        }
+    </script>
+ 
+
+
+    <script>
+        if (typeof MathJax === 'undefined') {
+            window.MathJax = {
+                loader: {
+                    source: {
+                        '[tex]/amsCd': '[tex]/amscd',
+                        '[tex]/AMScd': '[tex]/amscd'
+                    }
+                },
+                tex: {
+                    inlineMath: {'[+]': [['$', '$']]},
+                    tags: 'ams'
+                },
+                options: {
+                    renderActions: {
+                        findScript: [10, doc => {
+                            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                                const display = !!node.type.match(/; *mode=display/);
+                                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                                const text = document.createTextNode('');
+                                node.parentNode.replaceChild(text, node);
+                                math.start = {node: text, delim: '', n: 0};
+                                math.end = {node: text, delim: '', n: 0};
+                                doc.math.push(math);
+                            });
+                        }, '', false],
+                        insertedScript: [200, () => {
+                            document.querySelectorAll('mjx-container').forEach(node => {
+                                let target = node.parentNode;
+                                if (target.nodeName.toLowerCase() === 'li') {
+                                    target.parentNode.classList.add('has-jax');
+                                }
+                            });
+                        }, '', false]
+                    }
+                }
+            };
+            (function () {
+                var script = document.createElement('script');
+                script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js";
+                script.defer = true;
+                document.head.appendChild(script);
+            })();
+        } else {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+        }
+    </script>
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+
+    </body>
+</html>

@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--icon-->
+
+    
+        <link rel="shortcut icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="16x16" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="32x32" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon-96x96.png">
+    
+    
+        <link rel="apple-touch-icon" sizes="180x180" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/web-app-manifest-192x192.png">
+    
+    
+        <link rel="mask-icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/apple-touch-icon.png">
+    
+
+
+    <!-- meta -->
+
+
+<title>航天器自动交会对接Vol.5 远距离导引：相位调整策略 | Strtus&#39;s Journey</title>
+
+
+    <meta name="keywords" content="自动交会对接, 远距离导引, 霍曼转移">
+
+
+
+
+    <!-- OpenGraph -->
+ 
+    <meta name="description" content="引言在交会对接任务的初始阶段，追踪器（Chaser）和目标器（Target）可能相距数千公里，甚至位于轨道平面的不同位置（相位差很大）。此时，直接使用相对运动方程（HCW）是不合适的。 远距离导引 (Far-Range Rendezvous) 的主要任务是：通过一系列轨道机动，消除追踪器与目标器之间的相位差和高度差，将追踪器送入目标器附近的“通信走廊”或“相对导航捕获区”。本章将重点介绍其中的核心">
+<meta property="og:type" content="article">
+<meta property="og:title" content="航天器自动交会对接Vol.5 远距离导引：相位调整策略">
+<meta property="og:url" content="https://strtus.github.io/2025/09/05/%E8%88%AA%E5%A4%A9%E5%99%A8%E8%87%AA%E5%8A%A8%E4%BA%A4%E4%BC%9A%E5%AF%B9%E6%8E%A5Vol.5-%E8%BF%9C%E8%B7%9D%E7%A6%BB%E5%AF%BC%E5%BC%95%EF%BC%9A%E7%9B%B8%E4%BD%8D%E8%B0%83%E6%95%B4%E7%AD%96%E7%95%A5/index.html">
+<meta property="og:site_name" content="Strtus&#39;s Journey">
+<meta property="og:description" content="引言在交会对接任务的初始阶段，追踪器（Chaser）和目标器（Target）可能相距数千公里，甚至位于轨道平面的不同位置（相位差很大）。此时，直接使用相对运动方程（HCW）是不合适的。 远距离导引 (Far-Range Rendezvous) 的主要任务是：通过一系列轨道机动，消除追踪器与目标器之间的相位差和高度差，将追踪器送入目标器附近的“通信走廊”或“相对导航捕获区”。本章将重点介绍其中的核心">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-09-05T02:00:00.000Z">
+<meta property="article:modified_time" content="2025-11-21T11:48:15.190Z">
+<meta property="article:author" content="strtus">
+<meta property="article:tag" content="自动交会对接">
+<meta property="article:tag" content="远距离导引">
+<meta property="article:tag" content="霍曼转移">
+<meta name="twitter:card" content="summary_large_image">
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/highlight.css" media="none" >
+        
+            <link rel="stylesheet" id="hl-dark-theme" href="/css/highlight/highlight.dark.css" media="none">
+        
+    
+
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/style/dark.css">
+
+    
+<script src="/js/darkmode.js"></script>
+
+
+
+     
+
+    <!-- custom head -->
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+    <body>
+        <div id="app" tabindex="-1">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">Strtus&#39;s Journey</span>
+        </a>
+    </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">首页</a>
+                
+                    <a href="/about.html" class="navbar-menu button">About</a>
+                
+                    <a href="/categories/" class="navbar-menu button">分类</a>
+                
+                    <a href="/tags/" class="navbar-menu button">标签</a>
+                
+                    <a href="/archives/" class="navbar-menu button">归档</a>
+                
+            </div>
+        
+        
+        
+    <a href="/search/" id="btn-search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="24" height="24" fill="currentColor" stroke="currentColor" stroke-width="32"><path d="M192 448c0-141.152 114.848-256 256-256s256 114.848 256 256-114.848 256-256 256-256-114.848-256-256z m710.624 409.376l-206.88-206.88A318.784 318.784 0 0 0 768 448c0-176.736-143.264-320-320-320S128 271.264 128 448s143.264 320 320 320a318.784 318.784 0 0 0 202.496-72.256l206.88 206.88 45.248-45.248z"></path></svg>
+    </a>
+
+
+        
+        
+    <a href="javaScript:void(0);" id="btn-toggle-dark">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </a>
+
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">首页</a>
+                
+                    <a href="/about.html" class="dropdown-menu button">About</a>
+                
+                    <a href="/categories/" class="dropdown-menu button">分类</a>
+                
+                    <a href="/tags/" class="dropdown-menu button">标签</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">归档</a>
+                
+            </div>
+        
+    </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        航天器自动交会对接Vol.5 远距离导引：相位调整策略
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2025/09/" class="post-meta__date button">2025-09-05</a>
+        
+    <span class="separate-dot"></span><a href="/categories/%E8%88%AA%E5%A4%A9%E5%99%A8%E8%87%AA%E5%8A%A8%E4%BA%A4%E4%BC%9A%E5%AF%B9%E6%8E%A5%E7%90%86%E8%AE%BA/" class="button">航天器自动交会对接理论</a>
+
+ 
+        
+    
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+    <aside class="post-side">
+        <div class="post-side__toc">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%9B%B8%E4%BD%8D%E8%B0%83%E6%95%B4%EF%BC%9F"><span class="toc-number">2.</span> <span class="toc-text">什么是相位调整？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9C%8D%E6%9B%BC%E8%BD%AC%E7%A7%BB%E5%9C%A8%E4%BA%A4%E4%BC%9A%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text">霍曼转移在交会中的应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF%E5%81%87%E8%AE%BE"><span class="toc-number">3.1.</span> <span class="toc-text">场景假设</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AD%96%E7%95%A5%E6%AD%A5%E9%AA%A4"><span class="toc-number">3.2.</span> <span class="toc-text">策略步骤</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E5%9C%88%E8%B0%83%E7%9B%B8%E4%B8%8E%E5%85%B0%E4%BC%AF%E7%89%B9%E5%AF%BC%E5%BC%95"><span class="toc-number">4.</span> <span class="toc-text">多圈调相与兰伯特导引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a></li></ol>
+        </div>
+    </aside>
+    <a class="btn-toc button" id="btn-toc" tabindex="0">
+        <svg viewBox="0 0 1024 1024" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M128 256h64V192H128zM320 256h576V192H320zM128 544h64v-64H128zM320 544h576v-64H320zM128 832h64v-64H128zM320 832h576v-64H320z" fill="currentColor"></path>
+        </svg>
+    </a>
+    <div class="toc-menus" id="toc-menus">
+        <div class="toc-title">Article Directory</div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%9B%B8%E4%BD%8D%E8%B0%83%E6%95%B4%EF%BC%9F"><span class="toc-number">2.</span> <span class="toc-text">什么是相位调整？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9C%8D%E6%9B%BC%E8%BD%AC%E7%A7%BB%E5%9C%A8%E4%BA%A4%E4%BC%9A%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text">霍曼转移在交会中的应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF%E5%81%87%E8%AE%BE"><span class="toc-number">3.1.</span> <span class="toc-text">场景假设</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AD%96%E7%95%A5%E6%AD%A5%E9%AA%A4"><span class="toc-number">3.2.</span> <span class="toc-text">策略步骤</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E5%9C%88%E8%B0%83%E7%9B%B8%E4%B8%8E%E5%85%B0%E4%BC%AF%E7%89%B9%E5%AF%BC%E5%BC%95"><span class="toc-number">4.</span> <span class="toc-text">多圈调相与兰伯特导引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a></li></ol>
+    </div>
+
+
+<article class="post post__with-toc content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>在交会对接任务的初始阶段，追踪器（Chaser）和目标器（Target）可能相距数千公里，甚至位于轨道平面的不同位置（相位差很大）。此时，直接使用相对运动方程（HCW）是不合适的。</p>
+<p><strong>远距离导引 (Far-Range Rendezvous)</strong> 的主要任务是：通过一系列轨道机动，消除追踪器与目标器之间的<strong>相位差</strong>和<strong>高度差</strong>，将追踪器送入目标器附近的“通信走廊”或“相对导航捕获区”。本章将重点介绍其中的核心策略——<strong>相位调整 (Phasing)</strong>。</p>
+<hr>
+<h2 id="什么是相位调整？"><a href="#什么是相位调整？" class="headerlink" title="什么是相位调整？"></a>什么是相位调整？</h2><p>在轨道动力学中，轨道周期 $T$ 与半长轴 $a$ 的关系为 $T = 2\pi\sqrt{a^3/\mu}$。</p>
+<ul>
+<li>轨道越低，周期越短，角速度越快。</li>
+<li>轨道越高，周期越长，角速度越慢。</li>
+</ul>
+<p>利用这一特性，我们可以通过改变轨道高度来调整“追赶”速度：</p>
+<ul>
+<li><strong>追赶 (Catch up)</strong>：如果追踪器落后于目标器，它应该<strong>降低</strong>轨道高度，以获得更快的角速度。</li>
+<li><strong>等待 (Wait)</strong>：如果追踪器领先于目标器，它应该<strong>抬高</strong>轨道高度，减慢角速度，让目标器追上来。</li>
+</ul>
+<p>这种通过变轨来调整相对位置的操作，称为<strong>调相机动 (Phasing Maneuver)</strong>。</p>
+<hr>
+<h2 id="霍曼转移在交会中的应用"><a href="#霍曼转移在交会中的应用" class="headerlink" title="霍曼转移在交会中的应用"></a>霍曼转移在交会中的应用</h2><p>最简单的相位调整策略是结合<strong>霍曼转移</strong>（见《轨道动力学 Vol.3》）。</p>
+<h3 id="场景假设"><a href="#场景假设" class="headerlink" title="场景假设"></a>场景假设</h3><p>追踪器和目标器在同一轨道平面内，目标器在圆轨道 $r_T$ 上，追踪器在较低的圆轨道 $r_C$ 上。追踪器落后目标器相位角 $\Delta \theta$。</p>
+<h3 id="策略步骤"><a href="#策略步骤" class="headerlink" title="策略步骤"></a>策略步骤</h3><ol>
+<li><strong>计算追赶速率</strong>：计算两者的角速度差 $\Delta \omega = \omega_C - \omega_T$。</li>
+<li><strong>确定转移时间</strong>：选择一个霍曼转移轨道，其半长轴为 $a_{trans} = (r_C + r_T)/2$，转移时间为 $\Delta t_{trans} = \pi\sqrt{a_{trans}^3/\mu}$。</li>
+<li><strong>计算目标相位</strong>：在转移时间 $\Delta t_{trans}$ 内，目标器将转过角度 $\Delta \theta_T = \omega_T \Delta t_{trans}$。</li>
+<li><strong>确定点火时机</strong>：为了在到达远地点（目标轨道高度）时恰好与目标相遇，追踪器必须在两者相位差满足特定条件时点火。
+所需的初始相位差 $\phi_{req} = 180^\circ - \Delta \theta_T$。</li>
+<li><strong>等待与点火</strong>：追踪器在低轨道上漂移，直到相位差变为 $\phi_{req}$，然后执行霍曼转移的第一次脉冲 $\Delta v_1$。</li>
+<li><strong>圆化</strong>：到达目标轨道高度后，执行第二次脉冲 $\Delta v_2$ 完成圆化，此时两者位置重合，速度同步。</li>
+</ol>
+<hr>
+<h2 id="多圈调相与兰伯特导引"><a href="#多圈调相与兰伯特导引" class="headerlink" title="多圈调相与兰伯特导引"></a>多圈调相与兰伯特导引</h2><p>在实际任务（如神舟飞船与空间站交会）中，为了节省燃料并修正误差，通常不会一次性完成交会，而是采用<strong>多圈调相</strong>。</p>
+<ol>
+<li><strong>中间停泊点</strong>：追踪器先转移到一个略低于目标器的中间轨道。</li>
+<li><strong>自主修正</strong>：在中间轨道上，利用 GPS 或地面测控数据精定轨，计算残余误差。</li>
+<li><strong>兰伯特修正</strong>：利用<strong>兰伯特问题</strong>（见《轨道动力学 Vol.6》）的解，计算从当前位置到目标位置（预定交会时刻 $t_f$）所需的精确速度矢量，执行修正脉冲。</li>
+</ol>
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>远距离导引本质上是绝对轨道动力学的应用。核心思想是“<strong>以时间换空间</strong>”——利用轨道高度差产生的角速度差来消除相位误差。</p>
+<p>当追踪器通过远距离导引到达目标器附近（例如 50 km 处）时，相对导航传感器（如微波雷达）开始工作，任务进入<strong>近距离导引段</strong>。下一章，我们将探讨如何在近距离利用 HCW 动力学进行精确的<strong>脉冲制导</strong>和<strong>直线导引</strong>。</p>
+
+    </div>
+     
+    <div class="post-footer__meta"><p>updated at 2025-11-21</p></div> 
+    <div class="post-entry__tags"><a href="/tags/%E8%87%AA%E5%8A%A8%E4%BA%A4%E4%BC%9A%E5%AF%B9%E6%8E%A5/" class="post-tags__link button"># 自动交会对接</a><a href="/tags/%E8%BF%9C%E8%B7%9D%E7%A6%BB%E5%AF%BC%E5%BC%95/" class="post-tags__link button"># 远距离导引</a><a href="/tags/%E9%9C%8D%E6%9B%BC%E8%BD%AC%E7%A7%BB/" class="post-tags__link button"># 霍曼转移</a></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
+            
+                <a href="/2025/09/06/%E8%88%AA%E5%A4%A9%E5%99%A8%E8%87%AA%E5%8A%A8%E4%BA%A4%E4%BC%9A%E5%AF%B9%E6%8E%A5Vol.6-%E8%BF%91%E8%B7%9D%E7%A6%BB%E5%AF%BC%E5%BC%95%EF%BC%9AGlideslope%E4%B8%8E%E8%84%89%E5%86%B2%E5%88%B6%E5%AF%BC/" class="nav__link">
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
+                    </div>
+                    <div>
+                        <div class="nav__label">
+                            Previous Post
+                        </div>
+                        <div class="nav__title">
+                            航天器自动交会对接Vol.6 近距离导引：Glideslope与脉冲制导
+                        </div>
+                    </div>
+                </a>
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="/2025/09/04/%E8%88%AA%E5%A4%A9%E5%99%A8%E8%87%AA%E5%8A%A8%E4%BA%A4%E4%BC%9A%E5%AF%B9%E6%8E%A5Vol.4-%E6%A4%AD%E5%9C%86%E8%BD%A8%E9%81%93%E7%9B%B8%E5%AF%B9%E8%BF%90%E5%8A%A8%EF%BC%9AT-H%E6%96%B9%E7%A8%8B/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            Next Post
+                        </div>
+                        <div class="nav__title">
+                            航天器自动交会对接Vol.4 椭圆轨道相对运动：T-H方程
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
+        </div>
+    </div>
+
+
+
+
+
+</main>
+
+            <footer class="footer">
+     
+    <a href="#" class="button" id="b2t" aria-label="Back to Top" title="Back to Top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M233.376 722.752L278.624 768 512 534.624 745.376 768l45.248-45.248L512 444.128zM192 352h640V288H192z" fill="currentColor"></path>
+        </svg>
+    </a>
+
+    
+
+
+    
+     
+ 
+
+ 
+    
+        
+        <p class="footer-copyright">
+            Strtus's Journry
+        </p>
+    
+    
+        
+            
+        
+            
+        
+            <p>保持对世界的输出🙌</p>
+
+        
+    
+</footer>
+
+        </div>
+         
+
+ 
+    <script>
+        window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+        ga('create', 'G-5ERPC280ZB', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+ 
+
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5ERPC280ZB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-5ERPC280ZB');
+    </script>
+ 
+
+ 
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement('script');
+            hm.src = 'https://hm.baidu.com/hm.js?8da6411546e903e478a9d82d2a4d0c60';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+    
+ 
+
+
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.css">
+
+    
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.js"></script>
+
+    <script>
+        let lazyloadT = Boolean('false'),
+            auto_fancybox = Boolean('true')
+        if (auto_fancybox) {
+            $(".post__content").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        } else {
+            $(".post__content").find("fancybox").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        }
+    </script>
+ 
+
+
+    <script>
+        if (typeof MathJax === 'undefined') {
+            window.MathJax = {
+                loader: {
+                    source: {
+                        '[tex]/amsCd': '[tex]/amscd',
+                        '[tex]/AMScd': '[tex]/amscd'
+                    }
+                },
+                tex: {
+                    inlineMath: {'[+]': [['$', '$']]},
+                    tags: 'ams'
+                },
+                options: {
+                    renderActions: {
+                        findScript: [10, doc => {
+                            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                                const display = !!node.type.match(/; *mode=display/);
+                                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                                const text = document.createTextNode('');
+                                node.parentNode.replaceChild(text, node);
+                                math.start = {node: text, delim: '', n: 0};
+                                math.end = {node: text, delim: '', n: 0};
+                                doc.math.push(math);
+                            });
+                        }, '', false],
+                        insertedScript: [200, () => {
+                            document.querySelectorAll('mjx-container').forEach(node => {
+                                let target = node.parentNode;
+                                if (target.nodeName.toLowerCase() === 'li') {
+                                    target.parentNode.classList.add('has-jax');
+                                }
+                            });
+                        }, '', false]
+                    }
+                }
+            };
+            (function () {
+                var script = document.createElement('script');
+                script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js";
+                script.defer = true;
+                document.head.appendChild(script);
+            })();
+        } else {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+        }
+    </script>
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+
+    </body>
+</html>
