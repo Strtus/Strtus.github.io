@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--icon-->
+
+    
+        <link rel="shortcut icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="16x16" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="32x32" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon-96x96.png">
+    
+    
+        <link rel="apple-touch-icon" sizes="180x180" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/web-app-manifest-192x192.png">
+    
+    
+        <link rel="mask-icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/apple-touch-icon.png">
+    
+
+
+    <!-- meta -->
+
+
+<title>轨道动力学Vol.10 初轨确定：吉布斯(Gibbs)方法与高斯(Gauss)方法 | Strtus&#39;s Journey</title>
+
+
+    <meta name="keywords" content="轨道动力学, 轨道确定, 观测数据处理">
+
+
+
+
+    <!-- OpenGraph -->
+ 
+    <meta name="description" content="引言轨道确定 (Orbit Determination, OD) 是航天动力学的核心反问题。其基本任务是：根据地面观测站或星载传感器获得的一系列观测数据（如角度、距离、距离变化率等），估算出航天器在某一时刻的状态矢量 $(\mathbf{r}, \mathbf{v})$ 或轨道要素。 初轨确定 (Initial Orbit Determination, IOD) 特指在没有任何先验信息的情况下，仅">
+<meta property="og:type" content="article">
+<meta property="og:title" content="轨道动力学Vol.10 初轨确定：吉布斯(Gibbs)方法与高斯(Gauss)方法">
+<meta property="og:url" content="https://strtus.github.io/2025/08/30/%E8%BD%A8%E9%81%93%E5%8A%A8%E5%8A%9B%E5%AD%A6Vol.10-%E5%88%9D%E8%BD%A8%E7%A1%AE%E5%AE%9A%EF%BC%9A%E5%90%89%E5%B8%83%E6%96%AF(Gibbs)%E6%96%B9%E6%B3%95%E4%B8%8E%E9%AB%98%E6%96%AF(Gauss)%E6%96%B9%E6%B3%95/index.html">
+<meta property="og:site_name" content="Strtus&#39;s Journey">
+<meta property="og:description" content="引言轨道确定 (Orbit Determination, OD) 是航天动力学的核心反问题。其基本任务是：根据地面观测站或星载传感器获得的一系列观测数据（如角度、距离、距离变化率等），估算出航天器在某一时刻的状态矢量 $(\mathbf{r}, \mathbf{v})$ 或轨道要素。 初轨确定 (Initial Orbit Determination, IOD) 特指在没有任何先验信息的情况下，仅">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-08-30T02:00:00.000Z">
+<meta property="article:modified_time" content="2025-11-21T11:31:59.158Z">
+<meta property="article:author" content="strtus">
+<meta property="article:tag" content="轨道动力学">
+<meta property="article:tag" content="轨道确定">
+<meta property="article:tag" content="观测数据处理">
+<meta name="twitter:card" content="summary_large_image">
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/highlight.css" media="none" >
+        
+            <link rel="stylesheet" id="hl-dark-theme" href="/css/highlight/highlight.dark.css" media="none">
+        
+    
+
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/style/dark.css">
+
+    
+<script src="/js/darkmode.js"></script>
+
+
+
+     
+
+    <!-- custom head -->
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+    <body>
+        <div id="app" tabindex="-1">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">Strtus&#39;s Journey</span>
+        </a>
+    </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">首页</a>
+                
+                    <a href="/about.html" class="navbar-menu button">About</a>
+                
+                    <a href="/categories/" class="navbar-menu button">分类</a>
+                
+                    <a href="/tags/" class="navbar-menu button">标签</a>
+                
+                    <a href="/archives/" class="navbar-menu button">归档</a>
+                
+            </div>
+        
+        
+        
+    <a href="/search/" id="btn-search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="24" height="24" fill="currentColor" stroke="currentColor" stroke-width="32"><path d="M192 448c0-141.152 114.848-256 256-256s256 114.848 256 256-114.848 256-256 256-256-114.848-256-256z m710.624 409.376l-206.88-206.88A318.784 318.784 0 0 0 768 448c0-176.736-143.264-320-320-320S128 271.264 128 448s143.264 320 320 320a318.784 318.784 0 0 0 202.496-72.256l206.88 206.88 45.248-45.248z"></path></svg>
+    </a>
+
+
+        
+        
+    <a href="javaScript:void(0);" id="btn-toggle-dark">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </a>
+
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">首页</a>
+                
+                    <a href="/about.html" class="dropdown-menu button">About</a>
+                
+                    <a href="/categories/" class="dropdown-menu button">分类</a>
+                
+                    <a href="/tags/" class="dropdown-menu button">标签</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">归档</a>
+                
+            </div>
+        
+    </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        轨道动力学Vol.10 初轨确定：吉布斯(Gibbs)方法与高斯(Gauss)方法
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2025/08/" class="post-meta__date button">2025-08-30</a>
+        
+    <span class="separate-dot"></span><a href="/categories/%E8%88%AA%E5%A4%A9%E5%99%A8%E8%BD%A8%E9%81%93%E5%8A%A8%E5%8A%9B%E5%AD%A6%E7%90%86%E8%AE%BA/" class="button">航天器轨道动力学理论</a>
+
+ 
+        
+    
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+    <aside class="post-side">
+        <div class="post-side__toc">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="toc-number">2.</span> <span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%89%E5%B8%83%E6%96%AF-Gibbs-%E6%96%B9%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">吉布斯 (Gibbs) 方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80"><span class="toc-number">3.1.</span> <span class="toc-text">理论基础</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E7%AE%97%E6%B3%95%E6%B5%81%E7%A8%8B"><span class="toc-number">3.2.</span> <span class="toc-text">常用算法流程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AB%98%E6%96%AF-Gauss-%E6%96%B9%E6%B3%95"><span class="toc-number">4.</span> <span class="toc-text">高斯 (Gauss) 方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="toc-number">4.1.</span> <span class="toc-text">基本原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B1%82%E8%A7%A3%E6%AD%A5%E9%AA%A4-%E8%BF%AD%E4%BB%A3%E6%B3%95"><span class="toc-number">4.2.</span> <span class="toc-text">求解步骤 (迭代法)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%85%E6%9C%89%E8%A7%92%E5%BA%A6%E6%95%B0%E6%8D%AE%E7%9A%84-IOD-Angles-Only"><span class="toc-number">5.</span> <span class="toc-text">仅有角度数据的 IOD (Angles-Only)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AF%AD"><span class="toc-number">6.</span> <span class="toc-text">结语</span></a></li></ol>
+        </div>
+    </aside>
+    <a class="btn-toc button" id="btn-toc" tabindex="0">
+        <svg viewBox="0 0 1024 1024" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M128 256h64V192H128zM320 256h576V192H320zM128 544h64v-64H128zM320 544h576v-64H320zM128 832h64v-64H128zM320 832h576v-64H320z" fill="currentColor"></path>
+        </svg>
+    </a>
+    <div class="toc-menus" id="toc-menus">
+        <div class="toc-title">Article Directory</div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="toc-number">2.</span> <span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%89%E5%B8%83%E6%96%AF-Gibbs-%E6%96%B9%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">吉布斯 (Gibbs) 方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80"><span class="toc-number">3.1.</span> <span class="toc-text">理论基础</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E7%AE%97%E6%B3%95%E6%B5%81%E7%A8%8B"><span class="toc-number">3.2.</span> <span class="toc-text">常用算法流程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AB%98%E6%96%AF-Gauss-%E6%96%B9%E6%B3%95"><span class="toc-number">4.</span> <span class="toc-text">高斯 (Gauss) 方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="toc-number">4.1.</span> <span class="toc-text">基本原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B1%82%E8%A7%A3%E6%AD%A5%E9%AA%A4-%E8%BF%AD%E4%BB%A3%E6%B3%95"><span class="toc-number">4.2.</span> <span class="toc-text">求解步骤 (迭代法)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%85%E6%9C%89%E8%A7%92%E5%BA%A6%E6%95%B0%E6%8D%AE%E7%9A%84-IOD-Angles-Only"><span class="toc-number">5.</span> <span class="toc-text">仅有角度数据的 IOD (Angles-Only)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AF%AD"><span class="toc-number">6.</span> <span class="toc-text">结语</span></a></li></ol>
+    </div>
+
+
+<article class="post post__with-toc content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p><strong>轨道确定 (Orbit Determination, OD)</strong> 是航天动力学的核心反问题。其基本任务是：根据地面观测站或星载传感器获得的一系列观测数据（如角度、距离、距离变化率等），估算出航天器在某一时刻的状态矢量 $(\mathbf{r}, \mathbf{v})$ 或轨道要素。</p>
+<p><strong>初轨确定 (Initial Orbit Determination, IOD)</strong> 特指在没有任何先验信息的情况下，仅凭少量的观测数据（通常是短弧段）获得轨道初步解的过程。本章将介绍两种最经典的基于三个位置矢量的 IOD 方法：<strong>吉布斯 (Gibbs) 方法</strong> 和 <strong>高斯 (Gauss) 方法</strong>。</p>
+<hr>
+<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>假设我们通过某种手段（如雷达测距测角，或多台望远镜三角定位）获得了同一卫星在三个不同时刻 $t_1, t_2, t_3$ 的地心位置矢量：</p>
+<script type="math/tex; mode=display">
+\mathbf{r}_1, \quad \mathbf{r}_2, \quad \mathbf{r}_3</script><p>已知 $t_1 &lt; t_2 &lt; t_3$。
+目标：求解 $t_2$ 时刻的速度矢量 $\mathbf{v}_2$。
+一旦有了 $(\mathbf{r}_2, \mathbf{v}_2)$，我们就可以确定整个轨道。</p>
+<hr>
+<h2 id="吉布斯-Gibbs-方法"><a href="#吉布斯-Gibbs-方法" class="headerlink" title="吉布斯 (Gibbs) 方法"></a>吉布斯 (Gibbs) 方法</h2><p>吉布斯方法主要基于几何关系，适用于三个观测点间隔较大（例如 $&gt; 10^\circ$）的情况。</p>
+<h3 id="理论基础"><a href="#理论基础" class="headerlink" title="理论基础"></a>理论基础</h3><p>由于二体运动是平面的，三个位置矢量 $\mathbf{r}_1, \mathbf{r}_2, \mathbf{r}_3$ 必须共面。如果它们不共面（由于观测误差），吉布斯方法将失效或需要修正。</p>
+<p>吉布斯推导出了速度矢量 $\mathbf{v}_2$ 的显式表达式：</p>
+<script type="math/tex; mode=display">
+\mathbf{v}_2 = \frac{\sqrt{\mu}}{N} \left( D \mathbf{r}_2 + N \mathbf{e}_{cross} + S (\mathbf{r}_2 \times \mathbf{e}_{cross}) / r_2 \right)</script><p>(注：这是一种形式，更常用的工程公式如下)</p>
+<h3 id="常用算法流程"><a href="#常用算法流程" class="headerlink" title="常用算法流程"></a>常用算法流程</h3><p>定义三个辅助矢量：</p>
+<script type="math/tex; mode=display">
+\mathbf{Z}_{12} = \mathbf{r}_1 \times \mathbf{r}_2, \quad \mathbf{Z}_{23} = \mathbf{r}_2 \times \mathbf{r}_3, \quad \mathbf{Z}_{31} = \mathbf{r}_3 \times \mathbf{r}_1</script><p>验证共面性：$\mathbf{r}_1 \cdot \mathbf{Z}_{23} \approx 0$。</p>
+<p>定义三个标量：</p>
+<script type="math/tex; mode=display">
+N = |\mathbf{r}_1| (\mathbf{r}_2 \times \mathbf{r}_3) + |\mathbf{r}_2| (\mathbf{r}_3 \times \mathbf{r}_1) + |\mathbf{r}_3| (\mathbf{r}_1 \times \mathbf{r}_2)</script><script type="math/tex; mode=display">
+D = \mathbf{Z}_{12} + \mathbf{Z}_{23} + \mathbf{Z}_{31}</script><script type="math/tex; mode=display">
+S = (r_2 - r_3)\mathbf{r}_1 + (r_3 - r_1)\mathbf{r}_2 + (r_1 - r_2)\mathbf{r}_3</script><p>则中间时刻的速度 $\mathbf{v}_2$ 为：</p>
+<script type="math/tex; mode=display">
+\mathbf{v}_2 = \frac{1}{N} \sqrt{\frac{\mu}{|D|}} \left( \frac{L}{r_2} \mathbf{D} + \mathbf{S} \right)</script><p>其中 $L$ 是半通径相关项。</p>
+<p>(更简洁的矢量形式)：</p>
+<script type="math/tex; mode=display">
+\mathbf{v}_2 = \frac{\sqrt{\mu}}{|\mathbf{N}|} \left( \frac{\mathbf{D} \times \mathbf{r}_2}{r_2} + \mathbf{S} \right)</script><p>其中 $\mathbf{N} = r_1(\mathbf{r}_2 \times \mathbf{r}_3) + r_2(\mathbf{r}_3 \times \mathbf{r}_1) + r_3(\mathbf{r}_1 \times \mathbf{r}_2)$。</p>
+<hr>
+<h2 id="高斯-Gauss-方法"><a href="#高斯-Gauss-方法" class="headerlink" title="高斯 (Gauss) 方法"></a>高斯 (Gauss) 方法</h2><p>高斯方法利用了拉格朗日系数 ($f$ 和 $g$ 级数) 的近似，特别适用于三个观测点间隔很近（例如 $&lt; 1^\circ$）的情况。</p>
+<h3 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h3><p>根据二体动力学，任意时刻的位置可以表示为初始位置和速度的线性组合：</p>
+<script type="math/tex; mode=display">
+\mathbf{r}_1 = f_1 \mathbf{r}_2 + g_1 \mathbf{v}_2</script><script type="math/tex; mode=display">
+\mathbf{r}_3 = f_3 \mathbf{r}_2 + g_3 \mathbf{v}_2</script><p>其中 $f_i, g_i$ 是关于时间间隔 $\tau_1 = t_1 - t_2$ 和 $\tau_3 = t_3 - t_2$ 的函数。</p>
+<p>消去 $\mathbf{v}_2$，我们可以得到共线方程：</p>
+<script type="math/tex; mode=display">
+c_1 \mathbf{r}_1 + c_2 \mathbf{r}_2 + c_3 \mathbf{r}_3 = \mathbf{0}</script><p>这再次证明了共面性。</p>
+<h3 id="求解步骤-迭代法"><a href="#求解步骤-迭代法" class="headerlink" title="求解步骤 (迭代法)"></a>求解步骤 (迭代法)</h3><p>高斯方法的核心是求解关于 $r_2$ 的八阶方程（通常简化为迭代求解）。</p>
+<ol>
+<li><strong>时间间隔</strong>：$\tau_1 = t_1 - t_2, \tau_3 = t_3 - t_2$。</li>
+<li><strong>面积比近似</strong>：利用三角形面积比近似扇形面积比，初步估计 $c_1, c_3$。</li>
+<li><strong>求解 $r_2$</strong>：通过几何关系解出 $r_2$ 的初值。</li>
+<li><strong>修正 $f, g$</strong>：利用 $r_2$ 的估计值，计算更精确的 $f, g$ 系数（使用通用变量法或级数展开）。<script type="math/tex; mode=display">
+f \approx 1 - \frac{1}{2} \frac{\mu}{r_2^3} \tau^2, \quad g \approx \tau - \frac{1}{6} \frac{\mu}{r_2^3} \tau^3</script></li>
+<li><strong>更新速度</strong>：<script type="math/tex; mode=display">
+\mathbf{v}_2 = \frac{f_1 \mathbf{r}_3 - f_3 \mathbf{r}_1}{f_1 g_3 - f_3 g_1}</script></li>
+<li><strong>迭代</strong>：重复步骤 4-5 直到收敛。</li>
+</ol>
+<hr>
+<h2 id="仅有角度数据的-IOD-Angles-Only"><a href="#仅有角度数据的-IOD-Angles-Only" class="headerlink" title="仅有角度数据的 IOD (Angles-Only)"></a>仅有角度数据的 IOD (Angles-Only)</h2><p>在实际观测中（如光学望远镜），我们通常只能得到赤经 $\alpha$ 和赤纬 $\delta$，而不知道距离 $r$。
+这时有 3 个时刻 $\times$ 2 个角度 = 6 个已知量，正好对应 6 个轨道根数。
+经典解法包括：</p>
+<ul>
+<li><strong>拉普拉斯 (Laplace) 方法</strong>：利用 $\mathbf{r}$ 的导数关系。</li>
+<li><strong>高斯 (Gauss) 角度法</strong>：结合上述高斯方法，通过迭代猜测距离 $r_2$。</li>
+</ul>
+<hr>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>初轨确定是连接观测数据与轨道理论的桥梁。吉布斯方法和高斯方法虽然古老，但至今仍是现代空间态势感知（SSA）系统的基础算法。随着雷达和光学观测精度的提高，基于卡尔曼滤波（Kalman Filter）的<strong>精密轨道确定 (POD)</strong> 已成为主流，但 IOD 提供的初值依然是滤波收敛的关键。</p>
+<p>至此，我们的《轨道动力学》系列文章暂告一段落。从二体问题到摄动理论，从轨道机动到初轨确定，我们构建了一个完整的航天动力学知识框架。希望这些内容能为你探索星辰大海提供坚实的理论支持。</p>
+
+    </div>
+     
+    <div class="post-footer__meta"><p>updated at 2025-11-21</p></div> 
+    <div class="post-entry__tags"><a href="/tags/%E8%BD%A8%E9%81%93%E5%8A%A8%E5%8A%9B%E5%AD%A6/" class="post-tags__link button"># 轨道动力学</a><a href="/tags/%E8%BD%A8%E9%81%93%E7%A1%AE%E5%AE%9A/" class="post-tags__link button"># 轨道确定</a><a href="/tags/%E8%A7%82%E6%B5%8B%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/" class="post-tags__link button"># 观测数据处理</a></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
+            
+                <a href="/2025/09/01/%E5%A7%BF%E6%80%81%E5%8A%A8%E5%8A%9B%E5%AD%A6Vol.1-%E5%A7%BF%E6%80%81%E8%BF%90%E5%8A%A8%E5%AD%A6%E6%A0%B8%E5%BF%83%EF%BC%9A%E5%8F%82%E8%80%83%E7%B3%BB%E5%AE%9A%E4%B9%89%E4%B8%8E%E6%96%B9%E5%90%91%E4%BD%99%E5%BC%A6%E7%9F%A9%E9%98%B5(DCM)/" class="nav__link">
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
+                    </div>
+                    <div>
+                        <div class="nav__label">
+                            Previous Post
+                        </div>
+                        <div class="nav__title">
+                            姿态动力学Vol.1 姿态运动学核心：参考系定义与方向余弦矩阵(DCM)
+                        </div>
+                    </div>
+                </a>
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="/2025/08/29/%E8%BD%A8%E9%81%93%E5%8A%A8%E5%8A%9B%E5%AD%A6Vol.9-%E6%98%9F%E9%99%85%E8%88%AA%E8%A1%8C%E6%A6%82%E8%AE%BA%EF%BC%9A%E5%9C%86%E9%94%A5%E6%9B%B2%E7%BA%BF%E6%8B%BC%E6%8E%A5%E6%B3%95/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            Next Post
+                        </div>
+                        <div class="nav__title">
+                            轨道动力学Vol.9 星际航行概论：圆锥曲线拼接法
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
+        </div>
+    </div>
+
+
+
+
+
+</main>
+
+            <footer class="footer">
+     
+    <a href="#" class="button" id="b2t" aria-label="Back to Top" title="Back to Top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M233.376 722.752L278.624 768 512 534.624 745.376 768l45.248-45.248L512 444.128zM192 352h640V288H192z" fill="currentColor"></path>
+        </svg>
+    </a>
+
+    
+
+
+    
+     
+ 
+
+ 
+    
+        
+        <p class="footer-copyright">
+            Strtus's Journry
+        </p>
+    
+    
+        
+            
+        
+            
+        
+            <p>保持对世界的输出🙌</p>
+
+        
+    
+</footer>
+
+        </div>
+         
+
+ 
+    <script>
+        window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+        ga('create', 'G-5ERPC280ZB', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+ 
+
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5ERPC280ZB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-5ERPC280ZB');
+    </script>
+ 
+
+ 
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement('script');
+            hm.src = 'https://hm.baidu.com/hm.js?8da6411546e903e478a9d82d2a4d0c60';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+    
+ 
+
+
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.css">
+
+    
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.js"></script>
+
+    <script>
+        let lazyloadT = Boolean('false'),
+            auto_fancybox = Boolean('true')
+        if (auto_fancybox) {
+            $(".post__content").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        } else {
+            $(".post__content").find("fancybox").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        }
+    </script>
+ 
+
+
+    <script>
+        if (typeof MathJax === 'undefined') {
+            window.MathJax = {
+                loader: {
+                    source: {
+                        '[tex]/amsCd': '[tex]/amscd',
+                        '[tex]/AMScd': '[tex]/amscd'
+                    }
+                },
+                tex: {
+                    inlineMath: {'[+]': [['$', '$']]},
+                    tags: 'ams'
+                },
+                options: {
+                    renderActions: {
+                        findScript: [10, doc => {
+                            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                                const display = !!node.type.match(/; *mode=display/);
+                                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                                const text = document.createTextNode('');
+                                node.parentNode.replaceChild(text, node);
+                                math.start = {node: text, delim: '', n: 0};
+                                math.end = {node: text, delim: '', n: 0};
+                                doc.math.push(math);
+                            });
+                        }, '', false],
+                        insertedScript: [200, () => {
+                            document.querySelectorAll('mjx-container').forEach(node => {
+                                let target = node.parentNode;
+                                if (target.nodeName.toLowerCase() === 'li') {
+                                    target.parentNode.classList.add('has-jax');
+                                }
+                            });
+                        }, '', false]
+                    }
+                }
+            };
+            (function () {
+                var script = document.createElement('script');
+                script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js";
+                script.defer = true;
+                document.head.appendChild(script);
+            })();
+        } else {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+        }
+    </script>
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+
+    </body>
+</html>

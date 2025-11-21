@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--icon-->
+
+    
+        <link rel="shortcut icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="16x16" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="32x32" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon-96x96.png">
+    
+    
+        <link rel="apple-touch-icon" sizes="180x180" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/web-app-manifest-192x192.png">
+    
+    
+        <link rel="mask-icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/apple-touch-icon.png">
+    
+
+
+    <!-- meta -->
+
+
+<title>暗房理论Vol.3 定影与水洗的物理化学 | Strtus&#39;s Journey</title>
+
+
+    <meta name="keywords" content="暗房技术, 定影, 水洗, 硫代硫酸钠, 档案级保存">
+
+
+
+
+    <!-- OpenGraph -->
+ 
+    <meta name="description" content="前言：让影像永恒显影结束后，胶片上除了还原出来的金属银影像，还残留着大量未曝光的卤化银晶体。这些卤化银对光依然敏感，如果此时见光，它们会逐渐变黑，最终吞噬掉整个画面。 定影的目的就是将这些未感光的卤化银溶解掉，使影像“固定”下来。而水洗则是为了清除定影液残留，确保照片能保存百年而不变质。 定影化学原理卤化银（AgBr, AgCl）难溶于水，但能溶于硫代硫酸盐溶液。这是因为硫代硫酸根离子 ($S_2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="暗房理论Vol.3 定影与水洗的物理化学">
+<meta property="og:url" content="https://strtus.github.io/2025/02/04/%E6%9A%97%E6%88%BF%E7%90%86%E8%AE%BAVol.3-%E5%AE%9A%E5%BD%B1%E4%B8%8E%E6%B0%B4%E6%B4%97%E7%9A%84%E7%89%A9%E7%90%86%E5%8C%96%E5%AD%A6/index.html">
+<meta property="og:site_name" content="Strtus&#39;s Journey">
+<meta property="og:description" content="前言：让影像永恒显影结束后，胶片上除了还原出来的金属银影像，还残留着大量未曝光的卤化银晶体。这些卤化银对光依然敏感，如果此时见光，它们会逐渐变黑，最终吞噬掉整个画面。 定影的目的就是将这些未感光的卤化银溶解掉，使影像“固定”下来。而水洗则是为了清除定影液残留，确保照片能保存百年而不变质。 定影化学原理卤化银（AgBr, AgCl）难溶于水，但能溶于硫代硫酸盐溶液。这是因为硫代硫酸根离子 ($S_2">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-02-04T05:00:00.000Z">
+<meta property="article:modified_time" content="2025-11-21T11:20:25.865Z">
+<meta property="article:author" content="strtus">
+<meta property="article:tag" content="暗房技术">
+<meta property="article:tag" content="定影">
+<meta property="article:tag" content="水洗">
+<meta property="article:tag" content="硫代硫酸钠">
+<meta property="article:tag" content="档案级保存">
+<meta name="twitter:card" content="summary_large_image">
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/highlight.css" media="none" >
+        
+            <link rel="stylesheet" id="hl-dark-theme" href="/css/highlight/highlight.dark.css" media="none">
+        
+    
+
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/style/dark.css">
+
+    
+<script src="/js/darkmode.js"></script>
+
+
+
+     
+
+    <!-- custom head -->
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+    <body>
+        <div id="app" tabindex="-1">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">Strtus&#39;s Journey</span>
+        </a>
+    </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">首页</a>
+                
+                    <a href="/about.html" class="navbar-menu button">About</a>
+                
+                    <a href="/categories/" class="navbar-menu button">分类</a>
+                
+                    <a href="/tags/" class="navbar-menu button">标签</a>
+                
+                    <a href="/archives/" class="navbar-menu button">归档</a>
+                
+            </div>
+        
+        
+        
+    <a href="/search/" id="btn-search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="24" height="24" fill="currentColor" stroke="currentColor" stroke-width="32"><path d="M192 448c0-141.152 114.848-256 256-256s256 114.848 256 256-114.848 256-256 256-256-114.848-256-256z m710.624 409.376l-206.88-206.88A318.784 318.784 0 0 0 768 448c0-176.736-143.264-320-320-320S128 271.264 128 448s143.264 320 320 320a318.784 318.784 0 0 0 202.496-72.256l206.88 206.88 45.248-45.248z"></path></svg>
+    </a>
+
+
+        
+        
+    <a href="javaScript:void(0);" id="btn-toggle-dark">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </a>
+
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">首页</a>
+                
+                    <a href="/about.html" class="dropdown-menu button">About</a>
+                
+                    <a href="/categories/" class="dropdown-menu button">分类</a>
+                
+                    <a href="/tags/" class="dropdown-menu button">标签</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">归档</a>
+                
+            </div>
+        
+    </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        暗房理论Vol.3 定影与水洗的物理化学
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2025/02/" class="post-meta__date button">2025-02-04</a>
+        
+    <span class="separate-dot"></span><a href="/categories/%E6%91%84%E5%BD%B1%E8%89%BA%E6%9C%AF%E7%99%BE%E5%B9%B4%E5%8F%B2/" class="button">摄影艺术百年史</a>
+
+ 
+        
+    
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+    <aside class="post-side">
+        <div class="post-side__toc">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80%EF%BC%9A%E8%AE%A9%E5%BD%B1%E5%83%8F%E6%B0%B8%E6%81%92"><span class="toc-number">1.</span> <span class="toc-text">前言：让影像永恒</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E5%BD%B1%E5%8C%96%E5%AD%A6%E5%8E%9F%E7%90%86"><span class="toc-number">2.</span> <span class="toc-text">定影化学原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%9C%E5%90%88%E5%8F%8D%E5%BA%94"><span class="toc-number">2.1.</span> <span class="toc-text">络合反应</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E5%BD%B1%E5%89%82%E7%A7%8D%E7%B1%BB"><span class="toc-number">2.2.</span> <span class="toc-text">定影剂种类</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8C%E6%B5%B4%E5%AE%9A%E5%BD%B1%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">双浴定影法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B0%B4%E6%B4%97%E4%B8%8E%E6%89%A9%E6%95%A3"><span class="toc-number">4.</span> <span class="toc-text">水洗与扩散</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%B7%E6%B3%A2%E6%B8%85%E6%B4%97%E5%89%82"><span class="toc-number">5.</span> <span class="toc-text">海波清洗剂</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A1%A3%E6%A1%88%E7%BA%A7%E4%BF%9D%E5%AD%98"><span class="toc-number">6.</span> <span class="toc-text">档案级保存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-number">7.</span> <span class="toc-text">Reference</span></a></li></ol>
+        </div>
+    </aside>
+    <a class="btn-toc button" id="btn-toc" tabindex="0">
+        <svg viewBox="0 0 1024 1024" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M128 256h64V192H128zM320 256h576V192H320zM128 544h64v-64H128zM320 544h576v-64H320zM128 832h64v-64H128zM320 832h576v-64H320z" fill="currentColor"></path>
+        </svg>
+    </a>
+    <div class="toc-menus" id="toc-menus">
+        <div class="toc-title">Article Directory</div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80%EF%BC%9A%E8%AE%A9%E5%BD%B1%E5%83%8F%E6%B0%B8%E6%81%92"><span class="toc-number">1.</span> <span class="toc-text">前言：让影像永恒</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E5%BD%B1%E5%8C%96%E5%AD%A6%E5%8E%9F%E7%90%86"><span class="toc-number">2.</span> <span class="toc-text">定影化学原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%9C%E5%90%88%E5%8F%8D%E5%BA%94"><span class="toc-number">2.1.</span> <span class="toc-text">络合反应</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E5%BD%B1%E5%89%82%E7%A7%8D%E7%B1%BB"><span class="toc-number">2.2.</span> <span class="toc-text">定影剂种类</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8C%E6%B5%B4%E5%AE%9A%E5%BD%B1%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">双浴定影法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B0%B4%E6%B4%97%E4%B8%8E%E6%89%A9%E6%95%A3"><span class="toc-number">4.</span> <span class="toc-text">水洗与扩散</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%B7%E6%B3%A2%E6%B8%85%E6%B4%97%E5%89%82"><span class="toc-number">5.</span> <span class="toc-text">海波清洗剂</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A1%A3%E6%A1%88%E7%BA%A7%E4%BF%9D%E5%AD%98"><span class="toc-number">6.</span> <span class="toc-text">档案级保存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-number">7.</span> <span class="toc-text">Reference</span></a></li></ol>
+    </div>
+
+
+<article class="post post__with-toc content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <h2 id="前言：让影像永恒"><a href="#前言：让影像永恒" class="headerlink" title="前言：让影像永恒"></a>前言：让影像永恒</h2><p>显影结束后，胶片上除了还原出来的金属银影像，还残留着大量未曝光的卤化银晶体。这些卤化银对光依然敏感，如果此时见光，它们会逐渐变黑，最终吞噬掉整个画面。</p>
+<p>定影的目的就是将这些未感光的卤化银溶解掉，使影像“固定”下来。而水洗则是为了清除定影液残留，确保照片能保存百年而不变质。</p>
+<h2 id="定影化学原理"><a href="#定影化学原理" class="headerlink" title="定影化学原理"></a>定影化学原理</h2><p>卤化银（AgBr, AgCl）难溶于水，但能溶于硫代硫酸盐溶液。这是因为硫代硫酸根离子 ($S_2O_3^{2-}$) 能与银离子形成稳定的水溶性络合物。</p>
+<h3 id="络合反应"><a href="#络合反应" class="headerlink" title="络合反应"></a>络合反应</h3><p>定影反应是分步进行的：</p>
+<ol>
+<li><p><strong>吸附与溶解</strong>：</p>
+<script type="math/tex; mode=display">AgBr + 2S_2O_3^{2-} \rightleftharpoons [Ag(S_2O_3)_2]^{3-} + Br^-</script><p>生成的二硫代硫酸银络合物是易溶于水的。</p>
+</li>
+<li><p><strong>副反应风险</strong>：
+如果定影液耗尽（硫代硫酸根浓度低），会生成难溶的单硫代硫酸银络合物：</p>
+<script type="math/tex; mode=display">AgBr + S_2O_3^{2-} \rightleftharpoons [Ag(S_2O_3)]^{-} \text{(难溶)} + Br^-</script><p>这种难溶物质一旦吸附在纸基纤维中，几乎无法洗掉，日后会分解产生黄斑。</p>
+</li>
+</ol>
+<h3 id="定影剂种类"><a href="#定影剂种类" class="headerlink" title="定影剂种类"></a>定影剂种类</h3><ul>
+<li><strong>酸性定影液</strong>：加入醋酸，以中和残留的碱性显影液，防止显影继续进行。</li>
+<li><strong>快速定影液</strong>：使用硫代硫酸铵 ($(NH_4)_2S_2O_3$) 代替硫代硫酸钠。铵离子能加速银离子的扩散，定影速度快一倍。</li>
+</ul>
+<h2 id="双浴定影法"><a href="#双浴定影法" class="headerlink" title="双浴定影法"></a>双浴定影法</h2><p>为了避免上述难溶络合物的形成，专业暗房推荐使用双浴定影法：</p>
+<ol>
+<li><strong>第一浴</strong>：承担 90% 的卤化银溶解工作。随着使用，银离子浓度升高，可能生成难溶络合物。</li>
+<li><strong>第二浴</strong>：使用新鲜定影液。由于胶片进入第二浴时已基本没有卤化银，这里的硫代硫酸根极大过量，能确保将第一浴中可能形成的难溶络合物转化为易溶形式。</li>
+</ol>
+<p>当第一浴耗尽时，倒掉第一浴，将第二浴移作第一浴，并配制全新的第二浴。</p>
+<h2 id="水洗与扩散"><a href="#水洗与扩散" class="headerlink" title="水洗与扩散"></a>水洗与扩散</h2><p>定影后的胶片/相纸充满了硫代硫酸盐和银络合物。如果清洗不彻底，残留的硫代硫酸盐会分解产生硫 ($S$)，与银影像反应生成硫化银 ($Ag_2S$)，导致照片变黄、褪色。</p>
+<p>水洗过程遵循菲克扩散定律。杂质从高浓度的乳剂层向低浓度的水中扩散。</p>
+<ul>
+<li><strong>流水水洗</strong>：保持相纸表面的水始终是新鲜的（浓度接近 0），维持最大的浓度梯度。</li>
+<li><strong>纸基的挑战</strong>：对于纸基相纸，定影液会渗入纸纤维深处，极难洗净。通常需要水洗 1 小时以上。</li>
+</ul>
+<h2 id="海波清洗剂"><a href="#海波清洗剂" class="headerlink" title="海波清洗剂"></a>海波清洗剂</h2><p>为了加速水洗，常使用海波清洗剂，主要成分是亚硫酸钠 ($Na_2SO_3$)。</p>
+<ul>
+<li><strong>原理</strong>：亚硫酸根离子能置换出吸附在明胶和纸纤维上的硫代硫酸根离子，使其更容易扩散到水中。</li>
+<li>使用 HCA 可以将纸基相纸的水洗时间从 60 分钟缩短至 20 分钟，并提高清洗彻底度。</li>
+</ul>
+<h2 id="档案级保存"><a href="#档案级保存" class="headerlink" title="档案级保存"></a>档案级保存</h2><p>如何判断水洗是否合格？</p>
+<ul>
+<li><strong>残余硫代硫酸盐测试 (HT-2 测试)</strong>：使用硝酸银与醋酸溶液滴在相纸白边上。如果有残留硫代硫酸盐，会生成黄褐色的硫化银沉淀。</li>
+<li><strong>残余银测试</strong>：使用硫化钠溶液。如果有未定影干净的卤化银，会生成硫化银污渍。</li>
+</ul>
+<p>只有通过了这些测试，照片才能被称为达到了档案级标准，理论上可保存数百年。</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li>Eaton, G. T. (1957). <em>Photographic Chemistry</em>.</li>
+<li>Adams, A. (1981). <em>The Print</em>.</li>
+</ol>
+
+    </div>
+     
+    <div class="post-footer__meta"><p>updated at 2025-11-21</p></div> 
+    <div class="post-entry__tags"><a href="/tags/%E6%9A%97%E6%88%BF%E6%8A%80%E6%9C%AF/" class="post-tags__link button"># 暗房技术</a><a href="/tags/%E5%AE%9A%E5%BD%B1/" class="post-tags__link button"># 定影</a><a href="/tags/%E6%B0%B4%E6%B4%97/" class="post-tags__link button"># 水洗</a><a href="/tags/%E7%A1%AB%E4%BB%A3%E7%A1%AB%E9%85%B8%E9%92%A0/" class="post-tags__link button"># 硫代硫酸钠</a><a href="/tags/%E6%A1%A3%E6%A1%88%E7%BA%A7%E4%BF%9D%E5%AD%98/" class="post-tags__link button"># 档案级保存</a></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
+            
+                <a href="/2025/02/04/%E6%9A%97%E6%88%BF%E7%90%86%E8%AE%BAVol.4-%E5%8C%BA%E5%9F%9F%E6%9B%9D%E5%85%89%E6%B3%95(ZoneSystem)%E7%9A%84%E6%95%B0%E5%AD%A6%E6%A8%A1%E5%9E%8B/" class="nav__link">
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
+                    </div>
+                    <div>
+                        <div class="nav__label">
+                            Previous Post
+                        </div>
+                        <div class="nav__title">
+                            暗房理论Vol.4 区域曝光法(ZoneSystem)的数学模型
+                        </div>
+                    </div>
+                </a>
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="/2025/02/04/%E6%9A%97%E6%88%BF%E7%90%86%E8%AE%BAVol.2-%E6%98%BE%E5%BD%B1%E5%8C%96%E5%AD%A6%E5%8A%A8%E5%8A%9B%E5%AD%A6/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            Next Post
+                        </div>
+                        <div class="nav__title">
+                            暗房理论Vol.2 显影化学动力学
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
+        </div>
+    </div>
+
+
+
+
+
+</main>
+
+            <footer class="footer">
+     
+    <a href="#" class="button" id="b2t" aria-label="Back to Top" title="Back to Top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M233.376 722.752L278.624 768 512 534.624 745.376 768l45.248-45.248L512 444.128zM192 352h640V288H192z" fill="currentColor"></path>
+        </svg>
+    </a>
+
+    
+
+
+    
+     
+ 
+
+ 
+    
+        
+        <p class="footer-copyright">
+            Strtus's Journry
+        </p>
+    
+    
+        
+            
+        
+            
+        
+            <p>保持对世界的输出🙌</p>
+
+        
+    
+</footer>
+
+        </div>
+         
+
+ 
+    <script>
+        window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+        ga('create', 'G-5ERPC280ZB', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+ 
+
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5ERPC280ZB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-5ERPC280ZB');
+    </script>
+ 
+
+ 
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement('script');
+            hm.src = 'https://hm.baidu.com/hm.js?8da6411546e903e478a9d82d2a4d0c60';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+    
+ 
+
+
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.css">
+
+    
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.js"></script>
+
+    <script>
+        let lazyloadT = Boolean('false'),
+            auto_fancybox = Boolean('true')
+        if (auto_fancybox) {
+            $(".post__content").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        } else {
+            $(".post__content").find("fancybox").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        }
+    </script>
+ 
+
+
+    <script>
+        if (typeof MathJax === 'undefined') {
+            window.MathJax = {
+                loader: {
+                    source: {
+                        '[tex]/amsCd': '[tex]/amscd',
+                        '[tex]/AMScd': '[tex]/amscd'
+                    }
+                },
+                tex: {
+                    inlineMath: {'[+]': [['$', '$']]},
+                    tags: 'ams'
+                },
+                options: {
+                    renderActions: {
+                        findScript: [10, doc => {
+                            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                                const display = !!node.type.match(/; *mode=display/);
+                                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                                const text = document.createTextNode('');
+                                node.parentNode.replaceChild(text, node);
+                                math.start = {node: text, delim: '', n: 0};
+                                math.end = {node: text, delim: '', n: 0};
+                                doc.math.push(math);
+                            });
+                        }, '', false],
+                        insertedScript: [200, () => {
+                            document.querySelectorAll('mjx-container').forEach(node => {
+                                let target = node.parentNode;
+                                if (target.nodeName.toLowerCase() === 'li') {
+                                    target.parentNode.classList.add('has-jax');
+                                }
+                            });
+                        }, '', false]
+                    }
+                }
+            };
+            (function () {
+                var script = document.createElement('script');
+                script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js";
+                script.defer = true;
+                document.head.appendChild(script);
+            })();
+        } else {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+        }
+    </script>
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+
+    </body>
+</html>

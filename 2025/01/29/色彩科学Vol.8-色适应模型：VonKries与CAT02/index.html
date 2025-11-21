@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--icon-->
+
+    
+        <link rel="shortcut icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="16x16" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="32x32" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon-96x96.png">
+    
+    
+        <link rel="apple-touch-icon" sizes="180x180" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/web-app-manifest-192x192.png">
+    
+    
+        <link rel="mask-icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/apple-touch-icon.png">
+    
+
+
+    <!-- meta -->
+
+
+<title>色彩科学Vol.8 色适应模型：VonKries与CAT02 | Strtus&#39;s Journey</title>
+
+
+    <meta name="keywords" content="色彩科学, 色适应, Von Kries, CAT02, 白平衡">
+
+
+
+
+    <!-- OpenGraph -->
+ 
+    <meta name="description" content="前言：人眼的自动白平衡在摄影中，我们都知道“白平衡”的重要性。如果在白炽灯（低色温，偏黄）下拍摄一张白纸，不加修正的话，照片里的白纸会变成黄色。然而，我们在现场用肉眼看这张白纸时，它依然是白色的。 这种人眼视觉系统根据环境光源颜色自动调整灵敏度，从而保持物体表面颜色感知恒定的能力，称为色适应。 为了在数字图像处理中模拟这一过程（例如将 D65 光源下的颜色转换到 D50 光源下），我们需要建立数学">
+<meta property="og:type" content="article">
+<meta property="og:title" content="色彩科学Vol.8 色适应模型：VonKries与CAT02">
+<meta property="og:url" content="https://strtus.github.io/2025/01/29/%E8%89%B2%E5%BD%A9%E7%A7%91%E5%AD%A6Vol.8-%E8%89%B2%E9%80%82%E5%BA%94%E6%A8%A1%E5%9E%8B%EF%BC%9AVonKries%E4%B8%8ECAT02/index.html">
+<meta property="og:site_name" content="Strtus&#39;s Journey">
+<meta property="og:description" content="前言：人眼的自动白平衡在摄影中，我们都知道“白平衡”的重要性。如果在白炽灯（低色温，偏黄）下拍摄一张白纸，不加修正的话，照片里的白纸会变成黄色。然而，我们在现场用肉眼看这张白纸时，它依然是白色的。 这种人眼视觉系统根据环境光源颜色自动调整灵敏度，从而保持物体表面颜色感知恒定的能力，称为色适应。 为了在数字图像处理中模拟这一过程（例如将 D65 光源下的颜色转换到 D50 光源下），我们需要建立数学">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-01-29T02:00:00.000Z">
+<meta property="article:modified_time" content="2025-11-21T11:16:09.279Z">
+<meta property="article:author" content="strtus">
+<meta property="article:tag" content="色彩科学">
+<meta property="article:tag" content="色适应">
+<meta property="article:tag" content="Von Kries">
+<meta property="article:tag" content="CAT02">
+<meta property="article:tag" content="白平衡">
+<meta name="twitter:card" content="summary_large_image">
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/highlight.css" media="none" >
+        
+            <link rel="stylesheet" id="hl-dark-theme" href="/css/highlight/highlight.dark.css" media="none">
+        
+    
+
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/style/dark.css">
+
+    
+<script src="/js/darkmode.js"></script>
+
+
+
+     
+
+    <!-- custom head -->
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+    <body>
+        <div id="app" tabindex="-1">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">Strtus&#39;s Journey</span>
+        </a>
+    </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">首页</a>
+                
+                    <a href="/about.html" class="navbar-menu button">About</a>
+                
+                    <a href="/categories/" class="navbar-menu button">分类</a>
+                
+                    <a href="/tags/" class="navbar-menu button">标签</a>
+                
+                    <a href="/archives/" class="navbar-menu button">归档</a>
+                
+            </div>
+        
+        
+        
+    <a href="/search/" id="btn-search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="24" height="24" fill="currentColor" stroke="currentColor" stroke-width="32"><path d="M192 448c0-141.152 114.848-256 256-256s256 114.848 256 256-114.848 256-256 256-256-114.848-256-256z m710.624 409.376l-206.88-206.88A318.784 318.784 0 0 0 768 448c0-176.736-143.264-320-320-320S128 271.264 128 448s143.264 320 320 320a318.784 318.784 0 0 0 202.496-72.256l206.88 206.88 45.248-45.248z"></path></svg>
+    </a>
+
+
+        
+        
+    <a href="javaScript:void(0);" id="btn-toggle-dark">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </a>
+
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">首页</a>
+                
+                    <a href="/about.html" class="dropdown-menu button">About</a>
+                
+                    <a href="/categories/" class="dropdown-menu button">分类</a>
+                
+                    <a href="/tags/" class="dropdown-menu button">标签</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">归档</a>
+                
+            </div>
+        
+    </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        色彩科学Vol.8 色适应模型：VonKries与CAT02
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2025/01/" class="post-meta__date button">2025-01-29</a>
+        
+    <span class="separate-dot"></span><a href="/categories/%E8%89%B2%E5%BD%A9%E7%A7%91%E5%AD%A6%E7%9A%84%E6%95%B0%E5%AD%A6%E5%8E%9F%E7%90%86/" class="button">色彩科学的数学原理</a>
+
+ 
+        
+    
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+    <aside class="post-side">
+        <div class="post-side__toc">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80%EF%BC%9A%E4%BA%BA%E7%9C%BC%E7%9A%84%E8%87%AA%E5%8A%A8%E7%99%BD%E5%B9%B3%E8%A1%A1"><span class="toc-number">1.</span> <span class="toc-text">前言：人眼的自动白平衡</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Von-Kries-%E5%81%87%E8%AF%B4-1902"><span class="toc-number">2.</span> <span class="toc-text">Von Kries 假说 (1902)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E5%AD%A6%E8%A1%A8%E8%BE%BE"><span class="toc-number">2.1.</span> <span class="toc-text">数学表达</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%B0%E4%BB%A3-CAT-%E6%B5%81%E7%A8%8B"><span class="toc-number">3.</span> <span class="toc-text">现代 CAT 流程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E5%9C%A8%E4%BA%8E-mathbf-M-CAT"><span class="toc-number">3.1.</span> <span class="toc-text">关键在于 $\mathbf{M}_{CAT}$</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CAT02-%E5%8F%98%E6%8D%A2"><span class="toc-number">4.</span> <span class="toc-text">CAT02 变换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CAT02-%E7%9F%A9%E9%98%B5"><span class="toc-number">4.1.</span> <span class="toc-text">CAT02 矩阵</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E6%AD%A5%E9%AA%A4"><span class="toc-number">4.2.</span> <span class="toc-text">计算步骤</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%E4%B8%8E%E5%B1%95%E6%9C%9B"><span class="toc-number">5.</span> <span class="toc-text">总结与展望</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-number">6.</span> <span class="toc-text">Reference</span></a></li></ol>
+        </div>
+    </aside>
+    <a class="btn-toc button" id="btn-toc" tabindex="0">
+        <svg viewBox="0 0 1024 1024" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M128 256h64V192H128zM320 256h576V192H320zM128 544h64v-64H128zM320 544h576v-64H320zM128 832h64v-64H128zM320 832h576v-64H320z" fill="currentColor"></path>
+        </svg>
+    </a>
+    <div class="toc-menus" id="toc-menus">
+        <div class="toc-title">Article Directory</div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80%EF%BC%9A%E4%BA%BA%E7%9C%BC%E7%9A%84%E8%87%AA%E5%8A%A8%E7%99%BD%E5%B9%B3%E8%A1%A1"><span class="toc-number">1.</span> <span class="toc-text">前言：人眼的自动白平衡</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Von-Kries-%E5%81%87%E8%AF%B4-1902"><span class="toc-number">2.</span> <span class="toc-text">Von Kries 假说 (1902)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E5%AD%A6%E8%A1%A8%E8%BE%BE"><span class="toc-number">2.1.</span> <span class="toc-text">数学表达</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%B0%E4%BB%A3-CAT-%E6%B5%81%E7%A8%8B"><span class="toc-number">3.</span> <span class="toc-text">现代 CAT 流程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E5%9C%A8%E4%BA%8E-mathbf-M-CAT"><span class="toc-number">3.1.</span> <span class="toc-text">关键在于 $\mathbf{M}_{CAT}$</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CAT02-%E5%8F%98%E6%8D%A2"><span class="toc-number">4.</span> <span class="toc-text">CAT02 变换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CAT02-%E7%9F%A9%E9%98%B5"><span class="toc-number">4.1.</span> <span class="toc-text">CAT02 矩阵</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E6%AD%A5%E9%AA%A4"><span class="toc-number">4.2.</span> <span class="toc-text">计算步骤</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%E4%B8%8E%E5%B1%95%E6%9C%9B"><span class="toc-number">5.</span> <span class="toc-text">总结与展望</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-number">6.</span> <span class="toc-text">Reference</span></a></li></ol>
+    </div>
+
+
+<article class="post post__with-toc content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <h2 id="前言：人眼的自动白平衡"><a href="#前言：人眼的自动白平衡" class="headerlink" title="前言：人眼的自动白平衡"></a>前言：人眼的自动白平衡</h2><p>在摄影中，我们都知道“白平衡”的重要性。如果在白炽灯（低色温，偏黄）下拍摄一张白纸，不加修正的话，照片里的白纸会变成黄色。然而，我们在现场用肉眼看这张白纸时，它依然是白色的。</p>
+<p>这种人眼视觉系统根据环境光源颜色自动调整灵敏度，从而保持物体表面颜色感知恒定的能力，称为色适应。</p>
+<p>为了在数字图像处理中模拟这一过程（例如将 D65 光源下的颜色转换到 D50 光源下），我们需要建立数学模型，即色适应变换。</p>
+<h2 id="Von-Kries-假说-1902"><a href="#Von-Kries-假说-1902" class="headerlink" title="Von Kries 假说 (1902)"></a>Von Kries 假说 (1902)</h2><p>早在 1902 年，Johannes von Kries 就提出了色适应的最基础理论。他认为，色适应是通过独立调节三种视锥细胞（L, M, S）的增益系数来实现的。</p>
+<h3 id="数学表达"><a href="#数学表达" class="headerlink" title="数学表达"></a>数学表达</h3><p>假设源光源下的三刺激值为 $(L, M, S)$，目标光源下的三刺激值为 $(L’, M’, S’)$。Von Kries 变换可以表示为对角矩阵乘法：</p>
+<script type="math/tex; mode=display">
+\begin{bmatrix} L' \\ M' \\ S' \end{bmatrix} = \begin{bmatrix} k_L & 0 & 0 \\ 0 & k_M & 0 \\ 0 & 0 & k_S \end{bmatrix} \begin{bmatrix} L \\ M \\ S \end{bmatrix}</script><p>其中增益系数 $k$ 由目标光源白点 $(L_{w’}, M_{w’}, S_{w’})$ 与源光源白点 $(L_w, M_w, S_w)$ 的比值决定：</p>
+<script type="math/tex; mode=display">
+k_L = \frac{L_{w'}}{L_w}, \quad k_M = \frac{M_{w'}}{M_w}, \quad k_S = \frac{S_{w'}}{S_w}</script><p>这就像是相机的 RGB 通道独立增益控制。</p>
+<h2 id="现代-CAT-流程"><a href="#现代-CAT-流程" class="headerlink" title="现代 CAT 流程"></a>现代 CAT 流程</h2><p>虽然 Von Kries 假说基于 LMS 空间，但实际应用中我们通常从 XYZ 空间开始。因此，一个完整的 CAT 变换包含三个步骤：</p>
+<ol>
+<li><strong>XYZ $\to$ LMS</strong>：通过矩阵 $\mathbf{M}_{CAT}$ 将 XYZ 转换到锐化锥体响应空间（Sharpened Cone Response Domain）。</li>
+<li><strong>增益控制</strong>：应用 Von Kries 缩放。</li>
+<li><strong>LMS $\to$ XYZ</strong>：通过逆矩阵 $\mathbf{M}_{CAT}^{-1}$ 转回 XYZ。</li>
+</ol>
+<p>总公式为：</p>
+<script type="math/tex; mode=display">
+\begin{bmatrix} X' \\ Y' \\ Z' \end{bmatrix} = \mathbf{M}_{CAT}^{-1} \mathbf{D} \mathbf{M}_{CAT} \begin{bmatrix} X \\ Y \\ Z \end{bmatrix}</script><p>其中 $\mathbf{D}$ 是对角增益矩阵。</p>
+<h3 id="关键在于-mathbf-M-CAT"><a href="#关键在于-mathbf-M-CAT" class="headerlink" title="关键在于 $\mathbf{M}_{CAT}$"></a>关键在于 $\mathbf{M}_{CAT}$</h3><p>研究发现，直接使用生理学的 LMS 矩阵效果并非最好。科学家们通过优化数据集，推导出了更适合数学计算的“锐化”矩阵，如 Bradford 矩阵和 CAT02 矩阵。</p>
+<h2 id="CAT02-变换"><a href="#CAT02-变换" class="headerlink" title="CAT02 变换"></a>CAT02 变换</h2><p>CAT02 是目前最主流的色适应变换模型，被用于 CIECAM02 颜色外观模型中。</p>
+<h3 id="CAT02-矩阵"><a href="#CAT02-矩阵" class="headerlink" title="CAT02 矩阵"></a>CAT02 矩阵</h3><script type="math/tex; mode=display">
+\mathbf{M}_{CAT02} = \begin{bmatrix} 0.7328 & 0.4296 & -0.1624 \\ -0.7036 & 1.6975 & 0.0061 \\ 0.0030 & 0.0136 & 0.9834 \end{bmatrix}</script><h3 id="计算步骤"><a href="#计算步骤" class="headerlink" title="计算步骤"></a>计算步骤</h3><p>假设我们要将颜色从光源 A 转换到光源 B：</p>
+<ol>
+<li>计算光源 A 和 B 白点的 RGB 响应（基于 $\mathbf{M}_{CAT02}$）。</li>
+<li>计算增益 $D_R = R_{w,B}/R_{w,A}, D_G = G_{w,B}/G_{w,A}, D_B = B_{w,B}/B_{w,A}$。</li>
+<li>构造总变换矩阵 $\mathbf{M} = \mathbf{M}_{CAT02}^{-1} \mathbf{D} \mathbf{M}_{CAT02}$。</li>
+<li>将该矩阵应用于所有像素的 XYZ 值。</li>
+</ol>
+<h2 id="总结与展望"><a href="#总结与展望" class="headerlink" title="总结与展望"></a>总结与展望</h2><p>色适应模型解决了“不同光源下颜色外观一致性”的问题，是跨媒体色彩复制（如从屏幕到打印）的核心技术。</p>
+<p>然而，光源不仅仅影响白点，还会影响物体颜色的显色效果。为什么同样的红苹果在日光灯下看起来灰蒙蒙的？这就涉及到了光源的显色性。</p>
+<p>在下一章《色彩科学Vol.9 显色性评价：CRI与TM-30》中，我们将探讨如何评价一个光源还原物体真实颜色的能力。</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li>von Kries, J. (1902). <em>Influence of adaptation on the effects produced by luminous stimuli</em>.</li>
+<li>CIE. (2004). <em>CIE 159:2004 A Colour Appearance Model for Colour Management Systems: CIECAM02</em>.</li>
+<li>Fairchild, M. D. <em>Color Appearance Models</em>. Wiley.</li>
+</ol>
+
+    </div>
+     
+    <div class="post-footer__meta"><p>updated at 2025-11-21</p></div> 
+    <div class="post-entry__tags"><a href="/tags/%E8%89%B2%E5%BD%A9%E7%A7%91%E5%AD%A6/" class="post-tags__link button"># 色彩科学</a><a href="/tags/%E8%89%B2%E9%80%82%E5%BA%94/" class="post-tags__link button"># 色适应</a><a href="/tags/Von-Kries/" class="post-tags__link button"># Von Kries</a><a href="/tags/CAT02/" class="post-tags__link button"># CAT02</a><a href="/tags/%E7%99%BD%E5%B9%B3%E8%A1%A1/" class="post-tags__link button"># 白平衡</a></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
+            
+                <a href="/2025/01/30/%E8%89%B2%E5%BD%A9%E7%A7%91%E5%AD%A6Vol.9-%E6%98%BE%E8%89%B2%E6%80%A7%E8%AF%84%E4%BB%B7%EF%BC%9ACRI%E4%B8%8ETM-30/" class="nav__link">
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
+                    </div>
+                    <div>
+                        <div class="nav__label">
+                            Previous Post
+                        </div>
+                        <div class="nav__title">
+                            色彩科学Vol.9 显色性评价：CRI与TM-30
+                        </div>
+                    </div>
+                </a>
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="/2025/01/28/%E8%89%B2%E5%BD%A9%E7%A7%91%E5%AD%A6Vol.7-%E8%89%B2%E5%B7%AE%E5%85%AC%E5%BC%8F%E6%BC%94%E5%8F%98%EF%BC%9A%E4%BB%8EDeltaE%E5%88%B0CIEDE2000/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            Next Post
+                        </div>
+                        <div class="nav__title">
+                            色彩科学Vol.7 色差公式演变：从DeltaE到CIEDE2000
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
+        </div>
+    </div>
+
+
+
+
+
+</main>
+
+            <footer class="footer">
+     
+    <a href="#" class="button" id="b2t" aria-label="Back to Top" title="Back to Top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M233.376 722.752L278.624 768 512 534.624 745.376 768l45.248-45.248L512 444.128zM192 352h640V288H192z" fill="currentColor"></path>
+        </svg>
+    </a>
+
+    
+
+
+    
+     
+ 
+
+ 
+    
+        
+        <p class="footer-copyright">
+            Strtus's Journry
+        </p>
+    
+    
+        
+            
+        
+            
+        
+            <p>保持对世界的输出🙌</p>
+
+        
+    
+</footer>
+
+        </div>
+         
+
+ 
+    <script>
+        window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+        ga('create', 'G-5ERPC280ZB', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+ 
+
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5ERPC280ZB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-5ERPC280ZB');
+    </script>
+ 
+
+ 
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement('script');
+            hm.src = 'https://hm.baidu.com/hm.js?8da6411546e903e478a9d82d2a4d0c60';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+    
+ 
+
+
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.css">
+
+    
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.js"></script>
+
+    <script>
+        let lazyloadT = Boolean('false'),
+            auto_fancybox = Boolean('true')
+        if (auto_fancybox) {
+            $(".post__content").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        } else {
+            $(".post__content").find("fancybox").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        }
+    </script>
+ 
+
+
+    <script>
+        if (typeof MathJax === 'undefined') {
+            window.MathJax = {
+                loader: {
+                    source: {
+                        '[tex]/amsCd': '[tex]/amscd',
+                        '[tex]/AMScd': '[tex]/amscd'
+                    }
+                },
+                tex: {
+                    inlineMath: {'[+]': [['$', '$']]},
+                    tags: 'ams'
+                },
+                options: {
+                    renderActions: {
+                        findScript: [10, doc => {
+                            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                                const display = !!node.type.match(/; *mode=display/);
+                                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                                const text = document.createTextNode('');
+                                node.parentNode.replaceChild(text, node);
+                                math.start = {node: text, delim: '', n: 0};
+                                math.end = {node: text, delim: '', n: 0};
+                                doc.math.push(math);
+                            });
+                        }, '', false],
+                        insertedScript: [200, () => {
+                            document.querySelectorAll('mjx-container').forEach(node => {
+                                let target = node.parentNode;
+                                if (target.nodeName.toLowerCase() === 'li') {
+                                    target.parentNode.classList.add('has-jax');
+                                }
+                            });
+                        }, '', false]
+                    }
+                }
+            };
+            (function () {
+                var script = document.createElement('script');
+                script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js";
+                script.defer = true;
+                document.head.appendChild(script);
+            })();
+        } else {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+        }
+    </script>
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+
+    </body>
+</html>

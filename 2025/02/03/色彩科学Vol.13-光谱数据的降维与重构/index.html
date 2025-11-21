@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--icon-->
+
+    
+        <link rel="shortcut icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="16x16" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="32x32" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon-96x96.png">
+    
+    
+        <link rel="apple-touch-icon" sizes="180x180" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/web-app-manifest-192x192.png">
+    
+    
+        <link rel="mask-icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/apple-touch-icon.png">
+    
+
+
+    <!-- meta -->
+
+
+<title>色彩科学Vol.13 光谱数据的降维与重构 | Strtus&#39;s Journey</title>
+
+
+    <meta name="keywords" content="色彩科学, 光谱分析, PCA, 降维, 异谱同色">
+
+
+
+
+    <!-- OpenGraph -->
+ 
+    <meta name="description" content="前言：RGB 的阴影在前面的 12 章中，我们几乎都在处理三维数据（RGB, XYZ, Lab）。这是因为人眼只有三种视锥细胞，三维数据足以“欺骗”我们的眼睛。 然而，物理世界是无限维的。一个物体的颜色本质上由其光谱反射率曲线 $R(\lambda)$ 决定。当我们用 RGB 相机拍摄时，大量光谱信息丢失了，这就是同色异谱的根源。 在艺术品修复、纺织品配色和高端计算机图形学（Spectral Re">
+<meta property="og:type" content="article">
+<meta property="og:title" content="色彩科学Vol.13 光谱数据的降维与重构">
+<meta property="og:url" content="https://strtus.github.io/2025/02/03/%E8%89%B2%E5%BD%A9%E7%A7%91%E5%AD%A6Vol.13-%E5%85%89%E8%B0%B1%E6%95%B0%E6%8D%AE%E7%9A%84%E9%99%8D%E7%BB%B4%E4%B8%8E%E9%87%8D%E6%9E%84/index.html">
+<meta property="og:site_name" content="Strtus&#39;s Journey">
+<meta property="og:description" content="前言：RGB 的阴影在前面的 12 章中，我们几乎都在处理三维数据（RGB, XYZ, Lab）。这是因为人眼只有三种视锥细胞，三维数据足以“欺骗”我们的眼睛。 然而，物理世界是无限维的。一个物体的颜色本质上由其光谱反射率曲线 $R(\lambda)$ 决定。当我们用 RGB 相机拍摄时，大量光谱信息丢失了，这就是同色异谱的根源。 在艺术品修复、纺织品配色和高端计算机图形学（Spectral Re">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-02-03T02:00:00.000Z">
+<meta property="article:modified_time" content="2025-11-21T11:18:28.025Z">
+<meta property="article:author" content="strtus">
+<meta property="article:tag" content="色彩科学">
+<meta property="article:tag" content="光谱分析">
+<meta property="article:tag" content="PCA">
+<meta property="article:tag" content="降维">
+<meta property="article:tag" content="异谱同色">
+<meta name="twitter:card" content="summary_large_image">
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/highlight.css" media="none" >
+        
+            <link rel="stylesheet" id="hl-dark-theme" href="/css/highlight/highlight.dark.css" media="none">
+        
+    
+
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/style/dark.css">
+
+    
+<script src="/js/darkmode.js"></script>
+
+
+
+     
+
+    <!-- custom head -->
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+    <body>
+        <div id="app" tabindex="-1">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">Strtus&#39;s Journey</span>
+        </a>
+    </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">首页</a>
+                
+                    <a href="/about.html" class="navbar-menu button">About</a>
+                
+                    <a href="/categories/" class="navbar-menu button">分类</a>
+                
+                    <a href="/tags/" class="navbar-menu button">标签</a>
+                
+                    <a href="/archives/" class="navbar-menu button">归档</a>
+                
+            </div>
+        
+        
+        
+    <a href="/search/" id="btn-search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="24" height="24" fill="currentColor" stroke="currentColor" stroke-width="32"><path d="M192 448c0-141.152 114.848-256 256-256s256 114.848 256 256-114.848 256-256 256-256-114.848-256-256z m710.624 409.376l-206.88-206.88A318.784 318.784 0 0 0 768 448c0-176.736-143.264-320-320-320S128 271.264 128 448s143.264 320 320 320a318.784 318.784 0 0 0 202.496-72.256l206.88 206.88 45.248-45.248z"></path></svg>
+    </a>
+
+
+        
+        
+    <a href="javaScript:void(0);" id="btn-toggle-dark">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </a>
+
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">首页</a>
+                
+                    <a href="/about.html" class="dropdown-menu button">About</a>
+                
+                    <a href="/categories/" class="dropdown-menu button">分类</a>
+                
+                    <a href="/tags/" class="dropdown-menu button">标签</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">归档</a>
+                
+            </div>
+        
+    </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        色彩科学Vol.13 光谱数据的降维与重构
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2025/02/" class="post-meta__date button">2025-02-03</a>
+        
+    <span class="separate-dot"></span><a href="/categories/%E8%89%B2%E5%BD%A9%E7%A7%91%E5%AD%A6%E7%9A%84%E6%95%B0%E5%AD%A6%E5%8E%9F%E7%90%86/" class="button">色彩科学的数学原理</a>
+
+ 
+        
+    
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+    <aside class="post-side">
+        <div class="post-side__toc">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80%EF%BC%9ARGB-%E7%9A%84%E9%98%B4%E5%BD%B1"><span class="toc-number">1.</span> <span class="toc-text">前言：RGB 的阴影</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%89%E8%B0%B1%E6%95%B0%E6%8D%AE%E7%9A%84%E7%BB%9F%E8%AE%A1%E7%89%B9%E6%80%A7"><span class="toc-number">2.</span> <span class="toc-text">光谱数据的统计特性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90-PCA"><span class="toc-number">3.</span> <span class="toc-text">主成分分析 (PCA)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E5%9F%BA%E5%BA%95%E6%A8%A1%E5%9E%8B"><span class="toc-number">3.1.</span> <span class="toc-text">线性基底模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%9F%E5%A1%9E%E5%B0%94%E8%89%B2%E5%8D%A1%E7%9A%84%E5%AE%9E%E9%AA%8C"><span class="toc-number">3.2.</span> <span class="toc-text">孟塞尔色卡的实验</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%EF%BC%9A%E5%A4%9A%E5%85%89%E8%B0%B1%E6%88%90%E5%83%8F"><span class="toc-number">4.</span> <span class="toc-text">应用：多光谱成像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%E4%B8%8E%E5%B1%95%E6%9C%9B"><span class="toc-number">5.</span> <span class="toc-text">总结与展望</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-number">6.</span> <span class="toc-text">Reference</span></a></li></ol>
+        </div>
+    </aside>
+    <a class="btn-toc button" id="btn-toc" tabindex="0">
+        <svg viewBox="0 0 1024 1024" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M128 256h64V192H128zM320 256h576V192H320zM128 544h64v-64H128zM320 544h576v-64H320zM128 832h64v-64H128zM320 832h576v-64H320z" fill="currentColor"></path>
+        </svg>
+    </a>
+    <div class="toc-menus" id="toc-menus">
+        <div class="toc-title">Article Directory</div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80%EF%BC%9ARGB-%E7%9A%84%E9%98%B4%E5%BD%B1"><span class="toc-number">1.</span> <span class="toc-text">前言：RGB 的阴影</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%89%E8%B0%B1%E6%95%B0%E6%8D%AE%E7%9A%84%E7%BB%9F%E8%AE%A1%E7%89%B9%E6%80%A7"><span class="toc-number">2.</span> <span class="toc-text">光谱数据的统计特性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90-PCA"><span class="toc-number">3.</span> <span class="toc-text">主成分分析 (PCA)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E5%9F%BA%E5%BA%95%E6%A8%A1%E5%9E%8B"><span class="toc-number">3.1.</span> <span class="toc-text">线性基底模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%9F%E5%A1%9E%E5%B0%94%E8%89%B2%E5%8D%A1%E7%9A%84%E5%AE%9E%E9%AA%8C"><span class="toc-number">3.2.</span> <span class="toc-text">孟塞尔色卡的实验</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%EF%BC%9A%E5%A4%9A%E5%85%89%E8%B0%B1%E6%88%90%E5%83%8F"><span class="toc-number">4.</span> <span class="toc-text">应用：多光谱成像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%E4%B8%8E%E5%B1%95%E6%9C%9B"><span class="toc-number">5.</span> <span class="toc-text">总结与展望</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-number">6.</span> <span class="toc-text">Reference</span></a></li></ol>
+    </div>
+
+
+<article class="post post__with-toc content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <h2 id="前言：RGB-的阴影"><a href="#前言：RGB-的阴影" class="headerlink" title="前言：RGB 的阴影"></a>前言：RGB 的阴影</h2><p>在前面的 12 章中，我们几乎都在处理三维数据（RGB, XYZ, Lab）。这是因为人眼只有三种视锥细胞，三维数据足以“欺骗”我们的眼睛。</p>
+<p>然而，物理世界是无限维的。一个物体的颜色本质上由其光谱反射率曲线 $R(\lambda)$ 决定。当我们用 RGB 相机拍摄时，大量光谱信息丢失了，这就是同色异谱的根源。</p>
+<p>在艺术品修复、纺织品配色和高端计算机图形学（Spectral Rendering）中，我们需要处理完整的光谱数据。但是，如果以 10nm 为间隔采样可见光（400-700nm），每个像素就需要 31 个数据。这数据量太大了。有没有办法压缩它？</p>
+<h2 id="光谱数据的统计特性"><a href="#光谱数据的统计特性" class="headerlink" title="光谱数据的统计特性"></a>光谱数据的统计特性</h2><p>自然界的光谱并不是随机的噪声。</p>
+<ul>
+<li>树叶的反射率曲线总是平滑的，且在红外波段有特征性的“红边”。</li>
+<li>肤色的反射率曲线总是呈现出“W”形的血红蛋白吸收带。</li>
+</ul>
+<p>这种平滑性和规律性意味着光谱数据存在巨大的<strong>冗余</strong>。我们可以利用统计学方法对其进行降维。</p>
+<h2 id="主成分分析-PCA"><a href="#主成分分析-PCA" class="headerlink" title="主成分分析 (PCA)"></a>主成分分析 (PCA)</h2><p>主成分分析，在信号处理中也称为 Karhunen-Loève 变换 (KLT)，是处理光谱数据的核心工具。</p>
+<h3 id="线性基底模型"><a href="#线性基底模型" class="headerlink" title="线性基底模型"></a>线性基底模型</h3><p>PCA 的核心思想是找到一组正交的基底函数（特征向量，Eigenvectors）$E_i(\lambda)$，使得任意光谱 $S(\lambda)$ 都可以近似表示为这组基底的线性组合：</p>
+<script type="math/tex; mode=display">
+S(\lambda) \approx \mu(\lambda) + \sum_{i=1}^k w_i E_i(\lambda)</script><p>其中：</p>
+<ul>
+<li>$\mu(\lambda)$ 是平均光谱。</li>
+<li>$w_i$ 是权重系数（标量）。</li>
+<li>$k$ 是保留的主成分个数。</li>
+</ul>
+<h3 id="孟塞尔色卡的实验"><a href="#孟塞尔色卡的实验" class="headerlink" title="孟塞尔色卡的实验"></a>孟塞尔色卡的实验</h3><p>研究表明，对于孟塞尔色卡（Munsell Color Chips）等自然物体，<strong>前 3 到 6 个主成分</strong>就可以解释 99% 以上的光谱方差。
+这意味着，我们不需要存储 31 个数据，只需要存储 3-6 个权重系数 $w_i$，就可以高精度地重构出原始光谱。</p>
+<h2 id="应用：多光谱成像"><a href="#应用：多光谱成像" class="headerlink" title="应用：多光谱成像"></a>应用：多光谱成像</h2><p>基于 PCA 理论，我们可以设计多光谱相机。
+这种相机不像普通相机那样只有 R, G, B 三个滤光片，而是可能有 6 个或更多特定的窄带滤光片。</p>
+<p>通过测量这 6 个通道的响应，我们可以反解出 6 个权重系数 $w_i$，进而重构出物体在 400-700nm 的完整光谱反射率曲线。</p>
+<p>这在<strong>数字典藏</strong>（如故宫名画数字化）中应用广泛：一旦拥有了画作的光谱数据，我们就可以在计算机上模拟它在任何光源（烛光、日光、LED）下的真实样子，且完全避免同色异谱问题。</p>
+<h2 id="总结与展望"><a href="#总结与展望" class="headerlink" title="总结与展望"></a>总结与展望</h2><p>光谱是颜色的物理本质，而 RGB 只是人眼的生理投影。通过 PCA 等数学工具，我们可以在数据量和精确度之间找到完美的平衡。</p>
+<p>至此，我们已经从光子（辐射度量学）讲到了神经（HVS），从代数（格拉斯曼）讲到了几何（色品图），从工业标准（CIELAB）讲到了电影流程（ACES）。</p>
+<p>在最后一章《色彩科学Vol.14 计算色彩学前沿》中，我们将对整个系列进行总结，并展望色彩科学在 AI 和神经科学时代的未来。</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li>Maloney, L. T. (1986). <em>Evaluation of linear models of surface spectral reflectance with small numbers of parameters</em>. JOSA A.</li>
+<li>Parkkinen, J. P. S., et al. (1989). <em>Characteristic spectra of Munsell colors</em>. JOSA A.</li>
+<li>Hardeberg, J. Y. <em>Acquisition and Reproduction of Color Images: Colorimetric and Multispectral Approaches</em>.</li>
+</ol>
+
+    </div>
+     
+    <div class="post-footer__meta"><p>updated at 2025-11-21</p></div> 
+    <div class="post-entry__tags"><a href="/tags/%E8%89%B2%E5%BD%A9%E7%A7%91%E5%AD%A6/" class="post-tags__link button"># 色彩科学</a><a href="/tags/%E5%85%89%E8%B0%B1%E5%88%86%E6%9E%90/" class="post-tags__link button"># 光谱分析</a><a href="/tags/PCA/" class="post-tags__link button"># PCA</a><a href="/tags/%E9%99%8D%E7%BB%B4/" class="post-tags__link button"># 降维</a><a href="/tags/%E5%BC%82%E8%B0%B1%E5%90%8C%E8%89%B2/" class="post-tags__link button"># 异谱同色</a></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
+            
+                <a href="/2025/02/04/%E8%89%B2%E5%BD%A9%E7%A7%91%E5%AD%A6Vol.14-%E8%AE%A1%E7%AE%97%E8%89%B2%E5%BD%A9%E5%AD%A6%E5%89%8D%E6%B2%BF/" class="nav__link">
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
+                    </div>
+                    <div>
+                        <div class="nav__label">
+                            Previous Post
+                        </div>
+                        <div class="nav__title">
+                            色彩科学Vol.14 计算色彩学前沿
+                        </div>
+                    </div>
+                </a>
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="/2025/02/02/%E8%89%B2%E5%BD%A9%E7%A7%91%E5%AD%A6Vol.12-%E7%8E%B0%E4%BB%A3%E8%89%B2%E5%BD%A9%E7%AE%A1%E7%90%86%E6%B5%81%E7%A8%8B%EF%BC%9AACES%E4%B8%8ERec2020/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            Next Post
+                        </div>
+                        <div class="nav__title">
+                            色彩科学Vol.12 现代色彩管理流程：ACES与Rec2020
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
+        </div>
+    </div>
+
+
+
+
+
+</main>
+
+            <footer class="footer">
+     
+    <a href="#" class="button" id="b2t" aria-label="Back to Top" title="Back to Top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M233.376 722.752L278.624 768 512 534.624 745.376 768l45.248-45.248L512 444.128zM192 352h640V288H192z" fill="currentColor"></path>
+        </svg>
+    </a>
+
+    
+
+
+    
+     
+ 
+
+ 
+    
+        
+        <p class="footer-copyright">
+            Strtus's Journry
+        </p>
+    
+    
+        
+            
+        
+            
+        
+            <p>保持对世界的输出🙌</p>
+
+        
+    
+</footer>
+
+        </div>
+         
+
+ 
+    <script>
+        window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+        ga('create', 'G-5ERPC280ZB', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+ 
+
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5ERPC280ZB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-5ERPC280ZB');
+    </script>
+ 
+
+ 
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement('script');
+            hm.src = 'https://hm.baidu.com/hm.js?8da6411546e903e478a9d82d2a4d0c60';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+    
+ 
+
+
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.css">
+
+    
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.js"></script>
+
+    <script>
+        let lazyloadT = Boolean('false'),
+            auto_fancybox = Boolean('true')
+        if (auto_fancybox) {
+            $(".post__content").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        } else {
+            $(".post__content").find("fancybox").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        }
+    </script>
+ 
+
+
+    <script>
+        if (typeof MathJax === 'undefined') {
+            window.MathJax = {
+                loader: {
+                    source: {
+                        '[tex]/amsCd': '[tex]/amscd',
+                        '[tex]/AMScd': '[tex]/amscd'
+                    }
+                },
+                tex: {
+                    inlineMath: {'[+]': [['$', '$']]},
+                    tags: 'ams'
+                },
+                options: {
+                    renderActions: {
+                        findScript: [10, doc => {
+                            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                                const display = !!node.type.match(/; *mode=display/);
+                                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                                const text = document.createTextNode('');
+                                node.parentNode.replaceChild(text, node);
+                                math.start = {node: text, delim: '', n: 0};
+                                math.end = {node: text, delim: '', n: 0};
+                                doc.math.push(math);
+                            });
+                        }, '', false],
+                        insertedScript: [200, () => {
+                            document.querySelectorAll('mjx-container').forEach(node => {
+                                let target = node.parentNode;
+                                if (target.nodeName.toLowerCase() === 'li') {
+                                    target.parentNode.classList.add('has-jax');
+                                }
+                            });
+                        }, '', false]
+                    }
+                }
+            };
+            (function () {
+                var script = document.createElement('script');
+                script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js";
+                script.defer = true;
+                document.head.appendChild(script);
+            })();
+        } else {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+        }
+    </script>
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+
+    </body>
+</html>

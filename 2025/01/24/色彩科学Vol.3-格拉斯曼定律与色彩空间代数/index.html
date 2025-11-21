@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--icon-->
+
+    
+        <link rel="shortcut icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="16x16" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="32x32" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon-96x96.png">
+    
+    
+        <link rel="apple-touch-icon" sizes="180x180" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/web-app-manifest-192x192.png">
+    
+    
+        <link rel="mask-icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/apple-touch-icon.png">
+    
+
+
+    <!-- meta -->
+
+
+<title>色彩科学Vol.3 格拉斯曼定律与色彩空间代数 | Strtus&#39;s Journey</title>
+
+
+    <meta name="keywords" content="色彩科学, 格拉斯曼定律, 线性代数">
+
+
+
+
+    <!-- OpenGraph -->
+ 
+    <meta name="description" content="前言：色彩的代数结构在《色彩科学Vol.2 人眼视觉系统与颜色匹配实验》中，我们通过颜色匹配实验得到了 RGB 三刺激值。实验结果暗示了一个极其重要的性质：色彩的混合遵循线性叠加原理。 这意味着，我们可以借用强大的线性代数工具来研究色彩。色彩空间本质上是一个三维向量空间，而色彩的变换（如从 RGB 转到 XYZ，或从 sRGB 转到 CMYK）本质上是基底变换。 本章将详细阐述 Hermann G">
+<meta property="og:type" content="article">
+<meta property="og:title" content="色彩科学Vol.3 格拉斯曼定律与色彩空间代数">
+<meta property="og:url" content="https://strtus.github.io/2025/01/24/%E8%89%B2%E5%BD%A9%E7%A7%91%E5%AD%A6Vol.3-%E6%A0%BC%E6%8B%89%E6%96%AF%E6%9B%BC%E5%AE%9A%E5%BE%8B%E4%B8%8E%E8%89%B2%E5%BD%A9%E7%A9%BA%E9%97%B4%E4%BB%A3%E6%95%B0/index.html">
+<meta property="og:site_name" content="Strtus&#39;s Journey">
+<meta property="og:description" content="前言：色彩的代数结构在《色彩科学Vol.2 人眼视觉系统与颜色匹配实验》中，我们通过颜色匹配实验得到了 RGB 三刺激值。实验结果暗示了一个极其重要的性质：色彩的混合遵循线性叠加原理。 这意味着，我们可以借用强大的线性代数工具来研究色彩。色彩空间本质上是一个三维向量空间，而色彩的变换（如从 RGB 转到 XYZ，或从 sRGB 转到 CMYK）本质上是基底变换。 本章将详细阐述 Hermann G">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-01-24T02:00:00.000Z">
+<meta property="article:modified_time" content="2025-11-21T10:54:21.632Z">
+<meta property="article:author" content="strtus">
+<meta property="article:tag" content="色彩科学">
+<meta property="article:tag" content="格拉斯曼定律">
+<meta property="article:tag" content="线性代数">
+<meta name="twitter:card" content="summary_large_image">
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/highlight.css" media="none" >
+        
+            <link rel="stylesheet" id="hl-dark-theme" href="/css/highlight/highlight.dark.css" media="none">
+        
+    
+
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/style/dark.css">
+
+    
+<script src="/js/darkmode.js"></script>
+
+
+
+     
+
+    <!-- custom head -->
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+    <body>
+        <div id="app" tabindex="-1">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">Strtus&#39;s Journey</span>
+        </a>
+    </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">首页</a>
+                
+                    <a href="/about.html" class="navbar-menu button">About</a>
+                
+                    <a href="/categories/" class="navbar-menu button">分类</a>
+                
+                    <a href="/tags/" class="navbar-menu button">标签</a>
+                
+                    <a href="/archives/" class="navbar-menu button">归档</a>
+                
+            </div>
+        
+        
+        
+    <a href="/search/" id="btn-search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="24" height="24" fill="currentColor" stroke="currentColor" stroke-width="32"><path d="M192 448c0-141.152 114.848-256 256-256s256 114.848 256 256-114.848 256-256 256-256-114.848-256-256z m710.624 409.376l-206.88-206.88A318.784 318.784 0 0 0 768 448c0-176.736-143.264-320-320-320S128 271.264 128 448s143.264 320 320 320a318.784 318.784 0 0 0 202.496-72.256l206.88 206.88 45.248-45.248z"></path></svg>
+    </a>
+
+
+        
+        
+    <a href="javaScript:void(0);" id="btn-toggle-dark">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </a>
+
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">首页</a>
+                
+                    <a href="/about.html" class="dropdown-menu button">About</a>
+                
+                    <a href="/categories/" class="dropdown-menu button">分类</a>
+                
+                    <a href="/tags/" class="dropdown-menu button">标签</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">归档</a>
+                
+            </div>
+        
+    </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        色彩科学Vol.3 格拉斯曼定律与色彩空间代数
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2025/01/" class="post-meta__date button">2025-01-24</a>
+        
+    <span class="separate-dot"></span><a href="/categories/%E8%89%B2%E5%BD%A9%E7%A7%91%E5%AD%A6%E7%9A%84%E6%95%B0%E5%AD%A6%E5%8E%9F%E7%90%86/" class="button">色彩科学的数学原理</a>
+
+ 
+        
+    
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+    <aside class="post-side">
+        <div class="post-side__toc">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80%EF%BC%9A%E8%89%B2%E5%BD%A9%E7%9A%84%E4%BB%A3%E6%95%B0%E7%BB%93%E6%9E%84"><span class="toc-number">1.</span> <span class="toc-text">前言：色彩的代数结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%BC%E6%8B%89%E6%96%AF%E6%9B%BC%E5%AE%9A%E5%BE%8B"><span class="toc-number">2.</span> <span class="toc-text">格拉斯曼定律</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E5%AE%9A%E5%BE%8B%EF%BC%9A%E4%B8%89%E5%8F%98%E9%87%8F%E6%80%A7"><span class="toc-number">2.1.</span> <span class="toc-text">第一定律：三变量性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E5%AE%9A%E5%BE%8B%EF%BC%9A%E8%BF%9E%E7%BB%AD%E6%80%A7"><span class="toc-number">2.2.</span> <span class="toc-text">第二定律：连续性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E5%AE%9A%E5%BE%8B%EF%BC%9A%E5%8A%A0%E6%B3%95%E5%8E%9F%E7%90%86"><span class="toc-number">2.3.</span> <span class="toc-text">第三定律：加法原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E5%AE%9A%E5%BE%8B%EF%BC%9A%E6%AF%94%E4%BE%8B%E6%80%A7"><span class="toc-number">2.4.</span> <span class="toc-text">第四定律：比例性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%89%B2%E5%BD%A9%E7%A9%BA%E9%97%B4%E7%9A%84%E5%90%91%E9%87%8F%E8%A1%A8%E7%A4%BA"><span class="toc-number">3.</span> <span class="toc-text">色彩空间的向量表示</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%91%E9%87%8F%E5%AE%9A%E4%B9%89"><span class="toc-number">3.1.</span> <span class="toc-text">向量定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%89%B2%E5%BA%A6%E5%9D%90%E6%A0%87"><span class="toc-number">3.2.</span> <span class="toc-text">色度坐标</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%89%B2%E5%BD%A9%E7%A9%BA%E9%97%B4%E7%9A%84%E5%9F%BA%E5%BA%95%E5%8F%98%E6%8D%A2"><span class="toc-number">4.</span> <span class="toc-text">色彩空间的基底变换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E5%8F%98%E6%8D%A2%EF%BC%9F"><span class="toc-number">4.1.</span> <span class="toc-text">为什么需要变换？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%E4%B8%8E%E5%B1%95%E6%9C%9B"><span class="toc-number">5.</span> <span class="toc-text">总结与展望</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-number">6.</span> <span class="toc-text">Reference</span></a></li></ol>
+        </div>
+    </aside>
+    <a class="btn-toc button" id="btn-toc" tabindex="0">
+        <svg viewBox="0 0 1024 1024" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M128 256h64V192H128zM320 256h576V192H320zM128 544h64v-64H128zM320 544h576v-64H320zM128 832h64v-64H128zM320 832h576v-64H320z" fill="currentColor"></path>
+        </svg>
+    </a>
+    <div class="toc-menus" id="toc-menus">
+        <div class="toc-title">Article Directory</div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80%EF%BC%9A%E8%89%B2%E5%BD%A9%E7%9A%84%E4%BB%A3%E6%95%B0%E7%BB%93%E6%9E%84"><span class="toc-number">1.</span> <span class="toc-text">前言：色彩的代数结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%BC%E6%8B%89%E6%96%AF%E6%9B%BC%E5%AE%9A%E5%BE%8B"><span class="toc-number">2.</span> <span class="toc-text">格拉斯曼定律</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E5%AE%9A%E5%BE%8B%EF%BC%9A%E4%B8%89%E5%8F%98%E9%87%8F%E6%80%A7"><span class="toc-number">2.1.</span> <span class="toc-text">第一定律：三变量性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E5%AE%9A%E5%BE%8B%EF%BC%9A%E8%BF%9E%E7%BB%AD%E6%80%A7"><span class="toc-number">2.2.</span> <span class="toc-text">第二定律：连续性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E5%AE%9A%E5%BE%8B%EF%BC%9A%E5%8A%A0%E6%B3%95%E5%8E%9F%E7%90%86"><span class="toc-number">2.3.</span> <span class="toc-text">第三定律：加法原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E5%AE%9A%E5%BE%8B%EF%BC%9A%E6%AF%94%E4%BE%8B%E6%80%A7"><span class="toc-number">2.4.</span> <span class="toc-text">第四定律：比例性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%89%B2%E5%BD%A9%E7%A9%BA%E9%97%B4%E7%9A%84%E5%90%91%E9%87%8F%E8%A1%A8%E7%A4%BA"><span class="toc-number">3.</span> <span class="toc-text">色彩空间的向量表示</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%91%E9%87%8F%E5%AE%9A%E4%B9%89"><span class="toc-number">3.1.</span> <span class="toc-text">向量定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%89%B2%E5%BA%A6%E5%9D%90%E6%A0%87"><span class="toc-number">3.2.</span> <span class="toc-text">色度坐标</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%89%B2%E5%BD%A9%E7%A9%BA%E9%97%B4%E7%9A%84%E5%9F%BA%E5%BA%95%E5%8F%98%E6%8D%A2"><span class="toc-number">4.</span> <span class="toc-text">色彩空间的基底变换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E5%8F%98%E6%8D%A2%EF%BC%9F"><span class="toc-number">4.1.</span> <span class="toc-text">为什么需要变换？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%E4%B8%8E%E5%B1%95%E6%9C%9B"><span class="toc-number">5.</span> <span class="toc-text">总结与展望</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-number">6.</span> <span class="toc-text">Reference</span></a></li></ol>
+    </div>
+
+
+<article class="post post__with-toc content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <h2 id="前言：色彩的代数结构"><a href="#前言：色彩的代数结构" class="headerlink" title="前言：色彩的代数结构"></a>前言：色彩的代数结构</h2><p>在《色彩科学Vol.2 人眼视觉系统与颜色匹配实验》中，我们通过颜色匹配实验得到了 RGB 三刺激值。实验结果暗示了一个极其重要的性质：色彩的混合遵循线性叠加原理。</p>
+<p>这意味着，我们可以借用强大的线性代数工具来研究色彩。色彩空间本质上是一个三维向量空间，而色彩的变换（如从 RGB 转到 XYZ，或从 sRGB 转到 CMYK）本质上是基底变换。</p>
+<p>本章将详细阐述 Hermann Grassmann 于 1853 年提出的格拉斯曼定律，它是现代比色法的数学公理体系。</p>
+<h2 id="格拉斯曼定律"><a href="#格拉斯曼定律" class="headerlink" title="格拉斯曼定律"></a>格拉斯曼定律</h2><p>格拉斯曼定律总结了人眼对色彩混合的经验规律，将其提升为数学公理。</p>
+<h3 id="第一定律：三变量性"><a href="#第一定律：三变量性" class="headerlink" title="第一定律：三变量性"></a>第一定律：三变量性</h3><p>任何颜色都可以由三个线性无关的基色（Primaries）混合而成。
+这意味着色彩空间是三维的。若选定红($R$)、绿($G$)、蓝($B$)为基色，则任意颜色 $C$ 可表示为：</p>
+<script type="math/tex; mode=display">
+C \equiv R[R] + G[G] + B[B]</script><p>其中 $(R, G, B)$ 为三刺激值。</p>
+<h3 id="第二定律：连续性"><a href="#第二定律：连续性" class="headerlink" title="第二定律：连续性"></a>第二定律：连续性</h3><p>如果混合光的光谱成分发生连续变化，则其引起的颜色感觉也发生连续变化。这意味着色彩空间中不存在“突变”，色彩函数是连续且可微的。</p>
+<h3 id="第三定律：加法原理"><a href="#第三定律：加法原理" class="headerlink" title="第三定律：加法原理"></a>第三定律：加法原理</h3><p>这是格拉斯曼定律的核心，也是色彩空间线性性质的来源。
+若颜色 $C_1$ 匹配 $C_2$，颜色 $C_3$ 匹配 $C_4$，则它们的混合色也必然匹配：</p>
+<script type="math/tex; mode=display">
+\text{If } C_1 \equiv C_2 \text{ and } C_3 \equiv C_4, \text{ then } C_1 + C_3 \equiv C_2 + C_4</script><p>这表明，光度学上的加法对应于代数上的向量加法。</p>
+<h3 id="第四定律：比例性"><a href="#第四定律：比例性" class="headerlink" title="第四定律：比例性"></a>第四定律：比例性</h3><p>若颜色 $C_1$ 匹配 $C_2$，则增强或减弱相同倍数 $k$ 后，它们依然匹配：</p>
+<script type="math/tex; mode=display">
+\text{If } C_1 \equiv C_2, \text{ then } k C_1 \equiv k C_2</script><p>这意味着亮度的改变不会影响色度匹配关系（在明视觉范围内）。</p>
+<h2 id="色彩空间的向量表示"><a href="#色彩空间的向量表示" class="headerlink" title="色彩空间的向量表示"></a>色彩空间的向量表示</h2><p>基于格拉斯曼定律，我们可以将色彩视为三维向量空间 $\mathbb{V}^3$ 中的向量。</p>
+<h3 id="向量定义"><a href="#向量定义" class="headerlink" title="向量定义"></a>向量定义</h3><p>设 $[R], [G], [B]$ 为一组基底向量，则任意颜色向量 $\mathbf{C}$ 可表示为：</p>
+<script type="math/tex; mode=display">
+\mathbf{C} = \begin{bmatrix} R \\ G \\ B \end{bmatrix}</script><h3 id="色度坐标"><a href="#色度坐标" class="headerlink" title="色度坐标"></a>色度坐标</h3><p>为了分离“亮度”与“颜色（色相+饱和度）”，我们引入归一化的色度坐标。
+定义：</p>
+<script type="math/tex; mode=display">
+r = \frac{R}{R+G+B}, \quad g = \frac{G}{R+G+B}, \quad b = \frac{B}{R+G+B}</script><p>显然有 $r+g+b=1$。
+这三个量 $(r, g, b)$ 描述了颜色的色度。在几何上，这对应于将三维色彩向量投影到 $R+G+B=1$ 的平面（单位平面或麦克斯韦三角形）上。</p>
+<p>由于 $b = 1 - r - g$，我们通常只需要用二维坐标 $(r, g)$ 即可在平面上描述色度。这就是色度图的由来。</p>
+<h2 id="色彩空间的基底变换"><a href="#色彩空间的基底变换" class="headerlink" title="色彩空间的基底变换"></a>色彩空间的基底变换</h2><p>在色彩科学中，我们经常需要在不同的色彩空间之间转换（例如从 CIE RGB 转换到 CIE XYZ）。这在数学上等价于基底变换。</p>
+<p>假设我们有两组基色系统：</p>
+<ol>
+<li>旧基底：$\{[R], [G], [B]\}$</li>
+<li>新基底：$\{[X], [Y], [Z]\}$</li>
+</ol>
+<p>如果新基底中的每个基色都可以由旧基底线性表示：</p>
+<script type="math/tex; mode=display">
+\begin{cases}
+[X] = m_{11}[R] + m_{21}[G] + m_{31}[B] \\
+[Y] = m_{12}[R] + m_{22}[G] + m_{32}[B] \\
+[Z] = m_{13}[R] + m_{23}[G] + m_{33}[B]
+\end{cases}</script><p>那么，对于同一个颜色 $\mathbf{C}$，其在旧基底下的坐标 $(R, G, B)$ 与新基底下的坐标 $(X, Y, Z)$ 存在如下线性变换关系：</p>
+<script type="math/tex; mode=display">
+\begin{bmatrix} R \\ G \\ B \end{bmatrix} = \mathbf{M} \begin{bmatrix} X \\ Y \\ Z \end{bmatrix}</script><p>或者反过来：</p>
+<script type="math/tex; mode=display">
+\begin{bmatrix} X \\ Y \\ Z \end{bmatrix} = \mathbf{M}^{-1} \begin{bmatrix} R \\ G \\ B \end{bmatrix}</script><p>其中变换矩阵 $\mathbf{M}$ 由新基底在旧基底下的坐标构成。</p>
+<h3 id="为什么需要变换？"><a href="#为什么需要变换？" class="headerlink" title="为什么需要变换？"></a>为什么需要变换？</h3><p>CIE 1931 RGB 系统虽然物理意义明确，但存在负值（$\bar{r}(\lambda) &lt; 0$）。负值在工程计算和硬件实现中非常麻烦。
+利用格拉斯曼定律提供的线性变换工具，我们可以设计一套虚拟的基色系统（如 XYZ），使得：</p>
+<ol>
+<li>所有的颜色匹配函数 $\bar{x}, \bar{y}, \bar{z}$ 均为正值。</li>
+<li>其中一个分量（如 $Y$）直接代表亮度（Luminance）。</li>
+</ol>
+<p>这就是下一章 CIE 1931 XYZ 色彩空间的设计初衷。</p>
+<h2 id="总结与展望"><a href="#总结与展望" class="headerlink" title="总结与展望"></a>总结与展望</h2><p>格拉斯曼定律确立了色彩混合的线性代数本质，使得我们可以用矩阵运算来处理色彩转换。它是所有现代色彩管理系统（CMS）的数学内核。</p>
+<ul>
+<li>如何找到那个完美的变换矩阵 $\mathbf{M}$？</li>
+<li>如何设计一个全正值的 XYZ 空间？</li>
+<li>$Y$ 值是如何被设计成与亮度 $V(\lambda)$ 完全一致的？</li>
+</ul>
+<p>在下一章《色彩科学Vol.4 CIE1931-RGB与XYZ色彩空间》中，我们将详细推导色彩科学中最著名的 CIE XYZ 系统，揭开它神秘的面纱。</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li>Grassmann, H. (1853). <em>Zur Theorie der Farbenmischung</em>. Poggendorff’s Annalen der Physik und Chemie.</li>
+<li>Wyszecki, G., &amp; Stiles, W. S. <em>Color Science: Concepts and Methods</em>. Wiley.</li>
+<li>Sharma, G. <em>Digital Color Imaging Handbook</em>. CRC Press.</li>
+</ol>
+
+    </div>
+     
+    <div class="post-footer__meta"><p>updated at 2025-11-21</p></div> 
+    <div class="post-entry__tags"><a href="/tags/%E8%89%B2%E5%BD%A9%E7%A7%91%E5%AD%A6/" class="post-tags__link button"># 色彩科学</a><a href="/tags/%E6%A0%BC%E6%8B%89%E6%96%AF%E6%9B%BC%E5%AE%9A%E5%BE%8B/" class="post-tags__link button"># 格拉斯曼定律</a><a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" class="post-tags__link button"># 线性代数</a></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
+            
+                <a href="/2025/01/25/%E8%89%B2%E5%BD%A9%E7%A7%91%E5%AD%A6Vol.4-CIE1931-RGB%E4%B8%8EXYZ%E8%89%B2%E5%BD%A9%E7%A9%BA%E9%97%B4/" class="nav__link">
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
+                    </div>
+                    <div>
+                        <div class="nav__label">
+                            Previous Post
+                        </div>
+                        <div class="nav__title">
+                            色彩科学Vol.4 CIE1931-RGB与XYZ色彩空间
+                        </div>
+                    </div>
+                </a>
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="/how2build.html" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            Next Post
+                        </div>
+                        <div class="nav__title">
+                            利用HEXO+GithubPages搭建自己的静态博客
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
+        </div>
+    </div>
+
+
+
+
+
+</main>
+
+            <footer class="footer">
+     
+    <a href="#" class="button" id="b2t" aria-label="Back to Top" title="Back to Top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M233.376 722.752L278.624 768 512 534.624 745.376 768l45.248-45.248L512 444.128zM192 352h640V288H192z" fill="currentColor"></path>
+        </svg>
+    </a>
+
+    
+
+
+    
+     
+ 
+
+ 
+    
+        
+        <p class="footer-copyright">
+            Strtus's Journry
+        </p>
+    
+    
+        
+            
+        
+            
+        
+            <p>保持对世界的输出🙌</p>
+
+        
+    
+</footer>
+
+        </div>
+         
+
+ 
+    <script>
+        window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+        ga('create', 'G-5ERPC280ZB', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+ 
+
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5ERPC280ZB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-5ERPC280ZB');
+    </script>
+ 
+
+ 
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement('script');
+            hm.src = 'https://hm.baidu.com/hm.js?8da6411546e903e478a9d82d2a4d0c60';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+    
+ 
+
+
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.css">
+
+    
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.js"></script>
+
+    <script>
+        let lazyloadT = Boolean('false'),
+            auto_fancybox = Boolean('true')
+        if (auto_fancybox) {
+            $(".post__content").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        } else {
+            $(".post__content").find("fancybox").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        }
+    </script>
+ 
+
+
+    <script>
+        if (typeof MathJax === 'undefined') {
+            window.MathJax = {
+                loader: {
+                    source: {
+                        '[tex]/amsCd': '[tex]/amscd',
+                        '[tex]/AMScd': '[tex]/amscd'
+                    }
+                },
+                tex: {
+                    inlineMath: {'[+]': [['$', '$']]},
+                    tags: 'ams'
+                },
+                options: {
+                    renderActions: {
+                        findScript: [10, doc => {
+                            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                                const display = !!node.type.match(/; *mode=display/);
+                                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                                const text = document.createTextNode('');
+                                node.parentNode.replaceChild(text, node);
+                                math.start = {node: text, delim: '', n: 0};
+                                math.end = {node: text, delim: '', n: 0};
+                                doc.math.push(math);
+                            });
+                        }, '', false],
+                        insertedScript: [200, () => {
+                            document.querySelectorAll('mjx-container').forEach(node => {
+                                let target = node.parentNode;
+                                if (target.nodeName.toLowerCase() === 'li') {
+                                    target.parentNode.classList.add('has-jax');
+                                }
+                            });
+                        }, '', false]
+                    }
+                }
+            };
+            (function () {
+                var script = document.createElement('script');
+                script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js";
+                script.defer = true;
+                document.head.appendChild(script);
+            })();
+        } else {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+        }
+    </script>
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+
+    </body>
+</html>

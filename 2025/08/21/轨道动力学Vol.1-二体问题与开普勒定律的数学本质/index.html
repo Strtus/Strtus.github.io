@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--icon-->
+
+    
+        <link rel="shortcut icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="16x16" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="32x32" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon-96x96.png">
+    
+    
+        <link rel="apple-touch-icon" sizes="180x180" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/web-app-manifest-192x192.png">
+    
+    
+        <link rel="mask-icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/apple-touch-icon.png">
+    
+
+
+    <!-- meta -->
+
+
+<title>轨道动力学Vol.1 二体问题与开普勒定律的数学本质 | Strtus&#39;s Journey</title>
+
+
+    <meta name="keywords" content="轨道动力学, Astrodynamics, 基础理论">
+
+
+
+
+    <!-- OpenGraph -->
+ 
+    <meta name="description" content="引言航天器轨道动力学（Astrodynamics）是研究人造天体在引力场中运动规律的学科。一切复杂的任务设计，从近地轨道的交会对接到深空的引力弹弓，其基石都是最简单的模型——二体问题（Two-Body Problem）。 虽然开普勒在第17世纪初就基于第谷的观测数据总结出了行星运动三大定律，但直到牛顿提出万有引力定律，我们才真正拥有了从第一性原理推导这些规律的数学工具。本文将从牛顿力学出发，推导二">
+<meta property="og:type" content="article">
+<meta property="og:title" content="轨道动力学Vol.1 二体问题与开普勒定律的数学本质">
+<meta property="og:url" content="https://strtus.github.io/2025/08/21/%E8%BD%A8%E9%81%93%E5%8A%A8%E5%8A%9B%E5%AD%A6Vol.1-%E4%BA%8C%E4%BD%93%E9%97%AE%E9%A2%98%E4%B8%8E%E5%BC%80%E6%99%AE%E5%8B%92%E5%AE%9A%E5%BE%8B%E7%9A%84%E6%95%B0%E5%AD%A6%E6%9C%AC%E8%B4%A8/index.html">
+<meta property="og:site_name" content="Strtus&#39;s Journey">
+<meta property="og:description" content="引言航天器轨道动力学（Astrodynamics）是研究人造天体在引力场中运动规律的学科。一切复杂的任务设计，从近地轨道的交会对接到深空的引力弹弓，其基石都是最简单的模型——二体问题（Two-Body Problem）。 虽然开普勒在第17世纪初就基于第谷的观测数据总结出了行星运动三大定律，但直到牛顿提出万有引力定律，我们才真正拥有了从第一性原理推导这些规律的数学工具。本文将从牛顿力学出发，推导二">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-08-21T02:00:00.000Z">
+<meta property="article:modified_time" content="2025-11-21T11:28:41.915Z">
+<meta property="article:author" content="strtus">
+<meta property="article:tag" content="轨道动力学">
+<meta property="article:tag" content="Astrodynamics">
+<meta property="article:tag" content="基础理论">
+<meta name="twitter:card" content="summary_large_image">
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/highlight.css" media="none" >
+        
+            <link rel="stylesheet" id="hl-dark-theme" href="/css/highlight/highlight.dark.css" media="none">
+        
+    
+
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/style/dark.css">
+
+    
+<script src="/js/darkmode.js"></script>
+
+
+
+     
+
+    <!-- custom head -->
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+    <body>
+        <div id="app" tabindex="-1">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">Strtus&#39;s Journey</span>
+        </a>
+    </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">首页</a>
+                
+                    <a href="/about.html" class="navbar-menu button">About</a>
+                
+                    <a href="/categories/" class="navbar-menu button">分类</a>
+                
+                    <a href="/tags/" class="navbar-menu button">标签</a>
+                
+                    <a href="/archives/" class="navbar-menu button">归档</a>
+                
+            </div>
+        
+        
+        
+    <a href="/search/" id="btn-search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="24" height="24" fill="currentColor" stroke="currentColor" stroke-width="32"><path d="M192 448c0-141.152 114.848-256 256-256s256 114.848 256 256-114.848 256-256 256-256-114.848-256-256z m710.624 409.376l-206.88-206.88A318.784 318.784 0 0 0 768 448c0-176.736-143.264-320-320-320S128 271.264 128 448s143.264 320 320 320a318.784 318.784 0 0 0 202.496-72.256l206.88 206.88 45.248-45.248z"></path></svg>
+    </a>
+
+
+        
+        
+    <a href="javaScript:void(0);" id="btn-toggle-dark">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </a>
+
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">首页</a>
+                
+                    <a href="/about.html" class="dropdown-menu button">About</a>
+                
+                    <a href="/categories/" class="dropdown-menu button">分类</a>
+                
+                    <a href="/tags/" class="dropdown-menu button">标签</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">归档</a>
+                
+            </div>
+        
+    </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        轨道动力学Vol.1 二体问题与开普勒定律的数学本质
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2025/08/" class="post-meta__date button">2025-08-21</a>
+        
+    <span class="separate-dot"></span><a href="/categories/%E8%88%AA%E5%A4%A9%E5%99%A8%E8%BD%A8%E9%81%93%E5%8A%A8%E5%8A%9B%E5%AD%A6%E7%90%86%E8%AE%BA/" class="button">航天器轨道动力学理论</a>
+
+ 
+        
+    
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+    <aside class="post-side">
+        <div class="post-side__toc">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E4%BD%93%E8%BF%90%E5%8A%A8%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B"><span class="toc-number">2.</span> <span class="toc-text">二体运动微分方程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A7%AF%E5%88%86%E5%B8%B8%E6%95%B0%E4%B8%8E%E5%AE%88%E6%81%92%E5%BE%8B"><span class="toc-number">3.</span> <span class="toc-text">积分常数与守恒律</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%92%E5%8A%A8%E9%87%8F%E5%AE%88%E6%81%92"><span class="toc-number">3.1.</span> <span class="toc-text">角动量守恒</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%83%BD%E9%87%8F%E5%AE%88%E6%81%92-Vis-Viva-Equation"><span class="toc-number">3.2.</span> <span class="toc-text">能量守恒 (Vis-Viva Equation)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BD%A8%E9%81%93%E6%96%B9%E7%A8%8B%E4%B8%8E%E5%9C%86%E9%94%A5%E6%9B%B2%E7%BA%BF"><span class="toc-number">4.</span> <span class="toc-text">轨道方程与圆锥曲线</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AF%AD"><span class="toc-number">5.</span> <span class="toc-text">结语</span></a></li></ol>
+        </div>
+    </aside>
+    <a class="btn-toc button" id="btn-toc" tabindex="0">
+        <svg viewBox="0 0 1024 1024" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M128 256h64V192H128zM320 256h576V192H320zM128 544h64v-64H128zM320 544h576v-64H320zM128 832h64v-64H128zM320 832h576v-64H320z" fill="currentColor"></path>
+        </svg>
+    </a>
+    <div class="toc-menus" id="toc-menus">
+        <div class="toc-title">Article Directory</div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E4%BD%93%E8%BF%90%E5%8A%A8%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B"><span class="toc-number">2.</span> <span class="toc-text">二体运动微分方程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A7%AF%E5%88%86%E5%B8%B8%E6%95%B0%E4%B8%8E%E5%AE%88%E6%81%92%E5%BE%8B"><span class="toc-number">3.</span> <span class="toc-text">积分常数与守恒律</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%92%E5%8A%A8%E9%87%8F%E5%AE%88%E6%81%92"><span class="toc-number">3.1.</span> <span class="toc-text">角动量守恒</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%83%BD%E9%87%8F%E5%AE%88%E6%81%92-Vis-Viva-Equation"><span class="toc-number">3.2.</span> <span class="toc-text">能量守恒 (Vis-Viva Equation)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BD%A8%E9%81%93%E6%96%B9%E7%A8%8B%E4%B8%8E%E5%9C%86%E9%94%A5%E6%9B%B2%E7%BA%BF"><span class="toc-number">4.</span> <span class="toc-text">轨道方程与圆锥曲线</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AF%AD"><span class="toc-number">5.</span> <span class="toc-text">结语</span></a></li></ol>
+    </div>
+
+
+<article class="post post__with-toc content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>航天器轨道动力学（Astrodynamics）是研究人造天体在引力场中运动规律的学科。一切复杂的任务设计，从近地轨道的交会对接到深空的引力弹弓，其基石都是最简单的模型——<strong>二体问题（Two-Body Problem）</strong>。</p>
+<p>虽然开普勒在第17世纪初就基于第谷的观测数据总结出了行星运动三大定律，但直到牛顿提出万有引力定律，我们才真正拥有了从第一性原理推导这些规律的数学工具。本文将从牛顿力学出发，推导二体运动微分方程，并揭示其守恒量与轨道几何本质。</p>
+<hr>
+<h2 id="二体运动微分方程"><a href="#二体运动微分方程" class="headerlink" title="二体运动微分方程"></a>二体运动微分方程</h2><p>假设宇宙中仅有两个质点，质量分别为 $M$ 和 $m$，且 $M \gg m$（例如地球与卫星）。它们之间的相互作用力仅为万有引力。</p>
+<p>设 $M$ 和 $m$ 在惯性系中的位置矢量分别为 $\mathbf{R}$ 和 $\mathbf{r}$。根据牛顿第二定律和万有引力定律：</p>
+<script type="math/tex; mode=display">
+M \ddot{\mathbf{R}} = G \frac{Mm}{|\mathbf{r} - \mathbf{R}|^3} (\mathbf{r} - \mathbf{R})</script><script type="math/tex; mode=display">
+m \ddot{\mathbf{r}} = -G \frac{Mm}{|\mathbf{r} - \mathbf{R}|^3} (\mathbf{r} - \mathbf{R})</script><p>我们通常不关心它们在绝对惯性系中的位置，而是关心卫星相对于中心天体的位置。定义相对位置矢量 $\mathbf{r}_{rel} = \mathbf{r} - \mathbf{R}$。为了简化符号，下文用 $\mathbf{r}$ 表示相对位置矢量。</p>
+<p>将两式相减（$\ddot{\mathbf{r}} - \ddot{\mathbf{R}}$），并利用 $M \gg m$ 的假设（即 $M+m \approx M$），我们可以得到描述相对运动的二体微分方程：</p>
+<script type="math/tex; mode=display">
+\ddot{\mathbf{r}} = - \frac{G(M+m)}{r^3}\mathbf{r} \approx - \frac{\mu}{r^3}\mathbf{r}</script><p>其中 $\mu = GM$ 为中心天体的引力常数（对于地球，$\mu \approx 3.986 \times 10^5 \text{ km}^3/\text{s}^2$），$r = |\mathbf{r}|$ 为相对距离。</p>
+<p>这个看似简单的二阶非线性微分方程，蕴含了轨道动力学的所有奥秘。</p>
+<hr>
+<h2 id="积分常数与守恒律"><a href="#积分常数与守恒律" class="headerlink" title="积分常数与守恒律"></a>积分常数与守恒律</h2><p>为了求解上述方程，我们寻找运动中的守恒量（积分常数）。</p>
+<h3 id="角动量守恒"><a href="#角动量守恒" class="headerlink" title="角动量守恒"></a>角动量守恒</h3><p>将二体方程两边同时左乘（叉乘）位置矢量 $\mathbf{r}$：</p>
+<script type="math/tex; mode=display">
+\mathbf{r} \times \ddot{\mathbf{r}} + \mathbf{r} \times \frac{\mu}{r^3}\mathbf{r} = \mathbf{0}</script><p>由于 $\mathbf{r} \times \mathbf{r} = \mathbf{0}$，第二项消失。第一项可以写成全微分形式：</p>
+<script type="math/tex; mode=display">
+\frac{d}{dt} (\mathbf{r} \times \dot{\mathbf{r}}) = \mathbf{0}</script><p>这意味着比角动量（Specific Angular Momentum）$\mathbf{h}$ 是一个常矢量：</p>
+<script type="math/tex; mode=display">
+\mathbf{h} = \mathbf{r} \times \mathbf{v} = \text{const}</script><p><strong>物理意义</strong>：</p>
+<ol>
+<li><strong>轨道平面固定</strong>：由于 $\mathbf{r}$ 和 $\mathbf{v}$ 始终垂直于恒定矢量 $\mathbf{h}$，因此轨道运动始终被限制在一个固定的平面内。</li>
+<li><strong>开普勒第二定律</strong>：$\mathbf{h}$ 的模长 $h = |\mathbf{r} \times \mathbf{v}| = r v_\perp$。在极坐标系下，扫过的面积速率 $\frac{dA}{dt} = \frac{1}{2}h = \text{const}$，即“相等时间内扫过相等面积”。</li>
+</ol>
+<h3 id="能量守恒-Vis-Viva-Equation"><a href="#能量守恒-Vis-Viva-Equation" class="headerlink" title="能量守恒 (Vis-Viva Equation)"></a>能量守恒 (Vis-Viva Equation)</h3><p>将二体方程两边同时点乘速度矢量 $\mathbf{v} = \dot{\mathbf{r}}$：</p>
+<script type="math/tex; mode=display">
+\dot{\mathbf{r}} \cdot \ddot{\mathbf{r}} + \dot{\mathbf{r}} \cdot \frac{\mu}{r^3}\mathbf{r} = 0</script><p>利用 $\dot{\mathbf{r}} \cdot \ddot{\mathbf{r}} = \frac{d}{dt}(\frac{1}{2}v^2)$ 和 $\dot{\mathbf{r}} \cdot \mathbf{r} = r\dot{r}$，上式可变为：</p>
+<script type="math/tex; mode=display">
+\frac{d}{dt}\left( \frac{v^2}{2} \right) + \frac{\mu}{r^3} (r \dot{r}) = \frac{d}{dt}\left( \frac{v^2}{2} \right) + \frac{d}{dt}\left( -\frac{\mu}{r} \right) = 0</script><p>积分得到比机械能（Specific Mechanical Energy）$\mathcal{E}$ 守恒：</p>
+<script type="math/tex; mode=display">
+\mathcal{E} = \frac{v^2}{2} - \frac{\mu}{r} = \text{const}</script><p>这便是著名的 <strong>活力公式 (Vis-Viva Equation)</strong>。它表明轨道上任意一点的速度大小仅取决于该点到中心的距离 $r$ 和轨道的总能量。</p>
+<p>对于椭圆轨道，$\mathcal{E} = -\frac{\mu}{2a}$，其中 $a$ 为半长轴。代入上式得到工程中最常用的速度公式：</p>
+<script type="math/tex; mode=display">
+v = \sqrt{\mu \left( \frac{2}{r} - \frac{1}{a} \right)}</script><hr>
+<h2 id="轨道方程与圆锥曲线"><a href="#轨道方程与圆锥曲线" class="headerlink" title="轨道方程与圆锥曲线"></a>轨道方程与圆锥曲线</h2><p>为了得到轨道的几何形状，我们需要找到 $r$ 和角度之间的关系。利用矢量恒等式和积分技巧，可以推导出<strong>偏心率矢量 (Eccentricity Vector)</strong> $\mathbf{e}$ 也是一个守恒量。</p>
+<p>我们将二体方程 $\ddot{\mathbf{r}} = -\frac{\mu}{r^3}\mathbf{r}$ 两边叉乘角动量 $\mathbf{h}$：</p>
+<script type="math/tex; mode=display">
+\ddot{\mathbf{r}} \times \mathbf{h} = -\frac{\mu}{r^3}\mathbf{r} \times (\mathbf{r} \times \mathbf{v})</script><p>利用矢量三重积公式 $\mathbf{A} \times (\mathbf{B} \times \mathbf{C}) = (\mathbf{A} \cdot \mathbf{C})\mathbf{B} - (\mathbf{A} \cdot \mathbf{B})\mathbf{C}$，右边变为：</p>
+<script type="math/tex; mode=display">
+-\frac{\mu}{r^3} [ (\mathbf{r} \cdot \mathbf{v})\mathbf{r} - (\mathbf{r} \cdot \mathbf{r})\mathbf{v} ]</script><p>经过复杂的推导（利用 $\mathbf{r} \cdot \mathbf{v} = r\dot{r}$），可以证明：</p>
+<script type="math/tex; mode=display">
+\frac{d}{dt}(\mathbf{v} \times \mathbf{h}) = \mu \frac{d}{dt}\left( \frac{\mathbf{r}}{r} \right)</script><p>积分得到常矢量 $\mathbf{C}$，我们定义偏心率矢量 $\mathbf{e} = \mathbf{C}/\mu$：</p>
+<script type="math/tex; mode=display">
+\mathbf{e} = \frac{1}{\mu} (\mathbf{v} \times \mathbf{h}) - \frac{\mathbf{r}}{r}</script><p>$\mathbf{e}$ 的方向指向近拱点（Periapsis），模长 $e$ 即为轨道的偏心率。</p>
+<p>通过计算 $\mathbf{r} \cdot \mathbf{e}$，我们可以得到极坐标下的轨道方程：</p>
+<script type="math/tex; mode=display">
+\mathbf{r} \cdot \mathbf{e} = r e \cos \nu = \mathbf{r} \cdot \left( \frac{1}{\mu}(\mathbf{v} \times \mathbf{h}) - \frac{\mathbf{r}}{r} \right)</script><p>利用 $\mathbf{r} \cdot (\mathbf{v} \times \mathbf{h}) = (\mathbf{r} \times \mathbf{v}) \cdot \mathbf{h} = h^2$，整理得：</p>
+<script type="math/tex; mode=display">
+r = \frac{h^2/\mu}{1 + e \cos \nu} = \frac{p}{1 + e \cos \nu}</script><p>其中：</p>
+<ul>
+<li>$p = h^2 / \mu$ 为半通径 (Semi-latus rectum)。</li>
+<li>$e$ 为偏心率。</li>
+<li>$\nu$ 为真近点角 (True Anomaly)，即卫星相对于近拱点的角度。</li>
+</ul>
+<p>这个方程清晰地表明，二体运动的轨迹是<strong>圆锥曲线 (Conic Section)</strong>：</p>
+<ul>
+<li>$e = 0$: 圆 (Circle)</li>
+<li>$0 &lt; e &lt; 1$: 椭圆 (Ellipse)</li>
+<li>$e = 1$: 抛物线 (Parabola)</li>
+<li>$e &gt; 1$: 双曲线 (Hyperbola)</li>
+</ul>
+<hr>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>从 $\mathbf{F}=m\mathbf{a}$ 到 $r = \frac{p}{1 + e \cos \nu}$，我们用简洁的数学语言重构了开普勒定律。角动量 $\mathbf{h}$ 决定了轨道面，能量 $\mathcal{E}$ 决定了轨道的大小（$a$），而偏心率矢量 $\mathbf{e}$ 则刻画了轨道的形状和朝向。</p>
+<p>在后续的文章中，我们将利用这些守恒量，定义描述三维空间轨道的经典轨道要素（COE），并探讨如何在轨道之间进行机动。</p>
+
+    </div>
+     
+    <div class="post-footer__meta"><p>updated at 2025-11-21</p></div> 
+    <div class="post-entry__tags"><a href="/tags/%E8%BD%A8%E9%81%93%E5%8A%A8%E5%8A%9B%E5%AD%A6/" class="post-tags__link button"># 轨道动力学</a><a href="/tags/Astrodynamics/" class="post-tags__link button"># Astrodynamics</a><a href="/tags/%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA/" class="post-tags__link button"># 基础理论</a></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
+            
+                <a href="/2025/08/22/%E8%BD%A8%E9%81%93%E5%8A%A8%E5%8A%9B%E5%AD%A6Vol.2-%E7%BB%8F%E5%85%B8%E8%BD%A8%E9%81%93%E8%A6%81%E7%B4%A0(COE)%E4%B8%8E%E7%8A%B6%E6%80%81%E5%90%91%E9%87%8F%E4%BA%92%E8%BD%AC/" class="nav__link">
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
+                    </div>
+                    <div>
+                        <div class="nav__label">
+                            Previous Post
+                        </div>
+                        <div class="nav__title">
+                            轨道动力学Vol.2 经典轨道要素(COE)与状态向量互转
+                        </div>
+                    </div>
+                </a>
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="/2025/08/20/Clohessy-Wiltshire%E6%96%B9%E7%A8%8B%E7%9A%84%E7%B3%BB%E7%BB%9F%E6%8E%A8%E5%AF%BC/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            Next Post
+                        </div>
+                        <div class="nav__title">
+                            Clohessy-Wiltshire方程的系统推导
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
+        </div>
+    </div>
+
+
+
+
+
+</main>
+
+            <footer class="footer">
+     
+    <a href="#" class="button" id="b2t" aria-label="Back to Top" title="Back to Top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M233.376 722.752L278.624 768 512 534.624 745.376 768l45.248-45.248L512 444.128zM192 352h640V288H192z" fill="currentColor"></path>
+        </svg>
+    </a>
+
+    
+
+
+    
+     
+ 
+
+ 
+    
+        
+        <p class="footer-copyright">
+            Strtus's Journry
+        </p>
+    
+    
+        
+            
+        
+            
+        
+            <p>保持对世界的输出🙌</p>
+
+        
+    
+</footer>
+
+        </div>
+         
+
+ 
+    <script>
+        window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+        ga('create', 'G-5ERPC280ZB', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+ 
+
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5ERPC280ZB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-5ERPC280ZB');
+    </script>
+ 
+
+ 
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement('script');
+            hm.src = 'https://hm.baidu.com/hm.js?8da6411546e903e478a9d82d2a4d0c60';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+    
+ 
+
+
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.css">
+
+    
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.js"></script>
+
+    <script>
+        let lazyloadT = Boolean('false'),
+            auto_fancybox = Boolean('true')
+        if (auto_fancybox) {
+            $(".post__content").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        } else {
+            $(".post__content").find("fancybox").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        }
+    </script>
+ 
+
+
+    <script>
+        if (typeof MathJax === 'undefined') {
+            window.MathJax = {
+                loader: {
+                    source: {
+                        '[tex]/amsCd': '[tex]/amscd',
+                        '[tex]/AMScd': '[tex]/amscd'
+                    }
+                },
+                tex: {
+                    inlineMath: {'[+]': [['$', '$']]},
+                    tags: 'ams'
+                },
+                options: {
+                    renderActions: {
+                        findScript: [10, doc => {
+                            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                                const display = !!node.type.match(/; *mode=display/);
+                                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                                const text = document.createTextNode('');
+                                node.parentNode.replaceChild(text, node);
+                                math.start = {node: text, delim: '', n: 0};
+                                math.end = {node: text, delim: '', n: 0};
+                                doc.math.push(math);
+                            });
+                        }, '', false],
+                        insertedScript: [200, () => {
+                            document.querySelectorAll('mjx-container').forEach(node => {
+                                let target = node.parentNode;
+                                if (target.nodeName.toLowerCase() === 'li') {
+                                    target.parentNode.classList.add('has-jax');
+                                }
+                            });
+                        }, '', false]
+                    }
+                }
+            };
+            (function () {
+                var script = document.createElement('script');
+                script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js";
+                script.defer = true;
+                document.head.appendChild(script);
+            })();
+        } else {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+        }
+    </script>
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+
+    </body>
+</html>

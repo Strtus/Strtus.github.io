@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--icon-->
+
+    
+        <link rel="shortcut icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="16x16" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="32x32" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon-96x96.png">
+    
+    
+        <link rel="apple-touch-icon" sizes="180x180" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/web-app-manifest-192x192.png">
+    
+    
+        <link rel="mask-icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/apple-touch-icon.png">
+    
+
+
+    <!-- meta -->
+
+
+<title>姿态动力学Vol.5-刚体动力学方程：欧拉方程与惯性张量 | Strtus&#39;s Journey</title>
+
+
+    <meta name="keywords" content="刚体动力学, 欧拉方程, 惯性张量">
+
+
+
+
+    <!-- OpenGraph -->
+ 
+    <meta name="description" content="引言在前面的章节中，我们花费了大量的篇幅讨论姿态运动学 (Kinematics)，即如何描述物体的方向（欧拉角、四元数、MRPs）以及它们随时间的变化率。从本章开始，我们将进入姿态动力学 (Dynamics) 的核心领域，探讨是什么导致了姿态的变化——即力矩与角动量之间的关系。 这一章的基石是牛顿第二定律的旋转形式，最终导出的欧拉动力学方程 (Euler’s Equations of Motion">
+<meta property="og:type" content="article">
+<meta property="og:title" content="姿态动力学Vol.5-刚体动力学方程：欧拉方程与惯性张量">
+<meta property="og:url" content="https://strtus.github.io/2025/02/14/%E5%A7%BF%E6%80%81%E5%8A%A8%E5%8A%9B%E5%AD%A6Vol.5-%E5%88%9A%E4%BD%93%E5%8A%A8%E5%8A%9B%E5%AD%A6%E6%96%B9%E7%A8%8B%EF%BC%9A%E6%AC%A7%E6%8B%89%E6%96%B9%E7%A8%8B%E4%B8%8E%E6%83%AF%E6%80%A7%E5%BC%A0%E9%87%8F/index.html">
+<meta property="og:site_name" content="Strtus&#39;s Journey">
+<meta property="og:description" content="引言在前面的章节中，我们花费了大量的篇幅讨论姿态运动学 (Kinematics)，即如何描述物体的方向（欧拉角、四元数、MRPs）以及它们随时间的变化率。从本章开始，我们将进入姿态动力学 (Dynamics) 的核心领域，探讨是什么导致了姿态的变化——即力矩与角动量之间的关系。 这一章的基石是牛顿第二定律的旋转形式，最终导出的欧拉动力学方程 (Euler’s Equations of Motion">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-02-14T04:00:00.000Z">
+<meta property="article:modified_time" content="2025-11-21T07:41:58.006Z">
+<meta property="article:author" content="strtus">
+<meta property="article:tag" content="刚体动力学">
+<meta property="article:tag" content="欧拉方程">
+<meta property="article:tag" content="惯性张量">
+<meta name="twitter:card" content="summary_large_image">
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/highlight.css" media="none" >
+        
+            <link rel="stylesheet" id="hl-dark-theme" href="/css/highlight/highlight.dark.css" media="none">
+        
+    
+
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/style/dark.css">
+
+    
+<script src="/js/darkmode.js"></script>
+
+
+
+     
+
+    <!-- custom head -->
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+    <body>
+        <div id="app" tabindex="-1">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">Strtus&#39;s Journey</span>
+        </a>
+    </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">首页</a>
+                
+                    <a href="/about.html" class="navbar-menu button">About</a>
+                
+                    <a href="/categories/" class="navbar-menu button">分类</a>
+                
+                    <a href="/tags/" class="navbar-menu button">标签</a>
+                
+                    <a href="/archives/" class="navbar-menu button">归档</a>
+                
+            </div>
+        
+        
+        
+    <a href="/search/" id="btn-search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="24" height="24" fill="currentColor" stroke="currentColor" stroke-width="32"><path d="M192 448c0-141.152 114.848-256 256-256s256 114.848 256 256-114.848 256-256 256-256-114.848-256-256z m710.624 409.376l-206.88-206.88A318.784 318.784 0 0 0 768 448c0-176.736-143.264-320-320-320S128 271.264 128 448s143.264 320 320 320a318.784 318.784 0 0 0 202.496-72.256l206.88 206.88 45.248-45.248z"></path></svg>
+    </a>
+
+
+        
+        
+    <a href="javaScript:void(0);" id="btn-toggle-dark">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </a>
+
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">首页</a>
+                
+                    <a href="/about.html" class="dropdown-menu button">About</a>
+                
+                    <a href="/categories/" class="dropdown-menu button">分类</a>
+                
+                    <a href="/tags/" class="dropdown-menu button">标签</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">归档</a>
+                
+            </div>
+        
+    </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        姿态动力学Vol.5-刚体动力学方程：欧拉方程与惯性张量
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2025/02/" class="post-meta__date button">2025-02-14</a>
+        
+    <span class="separate-dot"></span><a href="/categories/%E8%88%AA%E5%A4%A9%E5%99%A8%E5%A7%BF%E6%80%81%E5%8A%A8%E5%8A%9B%E5%AD%A6%E7%90%86%E8%AE%BA/" class="button">航天器姿态动力学理论</a>
+
+ 
+        
+    
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+    <aside class="post-side">
+        <div class="post-side__toc">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%A7%92%E5%8A%A8%E9%87%8F%E4%B8%8E%E6%83%AF%E6%80%A7%E5%BC%A0%E9%87%8F"><span class="toc-number">2.</span> <span class="toc-text">1. 角动量与惯性张量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E8%B4%A8%E7%82%B9%E7%B3%BB%E7%9A%84%E8%A7%92%E5%8A%A8%E9%87%8F"><span class="toc-number">2.1.</span> <span class="toc-text">1.1 质点系的角动量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E6%83%AF%E6%80%A7%E5%BC%A0%E9%87%8F-Inertia-Tensor-%E7%9A%84%E5%BC%95%E5%85%A5"><span class="toc-number">2.2.</span> <span class="toc-text">1.2 惯性张量 (Inertia Tensor) 的引入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E4%B8%BB%E8%BD%B4%E5%9D%90%E6%A0%87%E7%B3%BB-Principal-Axes"><span class="toc-number">2.3.</span> <span class="toc-text">1.3 主轴坐标系 (Principal Axes)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%AC%A7%E6%8B%89%E5%8A%A8%E5%8A%9B%E5%AD%A6%E6%96%B9%E7%A8%8B-Euler%E2%80%99s-Equations"><span class="toc-number">3.</span> <span class="toc-text">2. 欧拉动力学方程 (Euler’s Equations)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E7%9F%A2%E9%87%8F%E6%8E%A8%E5%AF%BC"><span class="toc-number">3.1.</span> <span class="toc-text">2.1 矢量推导</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E6%A0%87%E9%87%8F%E5%BD%A2%E5%BC%8F%EF%BC%88%E4%B8%BB%E8%BD%B4%E7%B3%BB%E4%B8%8B%EF%BC%89"><span class="toc-number">3.2.</span> <span class="toc-text">2.2 标量形式（主轴系下）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%97%A0%E5%8A%9B%E7%9F%A9%E8%BF%90%E5%8A%A8%E5%88%86%E6%9E%90-Torque-free-Motion"><span class="toc-number">4.</span> <span class="toc-text">3. 无力矩运动分析 (Torque-free Motion)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E8%BD%B4%E5%AF%B9%E7%A7%B0%E5%88%9A%E4%BD%93-J-1-J-2-neq-J-3"><span class="toc-number">4.1.</span> <span class="toc-text">3.1 轴对称刚体 ($J_1 &#x3D; J_2 \neq J_3$)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E5%87%A0%E4%BD%95%E8%A7%A3%E9%87%8A%EF%BC%9A%E4%BD%93%E9%94%A5%E4%B8%8E%E7%A9%BA%E9%94%A5"><span class="toc-number">4.2.</span> <span class="toc-text">3.2 几何解释：体锥与空锥</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%9E%81%E8%BF%B9%E4%B8%8E%E8%B5%AB%E5%B0%94%E6%9E%81%E8%BF%B9-Polhode-amp-Herpolhode"><span class="toc-number">5.</span> <span class="toc-text">4. 极迹与赫尔极迹 (Polhode &amp; Herpolhode)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E8%83%BD%E9%87%8F%E6%A4%AD%E7%90%83%E4%B8%8E%E8%A7%92%E5%8A%A8%E9%87%8F%E7%90%83"><span class="toc-number">5.1.</span> <span class="toc-text">4.1 能量椭球与角动量球</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E6%9E%81%E8%BF%B9%E7%9A%84%E6%8B%93%E6%89%91%E7%BB%93%E6%9E%84"><span class="toc-number">5.2.</span> <span class="toc-text">4.2 极迹的拓扑结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AF%AD"><span class="toc-number">6.</span> <span class="toc-text">结语</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E8%A8%80-1"><span class="toc-number">7.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9A%E4%BD%93%E7%9A%84%E8%A7%92%E5%8A%A8%E9%87%8F"><span class="toc-number">8.</span> <span class="toc-text">刚体的角动量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%83%AF%E6%80%A7%E5%BC%A0%E9%87%8F-mathbf-J"><span class="toc-number">9.</span> <span class="toc-text">惯性张量 $\mathbf{J}$</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E8%BD%B4%E5%9D%90%E6%A0%87%E7%B3%BB"><span class="toc-number">9.1.</span> <span class="toc-text">主轴坐标系</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AC%A7%E6%8B%89%E5%8A%A8%E5%8A%9B%E5%AD%A6%E6%96%B9%E7%A8%8B"><span class="toc-number">10.</span> <span class="toc-text">欧拉动力学方程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%87%E9%87%8F%E5%BD%A2%E5%BC%8F%EF%BC%88%E4%B8%BB%E8%BD%B4%E5%9D%90%E6%A0%87%E7%B3%BB%EF%BC%89"><span class="toc-number">10.1.</span> <span class="toc-text">标量形式（主轴坐标系）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A0%E5%8A%9B%E7%9F%A9%E8%BF%90%E5%8A%A8-Torque-Free-Motion"><span class="toc-number">11.</span> <span class="toc-text">无力矩运动 (Torque-Free Motion)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%B4%E5%AF%B9%E7%A7%B0%E5%88%9A%E4%BD%93"><span class="toc-number">11.1.</span> <span class="toc-text">轴对称刚体</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%83%BD%E9%87%8F%E4%B8%8E%E8%A7%92%E5%8A%A8%E9%87%8F%E5%AE%88%E6%81%92"><span class="toc-number">11.2.</span> <span class="toc-text">能量与角动量守恒</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">12.</span> <span class="toc-text">总结</span></a></li></ol>
+        </div>
+    </aside>
+    <a class="btn-toc button" id="btn-toc" tabindex="0">
+        <svg viewBox="0 0 1024 1024" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M128 256h64V192H128zM320 256h576V192H320zM128 544h64v-64H128zM320 544h576v-64H320zM128 832h64v-64H128zM320 832h576v-64H320z" fill="currentColor"></path>
+        </svg>
+    </a>
+    <div class="toc-menus" id="toc-menus">
+        <div class="toc-title">Article Directory</div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%A7%92%E5%8A%A8%E9%87%8F%E4%B8%8E%E6%83%AF%E6%80%A7%E5%BC%A0%E9%87%8F"><span class="toc-number">2.</span> <span class="toc-text">1. 角动量与惯性张量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E8%B4%A8%E7%82%B9%E7%B3%BB%E7%9A%84%E8%A7%92%E5%8A%A8%E9%87%8F"><span class="toc-number">2.1.</span> <span class="toc-text">1.1 质点系的角动量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E6%83%AF%E6%80%A7%E5%BC%A0%E9%87%8F-Inertia-Tensor-%E7%9A%84%E5%BC%95%E5%85%A5"><span class="toc-number">2.2.</span> <span class="toc-text">1.2 惯性张量 (Inertia Tensor) 的引入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E4%B8%BB%E8%BD%B4%E5%9D%90%E6%A0%87%E7%B3%BB-Principal-Axes"><span class="toc-number">2.3.</span> <span class="toc-text">1.3 主轴坐标系 (Principal Axes)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%AC%A7%E6%8B%89%E5%8A%A8%E5%8A%9B%E5%AD%A6%E6%96%B9%E7%A8%8B-Euler%E2%80%99s-Equations"><span class="toc-number">3.</span> <span class="toc-text">2. 欧拉动力学方程 (Euler’s Equations)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E7%9F%A2%E9%87%8F%E6%8E%A8%E5%AF%BC"><span class="toc-number">3.1.</span> <span class="toc-text">2.1 矢量推导</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E6%A0%87%E9%87%8F%E5%BD%A2%E5%BC%8F%EF%BC%88%E4%B8%BB%E8%BD%B4%E7%B3%BB%E4%B8%8B%EF%BC%89"><span class="toc-number">3.2.</span> <span class="toc-text">2.2 标量形式（主轴系下）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%97%A0%E5%8A%9B%E7%9F%A9%E8%BF%90%E5%8A%A8%E5%88%86%E6%9E%90-Torque-free-Motion"><span class="toc-number">4.</span> <span class="toc-text">3. 无力矩运动分析 (Torque-free Motion)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E8%BD%B4%E5%AF%B9%E7%A7%B0%E5%88%9A%E4%BD%93-J-1-J-2-neq-J-3"><span class="toc-number">4.1.</span> <span class="toc-text">3.1 轴对称刚体 ($J_1 &#x3D; J_2 \neq J_3$)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E5%87%A0%E4%BD%95%E8%A7%A3%E9%87%8A%EF%BC%9A%E4%BD%93%E9%94%A5%E4%B8%8E%E7%A9%BA%E9%94%A5"><span class="toc-number">4.2.</span> <span class="toc-text">3.2 几何解释：体锥与空锥</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%9E%81%E8%BF%B9%E4%B8%8E%E8%B5%AB%E5%B0%94%E6%9E%81%E8%BF%B9-Polhode-amp-Herpolhode"><span class="toc-number">5.</span> <span class="toc-text">4. 极迹与赫尔极迹 (Polhode &amp; Herpolhode)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E8%83%BD%E9%87%8F%E6%A4%AD%E7%90%83%E4%B8%8E%E8%A7%92%E5%8A%A8%E9%87%8F%E7%90%83"><span class="toc-number">5.1.</span> <span class="toc-text">4.1 能量椭球与角动量球</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E6%9E%81%E8%BF%B9%E7%9A%84%E6%8B%93%E6%89%91%E7%BB%93%E6%9E%84"><span class="toc-number">5.2.</span> <span class="toc-text">4.2 极迹的拓扑结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AF%AD"><span class="toc-number">6.</span> <span class="toc-text">结语</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E8%A8%80-1"><span class="toc-number">7.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9A%E4%BD%93%E7%9A%84%E8%A7%92%E5%8A%A8%E9%87%8F"><span class="toc-number">8.</span> <span class="toc-text">刚体的角动量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%83%AF%E6%80%A7%E5%BC%A0%E9%87%8F-mathbf-J"><span class="toc-number">9.</span> <span class="toc-text">惯性张量 $\mathbf{J}$</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E8%BD%B4%E5%9D%90%E6%A0%87%E7%B3%BB"><span class="toc-number">9.1.</span> <span class="toc-text">主轴坐标系</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AC%A7%E6%8B%89%E5%8A%A8%E5%8A%9B%E5%AD%A6%E6%96%B9%E7%A8%8B"><span class="toc-number">10.</span> <span class="toc-text">欧拉动力学方程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%87%E9%87%8F%E5%BD%A2%E5%BC%8F%EF%BC%88%E4%B8%BB%E8%BD%B4%E5%9D%90%E6%A0%87%E7%B3%BB%EF%BC%89"><span class="toc-number">10.1.</span> <span class="toc-text">标量形式（主轴坐标系）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A0%E5%8A%9B%E7%9F%A9%E8%BF%90%E5%8A%A8-Torque-Free-Motion"><span class="toc-number">11.</span> <span class="toc-text">无力矩运动 (Torque-Free Motion)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%B4%E5%AF%B9%E7%A7%B0%E5%88%9A%E4%BD%93"><span class="toc-number">11.1.</span> <span class="toc-text">轴对称刚体</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%83%BD%E9%87%8F%E4%B8%8E%E8%A7%92%E5%8A%A8%E9%87%8F%E5%AE%88%E6%81%92"><span class="toc-number">11.2.</span> <span class="toc-text">能量与角动量守恒</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">12.</span> <span class="toc-text">总结</span></a></li></ol>
+    </div>
+
+
+<article class="post post__with-toc content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>在前面的章节中，我们花费了大量的篇幅讨论<strong>姿态运动学 (Kinematics)</strong>，即如何描述物体的方向（欧拉角、四元数、MRPs）以及它们随时间的变化率。从本章开始，我们将进入<strong>姿态动力学 (Dynamics)</strong> 的核心领域，探讨是什么导致了姿态的变化——即力矩与角动量之间的关系。</p>
+<p>这一章的基石是牛顿第二定律的旋转形式，最终导出的<strong>欧拉动力学方程 (Euler’s Equations of Motion)</strong> 是所有航天器姿态控制系统的物理基础。</p>
+<hr>
+<h2 id="1-角动量与惯性张量"><a href="#1-角动量与惯性张量" class="headerlink" title="1. 角动量与惯性张量"></a>1. 角动量与惯性张量</h2><h3 id="1-1-质点系的角动量"><a href="#1-1-质点系的角动量" class="headerlink" title="1.1 质点系的角动量"></a>1.1 质点系的角动量</h3><p>对于一个由 $N$ 个质点组成的刚体，其相对于质心 $O$ 的总角动量 $athbf{H}$ 定义为：</p>
+<script type="math/tex; mode=display">\mathbf{H} = \sum_{i=1}^{N} \mathbf{r}_i \times (m_i \mathbf{v}_i)</script><p>由于刚体上任意一点的速度 $\mathbf{v}_i = \boldsymbol{\omega} \times \mathbf{r}_i$，代入上式：</p>
+<script type="math/tex; mode=display">\mathbf{H} = \sum_{i=1}^{N} m_i \mathbf{r}_i \times (\boldsymbol{\omega} \times \mathbf{r}_i)</script><p>利用矢量三重积公式 $\mathbf{a} \times (\mathbf{b} \times \mathbf{c}) = (\mathbf{a} \cdot \mathbf{c})\mathbf{b} - (\mathbf{a} \cdot \mathbf{b})\mathbf{c}$，可得：</p>
+<script type="math/tex; mode=display">\mathbf{H} = \sum_{i=1}^{N} m_i [ (\mathbf{r}_i \cdot \mathbf{r}_i)\boldsymbol{\omega} - (\mathbf{r}_i \cdot \boldsymbol{\omega})\mathbf{r}_i ]</script><h3 id="1-2-惯性张量-Inertia-Tensor-的引入"><a href="#1-2-惯性张量-Inertia-Tensor-的引入" class="headerlink" title="1.2 惯性张量 (Inertia Tensor) 的引入"></a>1.2 惯性张量 (Inertia Tensor) 的引入</h3><p>将上述矢量方程写成矩阵形式，可以提取出<strong>惯性张量</strong> $\mathbf{J}$：</p>
+<script type="math/tex; mode=display">\mathbf{H} = \mathbf{J} \boldsymbol{\omega}</script><p>其中 $\mathbf{J}$ 是一个 $3 \times 3$ 的对称矩阵：</p>
+<script type="math/tex; mode=display">\mathbf{J} = \begin{bmatrix} J_{xx} & -J_{xy} & -J_{xz} \\ -J_{yx} & J_{yy} & -J_{yz} \\ -J_{zx} & -J_{zy} & J_{zz} \end{bmatrix}</script><p>其元素定义为（积分形式）：</p>
+<ul>
+<li><strong>转动惯量 (Moments of Inertia)</strong>：<script type="math/tex; mode=display">J_{xx} = \int (y^2 + z^2) dm, \quad J_{yy} = \int (x^2 + z^2) dm, \quad J_{zz} = \int (x^2 + y^2) dm</script></li>
+<li><strong>惯性积 (Products of Inertia)</strong>：<script type="math/tex; mode=display">J_{xy} = J_{yx} = \int xy \, dm, \quad J_{xz} = J_{zx} = \int xz \, dm, \quad J_{yz} = J_{zy} = \int yz \, dm</script></li>
+</ul>
+<h3 id="1-3-主轴坐标系-Principal-Axes"><a href="#1-3-主轴坐标系-Principal-Axes" class="headerlink" title="1.3 主轴坐标系 (Principal Axes)"></a>1.3 主轴坐标系 (Principal Axes)</h3><p>由于 $\mathbf{J}$ 是实对称矩阵，必然存在一个正交坐标系，使得 $\mathbf{J}$ 对角化。这个坐标系称为<strong>主轴坐标系</strong>。在主轴系下，惯性积为零：</p>
+<script type="math/tex; mode=display">\mathbf{J} = \text{diag}(J_1, J_2, J_3)</script><p>这极大地简化了动力学方程。</p>
+<hr>
+<h2 id="2-欧拉动力学方程-Euler’s-Equations"><a href="#2-欧拉动力学方程-Euler’s-Equations" class="headerlink" title="2. 欧拉动力学方程 (Euler’s Equations)"></a>2. 欧拉动力学方程 (Euler’s Equations)</h2><h3 id="2-1-矢量推导"><a href="#2-1-矢量推导" class="headerlink" title="2.1 矢量推导"></a>2.1 矢量推导</h3><p>根据角动量定理，力矩 $\mathbf{M}$ 等于角动量的时间变化率。但在应用牛顿定律时，必须相对于<strong>惯性系</strong>求导：</p>
+<script type="math/tex; mode=display">\mathbf{M} = \left( \frac{d\mathbf{H}}{dt} \right)_I</script><p>利用<strong>传输定理 (Transport Theorem)</strong>，将导数转换到随体坐标系 $B$：</p>
+<script type="math/tex; mode=display">\mathbf{M} = \left( \frac{d\mathbf{H}}{dt} \right)_B + \boldsymbol{\omega} \times \mathbf{H}</script><p>由于在随体坐标系中，刚体的质量分布不变，故 $\dot{\mathbf{J}} = 0$，因此 $(\dot{\mathbf{H}})_B = \mathbf{J}\dot{\boldsymbol{\omega}}$。
+代入后得到刚体动力学的矢量方程：</p>
+<script type="math/tex; mode=display">\mathbf{M} = \mathbf{J}\dot{\boldsymbol{\omega}} + \boldsymbol{\omega} \times (\mathbf{J}\boldsymbol{\omega})</script><h3 id="2-2-标量形式（主轴系下）"><a href="#2-2-标量形式（主轴系下）" class="headerlink" title="2.2 标量形式（主轴系下）"></a>2.2 标量形式（主轴系下）</h3><p>在主轴坐标系下展开上述矢量方程，得到著名的<strong>欧拉方程</strong>标量形式：</p>
+<script type="math/tex; mode=display">
+\begin{cases}
+M_1 = J_1 \dot{\omega}_1 + (J_3 - J_2) \omega_2 \omega_3 \\
+M_2 = J_2 \dot{\omega}_2 + (J_1 - J_3) \omega_1 \omega_3 \\
+M_3 = J_3 \dot{\omega}_3 + (J_2 - J_1) \omega_1 \omega_2
+\end{cases}</script><p>这组非线性耦合微分方程揭示了刚体转动的复杂性：即使没有外力矩 ($M=0$)，三个轴的角速度也会相互耦合，导致复杂的进动和章动。</p>
+<hr>
+<h2 id="3-无力矩运动分析-Torque-free-Motion"><a href="#3-无力矩运动分析-Torque-free-Motion" class="headerlink" title="3. 无力矩运动分析 (Torque-free Motion)"></a>3. 无力矩运动分析 (Torque-free Motion)</h2><p>当外力矩 $\mathbf{M} = \mathbf{0}$ 时，刚体的运动称为无力矩运动。这是航天器在巡航阶段的典型状态。</p>
+<h3 id="3-1-轴对称刚体-J-1-J-2-neq-J-3"><a href="#3-1-轴对称刚体-J-1-J-2-neq-J-3" class="headerlink" title="3.1 轴对称刚体 ($J_1 = J_2 \neq J_3$)"></a>3.1 轴对称刚体 ($J_1 = J_2 \neq J_3$)</h3><p>假设刚体是轴对称的（如圆柱体卫星），且 $J_1 = J_2 = J_t$（横向转动惯量），$J_3 = J_a$（轴向转动惯量）。
+欧拉方程简化为：</p>
+<script type="math/tex; mode=display">
+\begin{cases}
+J_t \dot{\omega}_1 = (J_t - J_a) \omega_2 \omega_3 \\
+J_t \dot{\omega}_2 = -(J_t - J_a) \omega_1 \omega_3 \\
+J_a \dot{\omega}_3 = 0
+\end{cases}</script><p>从第三个方程可知，$\dot{\omega}_3 = 0 \Rightarrow \omega_3 = \text{const}$。自旋角速度保持恒定。
+前两个方程构成一个线性谐振子系统，解得：</p>
+<script type="math/tex; mode=display">\omega_1(t) = \omega_{\perp} \cos(\lambda t + \phi_0)</script><script type="math/tex; mode=display">\omega_2(t) = \omega_{\perp} \sin(\lambda t + \phi_0)</script><p>其中 $\lambda$ 是<strong>相对进动率</strong>：</p>
+<script type="math/tex; mode=display">\lambda = \frac{J_t - J_a}{J_t} \omega_3</script><h3 id="3-2-几何解释：体锥与空锥"><a href="#3-2-几何解释：体锥与空锥" class="headerlink" title="3.2 几何解释：体锥与空锥"></a>3.2 几何解释：体锥与空锥</h3><ul>
+<li><strong>角速度矢量 $\boldsymbol{\omega}$</strong> 在本体坐标系中绕着对称轴 $b_3$ 旋转，轨迹是一个圆锥，称为<strong>体锥 (Body Cone)</strong>。</li>
+<li>在惯性空间中，$\boldsymbol{\omega}$ 绕着恒定的角动量矢量 $\mathbf{H}$ 旋转，轨迹称为<strong>空锥 (Space Cone)</strong>。</li>
+<li>刚体的运动可以形象地描述为：<strong>体锥在空锥上无滑滚动</strong>。</li>
+</ul>
+<hr>
+<h2 id="4-极迹与赫尔极迹-Polhode-amp-Herpolhode"><a href="#4-极迹与赫尔极迹-Polhode-amp-Herpolhode" class="headerlink" title="4. 极迹与赫尔极迹 (Polhode &amp; Herpolhode)"></a>4. 极迹与赫尔极迹 (Polhode &amp; Herpolhode)</h2><p>为了更直观地理解一般非对称刚体 ($J_1 \neq J_2 \neq J_3$) 的运动，Poinsot 提出了几何构造法。</p>
+<h3 id="4-1-能量椭球与角动量球"><a href="#4-1-能量椭球与角动量球" class="headerlink" title="4.1 能量椭球与角动量球"></a>4.1 能量椭球与角动量球</h3><p>无力矩运动有两个守恒量：</p>
+<ol>
+<li><strong>动能 $T$</strong>：$2T = \boldsymbol{\omega}^T \mathbf{J} \boldsymbol{\omega} = J_1 \omega_1^2 + J_2 \omega_2^2 + J_3 \omega_3^2 = \text{const}$</li>
+<li><strong>角动量模长 $H$</strong>：$H^2 = (J_1 \omega_1)^2 + (J_2 \omega_2)^2 + (J_3 \omega_3)^2 = \text{const}$</li>
+</ol>
+<p>在 $\omega_1-\omega_2-\omega_3$ 空间中：</p>
+<ul>
+<li>动能方程定义了一个<strong>椭球 (Kinetic Energy Ellipsoid)</strong>。</li>
+<li>角动量方程定义了一个<strong>椭球 (Momentum Ellipsoid)</strong>（注意这里是关于 $\omega$ 的椭球）。</li>
+</ul>
+<p>刚体的瞬时角速度 $\boldsymbol{\omega}(t)$ 必须同时位于这两个椭球的表面上。因此，$\boldsymbol{\omega}$ 的轨迹就是这两个椭球的<strong>交线</strong>。这条交线在本体坐标系中的轨迹称为<strong>极迹 (Polhode)</strong>。</p>
+<h3 id="4-2-极迹的拓扑结构"><a href="#4-2-极迹的拓扑结构" class="headerlink" title="4.2 极迹的拓扑结构"></a>4.2 极迹的拓扑结构</h3><p>极迹的形状揭示了刚体运动的稳定性：</p>
+<ul>
+<li>围绕最大惯量轴 ($J_{max}$) 和最小惯量轴 ($J_{min}$) 的极迹是闭合的小圈，表明运动是<strong>稳定</strong>的。</li>
+<li>围绕中间惯量轴 ($J_{int}$) 的极迹是发散的双曲线形状，且存在分界线（Separatrix），表明运动是<strong>不稳定</strong>的。</li>
+</ul>
+<p>这一结论就是著名的<strong>中间轴定理 (Intermediate Axis Theorem)</strong>，我们将在下一章详细讨论其稳定性证明。</p>
+<hr>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>欧拉方程是刚体动力学的灵魂。它告诉我们，转动惯量的分布决定了刚体旋转的特性。对于航天器而言，了解其惯性张量是进行姿态控制设计的第一步。</p>
+<p>下一章，我们将深入探讨刚体旋转的<strong>稳定性</strong>问题，解释为什么大多数卫星都设计成绕最大惯量轴旋转，以及著名的“网球拍定理”背后的数学原理.</p>
+<h2 id="引言-1"><a href="#引言-1" class="headerlink" title="引言"></a>引言</h2><p>在前面的章节中，我们详细讨论了姿态运动学，即如何描述和计算刚体的方向（DCM、欧拉角、四元数、CRPs/MRPs）。然而，要控制航天器的姿态，我们必须理解导致姿态发生变化的物理原因——力矩。本章将从牛顿第二定律的旋转形式出发，推导描述刚体转动动力学的核心方程——欧拉方程（Euler’s Equations），并深入探讨惯性张量的物理意义与数学性质。</p>
+<hr>
+<h2 id="刚体的角动量"><a href="#刚体的角动量" class="headerlink" title="刚体的角动量"></a>刚体的角动量</h2><p>对于一个由 $N$ 个质点组成的质点系，或者连续质量分布的刚体，其相对于参考点 $O$ 的角动量 $\mathbf{H}_O$ 定义为：</p>
+<script type="math/tex; mode=display">\mathbf{H}_O = \int_{\mathcal{B}} \mathbf{r} \times \mathbf{v} \, dm</script><p>其中 $\mathbf{r}$ 是质点相对于 $O$ 的位置矢量，$\mathbf{v} = \dot{\mathbf{r}}$ 是惯性速度。</p>
+<p>如果我们将参考点 $O$ 选在刚体的质心 $C$，并且引入随体坐标系 $\mathcal{B}$，刚体上任意一点的速度可以表示为：</p>
+<script type="math/tex; mode=display">\mathbf{v} = \mathbf{v}_C + \boldsymbol{\omega} \times \boldsymbol{\rho}</script><p>其中 $\mathbf{v}_C$ 是质心速度，$\boldsymbol{\omega}$ 是刚体的角速度，$\boldsymbol{\rho}$ 是质点相对于质心的位置矢量。</p>
+<p>对于刚体绕质心的转动，其相对于质心的角动量 $\mathbf{H}_C$ 可以简化为：</p>
+<script type="math/tex; mode=display">\mathbf{H}_C = \int_{\mathcal{B}} \boldsymbol{\rho} \times (\boldsymbol{\omega} \times \boldsymbol{\rho}) \, dm</script><p>利用向量三重积公式 $\mathbf{a} \times (\mathbf{b} \times \mathbf{c}) = (\mathbf{a} \cdot \mathbf{c})\mathbf{b} - (\mathbf{a} \cdot \mathbf{b})\mathbf{c}$，我们有：</p>
+<script type="math/tex; mode=display">\boldsymbol{\rho} \times (\boldsymbol{\omega} \times \boldsymbol{\rho}) = (\boldsymbol{\rho} \cdot \boldsymbol{\rho})\boldsymbol{\omega} - (\boldsymbol{\rho} \cdot \boldsymbol{\omega})\boldsymbol{\rho} = \rho^2 \boldsymbol{\omega} - (\boldsymbol{\rho}\boldsymbol{\rho}^T)\boldsymbol{\omega}</script><p>因此，角动量可以写成线性形式：</p>
+<script type="math/tex; mode=display">\mathbf{H}_C = \left[ \int_{\mathcal{B}} \left( \rho^2 \mathbf{I} - \boldsymbol{\rho}\boldsymbol{\rho}^T \right) dm \right] \boldsymbol{\omega}</script><p>括号中的积分项即为刚体的<strong>惯性张量</strong>（Inertia Tensor），记为 $\mathbf{J}$。于是我们得到刚体角动量的简洁表达：</p>
+<script type="math/tex; mode=display">\mathbf{H} = \mathbf{J} \boldsymbol{\omega}</script><hr>
+<h2 id="惯性张量-mathbf-J"><a href="#惯性张量-mathbf-J" class="headerlink" title="惯性张量 $\mathbf{J}$"></a>惯性张量 $\mathbf{J}$</h2><p>惯性张量是一个 $3 \times 3$ 的对称矩阵，描述了刚体质量分布对转动的阻碍特性。</p>
+<script type="math/tex; mode=display">\mathbf{J} = \begin{bmatrix} J_{xx} & -J_{xy} & -J_{xz} \\ -J_{yx} & J_{yy} & -J_{yz} \\ -J_{zx} & -J_{zy} & J_{zz} \end{bmatrix}</script><p>其中对角线元素称为<strong>转动惯量</strong>（Moments of Inertia）：</p>
+<script type="math/tex; mode=display">J_{xx} = \int (y^2 + z^2) dm, \quad J_{yy} = \int (x^2 + z^2) dm, \quad J_{zz} = \int (x^2 + y^2) dm</script><p>非对角线元素称为<strong>惯性积</strong>（Products of Inertia）：</p>
+<script type="math/tex; mode=display">J_{xy} = J_{yx} = \int xy \, dm, \quad J_{xz} = J_{zx} = \int xz \, dm, \quad J_{yz} = J_{zy} = \int yz \, dm</script><h3 id="主轴坐标系"><a href="#主轴坐标系" class="headerlink" title="主轴坐标系"></a>主轴坐标系</h3><p>由于 $\mathbf{J}$ 是实对称矩阵，根据线性代数理论，必然存在一个正交坐标系，使得 $\mathbf{J}$ 在该坐标系下为对角矩阵。这个坐标系的轴称为刚体的<strong>主轴</strong>（Principal Axes），对应的对角元素称为<strong>主转动惯量</strong>（Principal Moments of Inertia）。</p>
+<p>在主轴坐标系下，惯性张量简化为：</p>
+<script type="math/tex; mode=display">\mathbf{J} = \text{diag}(J_1, J_2, J_3)</script><p>此时，角动量 $\mathbf{H}$ 与角速度 $\boldsymbol{\omega}$ 的关系变得非常简单：</p>
+<script type="math/tex; mode=display">H_1 = J_1 \omega_1, \quad H_2 = J_2 \omega_2, \quad H_3 = J_3 \omega_3</script><hr>
+<h2 id="欧拉动力学方程"><a href="#欧拉动力学方程" class="headerlink" title="欧拉动力学方程"></a>欧拉动力学方程</h2><p>根据角动量定理，作用在刚体上的合外力矩 $\mathbf{M}$ 等于角动量的时间变化率。需要注意的是，这个导数必须在惯性系 $\mathcal{N}$ 中求取。</p>
+<script type="math/tex; mode=display">\mathbf{M} = \left( \frac{d\mathbf{H}}{dt} \right)_{\mathcal{N}}</script><p>利用传输定理（Transport Theorem），我们可以将惯性系下的导数转换为随体坐标系 $\mathcal{B}$ 下的导数：</p>
+<script type="math/tex; mode=display">\left( \frac{d\mathbf{H}}{dt} \right)_{\mathcal{N}} = \left( \frac{d\mathbf{H}}{dt} \right)_{\mathcal{B}} + \boldsymbol{\omega} \times \mathbf{H}</script><p>由于在随体坐标系中，刚体的质量分布不变，因此惯性张量 $\mathbf{J}$ 是常数矩阵（假设刚体没有变形或燃料消耗）。所以：</p>
+<script type="math/tex; mode=display">\left( \frac{d\mathbf{H}}{dt} \right)_{\mathcal{B}} = \mathbf{J} \dot{\boldsymbol{\omega}}</script><p>代入角动量定理，得到刚体姿态动力学的矢量形式方程：</p>
+<script type="math/tex; mode=display">\mathbf{J} \dot{\boldsymbol{\omega}} + \boldsymbol{\omega} \times (\mathbf{J} \boldsymbol{\omega}) = \mathbf{M}</script><p>这就是著名的<strong>欧拉动力学方程</strong>（Euler’s Equations of Motion）。</p>
+<h3 id="标量形式（主轴坐标系）"><a href="#标量形式（主轴坐标系）" class="headerlink" title="标量形式（主轴坐标系）"></a>标量形式（主轴坐标系）</h3><p>如果我们将方程投影到刚体的主轴坐标系上，由于 $J_{xy}=J_{yz}=J_{zx}=0$，方程组解耦为三个标量方程：</p>
+<script type="math/tex; mode=display">
+\begin{cases}
+J_1 \dot{\omega}_1 + (J_3 - J_2) \omega_2 \omega_3 = M_1 \\
+J_2 \dot{\omega}_2 + (J_1 - J_3) \omega_3 \omega_1 = M_2 \\
+J_3 \dot{\omega}_3 + (J_2 - J_1) \omega_1 \omega_2 = M_3
+\end{cases}</script><p>这组非线性微分方程是分析航天器姿态运动的基础。</p>
+<hr>
+<h2 id="无力矩运动-Torque-Free-Motion"><a href="#无力矩运动-Torque-Free-Motion" class="headerlink" title="无力矩运动 (Torque-Free Motion)"></a>无力矩运动 (Torque-Free Motion)</h2><p>当外力矩 $\mathbf{M} = \mathbf{0}$ 时，刚体处于无力矩运动状态。这是航天器在巡航阶段的常见状态。</p>
+<h3 id="轴对称刚体"><a href="#轴对称刚体" class="headerlink" title="轴对称刚体"></a>轴对称刚体</h3><p>假设刚体是轴对称的，例如 $J_1 = J_2 = J_t$（横向转动惯量），$J_3 = J_a$（轴向转动惯量）。欧拉方程简化为：</p>
+<script type="math/tex; mode=display">
+\begin{cases}
+J_t \dot{\omega}_1 + (J_a - J_t) \omega_2 \omega_3 = 0 \\
+J_t \dot{\omega}_2 - (J_a - J_t) \omega_3 \omega_1 = 0 \\
+J_a \dot{\omega}_3 = 0
+\end{cases}</script><p>从第三个方程可知，$\dot{\omega}_3 = 0$，即自旋角速度 $\omega_3$ 保持恒定。
+定义相对章动率 $\lambda = \frac{J_a - J_t}{J_t} \omega_3$，前两个方程变为：</p>
+<script type="math/tex; mode=display">\dot{\omega}_1 + \lambda \omega_2 = 0</script><script type="math/tex; mode=display">\dot{\omega}_2 - \lambda \omega_1 = 0</script><p>这是一个耦合的线性谐振子系统，其解为：</p>
+<script type="math/tex; mode=display">\omega_1(t) = \omega_{\perp} \cos(\lambda t + \phi_0)</script><script type="math/tex; mode=display">\omega_2(t) = \omega_{\perp} \sin(\lambda t + \phi_0)</script><p>这表明，角速度矢量 $\boldsymbol{\omega}$ 在随体坐标系中绕着对称轴（$z$轴）进动，轨迹是一个圆锥面，称为<strong>随体极锥</strong>（Body Cone）。</p>
+<h3 id="能量与角动量守恒"><a href="#能量与角动量守恒" class="headerlink" title="能量与角动量守恒"></a>能量与角动量守恒</h3><p>在无力矩运动中，系统存在两个守恒量：</p>
+<ol>
+<li><strong>动能</strong> $T = \frac{1}{2} \boldsymbol{\omega}^T \mathbf{J} \boldsymbol{\omega} = \text{const}$</li>
+<li><strong>角动量模长</strong> $H^2 = \mathbf{H}^T \mathbf{H} = \boldsymbol{\omega}^T \mathbf{J}^2 \boldsymbol{\omega} = \text{const}$</li>
+</ol>
+<p>这两个守恒量定义了角速度空间中的两个椭球体：<strong>动能椭球</strong>和<strong>角动量椭球</strong>。刚体的瞬时角速度矢量 $\boldsymbol{\omega}$ 必须同时位于这两个椭球面上，即它们的交线上。这一几何解释（Poinsot构造）直观地描述了刚体的自由旋转运动。</p>
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>欧拉方程建立了力矩与角速度变化率之间的关系，是姿态动力学的核心。结合前面章节的运动学方程（如四元数微分方程 $\dot{\mathbf{q}} = \frac{1}{2} \mathbf{q} \otimes \boldsymbol{\omega}$），我们就可以构建完整的航天器姿态仿真模型：</p>
+<ol>
+<li><strong>动力学回路</strong>：输入力矩 $\mathbf{M}$ $\to$ 欧拉方程 $\to$ 角加速度 $\dot{\boldsymbol{\omega}}$ $\to$ 积分得到 $\boldsymbol{\omega}$。</li>
+<li><strong>运动学回路</strong>：输入角速度 $\boldsymbol{\omega}$ $\to$ 运动学方程 $\to$ 姿态参数导数 $\dot{\mathbf{q}}$ $\to$ 积分得到姿态 $\mathbf{q}$。</li>
+</ol>
+<p>下一章，我们将利用欧拉方程来分析刚体绕主轴旋转的稳定性，探讨为什么大多数卫星倾向于绕最大转动惯量轴旋转。</p>
+
+    </div>
+     
+    <div class="post-footer__meta"><p>updated at 2025-11-21</p></div> 
+    <div class="post-entry__tags"><a href="/tags/%E5%88%9A%E4%BD%93%E5%8A%A8%E5%8A%9B%E5%AD%A6/" class="post-tags__link button"># 刚体动力学</a><a href="/tags/%E6%AC%A7%E6%8B%89%E6%96%B9%E7%A8%8B/" class="post-tags__link button"># 欧拉方程</a><a href="/tags/%E6%83%AF%E6%80%A7%E5%BC%A0%E9%87%8F/" class="post-tags__link button"># 惯性张量</a></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
+            
+                <a href="/2025/02/14/%E5%A7%BF%E6%80%81%E5%8A%A8%E5%8A%9B%E5%AD%A6Vol.4-%E7%BD%97%E5%BE%B7%E9%87%8C%E6%A0%BC%E6%96%AF%E5%8F%82%E6%95%B0(CRPs)%E4%B8%8E%E4%BF%AE%E6%AD%A3%E5%8F%82%E6%95%B0(MRPs)%E7%9A%84%E5%AF%B9%E5%81%B6%E6%80%A7/" class="nav__link">
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
+                    </div>
+                    <div>
+                        <div class="nav__label">
+                            Previous Post
+                        </div>
+                        <div class="nav__title">
+                            姿态动力学Vol.4-罗德里格斯参数(CRPs)与修正参数(MRPs)的对偶性
+                        </div>
+                    </div>
+                </a>
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="/2025/02/14/%E5%A7%BF%E6%80%81%E5%8A%A8%E5%8A%9B%E5%AD%A6Vol.6-%E7%A8%B3%E5%AE%9A%E6%80%A7%E5%88%86%E6%9E%90%EF%BC%9A%E4%B8%AD%E9%97%B4%E8%BD%B4%E5%AE%9A%E7%90%86%E4%B8%8E%E8%83%BD%E9%87%8F%E6%B1%87%E6%96%B9%E6%B3%95/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            Next Post
+                        </div>
+                        <div class="nav__title">
+                            姿态动力学Vol.6-稳定性分析：中间轴定理与能量汇方法
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
+        </div>
+    </div>
+
+
+
+
+
+</main>
+
+            <footer class="footer">
+     
+    <a href="#" class="button" id="b2t" aria-label="Back to Top" title="Back to Top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M233.376 722.752L278.624 768 512 534.624 745.376 768l45.248-45.248L512 444.128zM192 352h640V288H192z" fill="currentColor"></path>
+        </svg>
+    </a>
+
+    
+
+
+    
+     
+ 
+
+ 
+    
+        
+        <p class="footer-copyright">
+            Strtus's Journry
+        </p>
+    
+    
+        
+            
+        
+            
+        
+            <p>保持对世界的输出🙌</p>
+
+        
+    
+</footer>
+
+        </div>
+         
+
+ 
+    <script>
+        window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+        ga('create', 'G-5ERPC280ZB', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+ 
+
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5ERPC280ZB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-5ERPC280ZB');
+    </script>
+ 
+
+ 
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement('script');
+            hm.src = 'https://hm.baidu.com/hm.js?8da6411546e903e478a9d82d2a4d0c60';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+    
+ 
+
+
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.css">
+
+    
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.js"></script>
+
+    <script>
+        let lazyloadT = Boolean('false'),
+            auto_fancybox = Boolean('true')
+        if (auto_fancybox) {
+            $(".post__content").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        } else {
+            $(".post__content").find("fancybox").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        }
+    </script>
+ 
+
+
+    <script>
+        if (typeof MathJax === 'undefined') {
+            window.MathJax = {
+                loader: {
+                    source: {
+                        '[tex]/amsCd': '[tex]/amscd',
+                        '[tex]/AMScd': '[tex]/amscd'
+                    }
+                },
+                tex: {
+                    inlineMath: {'[+]': [['$', '$']]},
+                    tags: 'ams'
+                },
+                options: {
+                    renderActions: {
+                        findScript: [10, doc => {
+                            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                                const display = !!node.type.match(/; *mode=display/);
+                                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                                const text = document.createTextNode('');
+                                node.parentNode.replaceChild(text, node);
+                                math.start = {node: text, delim: '', n: 0};
+                                math.end = {node: text, delim: '', n: 0};
+                                doc.math.push(math);
+                            });
+                        }, '', false],
+                        insertedScript: [200, () => {
+                            document.querySelectorAll('mjx-container').forEach(node => {
+                                let target = node.parentNode;
+                                if (target.nodeName.toLowerCase() === 'li') {
+                                    target.parentNode.classList.add('has-jax');
+                                }
+                            });
+                        }, '', false]
+                    }
+                }
+            };
+            (function () {
+                var script = document.createElement('script');
+                script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js";
+                script.defer = true;
+                document.head.appendChild(script);
+            })();
+        } else {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+        }
+    </script>
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+
+    </body>
+</html>

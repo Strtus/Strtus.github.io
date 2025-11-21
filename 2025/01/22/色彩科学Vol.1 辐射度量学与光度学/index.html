@@ -38,29 +38,29 @@
 <title>色彩科学Vol.1 辐射度量学与光度学 | Strtus&#39;s Journey</title>
 
 
-    <meta name="keywords" content="色彩科学">
+    <meta name="keywords" content="色彩科学, 辐射度量学, 光度学">
 
 
 
 
     <!-- OpenGraph -->
  
-    <meta name="description" content="前言为了系统探讨色度学原理，首先需了解“什么是光？”以及“人眼如何对光产生视觉感知？” 有鉴于此，本文从电磁学与光学和视觉生理学的角度出发，对辐射度量学与光度学做简要阐述。这两大学科共同构成了量化光与色觉的基础框架。鉴于色彩理论所涉及之范畴极其广泛，本文仅聚焦辐射度量学和光度学的核心概念，为后续“颜色匹配实验”“三基色理论”“CIE 1931 XYZ 色度图”等内容奠定基础。 本文的前置基知识为：">
+    <meta name="description" content="前言：色彩科学的物理基石色彩科学是一门横跨物理学、生理学、心理学与数学的交叉学科。为了构建严谨的色彩科学知识体系，我们必须从最基础的物理量出发。 “光”是色彩的物理载体，而“视觉”是色彩的感知通道。要量化色彩，首先要解决两个问题：  如何客观地度量电磁辐射的能量？（辐射度量学） 如何量化人眼对这些辐射的主观亮度感受？（光度学）  作为《色彩科学的数学原理》系列的第一章，本文将建立辐射度量学与光度学">
 <meta property="og:type" content="article">
 <meta property="og:title" content="色彩科学Vol.1 辐射度量学与光度学">
 <meta property="og:url" content="https://strtus.github.io/2025/01/22/%E8%89%B2%E5%BD%A9%E7%A7%91%E5%AD%A6Vol.1%20%E8%BE%90%E5%B0%84%E5%BA%A6%E9%87%8F%E5%AD%A6%E4%B8%8E%E5%85%89%E5%BA%A6%E5%AD%A6/index.html">
 <meta property="og:site_name" content="Strtus&#39;s Journey">
-<meta property="og:description" content="前言为了系统探讨色度学原理，首先需了解“什么是光？”以及“人眼如何对光产生视觉感知？” 有鉴于此，本文从电磁学与光学和视觉生理学的角度出发，对辐射度量学与光度学做简要阐述。这两大学科共同构成了量化光与色觉的基础框架。鉴于色彩理论所涉及之范畴极其广泛，本文仅聚焦辐射度量学和光度学的核心概念，为后续“颜色匹配实验”“三基色理论”“CIE 1931 XYZ 色度图”等内容奠定基础。 本文的前置基知识为：">
+<meta property="og:description" content="前言：色彩科学的物理基石色彩科学是一门横跨物理学、生理学、心理学与数学的交叉学科。为了构建严谨的色彩科学知识体系，我们必须从最基础的物理量出发。 “光”是色彩的物理载体，而“视觉”是色彩的感知通道。要量化色彩，首先要解决两个问题：  如何客观地度量电磁辐射的能量？（辐射度量学） 如何量化人眼对这些辐射的主观亮度感受？（光度学）  作为《色彩科学的数学原理》系列的第一章，本文将建立辐射度量学与光度学">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/EM_spectrum_zh-hans.svg">
 <meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/LuminosityCurve3.svg">
-<meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/Photometry_radiometry_units.svg">
 <meta property="article:published_time" content="2025-01-22T14:00:21.000Z">
 <meta property="article:modified_time" content="2025-01-22T15:00:21.000Z">
 <meta property="article:author" content="strtus">
 <meta property="article:tag" content="色彩科学">
+<meta property="article:tag" content="辐射度量学">
+<meta property="article:tag" content="光度学">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/EM_spectrum_zh-hans.svg">
+<meta name="twitter:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/LuminosityCurve3.svg">
 
 
     
@@ -178,7 +178,7 @@
 
     <aside class="post-side">
         <div class="post-side__toc">
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%90%E5%B0%84%E5%BA%A6%E9%87%8F%E5%AD%A6%E4%B8%8E%E5%85%89%E5%BA%A6%E5%AD%A6%E5%9F%BA%E7%A1%80"><span class="toc-number">2.</span> <span class="toc-text">辐射度量学与光度学基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%90%E5%B0%84%E5%BA%A6%E9%87%8F%E5%AD%A6%E4%B8%8E%E5%85%89%E5%BA%A6%E5%AD%A6%E7%AE%80%E4%BB%8B"><span class="toc-number">2.1.</span> <span class="toc-text">辐射度量学与光度学简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%90%E5%B0%84%E5%BA%A6%E9%87%8F%E5%AD%A6%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">2.2.</span> <span class="toc-text">辐射度量学的基本概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%89%E5%BA%A6%E5%AD%A6%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">2.3.</span> <span class="toc-text">光度学的基本概念</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-number">3.</span> <span class="toc-text">Reference</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80%EF%BC%9A%E8%89%B2%E5%BD%A9%E7%A7%91%E5%AD%A6%E7%9A%84%E7%89%A9%E7%90%86%E5%9F%BA%E7%9F%B3"><span class="toc-number">1.</span> <span class="toc-text">前言：色彩科学的物理基石</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%90%E5%B0%84%E5%BA%A6%E9%87%8F%E5%AD%A6"><span class="toc-number">2.</span> <span class="toc-text">辐射度量学</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%90%E5%B0%84%E9%80%9A%E9%87%8F"><span class="toc-number">2.1.</span> <span class="toc-text">辐射通量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%90%E5%B0%84%E5%BC%BA%E5%BA%A6"><span class="toc-number">2.2.</span> <span class="toc-text">辐射强度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%90%E7%85%A7%E5%BA%A6"><span class="toc-number">2.3.</span> <span class="toc-text">辐照度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%90%E4%BA%AE%E5%BA%A6"><span class="toc-number">2.4.</span> <span class="toc-text">辐亮度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%89%E5%BA%A6%E5%AD%A6"><span class="toc-number">3.</span> <span class="toc-text">光度学</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%89%E8%B0%B1%E5%85%89%E8%A7%86%E6%95%88%E7%8E%87%E5%87%BD%E6%95%B0"><span class="toc-number">3.1.</span> <span class="toc-text">光谱光视效率函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%89%E9%80%9A%E9%87%8F"><span class="toc-number">3.2.</span> <span class="toc-text">光通量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%91%E5%85%89%E5%BC%BA%E5%BA%A6"><span class="toc-number">3.3.</span> <span class="toc-text">发光强度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%89%E7%85%A7%E5%BA%A6"><span class="toc-number">3.4.</span> <span class="toc-text">光照度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%89%E4%BA%AE%E5%BA%A6"><span class="toc-number">3.5.</span> <span class="toc-text">光亮度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%90%E5%B0%84%E9%87%8F%E4%B8%8E%E5%85%89%E5%BA%A6%E9%87%8F%E5%AF%B9%E7%85%A7%E8%A1%A8"><span class="toc-number">4.</span> <span class="toc-text">辐射量与光度量对照表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%E4%B8%8E%E5%B1%95%E6%9C%9B"><span class="toc-number">5.</span> <span class="toc-text">总结与展望</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-number">6.</span> <span class="toc-text">Reference</span></a></li></ol>
         </div>
     </aside>
     <a class="btn-toc button" id="btn-toc" tabindex="0">
@@ -188,91 +188,147 @@
     </a>
     <div class="toc-menus" id="toc-menus">
         <div class="toc-title">Article Directory</div>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%90%E5%B0%84%E5%BA%A6%E9%87%8F%E5%AD%A6%E4%B8%8E%E5%85%89%E5%BA%A6%E5%AD%A6%E5%9F%BA%E7%A1%80"><span class="toc-number">2.</span> <span class="toc-text">辐射度量学与光度学基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%90%E5%B0%84%E5%BA%A6%E9%87%8F%E5%AD%A6%E4%B8%8E%E5%85%89%E5%BA%A6%E5%AD%A6%E7%AE%80%E4%BB%8B"><span class="toc-number">2.1.</span> <span class="toc-text">辐射度量学与光度学简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%90%E5%B0%84%E5%BA%A6%E9%87%8F%E5%AD%A6%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">2.2.</span> <span class="toc-text">辐射度量学的基本概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%89%E5%BA%A6%E5%AD%A6%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">2.3.</span> <span class="toc-text">光度学的基本概念</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-number">3.</span> <span class="toc-text">Reference</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80%EF%BC%9A%E8%89%B2%E5%BD%A9%E7%A7%91%E5%AD%A6%E7%9A%84%E7%89%A9%E7%90%86%E5%9F%BA%E7%9F%B3"><span class="toc-number">1.</span> <span class="toc-text">前言：色彩科学的物理基石</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%90%E5%B0%84%E5%BA%A6%E9%87%8F%E5%AD%A6"><span class="toc-number">2.</span> <span class="toc-text">辐射度量学</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%90%E5%B0%84%E9%80%9A%E9%87%8F"><span class="toc-number">2.1.</span> <span class="toc-text">辐射通量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%90%E5%B0%84%E5%BC%BA%E5%BA%A6"><span class="toc-number">2.2.</span> <span class="toc-text">辐射强度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%90%E7%85%A7%E5%BA%A6"><span class="toc-number">2.3.</span> <span class="toc-text">辐照度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%90%E4%BA%AE%E5%BA%A6"><span class="toc-number">2.4.</span> <span class="toc-text">辐亮度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%89%E5%BA%A6%E5%AD%A6"><span class="toc-number">3.</span> <span class="toc-text">光度学</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%89%E8%B0%B1%E5%85%89%E8%A7%86%E6%95%88%E7%8E%87%E5%87%BD%E6%95%B0"><span class="toc-number">3.1.</span> <span class="toc-text">光谱光视效率函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%89%E9%80%9A%E9%87%8F"><span class="toc-number">3.2.</span> <span class="toc-text">光通量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%91%E5%85%89%E5%BC%BA%E5%BA%A6"><span class="toc-number">3.3.</span> <span class="toc-text">发光强度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%89%E7%85%A7%E5%BA%A6"><span class="toc-number">3.4.</span> <span class="toc-text">光照度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%89%E4%BA%AE%E5%BA%A6"><span class="toc-number">3.5.</span> <span class="toc-text">光亮度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%90%E5%B0%84%E9%87%8F%E4%B8%8E%E5%85%89%E5%BA%A6%E9%87%8F%E5%AF%B9%E7%85%A7%E8%A1%A8"><span class="toc-number">4.</span> <span class="toc-text">辐射量与光度量对照表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%E4%B8%8E%E5%B1%95%E6%9C%9B"><span class="toc-number">5.</span> <span class="toc-text">总结与展望</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-number">6.</span> <span class="toc-text">Reference</span></a></li></ol>
     </div>
 
 
 <article class="post post__with-toc content-card">
     <div class="post__header"></div>
     <div class="post__content">
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>为了系统探讨色度学原理，首先需了解“什么是光？”以及“人眼如何对光产生视觉感知？”</p>
-<p>有鉴于此，本文从电磁学与光学和视觉生理学的角度出发，对辐射度量学与光度学做简要阐述。这两大学科共同构成了量化光与色觉的基础框架。鉴于色彩理论所涉及之范畴极其广泛，本文仅聚焦辐射度量学和光度学的核心概念，为后续“颜色匹配实验”“三基色理论”“CIE 1931 XYZ 色度图”等内容奠定基础。</p>
-<p>本文的前置基知识为：微积分、矩阵理论</p>
-<h2 id="辐射度量学与光度学基础"><a href="#辐射度量学与光度学基础" class="headerlink" title="辐射度量学与光度学基础"></a>辐射度量学与光度学基础</h2><h3 id="辐射度量学与光度学简介"><a href="#辐射度量学与光度学简介" class="headerlink" title="辐射度量学与光度学简介"></a>辐射度量学与光度学简介</h3><p>辐射度量学（radiometry）主要研究电磁辐射的能量度量与分布规律。电磁辐射涵盖极宽广的波长范围，包括伽马射线、X 射线、紫外光、可见光、红外光、微波与无线电波等。然而，人眼仅能对其中约 390–780 nm 的波段产生视觉感受，故可见光只占整个电磁波谱的极小部分。</p>
-<p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/EM_spectrum_zh-hans.svg" style="zoom:150%;" /></p>
-<p>光度学（photometry）则侧重研究可见光对人眼视觉系统所带来的主观亮度刺激，因为虽然同为可见光，不同波长对于人眼的刺激也是不同的。</p>
-<p>大量实验证明，人眼对 555 $nm$ 单色光（黄绿色）最敏感，若在该波长定义其视觉响应系数为 1，则其他波长光的视见效率可用函数 ($V(\lambda)$)来表征。</p>
-<p>在将物理辐射量换算成人眼主观亮度的过程中，视见函数起到了加权的作用，某种意义上，视见函数构建了联结光度学和辐射度量学的桥梁。</p>
-<p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/LuminosityCurve3.svg"/></p>
-<h3 id="辐射度量学的基本概念"><a href="#辐射度量学的基本概念" class="headerlink" title="辐射度量学的基本概念"></a>辐射度量学的基本概念</h3><p>为便于后续建模，引入如下概念</p>
+        <h2 id="前言：色彩科学的物理基石"><a href="#前言：色彩科学的物理基石" class="headerlink" title="前言：色彩科学的物理基石"></a>前言：色彩科学的物理基石</h2><p>色彩科学是一门横跨物理学、生理学、心理学与数学的交叉学科。为了构建严谨的色彩科学知识体系，我们必须从最基础的物理量出发。</p>
+<p>“光”是色彩的物理载体，而“视觉”是色彩的感知通道。要量化色彩，首先要解决两个问题：</p>
 <ol>
-<li><p><strong>辐射通量($\varPhi_\mathrm{R}$) </strong> 
-表示单位时间内穿过某截面的电磁辐射能量，单位为瓦（$W$）：</p>
-<script type="math/tex; mode=display">
-\varPhi_\mathrm{R} = \frac{\mathrm{d}Q}{\mathrm{d}t}</script><p>其中 ($Q$) 代表辐射能量，($t$)为时间。</p>
-</li>
-<li><p><strong>辐射强度 ($I$)</strong><br>对点状辐射源而言，为在给定方向(单位立体角)上的辐射通量密度，单位为 ($\mathrm{W/sr}$)：</p>
-<script type="math/tex; mode=display">
-I = \frac{\mathrm{d}\varPhi_\mathrm{R}}{\mathrm{d}\varOmega}</script></li>
-<li><p><strong>辐照度 ($E$)</strong><br>当研究辐射能量如何“照射”到表面时，就引入辐照度：</p>
-<script type="math/tex; mode=display">
-E = \frac{\mathrm{d}\varPhi_\mathrm{R}}{\mathrm{d}A}</script><p>其单位为 ($\mathrm{W/m^2}$)。</p>
-</li>
-<li><p><strong>辐亮度 ($L$)</strong><br>指某表面微元在特定方向的出射辐射强度与其面积正交分量之比：</p>
-<script type="math/tex; mode=display">
-L = \frac{\mathrm{d}I}{\mathrm{d}A^\perp}
-= \frac{\mathrm{d}^2\varPhi_\mathrm{R}}{\mathrm{d}\varOmega \,\mathrm{d}A \cos\theta}</script><p>在无能量损耗的理想条件下，沿光线传播方向，辐亮度恒定不变。这一性质常用于图形学渲染算法中的光能传递计算。</p>
-</li>
+<li>如何客观地度量电磁辐射的能量？（辐射度量学）</li>
+<li>如何量化人眼对这些辐射的主观亮度感受？（光度学）</li>
 </ol>
-<blockquote>
-<p><strong>注</strong>：更深层次地，辐射度量学可追溯至麦克斯韦电磁学原理，将电磁场视为矢量场来分析。但在此处，我们采取几何光学近似，侧重能量“射线”形式即可满足后续色彩模型应用。</p>
-</blockquote>
-<h3 id="光度学的基本概念"><a href="#光度学的基本概念" class="headerlink" title="光度学的基本概念"></a>光度学的基本概念</h3><p>为便于后续建模，引入如下概念</p>
-<ol>
-<li><p><strong>光通量 ($\varPhi_\mathrm{V}$)</strong><br>若某光源在波长 ($\lambda$) 上辐射通量分布为 ($\phi_\mathrm{R}(\lambda)$)，则其光度学加权形式：</p>
+<p>作为《色彩科学的数学原理》系列的第一章，本文将建立辐射度量学与光度学的数学框架。这两者是后续理解三刺激值、色度图以及色彩管理系统的绝对基石。</p>
+<h2 id="辐射度量学"><a href="#辐射度量学" class="headerlink" title="辐射度量学"></a>辐射度量学</h2><p>辐射度量学主要研究电磁辐射的能量度量与分布规律，不考虑人眼的视觉特性，纯粹从物理能量角度出发。</p>
+<h3 id="辐射通量"><a href="#辐射通量" class="headerlink" title="辐射通量"></a>辐射通量</h3><p>定义：单位时间内穿过某截面的电磁辐射能量，也称为辐射功率。
+<strong>符号</strong>：$\Phi_\mathrm{e}$ (或 $\Phi_\mathrm{R}$)
+<strong>单位</strong>：瓦特 ($W$)</p>
 <script type="math/tex; mode=display">
-\phi_\mathrm{V}(\lambda) = \sigma_\mathrm{m} \, V(\lambda)\, \phi_\mathrm{R}(\lambda)</script><p>积分得总光通量：</p>
+\Phi_\mathrm{e} = \frac{\mathrm{d}Q}{\mathrm{d}t}</script><p>其中 $Q$ 代表辐射能量，$t$ 为时间。</p>
+<h3 id="辐射强度"><a href="#辐射强度" class="headerlink" title="辐射强度"></a>辐射强度</h3><p>定义：点辐射源在给定方向上，单位立体角内的辐射通量。
+<strong>符号</strong>：$I_\mathrm{e}$
+<strong>单位</strong>：瓦特每球面度 ($W/sr$)</p>
 <script type="math/tex; mode=display">
-\varPhi_\mathrm{V} = 
-\int_0^\infty
-\sigma_\mathrm{m}\,V(\lambda)\,
-\phi_\mathrm{R}(\lambda)\,
-\mathrm{d}\lambda</script><p>其中 ($\sigma_\mathrm{m}\approx 683\,[\mathrm{lm/W}]$)，常称“最大光谱光视效率”系数。</p>
-</li>
-<li><p><strong>发光强度 ($I_\mathrm{V}$)</strong><br>对应点光源在单位立体角内的光通量，单位为坎德拉($cd$)。若光源辐射555 nm波长光，功率强度为 ($\tfrac{1}{683}\,\mathrm{W/sr}$)，则发光强度为 1 $cd$。</p>
-</li>
-<li><p><strong>光照度 ($E_\mathrm{V}$)</strong><br>表示照射在单位面积上的光通量，单位勒克斯($lx$)：</p>
+I_\mathrm{e} = \frac{\mathrm{d}\Phi_\mathrm{e}}{\mathrm{d}\Omega}</script><p>其中 $\Omega$ 代表立体角。对于各向同性的点光源，若总辐射通量为 $\Phi_\mathrm{e}$，则其辐射强度为 $I_\mathrm{e} = \frac{\Phi_\mathrm{e}}{4\pi}$。</p>
+<h3 id="辐照度"><a href="#辐照度" class="headerlink" title="辐照度"></a>辐照度</h3><p>定义：照射到表面上单位面积的辐射通量。描述的是“接收”到的能量密度。
+<strong>符号</strong>：$E_\mathrm{e}$
+<strong>单位</strong>：瓦特每平方米 ($W/m^2$)</p>
 <script type="math/tex; mode=display">
-E_\mathrm{V} = \frac{\mathrm{d}\varPhi_\mathrm{V}}{\mathrm{d}A}</script></li>
-<li><p><strong>光亮度 ($L_\mathrm{V}$)</strong><br>在光度学中，定义与辐亮度平行，只是换成光度学加权：</p>
+E_\mathrm{e} = \frac{\mathrm{d}\Phi_\mathrm{e}}{\mathrm{d}A}</script><h3 id="辐亮度"><a href="#辐亮度" class="headerlink" title="辐亮度"></a>辐亮度</h3><p>定义：辐射源表面微元在特定方向上，单位投影面积、单位立体角内的辐射通量。
+<strong>符号</strong>：$L_\mathrm{e}$
+<strong>单位</strong>：瓦特每球面度每平方米 ($W \cdot sr^{-1} \cdot m^{-2}$)</p>
 <script type="math/tex; mode=display">
-L_\mathrm{V} 
-= \frac{\mathrm{d}I_\mathrm{V}}{\mathrm{d}A^\perp}
-= \frac{\mathrm{d}^2 \varPhi_\mathrm{V}}{\mathrm{d}\varOmega\,\mathrm{d}A \cos\theta}</script><p>单位为 $cd/m²$（通常亦称 $nit$）。这在显示器规格中常被提及，例如“500 $nit$”亮度。</p>
-</li>
-</ol>
-<p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/Photometry_radiometry_units.svg"/></p>
+L_\mathrm{e} = \frac{\mathrm{d}^2\Phi_\mathrm{e}}{\mathrm{d}\Omega \, \mathrm{d}A \cos\theta}</script><p>其中 $\theta$ 是辐射方向与表面法线的夹角，$dA \cos\theta$ 即为投影面积。</p>
+<p>重要性质：在无损耗介质中，沿光线传播方向，辐亮度保持不变。这一性质使得辐亮度成为计算机图形学（如渲染方程）和色彩测量中最核心的物理量。人眼或相机感受到的“亮度”直接对应于物体表面的辐亮度。</p>
+<hr>
+<h2 id="光度学"><a href="#光度学" class="headerlink" title="光度学"></a>光度学</h2><p>光度学是辐射度量学在人眼视觉系统上的投影。它只研究可见光（约 380nm - 780nm），并根据人眼对不同波长的敏感度对辐射量进行加权。</p>
+<h3 id="光谱光视效率函数"><a href="#光谱光视效率函数" class="headerlink" title="光谱光视效率函数"></a>光谱光视效率函数</h3><p>人眼对不同波长的光的敏感程度不同。CIE（国际照明委员会）定义了标准观察者的光谱光视效率函数 $V(\lambda)$。</p>
+<ul>
+<li>明视觉：在亮度较高环境下，由视锥细胞主导。峰值在 555nm (黄绿光)。</li>
+<li>暗视觉：在亮度极低环境下，由视杆细胞主导。峰值在 507nm。</li>
+</ul>
+<p>在色彩科学中，通常主要关注明视觉函数 $V(\lambda)$。</p>
+<p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/LuminosityCurve3.svg" style="zoom:80%;" /></p>
+<h3 id="光通量"><a href="#光通量" class="headerlink" title="光通量"></a>光通量</h3><p>定义：人眼所感知到的辐射功率。它是辐射通量的光谱分布 $\Phi_\mathrm{e}(\lambda)$ 与视见函数 $V(\lambda)$ 的加权积分。
+<strong>符号</strong>：$\Phi_\mathrm{v}$
+<strong>单位</strong>：流明 (lumen, $lm$)</p>
+<script type="math/tex; mode=display">
+\Phi_\mathrm{v} = K_\mathrm{m} \int_{380}^{780} \Phi_\mathrm{e}(\lambda) V(\lambda) \mathrm{d}\lambda</script><p>其中 $K_\mathrm{m}$ 是最大光谱光视效能，对于明视觉，CIE 1979 规定 $K_\mathrm{m} \approx 683 \, lm/W$（对应 555nm 单色光）。</p>
+<h3 id="发光强度"><a href="#发光强度" class="headerlink" title="发光强度"></a>发光强度</h3><p>定义：点光源在给定方向上单位立体角内的光通量。
+<strong>符号</strong>：$I_\mathrm{v}$
+<strong>单位</strong>：坎德拉 (candela, $cd$)。坎德拉是 SI 基本单位之一。</p>
+<script type="math/tex; mode=display">
+I_\mathrm{v} = \frac{\mathrm{d}\Phi_\mathrm{v}}{\mathrm{d}\Omega}</script><h3 id="光照度"><a href="#光照度" class="headerlink" title="光照度"></a>光照度</h3><p>定义：照射在单位面积上的光通量。
+<strong>符号</strong>：$E_\mathrm{v}$
+<strong>单位</strong>：勒克斯 (lux, $lx$)</p>
+<script type="math/tex; mode=display">
+E_\mathrm{v} = \frac{\mathrm{d}\Phi_\mathrm{v}}{\mathrm{d}A}</script><p>$1 \, lx = 1 \, lm/m^2$。</p>
+<h3 id="光亮度"><a href="#光亮度" class="headerlink" title="光亮度"></a>光亮度</h3><p>定义：光源或物体表面在给定方向上，单位投影面积、单位立体角内的光通量。
+<strong>符号</strong>：$L_\mathrm{v}$
+<strong>单位</strong>：坎德拉每平方米 ($cd/m^2$)，俗称尼特 ($nit$)。</p>
+<script type="math/tex; mode=display">
+L_\mathrm{v} = \frac{\mathrm{d}^2\Phi_\mathrm{v}}{\mathrm{d}\Omega \, \mathrm{d}A \cos\theta}</script><p>物理意义：光亮度 $L_\mathrm{v}$ 是唯一直接对应人眼主观“亮度”感知的物理量。显示器的亮度规格（如 500 nits）指的就是这个量。</p>
+<h2 id="辐射量与光度量对照表"><a href="#辐射量与光度量对照表" class="headerlink" title="辐射量与光度量对照表"></a>辐射量与光度量对照表</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">物理概念</th>
+<th style="text-align:left">辐射度量学</th>
+<th style="text-align:left">符号</th>
+<th style="text-align:left">单位</th>
+<th style="text-align:left">光度学</th>
+<th style="text-align:left">符号</th>
+<th style="text-align:left">单位</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">能量/通量</td>
+<td style="text-align:left">辐射通量</td>
+<td style="text-align:left">$\Phi_\mathrm{e}$</td>
+<td style="text-align:left">$W$</td>
+<td style="text-align:left">光通量</td>
+<td style="text-align:left">$\Phi_\mathrm{v}$</td>
+<td style="text-align:left">$lm$</td>
+</tr>
+<tr>
+<td style="text-align:left">角密度</td>
+<td style="text-align:left">辐射强度</td>
+<td style="text-align:left">$I_\mathrm{e}$</td>
+<td style="text-align:left">$W/sr$</td>
+<td style="text-align:left">发光强度</td>
+<td style="text-align:left">$I_\mathrm{v}$</td>
+<td style="text-align:left">$cd$</td>
+</tr>
+<tr>
+<td style="text-align:left">接收密度</td>
+<td style="text-align:left">辐照度</td>
+<td style="text-align:left">$E_\mathrm{e}$</td>
+<td style="text-align:left">$W/m^2$</td>
+<td style="text-align:left">光照度</td>
+<td style="text-align:left">$E_\mathrm{v}$</td>
+<td style="text-align:left">$lx$</td>
+</tr>
+<tr>
+<td style="text-align:left">表面发射密度</td>
+<td style="text-align:left">辐亮度</td>
+<td style="text-align:left">$L_\mathrm{e}$</td>
+<td style="text-align:left">$W/(sr \cdot m^2)$</td>
+<td style="text-align:left">光亮度</td>
+<td style="text-align:left">$L_\mathrm{v}$</td>
+<td style="text-align:left">$cd/m^2$</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="总结与展望"><a href="#总结与展望" class="headerlink" title="总结与展望"></a>总结与展望</h2><p>辐射度量学提供了描述光的绝对能量的方法，而光度学引入了人眼的加权特性。然而，光度学仅解决了一维的“亮度”问题，尚未涉及三维的“色彩”问题。</p>
+<ul>
+<li>为什么不同波长的光会产生不同的颜色感觉？</li>
+<li>如何量化“红”、“绿”、“蓝”？</li>
+<li>人眼是如何通过视锥细胞将光谱信号转化为神经信号的？</li>
+</ul>
+<p>在下一章《色彩科学Vol.2 人眼视觉系统与颜色匹配实验》中，我们将深入探讨人眼的生理构造与格拉斯曼定律，正式开启色彩量化之旅。</p>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
-<li>颜色的数学理论I——辐射度量学与光度学基础 - 缺心眼的香菜的文章 - 知乎 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/597710417">https://zhuanlan.zhihu.com/p/597710417</a></li>
-<li>Griffiths, David J. <a target="_blank" rel="noopener" href="https://web.archive.org/web/20210417085114/https://www.amazon.com/Introduction-Electrodynamics-3rd-David-Griffiths/dp/013805326X">Introduction to electrodynamics</a> 3. ed., reprint. with corr. Upper Saddle River, NJ [u.a.]: Prentice-Hall. 1999 [2012-04-06]. <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/Special:网络书源/0-13-805326-X">ISBN 0-13-805326-X</a>.</li>
-<li><em>维基百科, 自由的百科全书,</em> s.v. “輻照度” (by Wikipedia contributors), <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/w/index.php?title=輻照度&amp;oldid=72880072">https://zh.wikipedia.org/w/index.php?title=%E8%BC%BB%E7%85%A7%E5%BA%A6&amp;oldid=72880072</a> (accessed July 25, 2022).</li>
-<li>Wikipedia contributors, “Luminous efficiency function,” <em>Wikipedia, The Free Encyclopedia,</em> <a target="_blank" rel="noopener" href="https://en.wikipedia.org/w/index.php?title=Luminous_efficiency_function&amp;oldid=1255266869">https://en.wikipedia.org/w/index.php?title=Luminous_efficiency_function&amp;oldid=1255266869</a> (accessed January 22, 2025).</li>
-<li><strong>CIE</strong>. Commission Internationale de l’Éclairage. <em>Colorimetry</em> (CIE 15:2004). Vienna: CIE Central Bureau, 2004.  </li>
-<li>Malacara A. D. <em>Color Vision and Colorimetry: Theory and Applications, Second Edition</em>. SPIE Press, 2011.  </li>
-<li>Marschner S, Shirley P, Ashikhmin M, et al. <em>Fundamentals of Computer Graphics</em>. CRC Press, 2018.  </li>
+<li>CIE. <em>Commission Internationale de l’Éclairage</em>. Colorimetry (CIE 15:2004).</li>
+<li>Wyszecki, G., &amp; Stiles, W. S. <em>Color Science: Concepts and Methods, Quantitative Data and Formulae</em>. Wiley.</li>
+<li>Reinhard, E., et al. <em>High Dynamic Range Imaging: Acquisition, Display, and Image-Based Lighting</em>. Morgan Kaufmann.</li>
+<li>颜色的数学理论I——辐射度量学与光度学基础 - 知乎.</li>
 </ol>
 
     </div>
      
     <div class="post-footer__meta"><p>updated at 2025-01-22</p></div> 
-    <div class="post-entry__tags"><a href="/tags/%E8%89%B2%E5%BD%A9%E7%A7%91%E5%AD%A6/" class="post-tags__link button"># 色彩科学</a></div> 
+    <div class="post-entry__tags"><a href="/tags/%E8%89%B2%E5%BD%A9%E7%A7%91%E5%AD%A6/" class="post-tags__link button"># 色彩科学</a><a href="/tags/%E8%BE%90%E5%B0%84%E5%BA%A6%E9%87%8F%E5%AD%A6/" class="post-tags__link button"># 辐射度量学</a><a href="/tags/%E5%85%89%E5%BA%A6%E5%AD%A6/" class="post-tags__link button"># 光度学</a></div> 
 </article>
 
 
     <div class="nav">
         <div class="nav__prev">
             
-                <a href="/2025/01/22/%E8%89%B2%E5%BD%A9%E7%A7%91%E5%AD%A6Vol.2%20Trichromatic%20Theory%20&amp;%20Grassmann&#39;s%20Law/" class="nav__link">
+                <a href="/2025/01/23/%E8%89%B2%E5%BD%A9%E7%A7%91%E5%AD%A6Vol.2-%E4%BA%BA%E7%9C%BC%E8%A7%86%E8%A7%89%E7%B3%BB%E7%BB%9F%E4%B8%8E%E9%A2%9C%E8%89%B2%E5%8C%B9%E9%85%8D%E5%AE%9E%E9%AA%8C/" class="nav__link">
                     <div>
                         <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
                     </div>
@@ -281,7 +337,7 @@ L_\mathrm{V}
                             Previous Post
                         </div>
                         <div class="nav__title">
-                            色彩科学Vol.2 Trichromatic Theory &amp; Grassmann&#39;s Law
+                            色彩科学Vol.2 人眼视觉系统与颜色匹配实验
                         </div>
                     </div>
                 </a>

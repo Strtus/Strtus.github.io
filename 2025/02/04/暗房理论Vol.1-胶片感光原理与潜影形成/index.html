@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--icon-->
+
+    
+        <link rel="shortcut icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="16x16" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="32x32" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon-96x96.png">
+    
+    
+        <link rel="apple-touch-icon" sizes="180x180" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/web-app-manifest-192x192.png">
+    
+    
+        <link rel="mask-icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/apple-touch-icon.png">
+    
+
+
+    <!-- meta -->
+
+
+<title>暗房理论Vol.1 胶片感光原理与潜影形成 | Strtus&#39;s Journey</title>
+
+
+    <meta name="keywords" content="暗房技术, 胶片, 潜影, 卤化银, 物理化学">
+
+
+
+
+    <!-- OpenGraph -->
+ 
+    <meta name="description" content="前言：捕捉光子的陷阱摄影的本质是“用光作画”。在数码时代，光子被硅基传感器（CMOS&#x2F;CCD）捕获并转化为电子信号。而在胶片摄影的 150 年历史中，光子是被卤化银晶体捕获的。 当我们按下快门的那一刻，胶片上发生了一场微观层面的物理化学反应。虽然肉眼看不见任何变化，但潜影已经形成。本章将深入探讨这一神奇过程的微观机制。 卤化银晶体结构感光乳剂（Emulsion）的核心成分是悬浮在明胶中的卤化银微晶">
+<meta property="og:type" content="article">
+<meta property="og:title" content="暗房理论Vol.1 胶片感光原理与潜影形成">
+<meta property="og:url" content="https://strtus.github.io/2025/02/04/%E6%9A%97%E6%88%BF%E7%90%86%E8%AE%BAVol.1-%E8%83%B6%E7%89%87%E6%84%9F%E5%85%89%E5%8E%9F%E7%90%86%E4%B8%8E%E6%BD%9C%E5%BD%B1%E5%BD%A2%E6%88%90/index.html">
+<meta property="og:site_name" content="Strtus&#39;s Journey">
+<meta property="og:description" content="前言：捕捉光子的陷阱摄影的本质是“用光作画”。在数码时代，光子被硅基传感器（CMOS&#x2F;CCD）捕获并转化为电子信号。而在胶片摄影的 150 年历史中，光子是被卤化银晶体捕获的。 当我们按下快门的那一刻，胶片上发生了一场微观层面的物理化学反应。虽然肉眼看不见任何变化，但潜影已经形成。本章将深入探讨这一神奇过程的微观机制。 卤化银晶体结构感光乳剂（Emulsion）的核心成分是悬浮在明胶中的卤化银微晶">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-02-04T03:00:00.000Z">
+<meta property="article:modified_time" content="2025-11-21T11:20:21.890Z">
+<meta property="article:author" content="strtus">
+<meta property="article:tag" content="暗房技术">
+<meta property="article:tag" content="胶片">
+<meta property="article:tag" content="潜影">
+<meta property="article:tag" content="卤化银">
+<meta property="article:tag" content="物理化学">
+<meta name="twitter:card" content="summary_large_image">
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/highlight.css" media="none" >
+        
+            <link rel="stylesheet" id="hl-dark-theme" href="/css/highlight/highlight.dark.css" media="none">
+        
+    
+
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/style/dark.css">
+
+    
+<script src="/js/darkmode.js"></script>
+
+
+
+     
+
+    <!-- custom head -->
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+    <body>
+        <div id="app" tabindex="-1">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">Strtus&#39;s Journey</span>
+        </a>
+    </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">首页</a>
+                
+                    <a href="/about.html" class="navbar-menu button">About</a>
+                
+                    <a href="/categories/" class="navbar-menu button">分类</a>
+                
+                    <a href="/tags/" class="navbar-menu button">标签</a>
+                
+                    <a href="/archives/" class="navbar-menu button">归档</a>
+                
+            </div>
+        
+        
+        
+    <a href="/search/" id="btn-search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="24" height="24" fill="currentColor" stroke="currentColor" stroke-width="32"><path d="M192 448c0-141.152 114.848-256 256-256s256 114.848 256 256-114.848 256-256 256-256-114.848-256-256z m710.624 409.376l-206.88-206.88A318.784 318.784 0 0 0 768 448c0-176.736-143.264-320-320-320S128 271.264 128 448s143.264 320 320 320a318.784 318.784 0 0 0 202.496-72.256l206.88 206.88 45.248-45.248z"></path></svg>
+    </a>
+
+
+        
+        
+    <a href="javaScript:void(0);" id="btn-toggle-dark">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </a>
+
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">首页</a>
+                
+                    <a href="/about.html" class="dropdown-menu button">About</a>
+                
+                    <a href="/categories/" class="dropdown-menu button">分类</a>
+                
+                    <a href="/tags/" class="dropdown-menu button">标签</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">归档</a>
+                
+            </div>
+        
+    </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        暗房理论Vol.1 胶片感光原理与潜影形成
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2025/02/" class="post-meta__date button">2025-02-04</a>
+        
+    <span class="separate-dot"></span><a href="/categories/%E6%91%84%E5%BD%B1%E8%89%BA%E6%9C%AF%E7%99%BE%E5%B9%B4%E5%8F%B2/" class="button">摄影艺术百年史</a>
+
+ 
+        
+    
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+    <aside class="post-side">
+        <div class="post-side__toc">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80%EF%BC%9A%E6%8D%95%E6%8D%89%E5%85%89%E5%AD%90%E7%9A%84%E9%99%B7%E9%98%B1"><span class="toc-number">1.</span> <span class="toc-text">前言：捕捉光子的陷阱</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%A4%E5%8C%96%E9%93%B6%E6%99%B6%E4%BD%93%E7%BB%93%E6%9E%84"><span class="toc-number">2.</span> <span class="toc-text">卤化银晶体结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%89%E7%94%B5%E6%95%88%E5%BA%94%E4%B8%8E%E7%94%B5%E5%AD%90%E6%BF%80%E5%8F%91"><span class="toc-number">3.</span> <span class="toc-text">光电效应与电子激发</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%91%9B%E5%B0%BC-%E8%8E%AB%E7%89%B9%E7%90%86%E8%AE%BA"><span class="toc-number">4.</span> <span class="toc-text">葛尼-莫特理论</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%B5%E5%AD%90%E9%98%B6%E6%AE%B5-Electronic-Stage"><span class="toc-number">4.1.</span> <span class="toc-text">电子阶段 (Electronic Stage)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A6%BB%E5%AD%90%E9%98%B6%E6%AE%B5-Ionic-Stage"><span class="toc-number">4.2.</span> <span class="toc-text">离子阶段 (Ionic Stage)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BE%AA%E7%8E%AF%E4%B8%8E%E7%A7%AF%E7%B4%AF"><span class="toc-number">4.3.</span> <span class="toc-text">循环与积累</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%80%92%E6%98%93%E5%BE%8B%E5%A4%B1%E6%95%88"><span class="toc-number">5.</span> <span class="toc-text">倒易律失效</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">6.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-number">7.</span> <span class="toc-text">Reference</span></a></li></ol>
+        </div>
+    </aside>
+    <a class="btn-toc button" id="btn-toc" tabindex="0">
+        <svg viewBox="0 0 1024 1024" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M128 256h64V192H128zM320 256h576V192H320zM128 544h64v-64H128zM320 544h576v-64H320zM128 832h64v-64H128zM320 832h576v-64H320z" fill="currentColor"></path>
+        </svg>
+    </a>
+    <div class="toc-menus" id="toc-menus">
+        <div class="toc-title">Article Directory</div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80%EF%BC%9A%E6%8D%95%E6%8D%89%E5%85%89%E5%AD%90%E7%9A%84%E9%99%B7%E9%98%B1"><span class="toc-number">1.</span> <span class="toc-text">前言：捕捉光子的陷阱</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%A4%E5%8C%96%E9%93%B6%E6%99%B6%E4%BD%93%E7%BB%93%E6%9E%84"><span class="toc-number">2.</span> <span class="toc-text">卤化银晶体结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%89%E7%94%B5%E6%95%88%E5%BA%94%E4%B8%8E%E7%94%B5%E5%AD%90%E6%BF%80%E5%8F%91"><span class="toc-number">3.</span> <span class="toc-text">光电效应与电子激发</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%91%9B%E5%B0%BC-%E8%8E%AB%E7%89%B9%E7%90%86%E8%AE%BA"><span class="toc-number">4.</span> <span class="toc-text">葛尼-莫特理论</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%B5%E5%AD%90%E9%98%B6%E6%AE%B5-Electronic-Stage"><span class="toc-number">4.1.</span> <span class="toc-text">电子阶段 (Electronic Stage)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A6%BB%E5%AD%90%E9%98%B6%E6%AE%B5-Ionic-Stage"><span class="toc-number">4.2.</span> <span class="toc-text">离子阶段 (Ionic Stage)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BE%AA%E7%8E%AF%E4%B8%8E%E7%A7%AF%E7%B4%AF"><span class="toc-number">4.3.</span> <span class="toc-text">循环与积累</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%80%92%E6%98%93%E5%BE%8B%E5%A4%B1%E6%95%88"><span class="toc-number">5.</span> <span class="toc-text">倒易律失效</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">6.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-number">7.</span> <span class="toc-text">Reference</span></a></li></ol>
+    </div>
+
+
+<article class="post post__with-toc content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <h2 id="前言：捕捉光子的陷阱"><a href="#前言：捕捉光子的陷阱" class="headerlink" title="前言：捕捉光子的陷阱"></a>前言：捕捉光子的陷阱</h2><p>摄影的本质是“用光作画”。在数码时代，光子被硅基传感器（CMOS/CCD）捕获并转化为电子信号。而在胶片摄影的 150 年历史中，光子是被卤化银晶体捕获的。</p>
+<p>当我们按下快门的那一刻，胶片上发生了一场微观层面的物理化学反应。虽然肉眼看不见任何变化，但潜影已经形成。本章将深入探讨这一神奇过程的微观机制。</p>
+<h2 id="卤化银晶体结构"><a href="#卤化银晶体结构" class="headerlink" title="卤化银晶体结构"></a>卤化银晶体结构</h2><p>感光乳剂（Emulsion）的核心成分是悬浮在明胶中的卤化银微晶。最常用的是：</p>
+<ul>
+<li><strong>溴化银</strong>：感光度高，是现代胶片的主体。</li>
+<li><strong>氯化银</strong>：感光度低，常用于相纸。</li>
+<li><strong>碘化银</strong>：通常少量掺杂在 AgBr 中，用于增加感光度和光谱响应范围。</li>
+</ul>
+<p>卤化银晶体通常呈面心立方结构（类似 NaCl）。在现代高速胶片（如 Kodak T-Max, Ilford Delta）中，科学家通过控制结晶条件，制造出了扁平状的 T-颗粒，极大地增加了受光面积，提高了感光效率。</p>
+<h2 id="光电效应与电子激发"><a href="#光电效应与电子激发" class="headerlink" title="光电效应与电子激发"></a>光电效应与电子激发</h2><p>当一个能量为 $h\nu$ 的光子撞击卤化银晶体时，如果光子能量大于禁带宽度，价带（Valence Band）中的卤素离子（如 $Br^-$）会释放出一个电子：</p>
+<script type="math/tex; mode=display">
+Br^- + h\nu \rightarrow Br + e^-</script><p>这里，$e^-$ 是自由电子，$Br$ 是溴原子（也称为空穴 $h^+$）。这个自由电子在晶体导带（Conduction Band）中自由移动，直到它被晶体缺陷捕获。</p>
+<h2 id="葛尼-莫特理论"><a href="#葛尼-莫特理论" class="headerlink" title="葛尼-莫特理论"></a>葛尼-莫特理论</h2><p>1938 年，R.W. Gurney 和 N.F. Mott 提出了著名的潜影形成理论，至今仍被广泛接受。该过程分为两个阶段：</p>
+<h3 id="电子阶段-Electronic-Stage"><a href="#电子阶段-Electronic-Stage" class="headerlink" title="电子阶段 (Electronic Stage)"></a>电子阶段 (Electronic Stage)</h3><p>自由电子 $e^-$ 在晶体中游荡，最终被感光中心捕获。感光中心通常是晶体表面的硫化银（$Ag_2S$）杂质或晶格缺陷。</p>
+<script type="math/tex; mode=display">
+\text{Trap} + e^- \rightarrow \text{Trap}^-</script><p>此时，感光中心带上了负电荷。</p>
+<h3 id="离子阶段-Ionic-Stage"><a href="#离子阶段-Ionic-Stage" class="headerlink" title="离子阶段 (Ionic Stage)"></a>离子阶段 (Ionic Stage)</h3><p>带负电的感光中心吸引了晶体中可移动的间隙银离子。银离子迁移到感光中心，与电子结合，还原为金属银原子：</p>
+<script type="math/tex; mode=display">
+\text{Trap}^- + Ag_i^+ \rightarrow Ag</script><h3 id="循环与积累"><a href="#循环与积累" class="headerlink" title="循环与积累"></a>循环与积累</h3><p>单个银原子是不稳定的，容易分解。为了形成稳定的潜影，上述过程必须重复多次。</p>
+<script type="math/tex; mode=display">
+Ag + e^- \rightarrow Ag^-</script><script type="math/tex; mode=display">
+Ag^- + Ag_i^+ \rightarrow Ag_2</script><p>通常认为，4 个银原子聚集成团，才能构成一个稳定的、可被显影的潜影中心（Latent Image Center）。</p>
+<h2 id="倒易律失效"><a href="#倒易律失效" class="headerlink" title="倒易律失效"></a>倒易律失效</h2><p>根据倒易律，曝光量 $E = I \times t$。只要总量 $E$ 不变，光强 $I$ 和时间 $t$ 应该可以互换。
+然而，在极弱光（长曝光）下，光子到达的频率很低。</p>
+<ul>
+<li>如果第二个光子来得太晚，第一个银原子可能已经热分解了：$Ag \rightarrow Ag_i^+ + e^-$。</li>
+<li>这导致潜影形成的效率大幅下降。
+这就是倒易律失效的微观物理机制。因此，长曝光时需要显著增加曝光时间来补偿这种效率损失。</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>潜影的形成是一个将光能转化为化学能的过程。微小的光子能量触发了银离子的还原，形成了只有几个原子大小的金属银团簇。这个微小的团簇将在后续的显影过程中，作为催化剂，引发数亿倍的化学放大反应。</p>
+<p>下一章，我们将进入暗房，探讨如何通过显影将这看不见的潜影转化为可见的影像。</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li>Gurney, R. W., &amp; Mott, N. F. (1938). <em>The theory of the photolysis of silver bromide and the photographic latent image</em>.</li>
+<li>James, T. H. (1977). <em>The Theory of the Photographic Process</em>.</li>
+</ol>
+
+    </div>
+     
+    <div class="post-footer__meta"><p>updated at 2025-11-21</p></div> 
+    <div class="post-entry__tags"><a href="/tags/%E6%9A%97%E6%88%BF%E6%8A%80%E6%9C%AF/" class="post-tags__link button"># 暗房技术</a><a href="/tags/%E8%83%B6%E7%89%87/" class="post-tags__link button"># 胶片</a><a href="/tags/%E6%BD%9C%E5%BD%B1/" class="post-tags__link button"># 潜影</a><a href="/tags/%E5%8D%A4%E5%8C%96%E9%93%B6/" class="post-tags__link button"># 卤化银</a><a href="/tags/%E7%89%A9%E7%90%86%E5%8C%96%E5%AD%A6/" class="post-tags__link button"># 物理化学</a></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
+            
+                <a href="/2025/02/04/%E6%9A%97%E6%88%BF%E7%90%86%E8%AE%BAVol.2-%E6%98%BE%E5%BD%B1%E5%8C%96%E5%AD%A6%E5%8A%A8%E5%8A%9B%E5%AD%A6/" class="nav__link">
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
+                    </div>
+                    <div>
+                        <div class="nav__label">
+                            Previous Post
+                        </div>
+                        <div class="nav__title">
+                            暗房理论Vol.2 显影化学动力学
+                        </div>
+                    </div>
+                </a>
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="/2025/02/04/%E8%89%B2%E5%BD%A9%E7%A7%91%E5%AD%A6Vol.14-%E8%AE%A1%E7%AE%97%E8%89%B2%E5%BD%A9%E5%AD%A6%E5%89%8D%E6%B2%BF/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            Next Post
+                        </div>
+                        <div class="nav__title">
+                            色彩科学Vol.14 计算色彩学前沿
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
+        </div>
+    </div>
+
+
+
+
+
+</main>
+
+            <footer class="footer">
+     
+    <a href="#" class="button" id="b2t" aria-label="Back to Top" title="Back to Top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M233.376 722.752L278.624 768 512 534.624 745.376 768l45.248-45.248L512 444.128zM192 352h640V288H192z" fill="currentColor"></path>
+        </svg>
+    </a>
+
+    
+
+
+    
+     
+ 
+
+ 
+    
+        
+        <p class="footer-copyright">
+            Strtus's Journry
+        </p>
+    
+    
+        
+            
+        
+            
+        
+            <p>保持对世界的输出🙌</p>
+
+        
+    
+</footer>
+
+        </div>
+         
+
+ 
+    <script>
+        window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+        ga('create', 'G-5ERPC280ZB', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+ 
+
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5ERPC280ZB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-5ERPC280ZB');
+    </script>
+ 
+
+ 
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement('script');
+            hm.src = 'https://hm.baidu.com/hm.js?8da6411546e903e478a9d82d2a4d0c60';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+    
+ 
+
+
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.css">
+
+    
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.js"></script>
+
+    <script>
+        let lazyloadT = Boolean('false'),
+            auto_fancybox = Boolean('true')
+        if (auto_fancybox) {
+            $(".post__content").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        } else {
+            $(".post__content").find("fancybox").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        }
+    </script>
+ 
+
+
+    <script>
+        if (typeof MathJax === 'undefined') {
+            window.MathJax = {
+                loader: {
+                    source: {
+                        '[tex]/amsCd': '[tex]/amscd',
+                        '[tex]/AMScd': '[tex]/amscd'
+                    }
+                },
+                tex: {
+                    inlineMath: {'[+]': [['$', '$']]},
+                    tags: 'ams'
+                },
+                options: {
+                    renderActions: {
+                        findScript: [10, doc => {
+                            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                                const display = !!node.type.match(/; *mode=display/);
+                                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                                const text = document.createTextNode('');
+                                node.parentNode.replaceChild(text, node);
+                                math.start = {node: text, delim: '', n: 0};
+                                math.end = {node: text, delim: '', n: 0};
+                                doc.math.push(math);
+                            });
+                        }, '', false],
+                        insertedScript: [200, () => {
+                            document.querySelectorAll('mjx-container').forEach(node => {
+                                let target = node.parentNode;
+                                if (target.nodeName.toLowerCase() === 'li') {
+                                    target.parentNode.classList.add('has-jax');
+                                }
+                            });
+                        }, '', false]
+                    }
+                }
+            };
+            (function () {
+                var script = document.createElement('script');
+                script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js";
+                script.defer = true;
+                document.head.appendChild(script);
+            })();
+        } else {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+        }
+    </script>
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+
+    </body>
+</html>

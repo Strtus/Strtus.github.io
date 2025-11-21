@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--icon-->
+
+    
+        <link rel="shortcut icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="16x16" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="32x32" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon-96x96.png">
+    
+    
+        <link rel="apple-touch-icon" sizes="180x180" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/web-app-manifest-192x192.png">
+    
+    
+        <link rel="mask-icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/apple-touch-icon.png">
+    
+
+
+    <!-- meta -->
+
+
+<title>姿态动力学Vol.3 四元数(Quaternion)代数与姿态微分方程 | Strtus&#39;s Journey</title>
+
+
+    <meta name="keywords" content="姿态动力学, 四元数, 数学基础">
+
+
+
+
+    <!-- OpenGraph -->
+ 
+    <meta name="description" content="引言为了克服欧拉角的奇点问题，同时避免 DCM 的参数冗余（9个参数，6个约束），数学家们一直在寻找一种更优的姿态描述方法。1843年，爱尔兰数学家威廉·哈密顿 (William Hamilton) 在都柏林的一座桥上散步时，灵光一闪，发明了四元数 (Quaternion)。 四元数用 4 个参数描述 3 维旋转，它不仅无奇点，而且计算效率极高（只需 4 次乘法即可更新姿态，而 DCM 需要 27">
+<meta property="og:type" content="article">
+<meta property="og:title" content="姿态动力学Vol.3 四元数(Quaternion)代数与姿态微分方程">
+<meta property="og:url" content="https://strtus.github.io/2025/09/03/%E5%A7%BF%E6%80%81%E5%8A%A8%E5%8A%9B%E5%AD%A6Vol.3-%E5%9B%9B%E5%85%83%E6%95%B0(Quaternion)%E4%BB%A3%E6%95%B0%E4%B8%8E%E5%A7%BF%E6%80%81%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B/index.html">
+<meta property="og:site_name" content="Strtus&#39;s Journey">
+<meta property="og:description" content="引言为了克服欧拉角的奇点问题，同时避免 DCM 的参数冗余（9个参数，6个约束），数学家们一直在寻找一种更优的姿态描述方法。1843年，爱尔兰数学家威廉·哈密顿 (William Hamilton) 在都柏林的一座桥上散步时，灵光一闪，发明了四元数 (Quaternion)。 四元数用 4 个参数描述 3 维旋转，它不仅无奇点，而且计算效率极高（只需 4 次乘法即可更新姿态，而 DCM 需要 27">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-09-03T02:00:00.000Z">
+<meta property="article:modified_time" content="2025-11-21T07:38:18.501Z">
+<meta property="article:author" content="strtus">
+<meta property="article:tag" content="姿态动力学">
+<meta property="article:tag" content="四元数">
+<meta property="article:tag" content="数学基础">
+<meta name="twitter:card" content="summary_large_image">
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/highlight.css" media="none" >
+        
+            <link rel="stylesheet" id="hl-dark-theme" href="/css/highlight/highlight.dark.css" media="none">
+        
+    
+
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/style/dark.css">
+
+    
+<script src="/js/darkmode.js"></script>
+
+
+
+     
+
+    <!-- custom head -->
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+    <body>
+        <div id="app" tabindex="-1">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">Strtus&#39;s Journey</span>
+        </a>
+    </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">首页</a>
+                
+                    <a href="/about.html" class="navbar-menu button">About</a>
+                
+                    <a href="/categories/" class="navbar-menu button">分类</a>
+                
+                    <a href="/tags/" class="navbar-menu button">标签</a>
+                
+                    <a href="/archives/" class="navbar-menu button">归档</a>
+                
+            </div>
+        
+        
+        
+    <a href="/search/" id="btn-search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="24" height="24" fill="currentColor" stroke="currentColor" stroke-width="32"><path d="M192 448c0-141.152 114.848-256 256-256s256 114.848 256 256-114.848 256-256 256-256-114.848-256-256z m710.624 409.376l-206.88-206.88A318.784 318.784 0 0 0 768 448c0-176.736-143.264-320-320-320S128 271.264 128 448s143.264 320 320 320a318.784 318.784 0 0 0 202.496-72.256l206.88 206.88 45.248-45.248z"></path></svg>
+    </a>
+
+
+        
+        
+    <a href="javaScript:void(0);" id="btn-toggle-dark">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </a>
+
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">首页</a>
+                
+                    <a href="/about.html" class="dropdown-menu button">About</a>
+                
+                    <a href="/categories/" class="dropdown-menu button">分类</a>
+                
+                    <a href="/tags/" class="dropdown-menu button">标签</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">归档</a>
+                
+            </div>
+        
+    </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        姿态动力学Vol.3 四元数(Quaternion)代数与姿态微分方程
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2025/09/" class="post-meta__date button">2025-09-03</a>
+        
+    <span class="separate-dot"></span><a href="/categories/%E8%88%AA%E5%A4%A9%E5%99%A8%E5%A7%BF%E6%80%81%E5%8A%A8%E5%8A%9B%E5%AD%A6%E7%90%86%E8%AE%BA/" class="button">航天器姿态动力学理论</a>
+
+ 
+        
+    
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+    <aside class="post-side">
+        <div class="post-side__toc">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E4%BB%8E%E8%BD%B4-%E8%A7%92%E5%88%B0%E5%9B%9B%E5%85%83%E6%95%B0"><span class="toc-number">2.</span> <span class="toc-text">1. 从轴-角到四元数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E6%AC%A7%E6%8B%89%E6%97%8B%E8%BD%AC%E5%AE%9A%E7%90%86"><span class="toc-number">2.1.</span> <span class="toc-text">1.1 欧拉旋转定理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E5%9B%9B%E5%85%83%E6%95%B0%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">2.2.</span> <span class="toc-text">1.2 四元数的定义</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%9B%9B%E5%85%83%E6%95%B0%E4%BB%A3%E6%95%B0"><span class="toc-number">3.</span> <span class="toc-text">2. 四元数代数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E4%B9%98%E6%B3%95%E8%BF%90%E7%AE%97-Quaternion-Product"><span class="toc-number">3.1.</span> <span class="toc-text">2.1 乘法运算 (Quaternion Product)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E6%97%8B%E8%BD%AC%E7%AE%97%E5%AD%90"><span class="toc-number">3.2.</span> <span class="toc-text">2.2 旋转算子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E5%9B%9B%E5%85%83%E6%95%B0%E4%B8%8E-DCM-%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="toc-number">3.3.</span> <span class="toc-text">2.3 四元数与 DCM 的转换</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%A7%BF%E6%80%81%E8%BF%90%E5%8A%A8%E5%AD%A6%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B"><span class="toc-number">4.</span> <span class="toc-text">3. 姿态运动学微分方程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E6%8E%A8%E5%AF%BC%E6%80%9D%E8%B7%AF"><span class="toc-number">4.1.</span> <span class="toc-text">3.1 推导思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E7%9F%A9%E9%98%B5%E5%BD%A2%E5%BC%8F"><span class="toc-number">4.2.</span> <span class="toc-text">3.2 矩阵形式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E4%BC%98%E7%BC%BA%E7%82%B9%E5%88%86%E6%9E%90"><span class="toc-number">4.3.</span> <span class="toc-text">3.3 优缺点分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AF%AD"><span class="toc-number">5.</span> <span class="toc-text">结语</span></a></li></ol>
+        </div>
+    </aside>
+    <a class="btn-toc button" id="btn-toc" tabindex="0">
+        <svg viewBox="0 0 1024 1024" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M128 256h64V192H128zM320 256h576V192H320zM128 544h64v-64H128zM320 544h576v-64H320zM128 832h64v-64H128zM320 832h576v-64H320z" fill="currentColor"></path>
+        </svg>
+    </a>
+    <div class="toc-menus" id="toc-menus">
+        <div class="toc-title">Article Directory</div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E4%BB%8E%E8%BD%B4-%E8%A7%92%E5%88%B0%E5%9B%9B%E5%85%83%E6%95%B0"><span class="toc-number">2.</span> <span class="toc-text">1. 从轴-角到四元数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E6%AC%A7%E6%8B%89%E6%97%8B%E8%BD%AC%E5%AE%9A%E7%90%86"><span class="toc-number">2.1.</span> <span class="toc-text">1.1 欧拉旋转定理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E5%9B%9B%E5%85%83%E6%95%B0%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">2.2.</span> <span class="toc-text">1.2 四元数的定义</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%9B%9B%E5%85%83%E6%95%B0%E4%BB%A3%E6%95%B0"><span class="toc-number">3.</span> <span class="toc-text">2. 四元数代数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E4%B9%98%E6%B3%95%E8%BF%90%E7%AE%97-Quaternion-Product"><span class="toc-number">3.1.</span> <span class="toc-text">2.1 乘法运算 (Quaternion Product)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E6%97%8B%E8%BD%AC%E7%AE%97%E5%AD%90"><span class="toc-number">3.2.</span> <span class="toc-text">2.2 旋转算子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E5%9B%9B%E5%85%83%E6%95%B0%E4%B8%8E-DCM-%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="toc-number">3.3.</span> <span class="toc-text">2.3 四元数与 DCM 的转换</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%A7%BF%E6%80%81%E8%BF%90%E5%8A%A8%E5%AD%A6%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B"><span class="toc-number">4.</span> <span class="toc-text">3. 姿态运动学微分方程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E6%8E%A8%E5%AF%BC%E6%80%9D%E8%B7%AF"><span class="toc-number">4.1.</span> <span class="toc-text">3.1 推导思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E7%9F%A9%E9%98%B5%E5%BD%A2%E5%BC%8F"><span class="toc-number">4.2.</span> <span class="toc-text">3.2 矩阵形式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E4%BC%98%E7%BC%BA%E7%82%B9%E5%88%86%E6%9E%90"><span class="toc-number">4.3.</span> <span class="toc-text">3.3 优缺点分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AF%AD"><span class="toc-number">5.</span> <span class="toc-text">结语</span></a></li></ol>
+    </div>
+
+
+<article class="post post__with-toc content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>为了克服欧拉角的奇点问题，同时避免 DCM 的参数冗余（9个参数，6个约束），数学家们一直在寻找一种更优的姿态描述方法。1843年，爱尔兰数学家威廉·哈密顿 (William Hamilton) 在都柏林的一座桥上散步时，灵光一闪，发明了<strong>四元数 (Quaternion)</strong>。</p>
+<p>四元数用 4 个参数描述 3 维旋转，它不仅无奇点，而且计算效率极高（只需 4 次乘法即可更新姿态，而 DCM 需要 27 次）。如今，四元数已成为现代航天控制软件、计算机图形学（如Unity引擎）和机器人学的标准工具。本章将带你深入理解四元数的代数性质及其在姿态动力学中的应用。</p>
+<hr>
+<h2 id="1-从轴-角到四元数"><a href="#1-从轴-角到四元数" class="headerlink" title="1. 从轴-角到四元数"></a>1. 从轴-角到四元数</h2><h3 id="1-1-欧拉旋转定理"><a href="#1-1-欧拉旋转定理" class="headerlink" title="1.1 欧拉旋转定理"></a>1.1 欧拉旋转定理</h3><p><strong>欧拉旋转定理 (Euler’s Rotation Theorem)</strong> 指出：刚体绕定点的任意位移，都可以等效为绕过该点某一轴 $\mathbf{e}$ 旋转一个角度 $\Phi$。
+这就是<strong>轴-角 (Axis-Angle)</strong> 描述。虽然直观，但直接使用轴和角进行计算（如连续旋转的合成）非常复杂。</p>
+<h3 id="1-2-四元数的定义"><a href="#1-2-四元数的定义" class="headerlink" title="1.2 四元数的定义"></a>1.2 四元数的定义</h3><p>四元数 $\mathbf{q}$ 正是基于轴-角概念定义的。它由一个标量部分 $q_0$ 和一个矢量部分 $\mathbf{q}_{vec} = [q_1, q_2, q_3]^T$ 组成：</p>
+<script type="math/tex; mode=display">
+\mathbf{q} = \begin{bmatrix} q_0 \\ q_1 \\ q_2 \\ q_3 \end{bmatrix} = \begin{bmatrix} \cos(\Phi/2) \\ e_x \sin(\Phi/2) \\ e_y \sin(\Phi/2) \\ e_z \sin(\Phi/2) \end{bmatrix}</script><p>或者写成：</p>
+<script type="math/tex; mode=display">
+\mathbf{q} = q_0 + \mathbf{q}_{vec} = \cos(\Phi/2) + \mathbf{e} \sin(\Phi/2)</script><p>注意：</p>
+<ol>
+<li><strong>归一化约束</strong>：由于 $\mathbf{e}$ 是单位矢量，容易证明 $|\mathbf{q}|^2 = q_0^2 + q_1^2 + q_2^2 + q_3^2 = \cos^2(\Phi/2) + \sin^2(\Phi/2) = 1$。因此，描述姿态的必须是<strong>单位四元数</strong>。</li>
+<li><strong>半角</strong>：定义中使用了 $\Phi/2$ 而不是 $\Phi$，这是四元数代数性质的关键，也是它能避免奇点的原因。</li>
+</ol>
+<hr>
+<h2 id="2-四元数代数"><a href="#2-四元数代数" class="headerlink" title="2. 四元数代数"></a>2. 四元数代数</h2><p>四元数是复数的推广。复数有一个虚部 $i$，而四元数有三个虚部 $i, j, k$，满足哈密顿著名的公式：</p>
+<script type="math/tex; mode=display">i^2 = j^2 = k^2 = ijk = -1</script><h3 id="2-1-乘法运算-Quaternion-Product"><a href="#2-1-乘法运算-Quaternion-Product" class="headerlink" title="2.1 乘法运算 (Quaternion Product)"></a>2.1 乘法运算 (Quaternion Product)</h3><p>四元数乘法（记为 $\otimes$）是不满足交换律的（$\mathbf{p} \otimes \mathbf{q} \neq \mathbf{q} \otimes \mathbf{p}$）。
+设 $\mathbf{p} = p_0 + \mathbf{p}_{vec}, \mathbf{q} = q_0 + \mathbf{q}_{vec}$，利用虚部乘法规则，可以推导出：</p>
+<script type="math/tex; mode=display">
+\mathbf{p} \otimes \mathbf{q} = \begin{bmatrix} p_0 q_0 - \mathbf{p}_{vec} \cdot \mathbf{q}_{vec} \\ p_0 \mathbf{q}_{vec} + q_0 \mathbf{p}_{vec} + \mathbf{p}_{vec} \times \mathbf{q}_{vec} \end{bmatrix}</script><p>这个公式涵盖了点乘和叉乘，非常优美。</p>
+<h3 id="2-2-旋转算子"><a href="#2-2-旋转算子" class="headerlink" title="2.2 旋转算子"></a>2.2 旋转算子</h3><p>若要将三维矢量 $\mathbf{v}$ 旋转，首先将其扩充为纯四元数（标量部为0）：$\mathbf{v}’ = 0 + \mathbf{v}$。
+旋转后的矢量 $\mathbf{w}$ 对应的四元数 $\mathbf{w}’$ 由以下“三明治”积给出：</p>
+<script type="math/tex; mode=display">
+\mathbf{w}' = \mathbf{q} \otimes \mathbf{v}' \otimes \mathbf{q}^*</script><p>其中 $\mathbf{q}^* = q_0 - \mathbf{q}_{vec}$ 是共轭四元数（类似于复共轭）。
+这一操作等价于 $\mathbf{w} = \mathbf{C}(\mathbf{q}) \mathbf{v}$，其中 $\mathbf{C}(\mathbf{q})$ 是由四元数导出的 DCM。</p>
+<h3 id="2-3-四元数与-DCM-的转换"><a href="#2-3-四元数与-DCM-的转换" class="headerlink" title="2.3 四元数与 DCM 的转换"></a>2.3 四元数与 DCM 的转换</h3><script type="math/tex; mode=display">
+\mathbf{C}(\mathbf{q}) = \begin{bmatrix}
+1 - 2(q_2^2 + q_3^2) & 2(q_1 q_2 + q_0 q_3) & 2(q_1 q_3 - q_0 q_2) \\
+2(q_1 q_2 - q_0 q_3) & 1 - 2(q_1^2 + q_3^2) & 2(q_2 q_3 + q_0 q_1) \\
+2(q_1 q_3 + q_0 q_2) & 2(q_2 q_3 - q_0 q_1) & 1 - 2(q_1^2 + q_2^2)
+\end{bmatrix}</script><p>这是一个二次型映射。</p>
+<hr>
+<h2 id="3-姿态运动学微分方程"><a href="#3-姿态运动学微分方程" class="headerlink" title="3. 姿态运动学微分方程"></a>3. 姿态运动学微分方程</h2><p>这是姿态动力学中最重要的方程之一。它描述了四元数随时间的变化率 $\dot{\mathbf{q}}$ 与角速度 $\boldsymbol{\omega}$ 的关系。</p>
+<h3 id="3-1-推导思路"><a href="#3-1-推导思路" class="headerlink" title="3.1 推导思路"></a>3.1 推导思路</h3><p>利用旋转算子 $\mathbf{v}_B = \mathbf{q}^* \otimes \mathbf{v}_N \otimes \mathbf{q}$ 对时间求导，并结合传输定理，经过一系列复杂的代数运算（此处略去过程，直接给出结果），可以得到：</p>
+<script type="math/tex; mode=display">
+\dot{\mathbf{q}} = \frac{1}{2} \mathbf{q} \otimes \boldsymbol{\omega}'</script><p>其中 $\boldsymbol{\omega}’ = 0 + \boldsymbol{\omega}$ 是角速度的纯四元数形式。</p>
+<h3 id="3-2-矩阵形式"><a href="#3-2-矩阵形式" class="headerlink" title="3.2 矩阵形式"></a>3.2 矩阵形式</h3><p>为了便于计算机编程，通常写成矩阵向量乘积形式：</p>
+<script type="math/tex; mode=display">
+\begin{bmatrix} \dot{q}_0 \\ \dot{q}_1 \\ \dot{q}_2 \\ \dot{q}_3 \end{bmatrix} = \frac{1}{2} \boldsymbol{\Omega}(\boldsymbol{\omega}) \begin{bmatrix} q_0 \\ q_1 \\ q_2 \\ q_3 \end{bmatrix}</script><p>其中 $\boldsymbol{\Omega}(\boldsymbol{\omega})$ 是一个反对称矩阵：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{\Omega}(\boldsymbol{\omega}) = \begin{bmatrix} 0 & -\omega_x & -\omega_y & -\omega_z \\ \omega_x & 0 & \omega_z & -\omega_y \\ \omega_y & -\omega_z & 0 & \omega_x \\ \omega_z & \omega_y & -\omega_x & 0 \end{bmatrix}</script><h3 id="3-3-优缺点分析"><a href="#3-3-优缺点分析" class="headerlink" title="3.3 优缺点分析"></a>3.3 优缺点分析</h3><p><strong>优点</strong>：</p>
+<ol>
+<li><strong>线性</strong>：方程右边是 $\mathbf{q}$ 的线性函数，非常适合数值积分。</li>
+<li><strong>无奇点</strong>：无论姿态如何，该方程始终有效，没有除零风险。</li>
+<li><strong>效率</strong>：计算量远小于 DCM 的泊松方程。</li>
+</ol>
+<p><strong>缺点</strong>：</p>
+<ol>
+<li><strong>双倍覆盖 (Double Cover)</strong>：由于 $\cos((\Phi+2\pi)/2) = -\cos(\Phi/2)$，四元数 $\mathbf{q}$ 和 $-\mathbf{q}$ 代表同一个物理姿态。这在控制律设计时需要注意（通常选择距离当前 $\mathbf{q}$ 最近的那个符号）。</li>
+<li><strong>归一化</strong>：在数值积分过程中，由于截断误差，$\mathbf{q}$ 的模长会逐渐偏离 1。非单位四元数不再代表纯旋转（包含缩放）。因此，必须在每一步积分后进行强制归一化：<script type="math/tex; mode=display">\mathbf{q}_{new} = \frac{\mathbf{q}_{raw}}{\|\mathbf{q}_{raw}\|}</script></li>
+</ol>
+<hr>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>四元数以其优雅的代数性质和高效的计算性能，成为了姿态描述的王者。然而，对于某些特定的分析任务（如稳定性分析），四元数的物理意义不如<strong>罗德里格斯参数 (Rodrigues Parameters)</strong> 直观。下一章，我们将探讨这组有趣的参数及其修正形式，它们在处理大角度机动时有着独特的优势。</p>
+<p>```</p>
+
+    </div>
+     
+    <div class="post-footer__meta"><p>updated at 2025-11-21</p></div> 
+    <div class="post-entry__tags"><a href="/tags/%E5%A7%BF%E6%80%81%E5%8A%A8%E5%8A%9B%E5%AD%A6/" class="post-tags__link button"># 姿态动力学</a><a href="/tags/%E5%9B%9B%E5%85%83%E6%95%B0/" class="post-tags__link button"># 四元数</a><a href="/tags/%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80/" class="post-tags__link button"># 数学基础</a></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="/2025/09/02/%E5%A7%BF%E6%80%81%E5%8A%A8%E5%8A%9B%E5%AD%A6Vol.2-%E6%AC%A7%E6%8B%89%E8%A7%92(Euler-Angles)%E4%BD%93%E7%B3%BB%E4%B8%8E%E4%B8%87%E5%90%91%E8%8A%82%E6%AD%BB%E9%94%81%E7%9A%84%E6%95%B0%E5%AD%A6%E6%9C%AC%E8%B4%A8/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            Next Post
+                        </div>
+                        <div class="nav__title">
+                            姿态动力学Vol.2 欧拉角(Euler Angles)体系与万向节死锁的数学本质
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
+        </div>
+    </div>
+
+
+
+
+
+</main>
+
+            <footer class="footer">
+     
+    <a href="#" class="button" id="b2t" aria-label="Back to Top" title="Back to Top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M233.376 722.752L278.624 768 512 534.624 745.376 768l45.248-45.248L512 444.128zM192 352h640V288H192z" fill="currentColor"></path>
+        </svg>
+    </a>
+
+    
+
+
+    
+     
+ 
+
+ 
+    
+        
+        <p class="footer-copyright">
+            Strtus's Journry
+        </p>
+    
+    
+        
+            
+        
+            
+        
+            <p>保持对世界的输出🙌</p>
+
+        
+    
+</footer>
+
+        </div>
+         
+
+ 
+    <script>
+        window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+        ga('create', 'G-5ERPC280ZB', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+ 
+
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5ERPC280ZB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-5ERPC280ZB');
+    </script>
+ 
+
+ 
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement('script');
+            hm.src = 'https://hm.baidu.com/hm.js?8da6411546e903e478a9d82d2a4d0c60';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+    
+ 
+
+
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.css">
+
+    
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.js"></script>
+
+    <script>
+        let lazyloadT = Boolean('false'),
+            auto_fancybox = Boolean('true')
+        if (auto_fancybox) {
+            $(".post__content").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        } else {
+            $(".post__content").find("fancybox").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        }
+    </script>
+ 
+
+
+    <script>
+        if (typeof MathJax === 'undefined') {
+            window.MathJax = {
+                loader: {
+                    source: {
+                        '[tex]/amsCd': '[tex]/amscd',
+                        '[tex]/AMScd': '[tex]/amscd'
+                    }
+                },
+                tex: {
+                    inlineMath: {'[+]': [['$', '$']]},
+                    tags: 'ams'
+                },
+                options: {
+                    renderActions: {
+                        findScript: [10, doc => {
+                            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                                const display = !!node.type.match(/; *mode=display/);
+                                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                                const text = document.createTextNode('');
+                                node.parentNode.replaceChild(text, node);
+                                math.start = {node: text, delim: '', n: 0};
+                                math.end = {node: text, delim: '', n: 0};
+                                doc.math.push(math);
+                            });
+                        }, '', false],
+                        insertedScript: [200, () => {
+                            document.querySelectorAll('mjx-container').forEach(node => {
+                                let target = node.parentNode;
+                                if (target.nodeName.toLowerCase() === 'li') {
+                                    target.parentNode.classList.add('has-jax');
+                                }
+                            });
+                        }, '', false]
+                    }
+                }
+            };
+            (function () {
+                var script = document.createElement('script');
+                script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js";
+                script.defer = true;
+                document.head.appendChild(script);
+            })();
+        } else {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+        }
+    </script>
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+
+    </body>
+</html>

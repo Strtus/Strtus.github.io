@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--icon-->
+
+    
+        <link rel="shortcut icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="16x16" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="32x32" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon-96x96.png">
+    
+    
+        <link rel="apple-touch-icon" sizes="180x180" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/web-app-manifest-192x192.png">
+    
+    
+        <link rel="mask-icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/apple-touch-icon.png">
+    
+
+
+    <!-- meta -->
+
+
+<title>色彩科学Vol.14 计算色彩学前沿 | Strtus&#39;s Journey</title>
+
+
+    <meta name="keywords" content="色彩科学, 计算色彩学, AI, 神经科学, 总结">
+
+
+
+
+    <!-- OpenGraph -->
+ 
+    <meta name="description" content="前言：旅程的终点与起点从Vol.1 的辐射度量学开始，我们一路走过了光度学、三色视理论、格拉斯曼定律、CIE XYZ、Lab、色差公式、色适应、显色性、CIECAM02、ICC、ACES，直到Vol.13 的光谱分析。 这 14 章的内容构建了一座宏伟的数学大厦，解释了人类如何量化和复现色彩。然而，色彩科学并没有终结。随着人工智能（AI）和神经科学的发展，计算色彩学（Computational C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="色彩科学Vol.14 计算色彩学前沿">
+<meta property="og:url" content="https://strtus.github.io/2025/02/04/%E8%89%B2%E5%BD%A9%E7%A7%91%E5%AD%A6Vol.14-%E8%AE%A1%E7%AE%97%E8%89%B2%E5%BD%A9%E5%AD%A6%E5%89%8D%E6%B2%BF/index.html">
+<meta property="og:site_name" content="Strtus&#39;s Journey">
+<meta property="og:description" content="前言：旅程的终点与起点从Vol.1 的辐射度量学开始，我们一路走过了光度学、三色视理论、格拉斯曼定律、CIE XYZ、Lab、色差公式、色适应、显色性、CIECAM02、ICC、ACES，直到Vol.13 的光谱分析。 这 14 章的内容构建了一座宏伟的数学大厦，解释了人类如何量化和复现色彩。然而，色彩科学并没有终结。随着人工智能（AI）和神经科学的发展，计算色彩学（Computational C">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-02-04T02:00:00.000Z">
+<meta property="article:modified_time" content="2025-11-21T11:18:30.047Z">
+<meta property="article:author" content="strtus">
+<meta property="article:tag" content="色彩科学">
+<meta property="article:tag" content="计算色彩学">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="神经科学">
+<meta property="article:tag" content="总结">
+<meta name="twitter:card" content="summary_large_image">
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/highlight.css" media="none" >
+        
+            <link rel="stylesheet" id="hl-dark-theme" href="/css/highlight/highlight.dark.css" media="none">
+        
+    
+
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/style/dark.css">
+
+    
+<script src="/js/darkmode.js"></script>
+
+
+
+     
+
+    <!-- custom head -->
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+    <body>
+        <div id="app" tabindex="-1">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">Strtus&#39;s Journey</span>
+        </a>
+    </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">首页</a>
+                
+                    <a href="/about.html" class="navbar-menu button">About</a>
+                
+                    <a href="/categories/" class="navbar-menu button">分类</a>
+                
+                    <a href="/tags/" class="navbar-menu button">标签</a>
+                
+                    <a href="/archives/" class="navbar-menu button">归档</a>
+                
+            </div>
+        
+        
+        
+    <a href="/search/" id="btn-search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="24" height="24" fill="currentColor" stroke="currentColor" stroke-width="32"><path d="M192 448c0-141.152 114.848-256 256-256s256 114.848 256 256-114.848 256-256 256-256-114.848-256-256z m710.624 409.376l-206.88-206.88A318.784 318.784 0 0 0 768 448c0-176.736-143.264-320-320-320S128 271.264 128 448s143.264 320 320 320a318.784 318.784 0 0 0 202.496-72.256l206.88 206.88 45.248-45.248z"></path></svg>
+    </a>
+
+
+        
+        
+    <a href="javaScript:void(0);" id="btn-toggle-dark">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </a>
+
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">首页</a>
+                
+                    <a href="/about.html" class="dropdown-menu button">About</a>
+                
+                    <a href="/categories/" class="dropdown-menu button">分类</a>
+                
+                    <a href="/tags/" class="dropdown-menu button">标签</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">归档</a>
+                
+            </div>
+        
+    </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        色彩科学Vol.14 计算色彩学前沿
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2025/02/" class="post-meta__date button">2025-02-04</a>
+        
+    <span class="separate-dot"></span><a href="/categories/%E8%89%B2%E5%BD%A9%E7%A7%91%E5%AD%A6%E7%9A%84%E6%95%B0%E5%AD%A6%E5%8E%9F%E7%90%86/" class="button">色彩科学的数学原理</a>
+
+ 
+        
+    
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+    <aside class="post-side">
+        <div class="post-side__toc">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80%EF%BC%9A%E6%97%85%E7%A8%8B%E7%9A%84%E7%BB%88%E7%82%B9%E4%B8%8E%E8%B5%B7%E7%82%B9"><span class="toc-number">1.</span> <span class="toc-text">前言：旅程的终点与起点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E8%89%B2%E5%BD%A9%E6%81%92%E5%B8%B8%E6%80%A7"><span class="toc-number">2.</span> <span class="toc-text">计算色彩恒常性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AI-%E4%B8%8E%E8%89%B2%E5%BD%A9"><span class="toc-number">3.</span> <span class="toc-text">AI 与色彩</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A5%9E%E7%BB%8F%E7%A7%91%E5%AD%A6%E7%9A%84%E8%A7%86%E8%A7%92"><span class="toc-number">4.</span> <span class="toc-text">神经科学的视角</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%A8%E7%B3%BB%E5%88%97%E6%80%BB%E7%BB%93"><span class="toc-number">5.</span> <span class="toc-text">全系列总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-number">6.</span> <span class="toc-text">Reference</span></a></li></ol>
+        </div>
+    </aside>
+    <a class="btn-toc button" id="btn-toc" tabindex="0">
+        <svg viewBox="0 0 1024 1024" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M128 256h64V192H128zM320 256h576V192H320zM128 544h64v-64H128zM320 544h576v-64H320zM128 832h64v-64H128zM320 832h576v-64H320z" fill="currentColor"></path>
+        </svg>
+    </a>
+    <div class="toc-menus" id="toc-menus">
+        <div class="toc-title">Article Directory</div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80%EF%BC%9A%E6%97%85%E7%A8%8B%E7%9A%84%E7%BB%88%E7%82%B9%E4%B8%8E%E8%B5%B7%E7%82%B9"><span class="toc-number">1.</span> <span class="toc-text">前言：旅程的终点与起点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E8%89%B2%E5%BD%A9%E6%81%92%E5%B8%B8%E6%80%A7"><span class="toc-number">2.</span> <span class="toc-text">计算色彩恒常性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AI-%E4%B8%8E%E8%89%B2%E5%BD%A9"><span class="toc-number">3.</span> <span class="toc-text">AI 与色彩</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A5%9E%E7%BB%8F%E7%A7%91%E5%AD%A6%E7%9A%84%E8%A7%86%E8%A7%92"><span class="toc-number">4.</span> <span class="toc-text">神经科学的视角</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%A8%E7%B3%BB%E5%88%97%E6%80%BB%E7%BB%93"><span class="toc-number">5.</span> <span class="toc-text">全系列总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-number">6.</span> <span class="toc-text">Reference</span></a></li></ol>
+    </div>
+
+
+<article class="post post__with-toc content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <h2 id="前言：旅程的终点与起点"><a href="#前言：旅程的终点与起点" class="headerlink" title="前言：旅程的终点与起点"></a>前言：旅程的终点与起点</h2><p>从<strong>Vol.1</strong> 的辐射度量学开始，我们一路走过了光度学、三色视理论、格拉斯曼定律、CIE XYZ、Lab、色差公式、色适应、显色性、CIECAM02、ICC、ACES，直到<strong>Vol.13</strong> 的光谱分析。</p>
+<p>这 14 章的内容构建了一座宏伟的数学大厦，解释了人类如何量化和复现色彩。然而，色彩科学并没有终结。随着人工智能（AI）和神经科学的发展，计算色彩学（Computational Color Science）正在开辟新的疆域。</p>
+<h2 id="计算色彩恒常性"><a href="#计算色彩恒常性" class="headerlink" title="计算色彩恒常性"></a>计算色彩恒常性</h2><p>人眼具有惊人的色彩恒常性，即在不同光源下能识别物体固有色的能力。计算机视觉一直试图模仿这一能力，这被称为自动白平衡算法。</p>
+<ul>
+<li><strong>灰度世界假设</strong>：假设场景中所有颜色的平均值是灰色的。</li>
+<li><strong>Retinex 理论</strong>：Edwin Land 提出的理论，认为颜色是由视网膜（Retina）和大脑皮层（Cortex）共同计算的相对值。</li>
+<li><strong>贝叶斯方法</strong>：利用统计先验概率来推断最可能的光源颜色。</li>
+</ul>
+<h2 id="AI-与色彩"><a href="#AI-与色彩" class="headerlink" title="AI 与色彩"></a>AI 与色彩</h2><p>深度学习的出现彻底改变了图像处理领域。</p>
+<ul>
+<li><strong>黑白照片上色</strong>：利用 GAN（生成对抗网络），AI 可以“猜”出黑白照片中物体应有的颜色。这本质上是学习了语义（如“草是绿的”）与色彩的映射关系。</li>
+<li><strong>风格迁移</strong>：将梵高的色彩风格迁移到普通照片上，这涉及到了色彩统计特征的高维匹配。</li>
+</ul>
+<h2 id="神经科学的视角"><a href="#神经科学的视角" class="headerlink" title="神经科学的视角"></a>神经科学的视角</h2><p>我们目前的色彩模型（XYZ, Lab）都基于 1931 年的心理物理学实验。但大脑皮层是如何处理色彩的？</p>
+<ul>
+<li><strong>V4 区</strong>：视觉皮层的 V4 区被认为是色彩处理中心。</li>
+<li><strong>四色视者</strong>：有研究表明，极少数女性可能拥有第四种视锥细胞，能看到普通人看不到的色彩维度。如果这是真的，我们的 CIE XYZ 体系对她们来说就是不完整的。</li>
+</ul>
+<h2 id="全系列总结"><a href="#全系列总结" class="headerlink" title="全系列总结"></a>全系列总结</h2><p>《色彩科学的数学原理》系列的核心思想可以归纳为三点：</p>
+<ol>
+<li><strong>物理是基础</strong>：光是电磁波，光谱是颜色的物理指纹（Vol.1, Vol.13）。</li>
+<li><strong>生理是约束</strong>：人眼的三种视锥细胞决定了色彩空间是三维的（Vol.2, Vol.3）。</li>
+<li><strong>数学是桥梁</strong>：<ul>
+<li><strong>线性代数</strong>处理色彩混合与空间变换（Vol.3, Vol.4, Vol.8, Vol.11, Vol.12）。</li>
+<li><strong>几何学</strong>描述色域与距离（Vol.5, Vol.6, Vol.7）。</li>
+<li><strong>统计学</strong>处理光谱降维与显色性（Vol.9, Vol.13）。</li>
+</ul>
+</li>
+</ol>
+<p>色彩既是客观的物理存在，也是主观的心理构建。正是这种二象性，赋予了色彩科学无穷的魅力。</p>
+<p>希望这套系列文章能为你打开色彩科学的大门。无论你是摄影师、设计师、工程师还是科研人员，愿你都能在色彩的世界里找到理性的光芒。</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li>Land, E. H. (1977). <em>The Retinex Theory of Color Vision</em>. Scientific American.</li>
+<li>Finlayson, G. D., et al. <em>Color Constancy</em>.</li>
+<li>Goodfellow, I., et al. <em>Deep Learning</em>. (For AI related topics).</li>
+</ol>
+
+    </div>
+     
+    <div class="post-footer__meta"><p>updated at 2025-11-21</p></div> 
+    <div class="post-entry__tags"><a href="/tags/%E8%89%B2%E5%BD%A9%E7%A7%91%E5%AD%A6/" class="post-tags__link button"># 色彩科学</a><a href="/tags/%E8%AE%A1%E7%AE%97%E8%89%B2%E5%BD%A9%E5%AD%A6/" class="post-tags__link button"># 计算色彩学</a><a href="/tags/AI/" class="post-tags__link button"># AI</a><a href="/tags/%E7%A5%9E%E7%BB%8F%E7%A7%91%E5%AD%A6/" class="post-tags__link button"># 神经科学</a><a href="/tags/%E6%80%BB%E7%BB%93/" class="post-tags__link button"># 总结</a></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
+            
+                <a href="/2025/02/04/%E6%9A%97%E6%88%BF%E7%90%86%E8%AE%BAVol.1-%E8%83%B6%E7%89%87%E6%84%9F%E5%85%89%E5%8E%9F%E7%90%86%E4%B8%8E%E6%BD%9C%E5%BD%B1%E5%BD%A2%E6%88%90/" class="nav__link">
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
+                    </div>
+                    <div>
+                        <div class="nav__label">
+                            Previous Post
+                        </div>
+                        <div class="nav__title">
+                            暗房理论Vol.1 胶片感光原理与潜影形成
+                        </div>
+                    </div>
+                </a>
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="/2025/02/03/%E8%89%B2%E5%BD%A9%E7%A7%91%E5%AD%A6Vol.13-%E5%85%89%E8%B0%B1%E6%95%B0%E6%8D%AE%E7%9A%84%E9%99%8D%E7%BB%B4%E4%B8%8E%E9%87%8D%E6%9E%84/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            Next Post
+                        </div>
+                        <div class="nav__title">
+                            色彩科学Vol.13 光谱数据的降维与重构
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
+        </div>
+    </div>
+
+
+
+
+
+</main>
+
+            <footer class="footer">
+     
+    <a href="#" class="button" id="b2t" aria-label="Back to Top" title="Back to Top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M233.376 722.752L278.624 768 512 534.624 745.376 768l45.248-45.248L512 444.128zM192 352h640V288H192z" fill="currentColor"></path>
+        </svg>
+    </a>
+
+    
+
+
+    
+     
+ 
+
+ 
+    
+        
+        <p class="footer-copyright">
+            Strtus's Journry
+        </p>
+    
+    
+        
+            
+        
+            
+        
+            <p>保持对世界的输出🙌</p>
+
+        
+    
+</footer>
+
+        </div>
+         
+
+ 
+    <script>
+        window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+        ga('create', 'G-5ERPC280ZB', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+ 
+
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5ERPC280ZB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-5ERPC280ZB');
+    </script>
+ 
+
+ 
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement('script');
+            hm.src = 'https://hm.baidu.com/hm.js?8da6411546e903e478a9d82d2a4d0c60';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+    
+ 
+
+
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.css">
+
+    
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.js"></script>
+
+    <script>
+        let lazyloadT = Boolean('false'),
+            auto_fancybox = Boolean('true')
+        if (auto_fancybox) {
+            $(".post__content").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        } else {
+            $(".post__content").find("fancybox").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        }
+    </script>
+ 
+
+
+    <script>
+        if (typeof MathJax === 'undefined') {
+            window.MathJax = {
+                loader: {
+                    source: {
+                        '[tex]/amsCd': '[tex]/amscd',
+                        '[tex]/AMScd': '[tex]/amscd'
+                    }
+                },
+                tex: {
+                    inlineMath: {'[+]': [['$', '$']]},
+                    tags: 'ams'
+                },
+                options: {
+                    renderActions: {
+                        findScript: [10, doc => {
+                            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                                const display = !!node.type.match(/; *mode=display/);
+                                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                                const text = document.createTextNode('');
+                                node.parentNode.replaceChild(text, node);
+                                math.start = {node: text, delim: '', n: 0};
+                                math.end = {node: text, delim: '', n: 0};
+                                doc.math.push(math);
+                            });
+                        }, '', false],
+                        insertedScript: [200, () => {
+                            document.querySelectorAll('mjx-container').forEach(node => {
+                                let target = node.parentNode;
+                                if (target.nodeName.toLowerCase() === 'li') {
+                                    target.parentNode.classList.add('has-jax');
+                                }
+                            });
+                        }, '', false]
+                    }
+                }
+            };
+            (function () {
+                var script = document.createElement('script');
+                script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js";
+                script.defer = true;
+                document.head.appendChild(script);
+            })();
+        } else {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+        }
+    </script>
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+
+    </body>
+</html>

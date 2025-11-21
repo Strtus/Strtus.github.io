@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--icon-->
+
+    
+        <link rel="shortcut icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="16x16" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="32x32" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon-96x96.png">
+    
+    
+        <link rel="apple-touch-icon" sizes="180x180" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/web-app-manifest-192x192.png">
+    
+    
+        <link rel="mask-icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/apple-touch-icon.png">
+    
+
+
+    <!-- meta -->
+
+
+<title>色彩科学Vol.2 人眼视觉系统与颜色匹配实验 | Strtus&#39;s Journey</title>
+
+
+    <meta name="keywords" content="色彩科学, 颜色匹配, 视觉生理学">
+
+
+
+
+    <!-- OpenGraph -->
+ 
+    <meta name="description" content="前言：从物理到感知的跨越在《色彩科学Vol.1 辐射度量学与光度学》中，我们建立了描述光能量的物理框架（辐射度量学）以及描述光亮度的感知框架（光度学）。然而，光度学仅解决了一维的“明暗”问题，并未涉及三维的“色彩”感知。 为什么波长为 700nm 的光看起来是红色的，而 530nm 的光看起来是绿色的？为什么红光和绿光混合会产生黄色的感觉，而物理上并没有 580nm 的黄光存在？ 本章将深入人眼视">
+<meta property="og:type" content="article">
+<meta property="og:title" content="色彩科学Vol.2 人眼视觉系统与颜色匹配实验">
+<meta property="og:url" content="https://strtus.github.io/2025/01/23/%E8%89%B2%E5%BD%A9%E7%A7%91%E5%AD%A6Vol.2-%E4%BA%BA%E7%9C%BC%E8%A7%86%E8%A7%89%E7%B3%BB%E7%BB%9F%E4%B8%8E%E9%A2%9C%E8%89%B2%E5%8C%B9%E9%85%8D%E5%AE%9E%E9%AA%8C/index.html">
+<meta property="og:site_name" content="Strtus&#39;s Journey">
+<meta property="og:description" content="前言：从物理到感知的跨越在《色彩科学Vol.1 辐射度量学与光度学》中，我们建立了描述光能量的物理框架（辐射度量学）以及描述光亮度的感知框架（光度学）。然而，光度学仅解决了一维的“明暗”问题，并未涉及三维的“色彩”感知。 为什么波长为 700nm 的光看起来是红色的，而 530nm 的光看起来是绿色的？为什么红光和绿光混合会产生黄色的感觉，而物理上并没有 580nm 的黄光存在？ 本章将深入人眼视">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/CIE1931_RGBCMF.svg">
+<meta property="article:published_time" content="2025-01-23T02:00:00.000Z">
+<meta property="article:modified_time" content="2025-11-21T10:52:26.073Z">
+<meta property="article:author" content="strtus">
+<meta property="article:tag" content="色彩科学">
+<meta property="article:tag" content="颜色匹配">
+<meta property="article:tag" content="视觉生理学">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/CIE1931_RGBCMF.svg">
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/highlight.css" media="none" >
+        
+            <link rel="stylesheet" id="hl-dark-theme" href="/css/highlight/highlight.dark.css" media="none">
+        
+    
+
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/style/dark.css">
+
+    
+<script src="/js/darkmode.js"></script>
+
+
+
+     
+
+    <!-- custom head -->
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+    <body>
+        <div id="app" tabindex="-1">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">Strtus&#39;s Journey</span>
+        </a>
+    </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">首页</a>
+                
+                    <a href="/about.html" class="navbar-menu button">About</a>
+                
+                    <a href="/categories/" class="navbar-menu button">分类</a>
+                
+                    <a href="/tags/" class="navbar-menu button">标签</a>
+                
+                    <a href="/archives/" class="navbar-menu button">归档</a>
+                
+            </div>
+        
+        
+        
+    <a href="/search/" id="btn-search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="24" height="24" fill="currentColor" stroke="currentColor" stroke-width="32"><path d="M192 448c0-141.152 114.848-256 256-256s256 114.848 256 256-114.848 256-256 256-256-114.848-256-256z m710.624 409.376l-206.88-206.88A318.784 318.784 0 0 0 768 448c0-176.736-143.264-320-320-320S128 271.264 128 448s143.264 320 320 320a318.784 318.784 0 0 0 202.496-72.256l206.88 206.88 45.248-45.248z"></path></svg>
+    </a>
+
+
+        
+        
+    <a href="javaScript:void(0);" id="btn-toggle-dark">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </a>
+
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">首页</a>
+                
+                    <a href="/about.html" class="dropdown-menu button">About</a>
+                
+                    <a href="/categories/" class="dropdown-menu button">分类</a>
+                
+                    <a href="/tags/" class="dropdown-menu button">标签</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">归档</a>
+                
+            </div>
+        
+    </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        色彩科学Vol.2 人眼视觉系统与颜色匹配实验
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2025/01/" class="post-meta__date button">2025-01-23</a>
+        
+    <span class="separate-dot"></span><a href="/categories/%E8%89%B2%E5%BD%A9%E7%A7%91%E5%AD%A6%E7%9A%84%E6%95%B0%E5%AD%A6%E5%8E%9F%E7%90%86/" class="button">色彩科学的数学原理</a>
+
+ 
+        
+    
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+    <aside class="post-side">
+        <div class="post-side__toc">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80%EF%BC%9A%E4%BB%8E%E7%89%A9%E7%90%86%E5%88%B0%E6%84%9F%E7%9F%A5%E7%9A%84%E8%B7%A8%E8%B6%8A"><span class="toc-number">1.</span> <span class="toc-text">前言：从物理到感知的跨越</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%BA%E7%9C%BC%E8%A7%86%E8%A7%89%E7%B3%BB%E7%BB%9F%E7%94%9F%E7%90%86%E5%9F%BA%E7%A1%80"><span class="toc-number">2.</span> <span class="toc-text">人眼视觉系统生理基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%86%E7%BD%91%E8%86%9C%E7%9A%84%E5%85%89%E6%84%9F%E5%8F%97%E5%99%A8"><span class="toc-number">2.1.</span> <span class="toc-text">视网膜的光感受器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LMS-%E5%85%89%E8%B0%B1%E5%93%8D%E5%BA%94%E6%9B%B2%E7%BA%BF"><span class="toc-number">2.2.</span> <span class="toc-text">LMS 光谱响应曲线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8C%E8%89%B2%E5%BC%82%E8%B0%B1"><span class="toc-number">2.3.</span> <span class="toc-text">同色异谱</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%9C%E8%89%B2%E5%8C%B9%E9%85%8D%E5%AE%9E%E9%AA%8C"><span class="toc-number">3.</span> <span class="toc-text">颜色匹配实验</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%A3%85%E7%BD%AE%E4%B8%8E%E5%8E%9F%E7%90%86"><span class="toc-number">3.1.</span> <span class="toc-text">实验装置与原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B4%9F%E5%80%BC%E7%9A%84%E5%87%BA%E7%8E%B0%E4%B8%8E%E7%89%A9%E7%90%86%E6%84%8F%E4%B9%89"><span class="toc-number">3.2.</span> <span class="toc-text">负值的出现与物理意义</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CIE-1931-RGB-%E9%A2%9C%E8%89%B2%E5%8C%B9%E9%85%8D%E5%87%BD%E6%95%B0"><span class="toc-number">4.</span> <span class="toc-text">CIE 1931 RGB 颜色匹配函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E8%89%B2%E5%AE%9A%E4%B9%89"><span class="toc-number">4.1.</span> <span class="toc-text">基色定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BD%92%E4%B8%80%E5%8C%96%E6%9D%A1%E4%BB%B6"><span class="toc-number">4.2.</span> <span class="toc-text">归一化条件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%9C%E8%89%B2%E5%8C%B9%E9%85%8D%E5%87%BD%E6%95%B0%E6%9B%B2%E7%BA%BF"><span class="toc-number">4.3.</span> <span class="toc-text">颜色匹配函数曲线</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E5%88%BA%E6%BF%80%E5%80%BC-Tristimulus-Values-%E7%9A%84%E8%AE%A1%E7%AE%97"><span class="toc-number">5.</span> <span class="toc-text">三刺激值 (Tristimulus Values) 的计算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%E4%B8%8E%E5%B1%95%E6%9C%9B"><span class="toc-number">6.</span> <span class="toc-text">总结与展望</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-number">7.</span> <span class="toc-text">Reference</span></a></li></ol>
+        </div>
+    </aside>
+    <a class="btn-toc button" id="btn-toc" tabindex="0">
+        <svg viewBox="0 0 1024 1024" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M128 256h64V192H128zM320 256h576V192H320zM128 544h64v-64H128zM320 544h576v-64H320zM128 832h64v-64H128zM320 832h576v-64H320z" fill="currentColor"></path>
+        </svg>
+    </a>
+    <div class="toc-menus" id="toc-menus">
+        <div class="toc-title">Article Directory</div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80%EF%BC%9A%E4%BB%8E%E7%89%A9%E7%90%86%E5%88%B0%E6%84%9F%E7%9F%A5%E7%9A%84%E8%B7%A8%E8%B6%8A"><span class="toc-number">1.</span> <span class="toc-text">前言：从物理到感知的跨越</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%BA%E7%9C%BC%E8%A7%86%E8%A7%89%E7%B3%BB%E7%BB%9F%E7%94%9F%E7%90%86%E5%9F%BA%E7%A1%80"><span class="toc-number">2.</span> <span class="toc-text">人眼视觉系统生理基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%86%E7%BD%91%E8%86%9C%E7%9A%84%E5%85%89%E6%84%9F%E5%8F%97%E5%99%A8"><span class="toc-number">2.1.</span> <span class="toc-text">视网膜的光感受器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LMS-%E5%85%89%E8%B0%B1%E5%93%8D%E5%BA%94%E6%9B%B2%E7%BA%BF"><span class="toc-number">2.2.</span> <span class="toc-text">LMS 光谱响应曲线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8C%E8%89%B2%E5%BC%82%E8%B0%B1"><span class="toc-number">2.3.</span> <span class="toc-text">同色异谱</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%9C%E8%89%B2%E5%8C%B9%E9%85%8D%E5%AE%9E%E9%AA%8C"><span class="toc-number">3.</span> <span class="toc-text">颜色匹配实验</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%A3%85%E7%BD%AE%E4%B8%8E%E5%8E%9F%E7%90%86"><span class="toc-number">3.1.</span> <span class="toc-text">实验装置与原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B4%9F%E5%80%BC%E7%9A%84%E5%87%BA%E7%8E%B0%E4%B8%8E%E7%89%A9%E7%90%86%E6%84%8F%E4%B9%89"><span class="toc-number">3.2.</span> <span class="toc-text">负值的出现与物理意义</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CIE-1931-RGB-%E9%A2%9C%E8%89%B2%E5%8C%B9%E9%85%8D%E5%87%BD%E6%95%B0"><span class="toc-number">4.</span> <span class="toc-text">CIE 1931 RGB 颜色匹配函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E8%89%B2%E5%AE%9A%E4%B9%89"><span class="toc-number">4.1.</span> <span class="toc-text">基色定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BD%92%E4%B8%80%E5%8C%96%E6%9D%A1%E4%BB%B6"><span class="toc-number">4.2.</span> <span class="toc-text">归一化条件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%9C%E8%89%B2%E5%8C%B9%E9%85%8D%E5%87%BD%E6%95%B0%E6%9B%B2%E7%BA%BF"><span class="toc-number">4.3.</span> <span class="toc-text">颜色匹配函数曲线</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E5%88%BA%E6%BF%80%E5%80%BC-Tristimulus-Values-%E7%9A%84%E8%AE%A1%E7%AE%97"><span class="toc-number">5.</span> <span class="toc-text">三刺激值 (Tristimulus Values) 的计算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%E4%B8%8E%E5%B1%95%E6%9C%9B"><span class="toc-number">6.</span> <span class="toc-text">总结与展望</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-number">7.</span> <span class="toc-text">Reference</span></a></li></ol>
+    </div>
+
+
+<article class="post post__with-toc content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <h2 id="前言：从物理到感知的跨越"><a href="#前言：从物理到感知的跨越" class="headerlink" title="前言：从物理到感知的跨越"></a>前言：从物理到感知的跨越</h2><p>在《色彩科学Vol.1 辐射度量学与光度学》中，我们建立了描述光能量的物理框架（辐射度量学）以及描述光亮度的感知框架（光度学）。然而，光度学仅解决了一维的“明暗”问题，并未涉及三维的“色彩”感知。</p>
+<p>为什么波长为 700nm 的光看起来是红色的，而 530nm 的光看起来是绿色的？为什么红光和绿光混合会产生黄色的感觉，而物理上并没有 580nm 的黄光存在？</p>
+<p>本章将深入人眼视觉系统的生理构造，探讨三色视理论，并详细解析色彩科学史上最重要的实验——颜色匹配实验。这是将色彩从主观感受转化为数学定量的关键一步。</p>
+<h2 id="人眼视觉系统生理基础"><a href="#人眼视觉系统生理基础" class="headerlink" title="人眼视觉系统生理基础"></a>人眼视觉系统生理基础</h2><h3 id="视网膜的光感受器"><a href="#视网膜的光感受器" class="headerlink" title="视网膜的光感受器"></a>视网膜的光感受器</h3><p>人眼视网膜上分布着两种主要的光感受器细胞：视杆细胞和视锥细胞。</p>
+<ul>
+<li><p>视杆细胞：</p>
+<ul>
+<li>数量约 1.2 亿。</li>
+<li>极高感光度，负责暗视觉。</li>
+<li>无色彩分辨能力（这也是为什么在黑暗中我们看不清颜色）。</li>
+<li>峰值响应在 507nm 左右。</li>
+</ul>
+</li>
+<li><p>视锥细胞：</p>
+<ul>
+<li>数量约 600-700 万，主要集中在视网膜中央凹 (Fovea)。</li>
+<li>负责明视觉和色彩感知。</li>
+<li>根据光谱敏感度不同，分为三类：<ul>
+<li>L-Cones (Long)：对长波敏感，峰值约 560nm（偏红/黄）。</li>
+<li>M-Cones (Medium)：对中波敏感，峰值约 530nm（偏绿）。</li>
+<li>S-Cones (Short)：对短波敏感，峰值约 420nm（偏蓝）。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="LMS-光谱响应曲线"><a href="#LMS-光谱响应曲线" class="headerlink" title="LMS 光谱响应曲线"></a>LMS 光谱响应曲线</h3><p>人眼对色彩的感知，本质上是这三种视锥细胞对入射光谱功率分布 $P(\lambda)$ 的积分响应。</p>
+<p>设 $l(\lambda), m(\lambda), s(\lambda)$ 分别为 L, M, S 视锥细胞的光谱敏感度函数，则人眼产生的神经信号 $(L, M, S)$ 可表示为：</p>
+<script type="math/tex; mode=display">
+\begin{cases}
+L = \int P(\lambda) l(\lambda) \mathrm{d}\lambda \\
+M = \int P(\lambda) m(\lambda) \mathrm{d}\lambda \\
+S = \int P(\lambda) s(\lambda) \mathrm{d}\lambda
+\end{cases}</script><p>这一组积分公式揭示了色彩感知的本质：色彩是光谱在人眼传感器上的投影。</p>
+<h3 id="同色异谱"><a href="#同色异谱" class="headerlink" title="同色异谱"></a>同色异谱</h3><p>由上述积分公式可知，不同的光谱分布 $P_1(\lambda)$ 和 $P_2(\lambda)$，完全可能产生相同的 $(L, M, S)$ 响应值。</p>
+<script type="math/tex; mode=display">
+\int P_1(\lambda) l(\lambda) \mathrm{d}\lambda = \int P_2(\lambda) l(\lambda) \mathrm{d}\lambda</script><p>当两个物理成分不同的光谱引起相同的视觉感知时，这种现象称为同色异谱。
+这是色彩复现技术（如显示器、打印机）存在的物理基础——我们不需要重建自然界物体的真实光谱，只需要欺骗人眼的三个传感器即可。</p>
+<h2 id="颜色匹配实验"><a href="#颜色匹配实验" class="headerlink" title="颜色匹配实验"></a>颜色匹配实验</h2><p>既然人眼只有三种色彩传感器，理论上我们只需要三种基色光（Primaries），通过调节它们的强度比例，就可以混合出任意颜色。为了验证这一理论并量化色彩，20世纪20年代，W.D. Wright 和 J. Guild 分别进行了著名的颜色匹配实验。</p>
+<h3 id="实验装置与原理"><a href="#实验装置与原理" class="headerlink" title="实验装置与原理"></a>实验装置与原理</h3><p>实验装置是一个双视场结构：</p>
+<ul>
+<li>视场一侧（待测色）：显示某一特定波长的单色光 $\lambda$（测试光）。</li>
+<li>视场另一侧（匹配色）：由三束基色光（红 R、绿 G、蓝 B）叠加混合而成。</li>
+</ul>
+<p>观察者调节 R, G, B 三束光的强度，直到混合色的外观与待测单色光完全一致（即达到同色异谱匹配）。</p>
+<p>数学表达为：</p>
+<script type="math/tex; mode=display">
+C(\lambda) \equiv r(\lambda)[R] + g(\lambda)[G] + b(\lambda)[B]</script><p>其中 $\equiv$ 表示视觉上的匹配，而非物理光谱的相等。$r(\lambda), g(\lambda), b(\lambda)$ 即为在该波长下的颜色匹配函数。</p>
+<h3 id="负值的出现与物理意义"><a href="#负值的出现与物理意义" class="headerlink" title="负值的出现与物理意义"></a>负值的出现与物理意义</h3><p>在实验中，研究人员发现了一个严重的问题：并非所有的单色光都能通过 R, G, B 的正向混合来匹配。</p>
+<p>特别是对于青色（Cyan）波段的光，无论如何增加 R, G, B 的强度，混合色总是比单色光看起来更“白”（饱和度更低）。为了达成匹配，必须将红色基色光 $[R]$ 移到待测色那一侧，与待测光混合，去匹配剩下的 G 和 B。</p>
+<p>数学上，这等价于在匹配方程中引入了负值：</p>
+<script type="math/tex; mode=display">
+C(\lambda) + r'(\lambda)[R] \equiv g(\lambda)[G] + b(\lambda)[B]</script><p>移项后：</p>
+<script type="math/tex; mode=display">
+C(\lambda) \equiv -r'(\lambda)[R] + g(\lambda)[G] + b(\lambda)[B]</script><p>这意味着，在某些波段，颜色匹配函数 $\bar{r}(\lambda)$ 是负值。这在物理上无法直接实现（不存在负能量的光），但在数学上是完全成立的。</p>
+<h2 id="CIE-1931-RGB-颜色匹配函数"><a href="#CIE-1931-RGB-颜色匹配函数" class="headerlink" title="CIE 1931 RGB 颜色匹配函数"></a>CIE 1931 RGB 颜色匹配函数</h2><p>基于 Wright 和 Guild 的实验数据，CIE（国际照明委员会）在 1931 年标准化了 RGB 系统。</p>
+<h3 id="基色定义"><a href="#基色定义" class="headerlink" title="基色定义"></a>基色定义</h3><ul>
+<li>红 (R): 700.0 nm</li>
+<li>绿 (G): 546.1 nm</li>
+<li>蓝 (B): 435.8 nm</li>
+</ul>
+<h3 id="归一化条件"><a href="#归一化条件" class="headerlink" title="归一化条件"></a>归一化条件</h3><p>为了简化计算，CIE 规定当匹配等能量白光（Equal Energy White, E）时，R:G:B 的亮度比为 1:4.5907:0.0601，而此时的三刺激值相等，即 $R=G=B$。</p>
+<h3 id="颜色匹配函数曲线"><a href="#颜色匹配函数曲线" class="headerlink" title="颜色匹配函数曲线"></a>颜色匹配函数曲线</h3><p>下图展示了 CIE 1931 RGB 颜色匹配函数 $\bar{r}(\lambda), \bar{g}(\lambda), \bar{b}(\lambda)$。请注意 $\bar{r}(\lambda)$ 在 435.8nm 到 546.1nm 之间出现的明显负值。</p>
+<p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/CIE1931_RGBCMF.svg" style="zoom:80%;" /></p>
+<h2 id="三刺激值-Tristimulus-Values-的计算"><a href="#三刺激值-Tristimulus-Values-的计算" class="headerlink" title="三刺激值 (Tristimulus Values) 的计算"></a>三刺激值 (Tristimulus Values) 的计算</h2><p>一旦我们拥有了颜色匹配函数 $\bar{r}(\lambda), \bar{g}(\lambda), \bar{b}(\lambda)$，对于任意给定的光谱功率分布 $P(\lambda)$，其 RGB 三刺激值可以通过积分求得：</p>
+<script type="math/tex; mode=display">
+\begin{cases}
+R = \int_{380}^{780} P(\lambda) \bar{r}(\lambda) \mathrm{d}\lambda \\
+G = \int_{380}^{780} P(\lambda) \bar{g}(\lambda) \mathrm{d}\lambda \\
+B = \int_{380}^{780} P(\lambda) \bar{b}(\lambda) \mathrm{d}\lambda
+\end{cases}</script><p>这组 $(R, G, B)$ 值唯一确定了该光谱在 CIE 1931 RGB 系统下的颜色坐标。</p>
+<h2 id="总结与展望"><a href="#总结与展望" class="headerlink" title="总结与展望"></a>总结与展望</h2><p>本章我们从生理学出发，验证了三色视理论，并通过颜色匹配实验推导出了 RGB 颜色匹配函数。然而，RGB 系统中存在的负三刺激值给工程计算和硬件实现带来了极大的不便。</p>
+<ul>
+<li>能否构建一个全正值的色彩空间？</li>
+<li>色彩空间的线性变换遵循什么数学规律？</li>
+<li>如何将 RGB 空间变换到我们熟知的 XYZ 空间？</li>
+</ul>
+<p>在下一章《色彩科学Vol.3 格拉斯曼定律与色彩空间代数》中，我们将探讨色彩混合的线性代数本质——格拉斯曼定律，为推导 CIE XYZ 空间做好理论准备。</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li>Wright, W. D. (1928). <em>A re-determination of the trichromatic coefficients of the spectral colours</em>. Transactions of the Optical Society.</li>
+<li>Guild, J. (1931). <em>The colorimetric properties of the spectrum</em>. Philosophical Transactions of the Royal Society.</li>
+<li>Wyszecki, G., &amp; Stiles, W. S. <em>Color Science: Concepts and Methods</em>. Wiley.</li>
+<li>Fairman H S, et al. <em>How the CIE 1931 color‐matching functions were derived from Wright‐Guild data</em>. Color Research &amp; Application.</li>
+</ol>
+
+    </div>
+     
+    <div class="post-footer__meta"><p>updated at 2025-11-21</p></div> 
+    <div class="post-entry__tags"><a href="/tags/%E8%89%B2%E5%BD%A9%E7%A7%91%E5%AD%A6/" class="post-tags__link button"># 色彩科学</a><a href="/tags/%E9%A2%9C%E8%89%B2%E5%8C%B9%E9%85%8D/" class="post-tags__link button"># 颜色匹配</a><a href="/tags/%E8%A7%86%E8%A7%89%E7%94%9F%E7%90%86%E5%AD%A6/" class="post-tags__link button"># 视觉生理学</a></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
+            
+                <a href="/how2build.html" class="nav__link">
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
+                    </div>
+                    <div>
+                        <div class="nav__label">
+                            Previous Post
+                        </div>
+                        <div class="nav__title">
+                            利用HEXO+GithubPages搭建自己的静态博客
+                        </div>
+                    </div>
+                </a>
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="/2025/01/22/%E8%89%B2%E5%BD%A9%E7%A7%91%E5%AD%A6Vol.1%20%E8%BE%90%E5%B0%84%E5%BA%A6%E9%87%8F%E5%AD%A6%E4%B8%8E%E5%85%89%E5%BA%A6%E5%AD%A6/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            Next Post
+                        </div>
+                        <div class="nav__title">
+                            色彩科学Vol.1 辐射度量学与光度学
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
+        </div>
+    </div>
+
+
+
+
+
+</main>
+
+            <footer class="footer">
+     
+    <a href="#" class="button" id="b2t" aria-label="Back to Top" title="Back to Top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M233.376 722.752L278.624 768 512 534.624 745.376 768l45.248-45.248L512 444.128zM192 352h640V288H192z" fill="currentColor"></path>
+        </svg>
+    </a>
+
+    
+
+
+    
+     
+ 
+
+ 
+    
+        
+        <p class="footer-copyright">
+            Strtus's Journry
+        </p>
+    
+    
+        
+            
+        
+            
+        
+            <p>保持对世界的输出🙌</p>
+
+        
+    
+</footer>
+
+        </div>
+         
+
+ 
+    <script>
+        window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+        ga('create', 'G-5ERPC280ZB', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+ 
+
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5ERPC280ZB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-5ERPC280ZB');
+    </script>
+ 
+
+ 
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement('script');
+            hm.src = 'https://hm.baidu.com/hm.js?8da6411546e903e478a9d82d2a4d0c60';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+    
+ 
+
+
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.css">
+
+    
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.js"></script>
+
+    <script>
+        let lazyloadT = Boolean('false'),
+            auto_fancybox = Boolean('true')
+        if (auto_fancybox) {
+            $(".post__content").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        } else {
+            $(".post__content").find("fancybox").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        }
+    </script>
+ 
+
+
+    <script>
+        if (typeof MathJax === 'undefined') {
+            window.MathJax = {
+                loader: {
+                    source: {
+                        '[tex]/amsCd': '[tex]/amscd',
+                        '[tex]/AMScd': '[tex]/amscd'
+                    }
+                },
+                tex: {
+                    inlineMath: {'[+]': [['$', '$']]},
+                    tags: 'ams'
+                },
+                options: {
+                    renderActions: {
+                        findScript: [10, doc => {
+                            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                                const display = !!node.type.match(/; *mode=display/);
+                                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                                const text = document.createTextNode('');
+                                node.parentNode.replaceChild(text, node);
+                                math.start = {node: text, delim: '', n: 0};
+                                math.end = {node: text, delim: '', n: 0};
+                                doc.math.push(math);
+                            });
+                        }, '', false],
+                        insertedScript: [200, () => {
+                            document.querySelectorAll('mjx-container').forEach(node => {
+                                let target = node.parentNode;
+                                if (target.nodeName.toLowerCase() === 'li') {
+                                    target.parentNode.classList.add('has-jax');
+                                }
+                            });
+                        }, '', false]
+                    }
+                }
+            };
+            (function () {
+                var script = document.createElement('script');
+                script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js";
+                script.defer = true;
+                document.head.appendChild(script);
+            })();
+        } else {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+        }
+    </script>
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+
+    </body>
+</html>

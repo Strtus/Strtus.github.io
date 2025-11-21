@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--icon-->
+
+    
+        <link rel="shortcut icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="16x16" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="32x32" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon-96x96.png">
+    
+    
+        <link rel="apple-touch-icon" sizes="180x180" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/web-app-manifest-192x192.png">
+    
+    
+        <link rel="mask-icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/apple-touch-icon.png">
+    
+
+
+    <!-- meta -->
+
+
+<title>姿态动力学Vol.7-姿态确定：TRIAD算法与Wahba问题 | Strtus&#39;s Journey</title>
+
+
+    <meta name="keywords" content="姿态确定, TRIAD算法, Wahba问题, q-method, QUEST">
+
+
+
+
+    <!-- OpenGraph -->
+ 
+    <meta name="description" content="引言在控制航天器姿态之前，我们首先需要知道它当前的姿态是什么。这就是姿态确定（Attitude Determination）的任务。姿态确定本质上是一个估计问题：利用星敏感器、太阳敏感器、磁强计等传感器测量到的矢量信息，结合已知的参考矢量（如星表、太阳星历、地磁模型），计算出航天器本体坐标系相对于惯性参考系的旋转矩阵（或四元数）。 本章将介绍两种最经典的静态姿态确定方法：确定性的TRIAD算法和基">
+<meta property="og:type" content="article">
+<meta property="og:title" content="姿态动力学Vol.7-姿态确定：TRIAD算法与Wahba问题">
+<meta property="og:url" content="https://strtus.github.io/2025/02/17/%E5%A7%BF%E6%80%81%E5%8A%A8%E5%8A%9B%E5%AD%A6Vol.7-%E5%A7%BF%E6%80%81%E7%A1%AE%E5%AE%9A%EF%BC%9ATRIAD%E7%AE%97%E6%B3%95%E4%B8%8EWahba%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:site_name" content="Strtus&#39;s Journey">
+<meta property="og:description" content="引言在控制航天器姿态之前，我们首先需要知道它当前的姿态是什么。这就是姿态确定（Attitude Determination）的任务。姿态确定本质上是一个估计问题：利用星敏感器、太阳敏感器、磁强计等传感器测量到的矢量信息，结合已知的参考矢量（如星表、太阳星历、地磁模型），计算出航天器本体坐标系相对于惯性参考系的旋转矩阵（或四元数）。 本章将介绍两种最经典的静态姿态确定方法：确定性的TRIAD算法和基">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-02-17T04:00:00.000Z">
+<meta property="article:modified_time" content="2025-11-21T07:44:01.682Z">
+<meta property="article:author" content="strtus">
+<meta property="article:tag" content="姿态确定">
+<meta property="article:tag" content="TRIAD算法">
+<meta property="article:tag" content="Wahba问题">
+<meta property="article:tag" content="q-method">
+<meta property="article:tag" content="QUEST">
+<meta name="twitter:card" content="summary_large_image">
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/highlight.css" media="none" >
+        
+            <link rel="stylesheet" id="hl-dark-theme" href="/css/highlight/highlight.dark.css" media="none">
+        
+    
+
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/style/dark.css">
+
+    
+<script src="/js/darkmode.js"></script>
+
+
+
+     
+
+    <!-- custom head -->
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+    <body>
+        <div id="app" tabindex="-1">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">Strtus&#39;s Journey</span>
+        </a>
+    </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">首页</a>
+                
+                    <a href="/about.html" class="navbar-menu button">About</a>
+                
+                    <a href="/categories/" class="navbar-menu button">分类</a>
+                
+                    <a href="/tags/" class="navbar-menu button">标签</a>
+                
+                    <a href="/archives/" class="navbar-menu button">归档</a>
+                
+            </div>
+        
+        
+        
+    <a href="/search/" id="btn-search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="24" height="24" fill="currentColor" stroke="currentColor" stroke-width="32"><path d="M192 448c0-141.152 114.848-256 256-256s256 114.848 256 256-114.848 256-256 256-256-114.848-256-256z m710.624 409.376l-206.88-206.88A318.784 318.784 0 0 0 768 448c0-176.736-143.264-320-320-320S128 271.264 128 448s143.264 320 320 320a318.784 318.784 0 0 0 202.496-72.256l206.88 206.88 45.248-45.248z"></path></svg>
+    </a>
+
+
+        
+        
+    <a href="javaScript:void(0);" id="btn-toggle-dark">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </a>
+
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">首页</a>
+                
+                    <a href="/about.html" class="dropdown-menu button">About</a>
+                
+                    <a href="/categories/" class="dropdown-menu button">分类</a>
+                
+                    <a href="/tags/" class="dropdown-menu button">标签</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">归档</a>
+                
+            </div>
+        
+    </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        姿态动力学Vol.7-姿态确定：TRIAD算法与Wahba问题
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2025/02/" class="post-meta__date button">2025-02-17</a>
+        
+    <span class="separate-dot"></span><a href="/categories/%E8%88%AA%E5%A4%A9%E5%99%A8%E5%A7%BF%E6%80%81%E5%8A%A8%E5%8A%9B%E5%AD%A6%E7%90%86%E8%AE%BA/" class="button">航天器姿态动力学理论</a>
+
+ 
+        
+    
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+    <aside class="post-side">
+        <div class="post-side__toc">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%A7%82%E6%B5%8B%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.</span> <span class="toc-text">1. 观测模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-TRIAD-%E7%AE%97%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">2. TRIAD 算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E7%AE%97%E6%B3%95%E6%AD%A5%E9%AA%A4"><span class="toc-number">3.1.</span> <span class="toc-text">2.1 算法步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E4%BC%98%E7%BC%BA%E7%82%B9%E5%88%86%E6%9E%90"><span class="toc-number">3.2.</span> <span class="toc-text">2.2 优缺点分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Wahba-%E9%97%AE%E9%A2%98"><span class="toc-number">4.</span> <span class="toc-text">3. Wahba 问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="toc-number">4.1.</span> <span class="toc-text">3.1 损失函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-Davenport%E2%80%99s-q-method"><span class="toc-number">4.2.</span> <span class="toc-text">3.2 Davenport’s q-method</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-QUEST-%E7%AE%97%E6%B3%95-Quaternion-Estimator"><span class="toc-number">4.3.</span> <span class="toc-text">3.3 QUEST 算法 (Quaternion Estimator)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%8A%A8%E6%80%81%E5%A7%BF%E6%80%81%E4%BC%B0%E8%AE%A1-Kalman-Filtering"><span class="toc-number">5.</span> <span class="toc-text">4. 动态姿态估计 (Kalman Filtering)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">6.</span> <span class="toc-text">总结</span></a></li></ol>
+        </div>
+    </aside>
+    <a class="btn-toc button" id="btn-toc" tabindex="0">
+        <svg viewBox="0 0 1024 1024" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M128 256h64V192H128zM320 256h576V192H320zM128 544h64v-64H128zM320 544h576v-64H320zM128 832h64v-64H128zM320 832h576v-64H320z" fill="currentColor"></path>
+        </svg>
+    </a>
+    <div class="toc-menus" id="toc-menus">
+        <div class="toc-title">Article Directory</div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%A7%82%E6%B5%8B%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.</span> <span class="toc-text">1. 观测模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-TRIAD-%E7%AE%97%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">2. TRIAD 算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E7%AE%97%E6%B3%95%E6%AD%A5%E9%AA%A4"><span class="toc-number">3.1.</span> <span class="toc-text">2.1 算法步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E4%BC%98%E7%BC%BA%E7%82%B9%E5%88%86%E6%9E%90"><span class="toc-number">3.2.</span> <span class="toc-text">2.2 优缺点分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Wahba-%E9%97%AE%E9%A2%98"><span class="toc-number">4.</span> <span class="toc-text">3. Wahba 问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="toc-number">4.1.</span> <span class="toc-text">3.1 损失函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-Davenport%E2%80%99s-q-method"><span class="toc-number">4.2.</span> <span class="toc-text">3.2 Davenport’s q-method</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-QUEST-%E7%AE%97%E6%B3%95-Quaternion-Estimator"><span class="toc-number">4.3.</span> <span class="toc-text">3.3 QUEST 算法 (Quaternion Estimator)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%8A%A8%E6%80%81%E5%A7%BF%E6%80%81%E4%BC%B0%E8%AE%A1-Kalman-Filtering"><span class="toc-number">5.</span> <span class="toc-text">4. 动态姿态估计 (Kalman Filtering)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">6.</span> <span class="toc-text">总结</span></a></li></ol>
+    </div>
+
+
+<article class="post post__with-toc content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>在控制航天器姿态之前，我们首先需要知道它当前的姿态是什么。这就是<strong>姿态确定</strong>（Attitude Determination）的任务。姿态确定本质上是一个估计问题：利用星敏感器、太阳敏感器、磁强计等传感器测量到的矢量信息，结合已知的参考矢量（如星表、太阳星历、地磁模型），计算出航天器本体坐标系相对于惯性参考系的旋转矩阵（或四元数）。</p>
+<p>本章将介绍两种最经典的静态姿态确定方法：确定性的TRIAD算法和基于最优化的Wahba问题解法，并简要提及动态估计方法（EKF）。</p>
+<hr>
+<h2 id="1-观测模型"><a href="#1-观测模型" class="headerlink" title="1. 观测模型"></a>1. 观测模型</h2><p>假设我们在惯性系 $\mathcal{N}$ 中有两个已知的参考单位矢量 $\mathbf{r}_1, \mathbf{r}_2$（例如太阳矢量和地磁矢量）。
+同时，我们在航天器本体坐标系 $\mathcal{B}$ 中测量到了这两个矢量，记为 $\mathbf{b}_1, \mathbf{b}_2$。</p>
+<p>理想情况下，如果不存在测量噪声，它们之间满足如下关系：</p>
+<script type="math/tex; mode=display">\mathbf{b}_1 = \mathbf{C}_{BN} \mathbf{r}_1</script><script type="math/tex; mode=display">\mathbf{b}_2 = \mathbf{C}_{BN} \mathbf{r}_2</script><p>其中 $\mathbf{C}_{BN}$ 是我们需要求解的姿态矩阵（DCM）。</p>
+<hr>
+<h2 id="2-TRIAD-算法"><a href="#2-TRIAD-算法" class="headerlink" title="2. TRIAD 算法"></a>2. TRIAD 算法</h2><p>TRIAD（Tri-Axial Attitude Determination）算法是最早被提出的姿态确定算法之一（Black, 1964）。它的核心思想是利用两个非共线的矢量观测值构建两个正交坐标系，从而求解姿态矩阵。</p>
+<h3 id="2-1-算法步骤"><a href="#2-1-算法步骤" class="headerlink" title="2.1 算法步骤"></a>2.1 算法步骤</h3><ol>
+<li><p><strong>构建参考系基底</strong>：
+利用惯性系下的参考矢量 $\mathbf{r}_1, \mathbf{r}_2$ 构建一个正交三合基 $\{\mathbf{v}_1, \mathbf{v}_2, \mathbf{v}_3\}$：</p>
+<script type="math/tex; mode=display">\mathbf{v}_1 = \mathbf{r}_1</script><script type="math/tex; mode=display">\mathbf{v}_2 = \frac{\mathbf{r}_1 \times \mathbf{r}_2}{\|\mathbf{r}_1 \times \mathbf{r}_2\|}</script><script type="math/tex; mode=display">\mathbf{v}_3 = \mathbf{v}_1 \times \mathbf{v}_2</script></li>
+<li><p><strong>构建本体系基底</strong>：
+利用测量矢量 $\mathbf{b}_1, \mathbf{b}_2$ 构建对应的正交三合基 $\{\mathbf{w}_1, \mathbf{w}_2, \mathbf{w}_3\}$：</p>
+<script type="math/tex; mode=display">\mathbf{w}_1 = \mathbf{b}_1</script><script type="math/tex; mode=display">\mathbf{w}_2 = \frac{\mathbf{b}_1 \times \mathbf{b}_2}{\|\mathbf{b}_1 \times \mathbf{b}_2\|}</script><script type="math/tex; mode=display">\mathbf{w}_3 = \mathbf{w}_1 \times \mathbf{w}_2</script></li>
+<li><p><strong>求解姿态矩阵</strong>：
+由于这两个基底描述的是同一个物理架构在不同坐标系下的表示，因此存在唯一的旋转矩阵 $\mathbf{C}_{BN}$ 使得 $\mathbf{w}_i = \mathbf{C}_{BN} \mathbf{v}_i$。
+定义矩阵 $\mathbf{V} = [\mathbf{v}_1, \mathbf{v}_2, \mathbf{v}_3]$ 和 $\mathbf{W} = [\mathbf{w}_1, \mathbf{w}_2, \mathbf{w}_3]$。
+则有 $\mathbf{W} = \mathbf{C}_{BN} \mathbf{V}$。
+由于 $\mathbf{V}$ 是正交矩阵（$\mathbf{V}^T = \mathbf{V}^{-1}$），我们可以直接解出：</p>
+<script type="math/tex; mode=display">\mathbf{C}_{BN} = \mathbf{W} \mathbf{V}^T</script></li>
+</ol>
+<h3 id="2-2-优缺点分析"><a href="#2-2-优缺点分析" class="headerlink" title="2.2 优缺点分析"></a>2.2 优缺点分析</h3><ul>
+<li><strong>优点</strong>：计算极其简单，不需要迭代，适合算力有限的星载计算机。</li>
+<li><strong>缺点</strong>：它只利用了两个矢量信息，无法处理多于两个观测矢量的情况。而且它人为地赋予了第一个矢量 $\mathbf{r}_1$ 更高的权重（因为 $\mathbf{w}_1 = \mathbf{b}_1$ 完全保留了 $\mathbf{b}_1$ 的信息，而 $\mathbf{b}_2$ 的部分信息被丢弃了）。因此，通常将精度更高的传感器（如星敏感器）作为第一个矢量。</li>
+</ul>
+<hr>
+<h2 id="3-Wahba-问题"><a href="#3-Wahba-问题" class="headerlink" title="3. Wahba 问题"></a>3. Wahba 问题</h2><p>为了克服TRIAD算法的局限性，Grace Wahba 在1965年提出了著名的 Wahba 问题。这是一个最小二乘优化问题：寻找一个正交矩阵 $\mathbf{C}$，使得所有观测矢量 $\mathbf{b}_i$ 与参考矢量 $\mathbf{r}_i$ 之间的加权误差平方和最小。</p>
+<h3 id="3-1-损失函数"><a href="#3-1-损失函数" class="headerlink" title="3.1 损失函数"></a>3.1 损失函数</h3><script type="math/tex; mode=display">J(\mathbf{C}) = \frac{1}{2} \sum_{i=1}^{N} a_i \| \mathbf{b}_i - \mathbf{C} \mathbf{r}_i \|^2</script><p>其中 $a_i$ 是第 $i$ 个观测矢量的权重，通常取为测量方差的倒数 $\sigma_i^{-2}$。$N$ 是观测矢量的数量（$N \ge 2$）。</p>
+<p>展开损失函数：</p>
+<script type="math/tex; mode=display">\| \mathbf{b}_i - \mathbf{C} \mathbf{r}_i \|^2 = (\mathbf{b}_i - \mathbf{C} \mathbf{r}_i)^T (\mathbf{b}_i - \mathbf{C} \mathbf{r}_i) = \mathbf{b}_i^T \mathbf{b}_i + \mathbf{r}_i^T \mathbf{r}_i - 2 \mathbf{b}_i^T \mathbf{C} \mathbf{r}_i</script><p>由于 $\mathbf{b}_i$ 和 $\mathbf{r}_i$ 都是单位矢量，前两项为常数。因此，最小化 $J(\mathbf{C})$ 等价于最大化增益函数 $g(\mathbf{C})$：</p>
+<script type="math/tex; mode=display">g(\mathbf{C}) = \sum_{i=1}^{N} a_i \mathbf{b}_i^T \mathbf{C} \mathbf{r}_i = \text{tr}(\mathbf{C} \mathbf{B}^T)</script><p>其中 $\mathbf{B}$ 称为<strong>姿态轮廓矩阵 (Attitude Profile Matrix)</strong>：</p>
+<script type="math/tex; mode=display">\mathbf{B} = \sum_{i=1}^{N} a_i \mathbf{b}_i \mathbf{r}_i^T</script><h3 id="3-2-Davenport’s-q-method"><a href="#3-2-Davenport’s-q-method" class="headerlink" title="3.2 Davenport’s q-method"></a>3.2 Davenport’s q-method</h3><p>求解 Wahba 问题的方法有很多（如QUEST, ESOQ, FOAM），其中 Davenport 的 q-method 是最经典且基于四元数的方法。</p>
+<p>将姿态矩阵 $\mathbf{C}$ 用四元数 $\mathbf{q} = [\boldsymbol{\epsilon}^T, \eta]^T$ 表示，代入增益函数，经过繁琐但巧妙的代数推导，可以将最大化问题转化为求解特征值问题：</p>
+<script type="math/tex; mode=display">g(\mathbf{q}) = \mathbf{q}^T \mathbf{K} \mathbf{q}</script><p>其中 $\mathbf{K}$ 是一个 $4 \times 4$ 的对称矩阵，称为 <strong>Davenport 矩阵</strong>：</p>
+<script type="math/tex; mode=display">\mathbf{K} = \begin{bmatrix} \mathbf{S} - \sigma \mathbf{I} & \mathbf{Z} \\ \mathbf{Z}^T & \sigma \end{bmatrix}</script><p>这里：</p>
+<ul>
+<li>$\mathbf{S} = \mathbf{B} + \mathbf{B}^T$</li>
+<li>$\mathbf{Z} = [\mathbf{B}_{23}-\mathbf{B}_{32}, \mathbf{B}_{31}-\mathbf{B}_{13}, \mathbf{B}_{12}-\mathbf{B}_{21}]^T = \sum a_i (\mathbf{b}_i \times \mathbf{r}_i)$</li>
+<li>$\sigma = \text{tr}(\mathbf{B})$</li>
+</ul>
+<p>为了最大化 $\mathbf{q}^T \mathbf{K} \mathbf{q}$，在约束 $\mathbf{q}^T \mathbf{q} = 1$ 下，最优的四元数 $\mathbf{q}_{opt}$ 正是矩阵 $\mathbf{K}$ 的<strong>最大特征值</strong>对应的<strong>特征向量</strong>。</p>
+<p>这一结论极其优美，它将非线性的姿态估计问题转化为了标准的线性代数特征值问题，保证了全局最优解的存在性和唯一性。</p>
+<h3 id="3-3-QUEST-算法-Quaternion-Estimator"><a href="#3-3-QUEST-算法-Quaternion-Estimator" class="headerlink" title="3.3 QUEST 算法 (Quaternion Estimator)"></a>3.3 QUEST 算法 (Quaternion Estimator)</h3><p>q-method 虽然精确，但求解 $4 \times 4$ 矩阵的特征值在早期的星载计算机上仍然比较耗时。Shuster (1981) 提出了 QUEST 算法。
+QUEST 利用牛顿-拉夫逊迭代法快速求解特征方程 $\det(\mathbf{K} - \lambda \mathbf{I}) = 0$ 的最大根 $\lambda_{max}$，通常只需一次迭代即可收敛。</p>
+<script type="math/tex; mode=display">\lambda_{max} \approx \sum a_i</script><p>QUEST 是目前应用最广泛的静态姿态确定算法。</p>
+<hr>
+<h2 id="4-动态姿态估计-Kalman-Filtering"><a href="#4-动态姿态估计-Kalman-Filtering" class="headerlink" title="4. 动态姿态估计 (Kalman Filtering)"></a>4. 动态姿态估计 (Kalman Filtering)</h2><p>上述方法（TRIAD, Wahba）都是<strong>静态</strong>的，即只利用当前时刻的测量值。但在实际中，我们还有陀螺仪（Gyro）测量角速度。
+利用陀螺仪积分可以得到姿态的先验估计，再利用矢量观测（星敏感器）来修正这个估计。这就是<strong>扩展卡尔曼滤波 (EKF)</strong> 的基本思想。
+EKF 不仅能提高姿态精度，还能实时估计陀螺仪的漂移误差（Bias），是现代高精度姿态确定系统的核心算法。</p>
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li><strong>TRIAD</strong>：简单快速，适用于双矢量观测，精度受限于第一个矢量的精度。</li>
+<li><strong>Wahba问题</strong>：基于最小二乘的最优估计，能融合任意数量的矢量观测，精度更高。</li>
+<li><strong>q-method</strong>：Wahba问题的解析解，通过求解 $4 \times 4$ 矩阵的特征向量直接得到最优四元数。</li>
+<li><strong>EKF</strong>：融合陀螺仪和矢量观测的动态估计算法，是工业界的标准。</li>
+</ul>
+<p>下一章，我们将探讨如何利用环境力矩（如重力梯度）来实现航天器的被动稳定，而无需消耗任何燃料。</p>
+
+    </div>
+     
+    <div class="post-footer__meta"><p>updated at 2025-11-21</p></div> 
+    <div class="post-entry__tags"><a href="/tags/%E5%A7%BF%E6%80%81%E7%A1%AE%E5%AE%9A/" class="post-tags__link button"># 姿态确定</a><a href="/tags/TRIAD%E7%AE%97%E6%B3%95/" class="post-tags__link button"># TRIAD算法</a><a href="/tags/Wahba%E9%97%AE%E9%A2%98/" class="post-tags__link button"># Wahba问题</a><a href="/tags/q-method/" class="post-tags__link button"># q-method</a><a href="/tags/QUEST/" class="post-tags__link button"># QUEST</a></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
+            
+                <a href="/2025/02/18/%E5%A7%BF%E6%80%81%E5%8A%A8%E5%8A%9B%E5%AD%A6Vol.8-%E8%A2%AB%E5%8A%A8%E7%A8%B3%E5%AE%9A%E6%8A%80%E6%9C%AF%EF%BC%9A%E9%87%8D%E5%8A%9B%E6%A2%AF%E5%BA%A6%E7%A8%B3%E5%AE%9A%E4%B8%8E%E8%87%AA%E6%97%8B%E7%A8%B3%E5%AE%9A/" class="nav__link">
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
+                    </div>
+                    <div>
+                        <div class="nav__label">
+                            Previous Post
+                        </div>
+                        <div class="nav__title">
+                            姿态动力学Vol.8-被动稳定技术：重力梯度稳定与自旋稳定
+                        </div>
+                    </div>
+                </a>
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="/2025/02/14/%E5%A7%BF%E6%80%81%E5%8A%A8%E5%8A%9B%E5%AD%A6Vol.4-%E7%BD%97%E5%BE%B7%E9%87%8C%E6%A0%BC%E6%96%AF%E5%8F%82%E6%95%B0(CRPs)%E4%B8%8E%E4%BF%AE%E6%AD%A3%E5%8F%82%E6%95%B0(MRPs)%E7%9A%84%E5%AF%B9%E5%81%B6%E6%80%A7/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            Next Post
+                        </div>
+                        <div class="nav__title">
+                            姿态动力学Vol.4-罗德里格斯参数(CRPs)与修正参数(MRPs)的对偶性
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
+        </div>
+    </div>
+
+
+
+
+
+</main>
+
+            <footer class="footer">
+     
+    <a href="#" class="button" id="b2t" aria-label="Back to Top" title="Back to Top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M233.376 722.752L278.624 768 512 534.624 745.376 768l45.248-45.248L512 444.128zM192 352h640V288H192z" fill="currentColor"></path>
+        </svg>
+    </a>
+
+    
+
+
+    
+     
+ 
+
+ 
+    
+        
+        <p class="footer-copyright">
+            Strtus's Journry
+        </p>
+    
+    
+        
+            
+        
+            
+        
+            <p>保持对世界的输出🙌</p>
+
+        
+    
+</footer>
+
+        </div>
+         
+
+ 
+    <script>
+        window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+        ga('create', 'G-5ERPC280ZB', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+ 
+
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5ERPC280ZB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-5ERPC280ZB');
+    </script>
+ 
+
+ 
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement('script');
+            hm.src = 'https://hm.baidu.com/hm.js?8da6411546e903e478a9d82d2a4d0c60';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+    
+ 
+
+
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.css">
+
+    
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.js"></script>
+
+    <script>
+        let lazyloadT = Boolean('false'),
+            auto_fancybox = Boolean('true')
+        if (auto_fancybox) {
+            $(".post__content").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        } else {
+            $(".post__content").find("fancybox").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        }
+    </script>
+ 
+
+
+    <script>
+        if (typeof MathJax === 'undefined') {
+            window.MathJax = {
+                loader: {
+                    source: {
+                        '[tex]/amsCd': '[tex]/amscd',
+                        '[tex]/AMScd': '[tex]/amscd'
+                    }
+                },
+                tex: {
+                    inlineMath: {'[+]': [['$', '$']]},
+                    tags: 'ams'
+                },
+                options: {
+                    renderActions: {
+                        findScript: [10, doc => {
+                            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                                const display = !!node.type.match(/; *mode=display/);
+                                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                                const text = document.createTextNode('');
+                                node.parentNode.replaceChild(text, node);
+                                math.start = {node: text, delim: '', n: 0};
+                                math.end = {node: text, delim: '', n: 0};
+                                doc.math.push(math);
+                            });
+                        }, '', false],
+                        insertedScript: [200, () => {
+                            document.querySelectorAll('mjx-container').forEach(node => {
+                                let target = node.parentNode;
+                                if (target.nodeName.toLowerCase() === 'li') {
+                                    target.parentNode.classList.add('has-jax');
+                                }
+                            });
+                        }, '', false]
+                    }
+                }
+            };
+            (function () {
+                var script = document.createElement('script');
+                script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js";
+                script.defer = true;
+                document.head.appendChild(script);
+            })();
+        } else {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+        }
+    </script>
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+
+    </body>
+</html>

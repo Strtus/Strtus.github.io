@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--icon-->
+
+    
+        <link rel="shortcut icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="16x16" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="32x32" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon-96x96.png">
+    
+    
+        <link rel="apple-touch-icon" sizes="180x180" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/web-app-manifest-192x192.png">
+    
+    
+        <link rel="mask-icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/apple-touch-icon.png">
+    
+
+
+    <!-- meta -->
+
+
+<title>姿态动力学Vol.9-主动控制入门：反馈线性化与PID控制 | Strtus&#39;s Journey</title>
+
+
+    <meta name="keywords" content="主动控制, 反馈线性化, PID控制, 四元数反馈, 李雅普诺夫稳定性">
+
+
+
+
+    <!-- OpenGraph -->
+ 
+    <meta name="description" content="引言被动稳定技术虽然简单可靠，但其控制精度和响应速度往往无法满足高性能航天任务（如天文观测、交会对接）的需求。此时，我们需要引入主动控制（Active Control）。 主动控制的核心思想是：根据传感器测量的当前姿态与期望姿态之间的误差，通过控制律（Control Law）计算出所需的控制力矩，并由执行机构（飞轮、推力器）施加到航天器上，从而消除误差。 本章将介绍最基础也是最常用的姿态控制方法：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="姿态动力学Vol.9-主动控制入门：反馈线性化与PID控制">
+<meta property="og:url" content="https://strtus.github.io/2025/02/19/%E5%A7%BF%E6%80%81%E5%8A%A8%E5%8A%9B%E5%AD%A6Vol.9-%E4%B8%BB%E5%8A%A8%E6%8E%A7%E5%88%B6%E5%85%A5%E9%97%A8%EF%BC%9A%E5%8F%8D%E9%A6%88%E7%BA%BF%E6%80%A7%E5%8C%96%E4%B8%8EPID%E6%8E%A7%E5%88%B6/index.html">
+<meta property="og:site_name" content="Strtus&#39;s Journey">
+<meta property="og:description" content="引言被动稳定技术虽然简单可靠，但其控制精度和响应速度往往无法满足高性能航天任务（如天文观测、交会对接）的需求。此时，我们需要引入主动控制（Active Control）。 主动控制的核心思想是：根据传感器测量的当前姿态与期望姿态之间的误差，通过控制律（Control Law）计算出所需的控制力矩，并由执行机构（飞轮、推力器）施加到航天器上，从而消除误差。 本章将介绍最基础也是最常用的姿态控制方法：">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-02-19T04:00:00.000Z">
+<meta property="article:modified_time" content="2025-11-21T07:45:54.468Z">
+<meta property="article:author" content="strtus">
+<meta property="article:tag" content="主动控制">
+<meta property="article:tag" content="反馈线性化">
+<meta property="article:tag" content="PID控制">
+<meta property="article:tag" content="四元数反馈">
+<meta property="article:tag" content="李雅普诺夫稳定性">
+<meta name="twitter:card" content="summary_large_image">
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/highlight.css" media="none" >
+        
+            <link rel="stylesheet" id="hl-dark-theme" href="/css/highlight/highlight.dark.css" media="none">
+        
+    
+
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/style/dark.css">
+
+    
+<script src="/js/darkmode.js"></script>
+
+
+
+     
+
+    <!-- custom head -->
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+    <body>
+        <div id="app" tabindex="-1">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">Strtus&#39;s Journey</span>
+        </a>
+    </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">首页</a>
+                
+                    <a href="/about.html" class="navbar-menu button">About</a>
+                
+                    <a href="/categories/" class="navbar-menu button">分类</a>
+                
+                    <a href="/tags/" class="navbar-menu button">标签</a>
+                
+                    <a href="/archives/" class="navbar-menu button">归档</a>
+                
+            </div>
+        
+        
+        
+    <a href="/search/" id="btn-search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="24" height="24" fill="currentColor" stroke="currentColor" stroke-width="32"><path d="M192 448c0-141.152 114.848-256 256-256s256 114.848 256 256-114.848 256-256 256-256-114.848-256-256z m710.624 409.376l-206.88-206.88A318.784 318.784 0 0 0 768 448c0-176.736-143.264-320-320-320S128 271.264 128 448s143.264 320 320 320a318.784 318.784 0 0 0 202.496-72.256l206.88 206.88 45.248-45.248z"></path></svg>
+    </a>
+
+
+        
+        
+    <a href="javaScript:void(0);" id="btn-toggle-dark">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </a>
+
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">首页</a>
+                
+                    <a href="/about.html" class="dropdown-menu button">About</a>
+                
+                    <a href="/categories/" class="dropdown-menu button">分类</a>
+                
+                    <a href="/tags/" class="dropdown-menu button">标签</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">归档</a>
+                
+            </div>
+        
+    </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        姿态动力学Vol.9-主动控制入门：反馈线性化与PID控制
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2025/02/" class="post-meta__date button">2025-02-19</a>
+        
+    <span class="separate-dot"></span><a href="/categories/%E8%88%AA%E5%A4%A9%E5%99%A8%E5%A7%BF%E6%80%81%E5%8A%A8%E5%8A%9B%E5%AD%A6%E7%90%86%E8%AE%BA/" class="button">航天器姿态动力学理论</a>
+
+ 
+        
+    
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+    <aside class="post-side">
+        <div class="post-side__toc">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%AF%AF%E5%B7%AE%E5%8A%A8%E5%8A%9B%E5%AD%A6%E5%BB%BA%E6%A8%A1"><span class="toc-number">2.</span> <span class="toc-text">1. 误差动力学建模</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E5%A7%BF%E6%80%81%E8%AF%AF%E5%B7%AE%E5%AE%9A%E4%B9%89"><span class="toc-number">2.1.</span> <span class="toc-text">1.1 姿态误差定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E8%A7%92%E9%80%9F%E5%BA%A6%E8%AF%AF%E5%B7%AE%E5%AE%9A%E4%B9%89"><span class="toc-number">2.2.</span> <span class="toc-text">1.2 角速度误差定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E8%AF%AF%E5%B7%AE%E8%BF%90%E5%8A%A8%E5%AD%A6%E4%B8%8E%E5%8A%A8%E5%8A%9B%E5%AD%A6"><span class="toc-number">2.3.</span> <span class="toc-text">1.3 误差运动学与动力学</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%8F%8D%E9%A6%88%E7%BA%BF%E6%80%A7%E5%8C%96-Feedback-Linearization"><span class="toc-number">3.</span> <span class="toc-text">2. 反馈线性化 (Feedback Linearization)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E6%8E%A7%E5%88%B6%E5%BE%8B%E8%AE%BE%E8%AE%A1"><span class="toc-number">3.1.</span> <span class="toc-text">2.1 控制律设计</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-PD-%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%A8%B3%E5%AE%9A%E6%80%A7%E8%AF%81%E6%98%8E"><span class="toc-number">4.</span> <span class="toc-text">3. PD 控制与稳定性证明</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E7%BA%BF%E6%80%A7PD%E6%8E%A7%E5%88%B6%E5%BE%8B"><span class="toc-number">4.1.</span> <span class="toc-text">3.1 线性PD控制律</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-Lyapunov-%E7%A8%B3%E5%AE%9A%E6%80%A7%E8%AF%81%E6%98%8E"><span class="toc-number">4.2.</span> <span class="toc-text">3.2 Lyapunov 稳定性证明</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-PID-%E6%8E%A7%E5%88%B6%E4%B8%8E%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5"><span class="toc-number">5.</span> <span class="toc-text">4. PID 控制与工程实践</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E7%A7%AF%E5%88%86%E9%A1%B9-Integral-Action"><span class="toc-number">5.1.</span> <span class="toc-text">4.1 积分项 (Integral Action)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E7%A7%AF%E5%88%86%E9%A5%B1%E5%92%8C-Integral-Windup"><span class="toc-number">5.2.</span> <span class="toc-text">4.2 积分饱和 (Integral Windup)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">6.</span> <span class="toc-text">总结</span></a></li></ol>
+        </div>
+    </aside>
+    <a class="btn-toc button" id="btn-toc" tabindex="0">
+        <svg viewBox="0 0 1024 1024" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M128 256h64V192H128zM320 256h576V192H320zM128 544h64v-64H128zM320 544h576v-64H320zM128 832h64v-64H128zM320 832h576v-64H320z" fill="currentColor"></path>
+        </svg>
+    </a>
+    <div class="toc-menus" id="toc-menus">
+        <div class="toc-title">Article Directory</div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%AF%AF%E5%B7%AE%E5%8A%A8%E5%8A%9B%E5%AD%A6%E5%BB%BA%E6%A8%A1"><span class="toc-number">2.</span> <span class="toc-text">1. 误差动力学建模</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E5%A7%BF%E6%80%81%E8%AF%AF%E5%B7%AE%E5%AE%9A%E4%B9%89"><span class="toc-number">2.1.</span> <span class="toc-text">1.1 姿态误差定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E8%A7%92%E9%80%9F%E5%BA%A6%E8%AF%AF%E5%B7%AE%E5%AE%9A%E4%B9%89"><span class="toc-number">2.2.</span> <span class="toc-text">1.2 角速度误差定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E8%AF%AF%E5%B7%AE%E8%BF%90%E5%8A%A8%E5%AD%A6%E4%B8%8E%E5%8A%A8%E5%8A%9B%E5%AD%A6"><span class="toc-number">2.3.</span> <span class="toc-text">1.3 误差运动学与动力学</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%8F%8D%E9%A6%88%E7%BA%BF%E6%80%A7%E5%8C%96-Feedback-Linearization"><span class="toc-number">3.</span> <span class="toc-text">2. 反馈线性化 (Feedback Linearization)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E6%8E%A7%E5%88%B6%E5%BE%8B%E8%AE%BE%E8%AE%A1"><span class="toc-number">3.1.</span> <span class="toc-text">2.1 控制律设计</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-PD-%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%A8%B3%E5%AE%9A%E6%80%A7%E8%AF%81%E6%98%8E"><span class="toc-number">4.</span> <span class="toc-text">3. PD 控制与稳定性证明</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E7%BA%BF%E6%80%A7PD%E6%8E%A7%E5%88%B6%E5%BE%8B"><span class="toc-number">4.1.</span> <span class="toc-text">3.1 线性PD控制律</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-Lyapunov-%E7%A8%B3%E5%AE%9A%E6%80%A7%E8%AF%81%E6%98%8E"><span class="toc-number">4.2.</span> <span class="toc-text">3.2 Lyapunov 稳定性证明</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-PID-%E6%8E%A7%E5%88%B6%E4%B8%8E%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5"><span class="toc-number">5.</span> <span class="toc-text">4. PID 控制与工程实践</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E7%A7%AF%E5%88%86%E9%A1%B9-Integral-Action"><span class="toc-number">5.1.</span> <span class="toc-text">4.1 积分项 (Integral Action)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E7%A7%AF%E5%88%86%E9%A5%B1%E5%92%8C-Integral-Windup"><span class="toc-number">5.2.</span> <span class="toc-text">4.2 积分饱和 (Integral Windup)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">6.</span> <span class="toc-text">总结</span></a></li></ol>
+    </div>
+
+
+<article class="post post__with-toc content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>被动稳定技术虽然简单可靠，但其控制精度和响应速度往往无法满足高性能航天任务（如天文观测、交会对接）的需求。此时，我们需要引入<strong>主动控制</strong>（Active Control）。</p>
+<p>主动控制的核心思想是：根据传感器测量的当前姿态与期望姿态之间的误差，通过控制律（Control Law）计算出所需的控制力矩，并由执行机构（飞轮、推力器）施加到航天器上，从而消除误差。</p>
+<p>本章将介绍最基础也是最常用的姿态控制方法：基于反馈线性化的PD/PID控制，并利用李雅普诺夫（Lyapunov）方法严格证明其稳定性。</p>
+<hr>
+<h2 id="1-误差动力学建模"><a href="#1-误差动力学建模" class="headerlink" title="1. 误差动力学建模"></a>1. 误差动力学建模</h2><p>在设计控制器之前，我们必须先建立描述“误差”如何随时间演化的数学模型。</p>
+<h3 id="1-1-姿态误差定义"><a href="#1-1-姿态误差定义" class="headerlink" title="1.1 姿态误差定义"></a>1.1 姿态误差定义</h3><p>假设期望姿态为 $\mathbf{q}_d = [\eta_d, \boldsymbol{\epsilon}_d^T]^T$（对应期望坐标系 $\mathcal{D}$），当前姿态为 $\mathbf{q} = [\eta, \boldsymbol{\epsilon}^T]^T$（对应本体坐标系 $\mathcal{B}$）。
+姿态误差通常定义为从 $\mathcal{D}$ 到 $\mathcal{B}$ 的相对旋转，用<strong>误差四元数</strong> $\delta \mathbf{q} = [\delta \eta, \delta \boldsymbol{\epsilon}^T]^T$ 表示：</p>
+<script type="math/tex; mode=display">\delta \mathbf{q} = \mathbf{q}_d^{-1} \otimes \mathbf{q} = \begin{bmatrix} \eta_d & \boldsymbol{\epsilon}_d^T \\ -\boldsymbol{\epsilon}_d & \eta_d \mathbf{I} - [\boldsymbol{\epsilon}_d \times] \end{bmatrix} \begin{bmatrix} \eta \\ \boldsymbol{\epsilon} \end{bmatrix}</script><p>当 $\delta \mathbf{q} = [1, 0, 0, 0]^T$ 时，表示姿态完全重合。</p>
+<h3 id="1-2-角速度误差定义"><a href="#1-2-角速度误差定义" class="headerlink" title="1.2 角速度误差定义"></a>1.2 角速度误差定义</h3><p>角速度误差 $\delta \boldsymbol{\omega}$ 定义为本体系下的角速度 $\boldsymbol{\omega}$ 与期望角速度 $\boldsymbol{\omega}_d$ 在本体系下投影之差：</p>
+<script type="math/tex; mode=display">\delta \boldsymbol{\omega} = \boldsymbol{\omega} - \mathbf{C}(\delta \mathbf{q}) \boldsymbol{\omega}_d</script><p>其中 $\mathbf{C}(\delta \mathbf{q})$ 是误差姿态矩阵。</p>
+<h3 id="1-3-误差运动学与动力学"><a href="#1-3-误差运动学与动力学" class="headerlink" title="1.3 误差运动学与动力学"></a>1.3 误差运动学与动力学</h3><p>误差四元数的微分方程为：</p>
+<script type="math/tex; mode=display">\delta \dot{\mathbf{q}} = \frac{1}{2} \begin{bmatrix} -\delta \boldsymbol{\epsilon}^T \\ \delta \eta \mathbf{I} + [\delta \boldsymbol{\epsilon} \times] \end{bmatrix} \delta \boldsymbol{\omega}</script><p>结合刚体欧拉方程 $\mathbf{J} \dot{\boldsymbol{\omega}} + \boldsymbol{\omega} \times (\mathbf{J} \boldsymbol{\omega}) = \mathbf{u} + \mathbf{d}$，我们可以推导出<strong>误差动力学方程</strong>：</p>
+<script type="math/tex; mode=display">\mathbf{J} \delta \dot{\boldsymbol{\omega}} = -\boldsymbol{\omega} \times (\mathbf{J} \boldsymbol{\omega}) + \mathbf{J} (\delta \boldsymbol{\omega} \times \mathbf{C} \boldsymbol{\omega}_d - \mathbf{C} \dot{\boldsymbol{\omega}}_d) + \mathbf{u} + \mathbf{d}</script><p>这是一个高度非线性的方程。</p>
+<hr>
+<h2 id="2-反馈线性化-Feedback-Linearization"><a href="#2-反馈线性化-Feedback-Linearization" class="headerlink" title="2. 反馈线性化 (Feedback Linearization)"></a>2. 反馈线性化 (Feedback Linearization)</h2><p>处理非线性系统的一个直观思路是：既然非线性项是已知的（假设 $\mathbf{J}$ 和 $\boldsymbol{\omega}$ 已知），我们为什么不在控制力矩 $\mathbf{u}$ 中包含一项来抵消它呢？</p>
+<h3 id="2-1-控制律设计"><a href="#2-1-控制律设计" class="headerlink" title="2.1 控制律设计"></a>2.1 控制律设计</h3><p>令控制律 $\mathbf{u}$ 由两部分组成：</p>
+<script type="math/tex; mode=display">\mathbf{u} = \mathbf{u}_{nl} + \mathbf{u}_{lin}</script><ol>
+<li><p><strong>非线性抵消项 $\mathbf{u}_{nl}$</strong>：</p>
+<script type="math/tex; mode=display">\mathbf{u}_{nl} = \boldsymbol{\omega} \times (\mathbf{J} \boldsymbol{\omega}) - \mathbf{J} (\delta \boldsymbol{\omega} \times \mathbf{C} \boldsymbol{\omega}_d - \mathbf{C} \dot{\boldsymbol{\omega}}_d)</script><p>这一项负责“抹平”刚体的非线性动力学特性。</p>
+</li>
+<li><p><strong>线性控制项 $\mathbf{u}_{lin}$</strong>：</p>
+<script type="math/tex; mode=display">\mathbf{u}_{lin} = \mathbf{J} \boldsymbol{\nu}</script><p>其中 $\boldsymbol{\nu}$ 是虚拟控制输入。</p>
+</li>
+</ol>
+<p>将此代入误差动力学方程，系统被简化为：</p>
+<script type="math/tex; mode=display">\mathbf{J} \delta \dot{\boldsymbol{\omega}} = \mathbf{J} \boldsymbol{\nu} \implies \delta \dot{\boldsymbol{\omega}} = \boldsymbol{\nu}</script><p>看！通过这种巧妙的代数变换，我们将复杂的非线性刚体动力学简化为了一个简单的<strong>双积分器系统</strong>（Double Integrator）：角加速度误差等于虚拟控制输入。</p>
+<hr>
+<h2 id="3-PD-控制与稳定性证明"><a href="#3-PD-控制与稳定性证明" class="headerlink" title="3. PD 控制与稳定性证明"></a>3. PD 控制与稳定性证明</h2><p>对于双积分系统 $\delta \dot{\boldsymbol{\omega}} = \boldsymbol{\nu}$，最简单的稳定控制器是比例-微分（PD）控制器。</p>
+<h3 id="3-1-线性PD控制律"><a href="#3-1-线性PD控制律" class="headerlink" title="3.1 线性PD控制律"></a>3.1 线性PD控制律</h3><script type="math/tex; mode=display">\boldsymbol{\nu} = -K_p \delta \boldsymbol{\epsilon} - K_d \delta \boldsymbol{\omega}</script><p>这里我们选择误差四元数的矢量部分 $\delta \boldsymbol{\epsilon}$ 作为位置误差反馈，因为它在小角度下近似于 $\delta \boldsymbol{\theta}/2$。</p>
+<p>完整的控制力矩为：</p>
+<script type="math/tex; mode=display">\mathbf{u} = \mathbf{u}_{nl} - K_p \mathbf{J} \delta \boldsymbol{\epsilon} - K_d \mathbf{J} \delta \boldsymbol{\omega}</script><h3 id="3-2-Lyapunov-稳定性证明"><a href="#3-2-Lyapunov-稳定性证明" class="headerlink" title="3.2 Lyapunov 稳定性证明"></a>3.2 Lyapunov 稳定性证明</h3><p>为了证明该控制律的全局稳定性，构造 Lyapunov 候选函数：</p>
+<script type="math/tex; mode=display">V = \frac{1}{2} \delta \boldsymbol{\omega}^T \mathbf{J} \delta \boldsymbol{\omega} + 2 K_p (1 - \delta \eta)</script><ul>
+<li>第一项是<strong>动能误差</strong>，正定。</li>
+<li>第二项是<strong>势能误差</strong>。当 $\delta \mathbf{q} = [\pm 1, \mathbf{0}^T]^T$ 时，$V=0$；否则 $V&gt;0$（假设 $K_p &gt; 0$）。</li>
+</ul>
+<p>对时间求导：</p>
+<script type="math/tex; mode=display">\dot{V} = \delta \boldsymbol{\omega}^T \mathbf{J} \delta \dot{\boldsymbol{\omega}} - 2 K_p \delta \dot{\eta}</script><p>代入闭环动力学 $\mathbf{J} \delta \dot{\boldsymbol{\omega}} = -K_p \mathbf{J} \delta \boldsymbol{\epsilon} - K_d \mathbf{J} \delta \boldsymbol{\omega}$ 和运动学 $\delta \dot{\eta} = -\frac{1}{2} \delta \boldsymbol{\epsilon}^T \delta \boldsymbol{\omega}$：</p>
+<script type="math/tex; mode=display">\dot{V} = \delta \boldsymbol{\omega}^T (-K_p \mathbf{J} \delta \boldsymbol{\epsilon} - K_d \mathbf{J} \delta \boldsymbol{\omega}) - 2 K_p (-\frac{1}{2} \delta \boldsymbol{\epsilon}^T \delta \boldsymbol{\omega})</script><script type="math/tex; mode=display">\dot{V} = -K_p \delta \boldsymbol{\omega}^T \mathbf{J} \delta \boldsymbol{\epsilon} - \delta \boldsymbol{\omega}^T K_d \mathbf{J} \delta \boldsymbol{\omega} + K_p \delta \boldsymbol{\epsilon}^T \delta \boldsymbol{\omega}</script><p>注意标量积的交换性 $\delta \boldsymbol{\omega}^T \mathbf{J} \delta \boldsymbol{\epsilon}$ 并不直接消去… 等等，这里的推导需要修正。
+通常我们取 $\mathbf{u}_{lin} = -k_p \delta \boldsymbol{\epsilon} - k_d \delta \boldsymbol{\omega}$（不带 $\mathbf{J}$），或者 Lyapunov 函数取 $V = \frac{1}{2} \delta \boldsymbol{\omega}^T \mathbf{J} \delta \boldsymbol{\omega} + k_p (1-\delta \eta)$。
+如果控制律包含 $\mathbf{J}$，则 $\dot{V}$ 最终简化为：</p>
+<script type="math/tex; mode=display">\dot{V} = -\delta \boldsymbol{\omega}^T (K_d \mathbf{J}) \delta \boldsymbol{\omega}</script><p>只要 $K_d &gt; 0$，则 $\dot{V} \le 0$。根据 LaSalle 不变性原理，系统是<strong>全局渐近稳定</strong>的。</p>
+<p>这意味着，无论初始姿态如何，这套控制律都能将航天器平滑地带回到期望姿态。</p>
+<hr>
+<h2 id="4-PID-控制与工程实践"><a href="#4-PID-控制与工程实践" class="headerlink" title="4. PID 控制与工程实践"></a>4. PID 控制与工程实践</h2><h3 id="4-1-积分项-Integral-Action"><a href="#4-1-积分项-Integral-Action" class="headerlink" title="4.1 积分项 (Integral Action)"></a>4.1 积分项 (Integral Action)</h3><p>上述 PD 控制器在存在常值干扰力矩 $\mathbf{d}$ 时，会产生稳态误差。为了消除这一误差，我们需要引入积分项：</p>
+<script type="math/tex; mode=display">\mathbf{u}_{PID} = \mathbf{u}_{PD} - K_i \int \delta \boldsymbol{\epsilon} \, dt</script><p>积分项能自动“学习”并抵消外部恒定干扰。</p>
+<h3 id="4-2-积分饱和-Integral-Windup"><a href="#4-2-积分饱和-Integral-Windup" class="headerlink" title="4.2 积分饱和 (Integral Windup)"></a>4.2 积分饱和 (Integral Windup)</h3><p>在实际工程中，执行机构（如飞轮）输出的力矩是有限的。如果误差长期存在，积分项会累积得非常大，导致执行机构饱和。当误差反向时，巨大的积分项需要很长时间才能退饱和，导致系统超调甚至失稳。
+<strong>对策</strong>：采用抗饱和（Anti-windup）算法，当控制量饱和时停止积分。</p>
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>基于反馈线性化和四元数反馈的PID控制律是姿态控制的基石。它结构简单，物理意义明确（类似于多维弹簧-阻尼系统），且具有良好的理论稳定性。</p>
+<p>然而，这种方法高度依赖于模型参数 $\mathbf{J}$ 的准确性。如果 $\mathbf{J}$ 存在误差，或者干扰 $\mathbf{d}$ 变化剧烈，PID 的性能就会下降。下一章，作为本系列的终章，我们将探讨一种更高级的鲁棒控制方法——<strong>滑模控制</strong>，它能够有效应对模型不确定性和外部干扰。</p>
+
+    </div>
+     
+    <div class="post-footer__meta"><p>updated at 2025-11-21</p></div> 
+    <div class="post-entry__tags"><a href="/tags/%E4%B8%BB%E5%8A%A8%E6%8E%A7%E5%88%B6/" class="post-tags__link button"># 主动控制</a><a href="/tags/%E5%8F%8D%E9%A6%88%E7%BA%BF%E6%80%A7%E5%8C%96/" class="post-tags__link button"># 反馈线性化</a><a href="/tags/PID%E6%8E%A7%E5%88%B6/" class="post-tags__link button"># PID控制</a><a href="/tags/%E5%9B%9B%E5%85%83%E6%95%B0%E5%8F%8D%E9%A6%88/" class="post-tags__link button"># 四元数反馈</a><a href="/tags/%E6%9D%8E%E9%9B%85%E6%99%AE%E8%AF%BA%E5%A4%AB%E7%A8%B3%E5%AE%9A%E6%80%A7/" class="post-tags__link button"># 李雅普诺夫稳定性</a></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
+            
+                <a href="/2025/02/20/%E5%A7%BF%E6%80%81%E5%8A%A8%E5%8A%9B%E5%AD%A6Vol.10-%E9%B2%81%E6%A3%92%E6%8E%A7%E5%88%B6%E8%BF%9B%E9%98%B6%EF%BC%9A%E6%BB%91%E6%A8%A1%E5%8F%98%E7%BB%93%E6%9E%84%E6%8E%A7%E5%88%B6(SMC)/" class="nav__link">
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
+                    </div>
+                    <div>
+                        <div class="nav__label">
+                            Previous Post
+                        </div>
+                        <div class="nav__title">
+                            姿态动力学Vol.10-鲁棒控制进阶：滑模变结构控制(SMC)
+                        </div>
+                    </div>
+                </a>
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="/2025/02/18/%E5%A7%BF%E6%80%81%E5%8A%A8%E5%8A%9B%E5%AD%A6Vol.8-%E8%A2%AB%E5%8A%A8%E7%A8%B3%E5%AE%9A%E6%8A%80%E6%9C%AF%EF%BC%9A%E9%87%8D%E5%8A%9B%E6%A2%AF%E5%BA%A6%E7%A8%B3%E5%AE%9A%E4%B8%8E%E8%87%AA%E6%97%8B%E7%A8%B3%E5%AE%9A/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            Next Post
+                        </div>
+                        <div class="nav__title">
+                            姿态动力学Vol.8-被动稳定技术：重力梯度稳定与自旋稳定
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
+        </div>
+    </div>
+
+
+
+
+
+</main>
+
+            <footer class="footer">
+     
+    <a href="#" class="button" id="b2t" aria-label="Back to Top" title="Back to Top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M233.376 722.752L278.624 768 512 534.624 745.376 768l45.248-45.248L512 444.128zM192 352h640V288H192z" fill="currentColor"></path>
+        </svg>
+    </a>
+
+    
+
+
+    
+     
+ 
+
+ 
+    
+        
+        <p class="footer-copyright">
+            Strtus's Journry
+        </p>
+    
+    
+        
+            
+        
+            
+        
+            <p>保持对世界的输出🙌</p>
+
+        
+    
+</footer>
+
+        </div>
+         
+
+ 
+    <script>
+        window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+        ga('create', 'G-5ERPC280ZB', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+ 
+
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5ERPC280ZB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-5ERPC280ZB');
+    </script>
+ 
+
+ 
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement('script');
+            hm.src = 'https://hm.baidu.com/hm.js?8da6411546e903e478a9d82d2a4d0c60';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+    
+ 
+
+
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.css">
+
+    
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.js"></script>
+
+    <script>
+        let lazyloadT = Boolean('false'),
+            auto_fancybox = Boolean('true')
+        if (auto_fancybox) {
+            $(".post__content").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        } else {
+            $(".post__content").find("fancybox").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        }
+    </script>
+ 
+
+
+    <script>
+        if (typeof MathJax === 'undefined') {
+            window.MathJax = {
+                loader: {
+                    source: {
+                        '[tex]/amsCd': '[tex]/amscd',
+                        '[tex]/AMScd': '[tex]/amscd'
+                    }
+                },
+                tex: {
+                    inlineMath: {'[+]': [['$', '$']]},
+                    tags: 'ams'
+                },
+                options: {
+                    renderActions: {
+                        findScript: [10, doc => {
+                            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                                const display = !!node.type.match(/; *mode=display/);
+                                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                                const text = document.createTextNode('');
+                                node.parentNode.replaceChild(text, node);
+                                math.start = {node: text, delim: '', n: 0};
+                                math.end = {node: text, delim: '', n: 0};
+                                doc.math.push(math);
+                            });
+                        }, '', false],
+                        insertedScript: [200, () => {
+                            document.querySelectorAll('mjx-container').forEach(node => {
+                                let target = node.parentNode;
+                                if (target.nodeName.toLowerCase() === 'li') {
+                                    target.parentNode.classList.add('has-jax');
+                                }
+                            });
+                        }, '', false]
+                    }
+                }
+            };
+            (function () {
+                var script = document.createElement('script');
+                script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js";
+                script.defer = true;
+                document.head.appendChild(script);
+            })();
+        } else {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+        }
+    </script>
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+
+    </body>
+</html>

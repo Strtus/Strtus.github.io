@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--icon-->
+
+    
+        <link rel="shortcut icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="16x16" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="32x32" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon-96x96.png">
+    
+    
+        <link rel="apple-touch-icon" sizes="180x180" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/web-app-manifest-192x192.png">
+    
+    
+        <link rel="mask-icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/apple-touch-icon.png">
+    
+
+
+    <!-- meta -->
+
+
+<title>姿态动力学Vol.2 欧拉角(Euler Angles)体系与万向节死锁的数学本质 | Strtus&#39;s Journey</title>
+
+
+    <meta name="keywords" content="姿态动力学, 欧拉角, 奇点">
+
+
+
+
+    <!-- OpenGraph -->
+ 
+    <meta name="description" content="引言方向余弦矩阵 (DCM) 虽然数学性质完美，但不够直观。如果你告诉飞行员“现在的姿态矩阵是…”，他肯定会疯掉。人类更习惯用“滚转 (Roll)、俯仰 (Pitch)、偏航 (Yaw)”来描述姿态。 这种将三维旋转分解为三次绕不同轴的连续旋转的方法，统称为欧拉角 (Euler Angles)。它将复杂的姿态描述简化为三个直观的角度。然而，直观的背后隐藏着一个致命的数学陷阱——万向节死锁 (Gim">
+<meta property="og:type" content="article">
+<meta property="og:title" content="姿态动力学Vol.2 欧拉角(Euler Angles)体系与万向节死锁的数学本质">
+<meta property="og:url" content="https://strtus.github.io/2025/09/02/%E5%A7%BF%E6%80%81%E5%8A%A8%E5%8A%9B%E5%AD%A6Vol.2-%E6%AC%A7%E6%8B%89%E8%A7%92(Euler-Angles)%E4%BD%93%E7%B3%BB%E4%B8%8E%E4%B8%87%E5%90%91%E8%8A%82%E6%AD%BB%E9%94%81%E7%9A%84%E6%95%B0%E5%AD%A6%E6%9C%AC%E8%B4%A8/index.html">
+<meta property="og:site_name" content="Strtus&#39;s Journey">
+<meta property="og:description" content="引言方向余弦矩阵 (DCM) 虽然数学性质完美，但不够直观。如果你告诉飞行员“现在的姿态矩阵是…”，他肯定会疯掉。人类更习惯用“滚转 (Roll)、俯仰 (Pitch)、偏航 (Yaw)”来描述姿态。 这种将三维旋转分解为三次绕不同轴的连续旋转的方法，统称为欧拉角 (Euler Angles)。它将复杂的姿态描述简化为三个直观的角度。然而，直观的背后隐藏着一个致命的数学陷阱——万向节死锁 (Gim">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-09-02T02:00:00.000Z">
+<meta property="article:modified_time" content="2025-11-21T07:37:39.937Z">
+<meta property="article:author" content="strtus">
+<meta property="article:tag" content="姿态动力学">
+<meta property="article:tag" content="欧拉角">
+<meta property="article:tag" content="奇点">
+<meta name="twitter:card" content="summary_large_image">
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/highlight.css" media="none" >
+        
+            <link rel="stylesheet" id="hl-dark-theme" href="/css/highlight/highlight.dark.css" media="none">
+        
+    
+
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/style/dark.css">
+
+    
+<script src="/js/darkmode.js"></script>
+
+
+
+     
+
+    <!-- custom head -->
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+    <body>
+        <div id="app" tabindex="-1">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">Strtus&#39;s Journey</span>
+        </a>
+    </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">首页</a>
+                
+                    <a href="/about.html" class="navbar-menu button">About</a>
+                
+                    <a href="/categories/" class="navbar-menu button">分类</a>
+                
+                    <a href="/tags/" class="navbar-menu button">标签</a>
+                
+                    <a href="/archives/" class="navbar-menu button">归档</a>
+                
+            </div>
+        
+        
+        
+    <a href="/search/" id="btn-search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="24" height="24" fill="currentColor" stroke="currentColor" stroke-width="32"><path d="M192 448c0-141.152 114.848-256 256-256s256 114.848 256 256-114.848 256-256 256-256-114.848-256-256z m710.624 409.376l-206.88-206.88A318.784 318.784 0 0 0 768 448c0-176.736-143.264-320-320-320S128 271.264 128 448s143.264 320 320 320a318.784 318.784 0 0 0 202.496-72.256l206.88 206.88 45.248-45.248z"></path></svg>
+    </a>
+
+
+        
+        
+    <a href="javaScript:void(0);" id="btn-toggle-dark">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </a>
+
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">首页</a>
+                
+                    <a href="/about.html" class="dropdown-menu button">About</a>
+                
+                    <a href="/categories/" class="dropdown-menu button">分类</a>
+                
+                    <a href="/tags/" class="dropdown-menu button">标签</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">归档</a>
+                
+            </div>
+        
+    </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        姿态动力学Vol.2 欧拉角(Euler Angles)体系与万向节死锁的数学本质
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2025/09/" class="post-meta__date button">2025-09-02</a>
+        
+    <span class="separate-dot"></span><a href="/categories/%E8%88%AA%E5%A4%A9%E5%99%A8%E5%A7%BF%E6%80%81%E5%8A%A8%E5%8A%9B%E5%AD%A6%E7%90%86%E8%AE%BA/" class="button">航天器姿态动力学理论</a>
+
+ 
+        
+    
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+    <aside class="post-side">
+        <div class="post-side__toc">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%AC%A7%E6%8B%89%E8%A7%92%E7%9A%84%E5%AE%9A%E4%B9%89%E4%B8%8E%E5%BA%8F%E5%88%97"><span class="toc-number">2.</span> <span class="toc-text">1. 欧拉角的定义与序列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E7%BB%8F%E5%85%B8%E6%AC%A7%E6%8B%89%E8%A7%92-Classic-Euler-Angles"><span class="toc-number">2.1.</span> <span class="toc-text">1.1 经典欧拉角 (Classic Euler Angles)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E6%B3%B0%E7%89%B9-%E5%B8%83%E8%8E%B1%E6%81%A9%E8%A7%92-Tait-Bryan-Angles"><span class="toc-number">2.2.</span> <span class="toc-text">1.2 泰特-布莱恩角 (Tait-Bryan Angles)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-3-2-1-%E5%BA%8F%E5%88%97%E8%AF%A6%E8%A7%A3"><span class="toc-number">2.3.</span> <span class="toc-text">1.3 3-2-1 序列详解</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%BF%90%E5%8A%A8%E5%AD%A6%E6%96%B9%E7%A8%8B%E4%B8%8E%E5%A5%87%E7%82%B9"><span class="toc-number">3.</span> <span class="toc-text">2. 运动学方程与奇点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E8%A7%92%E9%80%9F%E5%BA%A6%E7%9A%84%E5%90%88%E6%88%90"><span class="toc-number">3.1.</span> <span class="toc-text">2.1 角速度的合成</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E8%BF%90%E5%8A%A8%E5%AD%A6%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B"><span class="toc-number">3.2.</span> <span class="toc-text">2.2 运动学微分方程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E4%B8%87%E5%90%91%E8%8A%82%E6%AD%BB%E9%94%81-Gimbal-Lock-%E7%9A%84%E6%95%B0%E5%AD%A6%E6%9C%AC%E8%B4%A8"><span class="toc-number">3.3.</span> <span class="toc-text">2.3 万向节死锁 (Gimbal Lock) 的数学本质</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%B0%8F%E8%A7%92%E5%BA%A6%E8%BF%91%E4%BC%BC"><span class="toc-number">4.</span> <span class="toc-text">3. 小角度近似</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AF%AD"><span class="toc-number">5.</span> <span class="toc-text">结语</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E8%A8%80-1"><span class="toc-number">6.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%AC%A7%E6%8B%89%E8%A7%92%E7%9A%84%E5%AE%9A%E4%B9%89%E4%B8%8E%E5%BA%8F%E5%88%97-1"><span class="toc-number">7.</span> <span class="toc-text">1. 欧拉角的定义与序列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E7%BB%8F%E5%85%B8%E6%AC%A7%E6%8B%89%E8%A7%92-Classic-Euler-Angles-1"><span class="toc-number">7.1.</span> <span class="toc-text">1.1 经典欧拉角 (Classic Euler Angles)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E6%B3%B0%E7%89%B9-%E5%B8%83%E8%8E%B1%E6%81%A9%E8%A7%92-Tait-Bryan-Angles-1"><span class="toc-number">7.2.</span> <span class="toc-text">1.2 泰特-布莱恩角 (Tait-Bryan Angles)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%BF%90%E5%8A%A8%E5%AD%A6%E6%96%B9%E7%A8%8B%E4%B8%8E%E5%A5%87%E7%82%B9-1"><span class="toc-number">8.</span> <span class="toc-text">2. 运动学方程与奇点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E4%B8%87%E5%90%91%E8%8A%82%E6%AD%BB%E9%94%81-Gimbal-Lock"><span class="toc-number">8.1.</span> <span class="toc-text">2.1 万向节死锁 (Gimbal Lock)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%B0%8F%E8%A7%92%E5%BA%A6%E8%BF%91%E4%BC%BC-1"><span class="toc-number">9.</span> <span class="toc-text">3. 小角度近似</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AF%AD-1"><span class="toc-number">10.</span> <span class="toc-text">结语</span></a></li></ol>
+        </div>
+    </aside>
+    <a class="btn-toc button" id="btn-toc" tabindex="0">
+        <svg viewBox="0 0 1024 1024" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M128 256h64V192H128zM320 256h576V192H320zM128 544h64v-64H128zM320 544h576v-64H320zM128 832h64v-64H128zM320 832h576v-64H320z" fill="currentColor"></path>
+        </svg>
+    </a>
+    <div class="toc-menus" id="toc-menus">
+        <div class="toc-title">Article Directory</div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%AC%A7%E6%8B%89%E8%A7%92%E7%9A%84%E5%AE%9A%E4%B9%89%E4%B8%8E%E5%BA%8F%E5%88%97"><span class="toc-number">2.</span> <span class="toc-text">1. 欧拉角的定义与序列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E7%BB%8F%E5%85%B8%E6%AC%A7%E6%8B%89%E8%A7%92-Classic-Euler-Angles"><span class="toc-number">2.1.</span> <span class="toc-text">1.1 经典欧拉角 (Classic Euler Angles)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E6%B3%B0%E7%89%B9-%E5%B8%83%E8%8E%B1%E6%81%A9%E8%A7%92-Tait-Bryan-Angles"><span class="toc-number">2.2.</span> <span class="toc-text">1.2 泰特-布莱恩角 (Tait-Bryan Angles)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-3-2-1-%E5%BA%8F%E5%88%97%E8%AF%A6%E8%A7%A3"><span class="toc-number">2.3.</span> <span class="toc-text">1.3 3-2-1 序列详解</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%BF%90%E5%8A%A8%E5%AD%A6%E6%96%B9%E7%A8%8B%E4%B8%8E%E5%A5%87%E7%82%B9"><span class="toc-number">3.</span> <span class="toc-text">2. 运动学方程与奇点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E8%A7%92%E9%80%9F%E5%BA%A6%E7%9A%84%E5%90%88%E6%88%90"><span class="toc-number">3.1.</span> <span class="toc-text">2.1 角速度的合成</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E8%BF%90%E5%8A%A8%E5%AD%A6%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B"><span class="toc-number">3.2.</span> <span class="toc-text">2.2 运动学微分方程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E4%B8%87%E5%90%91%E8%8A%82%E6%AD%BB%E9%94%81-Gimbal-Lock-%E7%9A%84%E6%95%B0%E5%AD%A6%E6%9C%AC%E8%B4%A8"><span class="toc-number">3.3.</span> <span class="toc-text">2.3 万向节死锁 (Gimbal Lock) 的数学本质</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%B0%8F%E8%A7%92%E5%BA%A6%E8%BF%91%E4%BC%BC"><span class="toc-number">4.</span> <span class="toc-text">3. 小角度近似</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AF%AD"><span class="toc-number">5.</span> <span class="toc-text">结语</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E8%A8%80-1"><span class="toc-number">6.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%AC%A7%E6%8B%89%E8%A7%92%E7%9A%84%E5%AE%9A%E4%B9%89%E4%B8%8E%E5%BA%8F%E5%88%97-1"><span class="toc-number">7.</span> <span class="toc-text">1. 欧拉角的定义与序列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E7%BB%8F%E5%85%B8%E6%AC%A7%E6%8B%89%E8%A7%92-Classic-Euler-Angles-1"><span class="toc-number">7.1.</span> <span class="toc-text">1.1 经典欧拉角 (Classic Euler Angles)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E6%B3%B0%E7%89%B9-%E5%B8%83%E8%8E%B1%E6%81%A9%E8%A7%92-Tait-Bryan-Angles-1"><span class="toc-number">7.2.</span> <span class="toc-text">1.2 泰特-布莱恩角 (Tait-Bryan Angles)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%BF%90%E5%8A%A8%E5%AD%A6%E6%96%B9%E7%A8%8B%E4%B8%8E%E5%A5%87%E7%82%B9-1"><span class="toc-number">8.</span> <span class="toc-text">2. 运动学方程与奇点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E4%B8%87%E5%90%91%E8%8A%82%E6%AD%BB%E9%94%81-Gimbal-Lock"><span class="toc-number">8.1.</span> <span class="toc-text">2.1 万向节死锁 (Gimbal Lock)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%B0%8F%E8%A7%92%E5%BA%A6%E8%BF%91%E4%BC%BC-1"><span class="toc-number">9.</span> <span class="toc-text">3. 小角度近似</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AF%AD-1"><span class="toc-number">10.</span> <span class="toc-text">结语</span></a></li></ol>
+    </div>
+
+
+<article class="post post__with-toc content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>方向余弦矩阵 (DCM) 虽然数学性质完美，但不够直观。如果你告诉飞行员“现在的姿态矩阵是…”，他肯定会疯掉。人类更习惯用“滚转 (Roll)、俯仰 (Pitch)、偏航 (Yaw)”来描述姿态。</p>
+<p>这种将三维旋转分解为三次绕不同轴的连续旋转的方法，统称为<strong>欧拉角 (Euler Angles)</strong>。它将复杂的姿态描述简化为三个直观的角度。然而，直观的背后隐藏着一个致命的数学陷阱——<strong>万向节死锁 (Gimbal Lock)</strong>。本章将系统地介绍欧拉角体系，推导其运动学方程，并从数学本质上揭示奇点产生的根源。</p>
+<hr>
+<h2 id="1-欧拉角的定义与序列"><a href="#1-欧拉角的定义与序列" class="headerlink" title="1. 欧拉角的定义与序列"></a>1. 欧拉角的定义与序列</h2><p>欧拉角并非只有一种。根据旋转轴的选择顺序不同，共有 12 种可能的旋转序列。这 12 种序列分为两类：</p>
+<h3 id="1-1-经典欧拉角-Classic-Euler-Angles"><a href="#1-1-经典欧拉角-Classic-Euler-Angles" class="headerlink" title="1.1 经典欧拉角 (Classic Euler Angles)"></a>1.1 经典欧拉角 (Classic Euler Angles)</h3><p>这类序列中，第一次和第三次旋转绕相同的轴（例如 $Z \to X \to Z$）。</p>
+<ul>
+<li><strong>序列</strong>：3-1-3, 3-2-3, 1-2-1, 1-3-1, 2-1-2, 2-3-2。</li>
+<li><strong>应用</strong>：经典力学中描述刚体定点转动（如陀螺），轨道力学中的轨道要素（$mega, i, mega$ 对应 3-1-3 序列）。</li>
+</ul>
+<h3 id="1-2-泰特-布莱恩角-Tait-Bryan-Angles"><a href="#1-2-泰特-布莱恩角-Tait-Bryan-Angles" class="headerlink" title="1.2 泰特-布莱恩角 (Tait-Bryan Angles)"></a>1.2 泰特-布莱恩角 (Tait-Bryan Angles)</h3><p>这类序列中，三次旋转绕三个不同的轴（例如 $Z \to Y \to X$）。</p>
+<ul>
+<li><strong>序列</strong>：1-2-3, 1-3-2, 2-1-3, 2-3-1, 3-1-2, 3-2-1。</li>
+<li><strong>应用</strong>：航空航天工程。其中 <strong>3-2-1 序列</strong> 是描述飞机和导弹姿态的标准序列。</li>
+</ul>
+<h3 id="1-3-3-2-1-序列详解"><a href="#1-3-3-2-1-序列详解" class="headerlink" title="1.3 3-2-1 序列详解"></a>1.3 3-2-1 序列详解</h3><p>让我们详细推导最常用的 3-2-1 序列 ($Z \to Y \to X$)。
+假设从参考系 $N$ 到本体系 $B$ 的变换过程如下：</p>
+<ol>
+<li><strong>偏航 (Yaw, $si$)</strong>：绕 $Z_N$ 轴旋转 $si$，得到中间系 $1$。<script type="math/tex; mode=display">\mathbf{C}_1 = \mathbf{R}_3(\psi) = \begin{bmatrix} c\psi & s\psi & 0 \
+-s\psi & c\psi & 0 \
+0 & 0 & 1 \end{bmatrix}</script></li>
+<li><strong>俯仰 (Pitch, $\theta$)</strong>：绕中间系 $1$ 的 $Y_1$ 轴旋转 $\theta$，得到中间系 $2$。<script type="math/tex; mode=display">\mathbf{C}_2 = \mathbf{R}_2(\theta) = \begin{bmatrix} c\theta & 0 & -s\theta \
+0 & 1 & 0 \
+s\theta & 0 & c\theta \end{bmatrix}</script></li>
+<li><strong>滚转 (Roll, $hi$)</strong>：绕中间系 $2$ 的 $X_2$ 轴旋转 $hi$，得到最终的本体系 $B$。<script type="math/tex; mode=display">\mathbf{C}_3 = \mathbf{R}_1(\phi) = \begin{bmatrix} 1 & 0 & 0 \
+0 & c\phi & s\phi \
+0 & -s\phi & c\phi \end{bmatrix}</script></li>
+</ol>
+<p>总的旋转矩阵 $\mathbf{C}_{BN}$ 为三次旋转的乘积（注意顺序：后旋转的左乘）：</p>
+<script type="math/tex; mode=display">
+\mathbf{C}_{BN}(\psi, \theta, \phi) = \mathbf{C}_3 \mathbf{C}_2 \mathbf{C}_1 = \mathbf{R}_1(\phi) \mathbf{R}_2(\theta) \mathbf{R}_3(\psi)</script><p>展开后可得著名的方向余弦表：</p>
+<script type="math/tex; mode=display">
+\mathbf{C}_{BN} = \begin{bmatrix}
+c\theta c\psi & c\theta s\psi & -s\theta \\
+s\phi s\theta c\psi - c\phi s\psi & s\phi s\theta s\psi + c\phi c\psi & s\phi c\theta \\
+c\phi s\theta c\psi + s\phi s\psi & c\phi s\theta s\psi - s\phi c\psi & c\phi c\theta
+\end{bmatrix}</script><hr>
+<h2 id="2-运动学方程与奇点"><a href="#2-运动学方程与奇点" class="headerlink" title="2. 运动学方程与奇点"></a>2. 运动学方程与奇点</h2><p>我们不仅关心角度本身，更关心角度的变化率 $(\dot{\phi}, \dot{\theta}, \dot{\psi})$ 与本体角速度 $\boldsymbol{\omega} = [p, q, r]^T$ 之间的关系。</p>
+<h3 id="2-1-角速度的合成"><a href="#2-1-角速度的合成" class="headerlink" title="2.1 角速度的合成"></a>2.1 角速度的合成</h3><p>注意：$\boldsymbol{\omega}$ 是物理角速度矢量，而 $(\dot{\phi}, \dot{\theta}, \dot{\psi})$ 只是三个标量参数的变化率。它们对应的旋转轴并不正交，甚至不在同一个坐标系中。</p>
+<ul>
+<li>$\dot{\psi}$ 是绕 $Z_N$ 轴的。</li>
+<li>$\dot{\theta}$ 是绕 $Y_1$ 轴的（中间轴）。</li>
+<li>$\dot{\phi}$ 是绕 $X_B$ 轴的（本体轴）。</li>
+</ul>
+<p>将这三个角速度矢量投影到本体系 $B$ 中并相加，得到总角速度：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{\omega} = \dot{\phi} \mathbf{i}_B + \dot{\theta} \mathbf{j}_2 + \dot{\psi} \mathbf{k}_N</script><p>利用坐标变换将 $\mathbf{j}_2$ 和 $\mathbf{k}_N$ 变换到 $B$ 系：</p>
+<script type="math/tex; mode=display">
+\begin{bmatrix} p \
+q \
+r \end{bmatrix} = \begin{bmatrix} 1 & 0 & -\sin\theta \
+0 & \cos\phi & \sin\phi\cos\theta \
+0 & -\sin\phi & \cos\phi\cos\theta \end{bmatrix} \begin{bmatrix} \dot{\phi} \
+\dot{\theta} \
+\dot{\psi} \end{bmatrix}</script><h3 id="2-2-运动学微分方程"><a href="#2-2-运动学微分方程" class="headerlink" title="2.2 运动学微分方程"></a>2.2 运动学微分方程</h3><p>为了在仿真中更新欧拉角，我们需要上述方程的逆关系，即用 $\boldsymbol{\omega}$ 求 $(\dot{\phi}, \dot{\theta}, \dot{\psi})$。
+对系数矩阵求逆，得到 3-2-1 序列的运动学方程：</p>
+<script type="math/tex; mode=display">
+\begin{bmatrix} \dot{\phi} \
+\dot{\theta} \
+\dot{\psi} \end{bmatrix} = \frac{1}{\cos\theta} \begin{bmatrix} \cos\theta & \sin\phi\sin\theta & \cos\phi\sin\theta \
+0 & \cos\phi\cos\theta & -\sin\phi\cos\theta \
+0 & \sin\phi & \cos\phi \end{bmatrix} \begin{bmatrix} p \
+q \
+r \end{bmatrix}</script><h3 id="2-3-万向节死锁-Gimbal-Lock-的数学本质"><a href="#2-3-万向节死锁-Gimbal-Lock-的数学本质" class="headerlink" title="2.3 万向节死锁 (Gimbal Lock) 的数学本质"></a>2.3 万向节死锁 (Gimbal Lock) 的数学本质</h3><p>请密切关注上述矩阵中的公因子 $\frac{1}{\cos\theta}$。
+当俯仰角 $\theta \to \pm 90^\circ$ 时，$\cos\theta \to 0$，方程右边趋于无穷大。
+这意味着：<strong>在 $\theta = \pm 90^\circ$ 时，欧拉角运动学方程存在奇点。</strong></p>
+<p><strong>几何解释</strong>：
+回顾 3-2-1 序列的旋转过程。当 $\theta = 90^\circ$ 时，中间系 $2$ 的 $X$ 轴垂直向上，与初始系 $N$ 的 $Z$ 轴重合（或反向）。
+此时，第一转轴（偏航轴 $Z_N$）和第三转轴（滚转轴 $X_B$）变得平行。
+这就好比一个三轴万向节，当中间的环转到 90 度时，内环和外环的转轴重合了。系统瞬间失去了一个自由度。此时，我们无法区分滚转和偏航，因为它们绕的是同一根物理轴。</p>
+<p><strong>后果</strong>：</p>
+<ol>
+<li><strong>数值发散</strong>：在数值积分中，计算机会报除零错误或产生巨大的数值误差，导致姿态解算失败。</li>
+<li><strong>控制失效</strong>：在奇点附近，雅可比矩阵条件数变差，控制算法可能输出极大的控制力矩，导致系统不稳定。</li>
+<li><strong>阿波罗 13 号</strong>：阿波罗飞船使用了物理万向节平台。为了防止死锁，飞船必须避免特定的姿态机动（如“红区”）。一旦进入死锁，惯导平台将失去姿态基准，这在太空中是灾难性的。</li>
+</ol>
+<hr>
+<h2 id="3-小角度近似"><a href="#3-小角度近似" class="headerlink" title="3. 小角度近似"></a>3. 小角度近似</h2><p>虽然大角度存在奇点，但在姿态稳定控制中，卫星通常保持在平衡位置附近（小角度）。
+当 $\phi, \theta, \psi \approx 0$ 时：</p>
+<ul>
+<li>$\cos(\cdot) \approx 1, \sin(\cdot) \approx (\cdot)$</li>
+<li>忽略二阶小量。</li>
+</ul>
+<p>此时，DCM 简化为：</p>
+<script type="math/tex; mode=display">
+\mathbf{C}_{BN} \approx \begin{bmatrix} 1 & \psi & -\theta \
+-\psi & 1 & \phi \
+\theta & -\phi & 1 \end{bmatrix} = \mathbf{I} - [\boldsymbol{\theta} \times]</script><p>运动学方程简化为：</p>
+<script type="math/tex; mode=display">
+\dot{\phi} \approx p, \quad \dot{\theta} \approx q, \quad \dot{\psi} \approx r</script><p>这意味着在小角度下，欧拉角的变化率近似等于本体角速度。这使得线性控制理论（如 PID）可以直接应用于姿态控制，这也是为什么欧拉角在工程中依然被广泛使用的原因——只要你保证不翻跟头。</p>
+<hr>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>欧拉角直观、易懂，是飞行员和工程师沟通的语言。但在全姿态飞行或高机动任务中，它的奇点问题是致命的。为了解决这个问题，数学家引入了复数在四维空间的推广——<strong>四元数</strong>。它不仅消除了奇点，还带来了极高的计算效率。下一章，我们将揭开四元数的神秘面纱。</p>
+<h2 id="引言-1"><a href="#引言-1" class="headerlink" title="引言"></a>引言</h2><p>方向余弦矩阵 (DCM) 虽然数学性质完美，但不够直观。如果你告诉飞行员“现在的姿态矩阵是…”，他肯定会疯掉。人类更习惯用“滚转 (Roll)、俯仰 (Pitch)、偏航 (Yaw)”来描述姿态。</p>
+<p>这种将三维旋转分解为三次绕不同轴的连续旋转的方法，统称为<strong>欧拉角 (Euler Angles)</strong>。然而，直观的背后隐藏着一个致命的数学陷阱——<strong>万向节死锁 (Gimbal Lock)</strong>。</p>
+<hr>
+<h2 id="1-欧拉角的定义与序列-1"><a href="#1-欧拉角的定义与序列-1" class="headerlink" title="1. 欧拉角的定义与序列"></a>1. 欧拉角的定义与序列</h2><p>欧拉角并非只有一种。根据旋转轴的选择顺序不同，共有 12 种可能的旋转序列。</p>
+<h3 id="1-1-经典欧拉角-Classic-Euler-Angles-1"><a href="#1-1-经典欧拉角-Classic-Euler-Angles-1" class="headerlink" title="1.1 经典欧拉角 (Classic Euler Angles)"></a>1.1 经典欧拉角 (Classic Euler Angles)</h3><p>旋转轴重复使用，例如 <strong>3-1-3 序列</strong> ($Z \to X \to Z$)。
+这是经典力学中描述刚体定点转动的标准方法，常用于轨道力学（如 $\Omega, i, \omega$ 就是一种 3-1-3 序列）。</p>
+<h3 id="1-2-泰特-布莱恩角-Tait-Bryan-Angles-1"><a href="#1-2-泰特-布莱恩角-Tait-Bryan-Angles-1" class="headerlink" title="1.2 泰特-布莱恩角 (Tait-Bryan Angles)"></a>1.2 泰特-布莱恩角 (Tait-Bryan Angles)</h3><p>旋转轴不重复，例如 <strong>3-2-1 序列</strong> ($Z \to Y \to X$)。
+这是航空航天中最常用的序列，对应于：</p>
+<ol>
+<li>绕 $Z$ 轴旋转 $\psi$ (Yaw, 偏航)</li>
+<li>绕 $Y$ 轴旋转 $\theta$ (Pitch, 俯仰)</li>
+<li>绕 $X$ 轴旋转 $\phi$ (Roll, 滚转)</li>
+</ol>
+<p>其 DCM 可以通过三个基本旋转矩阵相乘得到：</p>
+<script type="math/tex; mode=display">
+\mathbf{C}_{321}(\psi, \theta, \phi) = \mathbf{R}_1(\phi) \mathbf{R}_2(\theta) \mathbf{R}_3(\psi)</script><p>展开后可得：</p>
+<script type="math/tex; mode=display">
+\mathbf{C}_{321} = \begin{bmatrix}
+c\theta c\psi & c\theta s\psi & -s\theta \\
+s\phi s\theta c\psi - c\phi s\psi & s\phi s\theta s\psi + c\phi c\psi & s\phi c\theta \\
+c\phi s\theta c\psi + s\phi s\psi & c\phi s\theta s\psi - s\phi c\psi & c\phi c\theta
+\end{bmatrix}</script><hr>
+<h2 id="2-运动学方程与奇点-1"><a href="#2-运动学方程与奇点-1" class="headerlink" title="2. 运动学方程与奇点"></a>2. 运动学方程与奇点</h2><p>我们不仅关心角度本身，更关心角度的变化率 $(\dot{\phi}, \dot{\theta}, \dot{\psi})$ 与本体角速度 $\boldsymbol{\omega} = [p, q, r]^T$ 之间的关系。</p>
+<p>注意：$\boldsymbol{\omega}$ 是物理角速度，而 $(\dot{\phi}, \dot{\theta}, \dot{\psi})$ 是三个非正交轴上的角速度分量。它们之间不是简单的相等关系。</p>
+<p>对于 3-2-1 序列，其运动学方程为：</p>
+<script type="math/tex; mode=display">
+\begin{bmatrix} \dot{\phi} \\ \dot{\theta} \\ \dot{\psi} \end{bmatrix} = \frac{1}{\cos\theta} \begin{bmatrix} \cos\theta & \sin\phi\sin\theta & \cos\phi\sin\theta \\ 0 & \cos\phi\cos\theta & -\sin\phi\cos\theta \\ 0 & \sin\phi & \cos\phi \end{bmatrix} \begin{bmatrix} p \\ q \\ r \end{bmatrix}</script><h3 id="2-1-万向节死锁-Gimbal-Lock"><a href="#2-1-万向节死锁-Gimbal-Lock" class="headerlink" title="2.1 万向节死锁 (Gimbal Lock)"></a>2.1 万向节死锁 (Gimbal Lock)</h3><p>请注意上述矩阵中的系数 $\frac{1}{\cos\theta}$。
+当俯仰角 $\theta \to \pm 90^\circ$ 时，$\cos\theta \to 0$，方程右边趋于无穷大。
+这意味着：<strong>在 $\theta = 90^\circ$ 时，欧拉角无法描述姿态的运动。</strong></p>
+<p>从几何上看，当 $\theta = 90^\circ$ 时，第一转轴 ($Z$轴) 和第三转轴 ($X$轴) 重合了。系统失去了一个自由度。此时，我们无法区分滚转和偏航，因为它们绕的是同一根轴。</p>
+<p><strong>后果</strong>：</p>
+<ul>
+<li>在数值积分中，计算机会报除零错误或产生巨大的数值误差。</li>
+<li>在阿波罗登月任务中，惯性导航平台使用了物理万向节。为了防止死锁，飞船必须避免特定的姿态机动。</li>
+</ul>
+<hr>
+<h2 id="3-小角度近似-1"><a href="#3-小角度近似-1" class="headerlink" title="3. 小角度近似"></a>3. 小角度近似</h2><p>虽然大角度存在奇点，但在姿态稳定控制中，卫星通常保持在平衡位置附近（小角度）。
+当 $\phi, \theta, \psi \approx 0$ 时：</p>
+<ul>
+<li>$\cos \approx 1, \sin \approx \text{angle}$</li>
+<li>$\dot{\phi} \approx p$</li>
+<li>$\dot{\theta} \approx q$</li>
+<li>$\dot{\psi} \approx r$</li>
+</ul>
+<p>此时，欧拉角变化率近似等于角速度。这使得线性控制理论（如 PID）可以直接应用于姿态控制。</p>
+<hr>
+<h2 id="结语-1"><a href="#结语-1" class="headerlink" title="结语"></a>结语</h2><p>欧拉角直观、易懂，是飞行员和工程师沟通的语言。但在全姿态飞行或高机动任务中，它的奇点问题是致命的。为了解决这个问题，数学家引入了复数在四维空间的推广——<strong>四元数</strong>。</p>
+<p>```</p>
+
+    </div>
+     
+    <div class="post-footer__meta"><p>updated at 2025-11-21</p></div> 
+    <div class="post-entry__tags"><a href="/tags/%E5%A7%BF%E6%80%81%E5%8A%A8%E5%8A%9B%E5%AD%A6/" class="post-tags__link button"># 姿态动力学</a><a href="/tags/%E6%AC%A7%E6%8B%89%E8%A7%92/" class="post-tags__link button"># 欧拉角</a><a href="/tags/%E5%A5%87%E7%82%B9/" class="post-tags__link button"># 奇点</a></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
+            
+                <a href="/2025/09/03/%E5%A7%BF%E6%80%81%E5%8A%A8%E5%8A%9B%E5%AD%A6Vol.3-%E5%9B%9B%E5%85%83%E6%95%B0(Quaternion)%E4%BB%A3%E6%95%B0%E4%B8%8E%E5%A7%BF%E6%80%81%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B/" class="nav__link">
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
+                    </div>
+                    <div>
+                        <div class="nav__label">
+                            Previous Post
+                        </div>
+                        <div class="nav__title">
+                            姿态动力学Vol.3 四元数(Quaternion)代数与姿态微分方程
+                        </div>
+                    </div>
+                </a>
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="/2025/09/01/%E5%A7%BF%E6%80%81%E5%8A%A8%E5%8A%9B%E5%AD%A6Vol.1-%E5%A7%BF%E6%80%81%E8%BF%90%E5%8A%A8%E5%AD%A6%E6%A0%B8%E5%BF%83%EF%BC%9A%E5%8F%82%E8%80%83%E7%B3%BB%E5%AE%9A%E4%B9%89%E4%B8%8E%E6%96%B9%E5%90%91%E4%BD%99%E5%BC%A6%E7%9F%A9%E9%98%B5(DCM)/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            Next Post
+                        </div>
+                        <div class="nav__title">
+                            姿态动力学Vol.1 姿态运动学核心：参考系定义与方向余弦矩阵(DCM)
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
+        </div>
+    </div>
+
+
+
+
+
+</main>
+
+            <footer class="footer">
+     
+    <a href="#" class="button" id="b2t" aria-label="Back to Top" title="Back to Top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M233.376 722.752L278.624 768 512 534.624 745.376 768l45.248-45.248L512 444.128zM192 352h640V288H192z" fill="currentColor"></path>
+        </svg>
+    </a>
+
+    
+
+
+    
+     
+ 
+
+ 
+    
+        
+        <p class="footer-copyright">
+            Strtus's Journry
+        </p>
+    
+    
+        
+            
+        
+            
+        
+            <p>保持对世界的输出🙌</p>
+
+        
+    
+</footer>
+
+        </div>
+         
+
+ 
+    <script>
+        window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+        ga('create', 'G-5ERPC280ZB', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+ 
+
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5ERPC280ZB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-5ERPC280ZB');
+    </script>
+ 
+
+ 
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement('script');
+            hm.src = 'https://hm.baidu.com/hm.js?8da6411546e903e478a9d82d2a4d0c60';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+    
+ 
+
+
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.css">
+
+    
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.js"></script>
+
+    <script>
+        let lazyloadT = Boolean('false'),
+            auto_fancybox = Boolean('true')
+        if (auto_fancybox) {
+            $(".post__content").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        } else {
+            $(".post__content").find("fancybox").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        }
+    </script>
+ 
+
+
+    <script>
+        if (typeof MathJax === 'undefined') {
+            window.MathJax = {
+                loader: {
+                    source: {
+                        '[tex]/amsCd': '[tex]/amscd',
+                        '[tex]/AMScd': '[tex]/amscd'
+                    }
+                },
+                tex: {
+                    inlineMath: {'[+]': [['$', '$']]},
+                    tags: 'ams'
+                },
+                options: {
+                    renderActions: {
+                        findScript: [10, doc => {
+                            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                                const display = !!node.type.match(/; *mode=display/);
+                                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                                const text = document.createTextNode('');
+                                node.parentNode.replaceChild(text, node);
+                                math.start = {node: text, delim: '', n: 0};
+                                math.end = {node: text, delim: '', n: 0};
+                                doc.math.push(math);
+                            });
+                        }, '', false],
+                        insertedScript: [200, () => {
+                            document.querySelectorAll('mjx-container').forEach(node => {
+                                let target = node.parentNode;
+                                if (target.nodeName.toLowerCase() === 'li') {
+                                    target.parentNode.classList.add('has-jax');
+                                }
+                            });
+                        }, '', false]
+                    }
+                }
+            };
+            (function () {
+                var script = document.createElement('script');
+                script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js";
+                script.defer = true;
+                document.head.appendChild(script);
+            })();
+        } else {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+        }
+    </script>
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+
+    </body>
+</html>

@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--icon-->
+
+    
+        <link rel="shortcut icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="16x16" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="32x32" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon-96x96.png">
+    
+    
+        <link rel="apple-touch-icon" sizes="180x180" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/web-app-manifest-192x192.png">
+    
+    
+        <link rel="mask-icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/apple-touch-icon.png">
+    
+
+
+    <!-- meta -->
+
+
+<title>色彩科学Vol.10 颜色外观模型：CIECAM02 | Strtus&#39;s Journey</title>
+
+
+    <meta name="keywords" content="色彩科学, CIECAM02, 颜色外观, 视觉现象">
+
+
+
+
+    <!-- OpenGraph -->
+ 
+    <meta name="description" content="前言：XYZ 的局限在前面的章节中，我们建立了一套完整的色度学体系（XYZ, Lab）。然而，传统的色度学只能预测两个颜色在相同观察条件下是否匹配（Match），却无法预测颜色看起来是什么样子（Appearance）。 举个例子：  同时对比：同样的灰色方块，放在黑色背景上看起来更亮，放在白色背景上看起来更暗。 亨特效应：随着照明亮度的增加，物体的色彩看起来更鲜艳（饱和度增加）。 史蒂文斯效应：随">
+<meta property="og:type" content="article">
+<meta property="og:title" content="色彩科学Vol.10 颜色外观模型：CIECAM02">
+<meta property="og:url" content="https://strtus.github.io/2025/01/31/%E8%89%B2%E5%BD%A9%E7%A7%91%E5%AD%A6Vol.10-%E9%A2%9C%E8%89%B2%E5%A4%96%E8%A7%82%E6%A8%A1%E5%9E%8B%EF%BC%9ACIECAM02/index.html">
+<meta property="og:site_name" content="Strtus&#39;s Journey">
+<meta property="og:description" content="前言：XYZ 的局限在前面的章节中，我们建立了一套完整的色度学体系（XYZ, Lab）。然而，传统的色度学只能预测两个颜色在相同观察条件下是否匹配（Match），却无法预测颜色看起来是什么样子（Appearance）。 举个例子：  同时对比：同样的灰色方块，放在黑色背景上看起来更亮，放在白色背景上看起来更暗。 亨特效应：随着照明亮度的增加，物体的色彩看起来更鲜艳（饱和度增加）。 史蒂文斯效应：随">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-01-31T02:00:00.000Z">
+<meta property="article:modified_time" content="2025-11-21T11:16:13.320Z">
+<meta property="article:author" content="strtus">
+<meta property="article:tag" content="色彩科学">
+<meta property="article:tag" content="CIECAM02">
+<meta property="article:tag" content="颜色外观">
+<meta property="article:tag" content="视觉现象">
+<meta name="twitter:card" content="summary_large_image">
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/highlight.css" media="none" >
+        
+            <link rel="stylesheet" id="hl-dark-theme" href="/css/highlight/highlight.dark.css" media="none">
+        
+    
+
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/style/dark.css">
+
+    
+<script src="/js/darkmode.js"></script>
+
+
+
+     
+
+    <!-- custom head -->
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+    <body>
+        <div id="app" tabindex="-1">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">Strtus&#39;s Journey</span>
+        </a>
+    </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">首页</a>
+                
+                    <a href="/about.html" class="navbar-menu button">About</a>
+                
+                    <a href="/categories/" class="navbar-menu button">分类</a>
+                
+                    <a href="/tags/" class="navbar-menu button">标签</a>
+                
+                    <a href="/archives/" class="navbar-menu button">归档</a>
+                
+            </div>
+        
+        
+        
+    <a href="/search/" id="btn-search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="24" height="24" fill="currentColor" stroke="currentColor" stroke-width="32"><path d="M192 448c0-141.152 114.848-256 256-256s256 114.848 256 256-114.848 256-256 256-256-114.848-256-256z m710.624 409.376l-206.88-206.88A318.784 318.784 0 0 0 768 448c0-176.736-143.264-320-320-320S128 271.264 128 448s143.264 320 320 320a318.784 318.784 0 0 0 202.496-72.256l206.88 206.88 45.248-45.248z"></path></svg>
+    </a>
+
+
+        
+        
+    <a href="javaScript:void(0);" id="btn-toggle-dark">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </a>
+
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">首页</a>
+                
+                    <a href="/about.html" class="dropdown-menu button">About</a>
+                
+                    <a href="/categories/" class="dropdown-menu button">分类</a>
+                
+                    <a href="/tags/" class="dropdown-menu button">标签</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">归档</a>
+                
+            </div>
+        
+    </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        色彩科学Vol.10 颜色外观模型：CIECAM02
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2025/01/" class="post-meta__date button">2025-01-31</a>
+        
+    <span class="separate-dot"></span><a href="/categories/%E8%89%B2%E5%BD%A9%E7%A7%91%E5%AD%A6%E7%9A%84%E6%95%B0%E5%AD%A6%E5%8E%9F%E7%90%86/" class="button">色彩科学的数学原理</a>
+
+ 
+        
+    
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+    <aside class="post-side">
+        <div class="post-side__toc">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80%EF%BC%9AXYZ-%E7%9A%84%E5%B1%80%E9%99%90"><span class="toc-number">1.</span> <span class="toc-text">前言：XYZ 的局限</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CIECAM02-%E6%A8%A1%E5%9E%8B%E6%9E%B6%E6%9E%84"><span class="toc-number">2.</span> <span class="toc-text">CIECAM02 模型架构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E5%8F%82%E6%95%B0"><span class="toc-number">2.1.</span> <span class="toc-text">输入参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B"><span class="toc-number">2.2.</span> <span class="toc-text">核心处理流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E5%B1%9E%E6%80%A7-Appearance-Correlates"><span class="toc-number">2.3.</span> <span class="toc-text">输出属性 (Appearance Correlates)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%86%E8%A7%89%E7%8E%B0%E8%B1%A1%E7%9A%84%E8%A7%A3%E9%87%8A"><span class="toc-number">3.</span> <span class="toc-text">视觉现象的解释</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%E4%B8%8E%E5%B1%95%E6%9C%9B"><span class="toc-number">4.</span> <span class="toc-text">总结与展望</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-number">5.</span> <span class="toc-text">Reference</span></a></li></ol>
+        </div>
+    </aside>
+    <a class="btn-toc button" id="btn-toc" tabindex="0">
+        <svg viewBox="0 0 1024 1024" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M128 256h64V192H128zM320 256h576V192H320zM128 544h64v-64H128zM320 544h576v-64H320zM128 832h64v-64H128zM320 832h576v-64H320z" fill="currentColor"></path>
+        </svg>
+    </a>
+    <div class="toc-menus" id="toc-menus">
+        <div class="toc-title">Article Directory</div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80%EF%BC%9AXYZ-%E7%9A%84%E5%B1%80%E9%99%90"><span class="toc-number">1.</span> <span class="toc-text">前言：XYZ 的局限</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CIECAM02-%E6%A8%A1%E5%9E%8B%E6%9E%B6%E6%9E%84"><span class="toc-number">2.</span> <span class="toc-text">CIECAM02 模型架构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E5%8F%82%E6%95%B0"><span class="toc-number">2.1.</span> <span class="toc-text">输入参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B"><span class="toc-number">2.2.</span> <span class="toc-text">核心处理流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E5%B1%9E%E6%80%A7-Appearance-Correlates"><span class="toc-number">2.3.</span> <span class="toc-text">输出属性 (Appearance Correlates)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%86%E8%A7%89%E7%8E%B0%E8%B1%A1%E7%9A%84%E8%A7%A3%E9%87%8A"><span class="toc-number">3.</span> <span class="toc-text">视觉现象的解释</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%E4%B8%8E%E5%B1%95%E6%9C%9B"><span class="toc-number">4.</span> <span class="toc-text">总结与展望</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-number">5.</span> <span class="toc-text">Reference</span></a></li></ol>
+    </div>
+
+
+<article class="post post__with-toc content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <h2 id="前言：XYZ-的局限"><a href="#前言：XYZ-的局限" class="headerlink" title="前言：XYZ 的局限"></a>前言：XYZ 的局限</h2><p>在前面的章节中，我们建立了一套完整的色度学体系（XYZ, Lab）。然而，传统的色度学只能预测两个颜色在相同观察条件下是否匹配（Match），却无法预测颜色看起来是什么样子（Appearance）。</p>
+<p>举个例子：</p>
+<ul>
+<li>同时对比：同样的灰色方块，放在黑色背景上看起来更亮，放在白色背景上看起来更暗。</li>
+<li>亨特效应：随着照明亮度的增加，物体的色彩看起来更鲜艳（饱和度增加）。</li>
+<li>史蒂文斯效应：随着亮度的增加，黑白对比度看起来更高。</li>
+</ul>
+<p>这些现象说明，颜色的感知不仅取决于光本身的物理特性（XYZ），还取决于观察环境（背景、亮度、周边环境）。为了模拟这些复杂的视觉现象，我们需要颜色外观模型。</p>
+<h2 id="CIECAM02-模型架构"><a href="#CIECAM02-模型架构" class="headerlink" title="CIECAM02 模型架构"></a>CIECAM02 模型架构</h2><p>CIECAM02 是 CIE 于 2002 年发布的颜色外观模型，是目前最先进的通用模型。它输入物理参数，输出感知属性。</p>
+<h3 id="输入参数"><a href="#输入参数" class="headerlink" title="输入参数"></a>输入参数</h3><p>要运行 CIECAM02，除了样本的 XYZ 值外，还必须输入环境参数：</p>
+<ul>
+<li>$X_w, Y_w, Z_w$：参考白点的三刺激值。</li>
+<li>$L_A$：适应场的亮度（cd/m²）。</li>
+<li>$Y_b$：背景的相对亮度。</li>
+<li>$c, N_c, F$：环境参数（平均、昏暗、黑暗）。</li>
+</ul>
+<h3 id="核心处理流程"><a href="#核心处理流程" class="headerlink" title="核心处理流程"></a>核心处理流程</h3><ol>
+<li><strong>色适应变换 (CAT02)</strong>：首先将 XYZ 转换到 LMS 空间，并根据白点进行色适应修正（见 Vol.8）。</li>
+<li><strong>动态响应压缩</strong>：模拟视锥细胞对光强的非线性响应（Michaelis-Menten 方程）。<script type="math/tex; mode=display">
+R'_a = \frac{400 (F_L R'_c)^{0.42}}{27.13 + (F_L R'_c)^{0.42}} + 0.1</script>这一步模拟了人眼对亮度的适应性。</li>
+<li><strong>色对立转换</strong>：将 LMS 信号转换为红-绿 ($a$)、黄-蓝 ($b$) 和消色差 ($A$) 信号。</li>
+</ol>
+<h3 id="输出属性-Appearance-Correlates"><a href="#输出属性-Appearance-Correlates" class="headerlink" title="输出属性 (Appearance Correlates)"></a>输出属性 (Appearance Correlates)</h3><p>CIECAM02 输出六个维度的感知属性，分为两组：</p>
+<p><strong>相对属性（与白点相关）：</strong></p>
+<ul>
+<li><strong>明度 $J$ (Lightness)</strong>：相对于白点的亮度（0-100）。</li>
+<li><strong>彩度 $C$ (Chroma)</strong>：相对于白点的色彩强度。</li>
+<li><strong>色相角 $h$ (Hue Angle)</strong>：颜色的色相（0-360°）。</li>
+</ul>
+<p><strong>绝对属性（与物理亮度相关）：</strong></p>
+<ul>
+<li><strong>亮度 $Q$ (Brightness)</strong>：发光的绝对强度感。</li>
+<li><strong>色彩丰富度 $M$ (Colorfulness)</strong>：色彩的绝对量。</li>
+<li><strong>饱和度 $s$ (Saturation)</strong>：色彩丰富度与亮度的比值 ($M/Q$)。</li>
+</ul>
+<h2 id="视觉现象的解释"><a href="#视觉现象的解释" class="headerlink" title="视觉现象的解释"></a>视觉现象的解释</h2><p>CIECAM02 能够成功预测多种视觉现象：</p>
+<ul>
+<li><strong>亨特效应</strong>：模型中的亮度适应因子 $F_L$ 会随着 $L_A$ 增加而增加，导致输出的彩度 $C$ 和丰富度 $M$ 增加。</li>
+<li><strong>背景效应</strong>：通过引入背景参数 $Y_b$ 和诱导因子 $n$，模型能预测背景对明度的影响。</li>
+</ul>
+<h2 id="总结与展望"><a href="#总结与展望" class="headerlink" title="总结与展望"></a>总结与展望</h2><p>CIECAM02 是连接物理光学与心理视觉的终极桥梁。它不仅告诉我们两个颜色是否一样，还告诉我们它们看起来像什么。</p>
+<p>然而，CIECAM02 计算复杂，通常只在高端色彩管理系统中使用。在实际工程应用（如显示器校色、打印机配置）中，我们更多地是处理设备相关的色彩空间（如 RGB, CMYK）与设备无关空间（PCS）之间的转换。</p>
+<p>这就引入了设备特征化的概念。在下一章《色彩科学Vol.11 设备色彩特征化：ICC-Profile与3D-LUT》中，我们将探讨如何让不同的设备“说同一种语言”。</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li>CIE. (2004). <em>CIE 159:2004 A Colour Appearance Model for Colour Management Systems: CIECAM02</em>.</li>
+<li>Fairchild, M. D. <em>Color Appearance Models</em>. Wiley.</li>
+<li>Moroney, N., et al. (2002). <em>The CIECAM02 Color Appearance Model</em>. IS&amp;T/SID Color Imaging Conference.</li>
+</ol>
+
+    </div>
+     
+    <div class="post-footer__meta"><p>updated at 2025-11-21</p></div> 
+    <div class="post-entry__tags"><a href="/tags/%E8%89%B2%E5%BD%A9%E7%A7%91%E5%AD%A6/" class="post-tags__link button"># 色彩科学</a><a href="/tags/CIECAM02/" class="post-tags__link button"># CIECAM02</a><a href="/tags/%E9%A2%9C%E8%89%B2%E5%A4%96%E8%A7%82/" class="post-tags__link button"># 颜色外观</a><a href="/tags/%E8%A7%86%E8%A7%89%E7%8E%B0%E8%B1%A1/" class="post-tags__link button"># 视觉现象</a></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
+            
+                <a href="/2025/01/31/%E5%9F%BA%E4%BA%8EOllama%E6%A1%86%E6%9E%B6%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2DeepSeek/" class="nav__link">
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
+                    </div>
+                    <div>
+                        <div class="nav__label">
+                            Previous Post
+                        </div>
+                        <div class="nav__title">
+                            基于Ollama框架本地部署DeepSeek
+                        </div>
+                    </div>
+                </a>
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="/2025/01/30/%E8%89%B2%E5%BD%A9%E7%A7%91%E5%AD%A6Vol.9-%E6%98%BE%E8%89%B2%E6%80%A7%E8%AF%84%E4%BB%B7%EF%BC%9ACRI%E4%B8%8ETM-30/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            Next Post
+                        </div>
+                        <div class="nav__title">
+                            色彩科学Vol.9 显色性评价：CRI与TM-30
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
+        </div>
+    </div>
+
+
+
+
+
+</main>
+
+            <footer class="footer">
+     
+    <a href="#" class="button" id="b2t" aria-label="Back to Top" title="Back to Top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M233.376 722.752L278.624 768 512 534.624 745.376 768l45.248-45.248L512 444.128zM192 352h640V288H192z" fill="currentColor"></path>
+        </svg>
+    </a>
+
+    
+
+
+    
+     
+ 
+
+ 
+    
+        
+        <p class="footer-copyright">
+            Strtus's Journry
+        </p>
+    
+    
+        
+            
+        
+            
+        
+            <p>保持对世界的输出🙌</p>
+
+        
+    
+</footer>
+
+        </div>
+         
+
+ 
+    <script>
+        window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+        ga('create', 'G-5ERPC280ZB', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+ 
+
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5ERPC280ZB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-5ERPC280ZB');
+    </script>
+ 
+
+ 
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement('script');
+            hm.src = 'https://hm.baidu.com/hm.js?8da6411546e903e478a9d82d2a4d0c60';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+    
+ 
+
+
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.css">
+
+    
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.js"></script>
+
+    <script>
+        let lazyloadT = Boolean('false'),
+            auto_fancybox = Boolean('true')
+        if (auto_fancybox) {
+            $(".post__content").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        } else {
+            $(".post__content").find("fancybox").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        }
+    </script>
+ 
+
+
+    <script>
+        if (typeof MathJax === 'undefined') {
+            window.MathJax = {
+                loader: {
+                    source: {
+                        '[tex]/amsCd': '[tex]/amscd',
+                        '[tex]/AMScd': '[tex]/amscd'
+                    }
+                },
+                tex: {
+                    inlineMath: {'[+]': [['$', '$']]},
+                    tags: 'ams'
+                },
+                options: {
+                    renderActions: {
+                        findScript: [10, doc => {
+                            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                                const display = !!node.type.match(/; *mode=display/);
+                                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                                const text = document.createTextNode('');
+                                node.parentNode.replaceChild(text, node);
+                                math.start = {node: text, delim: '', n: 0};
+                                math.end = {node: text, delim: '', n: 0};
+                                doc.math.push(math);
+                            });
+                        }, '', false],
+                        insertedScript: [200, () => {
+                            document.querySelectorAll('mjx-container').forEach(node => {
+                                let target = node.parentNode;
+                                if (target.nodeName.toLowerCase() === 'li') {
+                                    target.parentNode.classList.add('has-jax');
+                                }
+                            });
+                        }, '', false]
+                    }
+                }
+            };
+            (function () {
+                var script = document.createElement('script');
+                script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js";
+                script.defer = true;
+                document.head.appendChild(script);
+            })();
+        } else {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+        }
+    </script>
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+
+    </body>
+</html>

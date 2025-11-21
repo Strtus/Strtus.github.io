@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--icon-->
+
+    
+        <link rel="shortcut icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="16x16" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="32x32" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon-96x96.png">
+    
+    
+        <link rel="apple-touch-icon" sizes="180x180" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/web-app-manifest-192x192.png">
+    
+    
+        <link rel="mask-icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/apple-touch-icon.png">
+    
+
+
+    <!-- meta -->
+
+
+<title>色彩科学Vol.9 显色性评价：CRI与TM-30 | Strtus&#39;s Journey</title>
+
+
+    <meta name="keywords" content="色彩科学, 显色性, CRI, TM-30, 光谱">
+
+
+
+
+    <!-- OpenGraph -->
+ 
+    <meta name="description" content="前言：光源的“良心”在购买 LED 灯泡时，我们常看到包装上写着 “CRI &gt; 90” 或 “Ra &gt; 80”。这代表什么？ 为什么有些灯光下，苹果看起来鲜红欲滴，而在另一些灯光下却显得灰暗枯槁？ 这就是光源的显色性。它描述了光源还原物体真实颜色的能力。一个高显色性的光源，能让物体呈现出如同在太阳光下一样的自然色彩。 本章将探讨显色性评价标准的演变，从传统的 CRI 到现代的 TM-3">
+<meta property="og:type" content="article">
+<meta property="og:title" content="色彩科学Vol.9 显色性评价：CRI与TM-30">
+<meta property="og:url" content="https://strtus.github.io/2025/01/30/%E8%89%B2%E5%BD%A9%E7%A7%91%E5%AD%A6Vol.9-%E6%98%BE%E8%89%B2%E6%80%A7%E8%AF%84%E4%BB%B7%EF%BC%9ACRI%E4%B8%8ETM-30/index.html">
+<meta property="og:site_name" content="Strtus&#39;s Journey">
+<meta property="og:description" content="前言：光源的“良心”在购买 LED 灯泡时，我们常看到包装上写着 “CRI &gt; 90” 或 “Ra &gt; 80”。这代表什么？ 为什么有些灯光下，苹果看起来鲜红欲滴，而在另一些灯光下却显得灰暗枯槁？ 这就是光源的显色性。它描述了光源还原物体真实颜色的能力。一个高显色性的光源，能让物体呈现出如同在太阳光下一样的自然色彩。 本章将探讨显色性评价标准的演变，从传统的 CRI 到现代的 TM-3">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/TM30_CVG_Example.png">
+<meta property="article:published_time" content="2025-01-30T02:00:00.000Z">
+<meta property="article:modified_time" content="2025-11-21T11:16:11.292Z">
+<meta property="article:author" content="strtus">
+<meta property="article:tag" content="色彩科学">
+<meta property="article:tag" content="显色性">
+<meta property="article:tag" content="CRI">
+<meta property="article:tag" content="TM-30">
+<meta property="article:tag" content="光谱">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/TM30_CVG_Example.png">
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/highlight.css" media="none" >
+        
+            <link rel="stylesheet" id="hl-dark-theme" href="/css/highlight/highlight.dark.css" media="none">
+        
+    
+
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/style/dark.css">
+
+    
+<script src="/js/darkmode.js"></script>
+
+
+
+     
+
+    <!-- custom head -->
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+    <body>
+        <div id="app" tabindex="-1">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">Strtus&#39;s Journey</span>
+        </a>
+    </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">首页</a>
+                
+                    <a href="/about.html" class="navbar-menu button">About</a>
+                
+                    <a href="/categories/" class="navbar-menu button">分类</a>
+                
+                    <a href="/tags/" class="navbar-menu button">标签</a>
+                
+                    <a href="/archives/" class="navbar-menu button">归档</a>
+                
+            </div>
+        
+        
+        
+    <a href="/search/" id="btn-search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="24" height="24" fill="currentColor" stroke="currentColor" stroke-width="32"><path d="M192 448c0-141.152 114.848-256 256-256s256 114.848 256 256-114.848 256-256 256-256-114.848-256-256z m710.624 409.376l-206.88-206.88A318.784 318.784 0 0 0 768 448c0-176.736-143.264-320-320-320S128 271.264 128 448s143.264 320 320 320a318.784 318.784 0 0 0 202.496-72.256l206.88 206.88 45.248-45.248z"></path></svg>
+    </a>
+
+
+        
+        
+    <a href="javaScript:void(0);" id="btn-toggle-dark">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </a>
+
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">首页</a>
+                
+                    <a href="/about.html" class="dropdown-menu button">About</a>
+                
+                    <a href="/categories/" class="dropdown-menu button">分类</a>
+                
+                    <a href="/tags/" class="dropdown-menu button">标签</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">归档</a>
+                
+            </div>
+        
+    </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        色彩科学Vol.9 显色性评价：CRI与TM-30
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2025/01/" class="post-meta__date button">2025-01-30</a>
+        
+    <span class="separate-dot"></span><a href="/categories/%E8%89%B2%E5%BD%A9%E7%A7%91%E5%AD%A6%E7%9A%84%E6%95%B0%E5%AD%A6%E5%8E%9F%E7%90%86/" class="button">色彩科学的数学原理</a>
+
+ 
+        
+    
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+    <aside class="post-side">
+        <div class="post-side__toc">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80%EF%BC%9A%E5%85%89%E6%BA%90%E7%9A%84%E2%80%9C%E8%89%AF%E5%BF%83%E2%80%9D"><span class="toc-number">1.</span> <span class="toc-text">前言：光源的“良心”</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CIE-R-a-CRI-Color-Rendering-Index"><span class="toc-number">2.</span> <span class="toc-text">CIE $R_a$ (CRI - Color Rendering Index)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%84%E4%BB%B7%E6%96%B9%E6%B3%95"><span class="toc-number">2.1.</span> <span class="toc-text">评价方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CRI-%E7%9A%84%E5%B1%80%E9%99%90%E6%80%A7"><span class="toc-number">2.2.</span> <span class="toc-text">CRI 的局限性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IES-TM-30-18"><span class="toc-number">3.</span> <span class="toc-text">IES TM-30-18</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#99-%E4%B8%AA%E9%A2%9C%E8%89%B2%E6%A0%B7%E6%9C%AC-CES"><span class="toc-number">3.1.</span> <span class="toc-text">99 个颜色样本 (CES)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8C%E6%8C%87%E6%A0%87%E4%BD%93%E7%B3%BB"><span class="toc-number">3.2.</span> <span class="toc-text">双指标体系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%9C%E8%89%B2%E7%9F%A2%E9%87%8F%E5%9B%BE-Color-Vector-Graphic-CVG"><span class="toc-number">3.3.</span> <span class="toc-text">颜色矢量图 (Color Vector Graphic, CVG)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%E4%B8%8E%E5%B1%95%E6%9C%9B"><span class="toc-number">4.</span> <span class="toc-text">总结与展望</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-number">5.</span> <span class="toc-text">Reference</span></a></li></ol>
+        </div>
+    </aside>
+    <a class="btn-toc button" id="btn-toc" tabindex="0">
+        <svg viewBox="0 0 1024 1024" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M128 256h64V192H128zM320 256h576V192H320zM128 544h64v-64H128zM320 544h576v-64H320zM128 832h64v-64H128zM320 832h576v-64H320z" fill="currentColor"></path>
+        </svg>
+    </a>
+    <div class="toc-menus" id="toc-menus">
+        <div class="toc-title">Article Directory</div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80%EF%BC%9A%E5%85%89%E6%BA%90%E7%9A%84%E2%80%9C%E8%89%AF%E5%BF%83%E2%80%9D"><span class="toc-number">1.</span> <span class="toc-text">前言：光源的“良心”</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CIE-R-a-CRI-Color-Rendering-Index"><span class="toc-number">2.</span> <span class="toc-text">CIE $R_a$ (CRI - Color Rendering Index)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%84%E4%BB%B7%E6%96%B9%E6%B3%95"><span class="toc-number">2.1.</span> <span class="toc-text">评价方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CRI-%E7%9A%84%E5%B1%80%E9%99%90%E6%80%A7"><span class="toc-number">2.2.</span> <span class="toc-text">CRI 的局限性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IES-TM-30-18"><span class="toc-number">3.</span> <span class="toc-text">IES TM-30-18</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#99-%E4%B8%AA%E9%A2%9C%E8%89%B2%E6%A0%B7%E6%9C%AC-CES"><span class="toc-number">3.1.</span> <span class="toc-text">99 个颜色样本 (CES)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8C%E6%8C%87%E6%A0%87%E4%BD%93%E7%B3%BB"><span class="toc-number">3.2.</span> <span class="toc-text">双指标体系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%9C%E8%89%B2%E7%9F%A2%E9%87%8F%E5%9B%BE-Color-Vector-Graphic-CVG"><span class="toc-number">3.3.</span> <span class="toc-text">颜色矢量图 (Color Vector Graphic, CVG)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%E4%B8%8E%E5%B1%95%E6%9C%9B"><span class="toc-number">4.</span> <span class="toc-text">总结与展望</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-number">5.</span> <span class="toc-text">Reference</span></a></li></ol>
+    </div>
+
+
+<article class="post post__with-toc content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <h2 id="前言：光源的“良心”"><a href="#前言：光源的“良心”" class="headerlink" title="前言：光源的“良心”"></a>前言：光源的“良心”</h2><p>在购买 LED 灯泡时，我们常看到包装上写着 “CRI &gt; 90” 或 “Ra &gt; 80”。这代表什么？
+为什么有些灯光下，苹果看起来鲜红欲滴，而在另一些灯光下却显得灰暗枯槁？</p>
+<p>这就是光源的显色性。它描述了光源还原物体真实颜色的能力。一个高显色性的光源，能让物体呈现出如同在太阳光下一样的自然色彩。</p>
+<p>本章将探讨显色性评价标准的演变，从传统的 CRI 到现代的 TM-30。</p>
+<h2 id="CIE-R-a-CRI-Color-Rendering-Index"><a href="#CIE-R-a-CRI-Color-Rendering-Index" class="headerlink" title="CIE $R_a$ (CRI - Color Rendering Index)"></a>CIE $R_a$ (CRI - Color Rendering Index)</h2><p>CRI 是 CIE 于 1965 年制定的标准，至今仍是最通用的指标。</p>
+<h3 id="评价方法"><a href="#评价方法" class="headerlink" title="评价方法"></a>评价方法</h3><p>CRI 的计算基于“测试光源”与“参考光源”的对比。</p>
+<ol>
+<li><strong>参考光源</strong>：如果是低色温，用黑体辐射；如果是高色温，用日光模型（D系列）。</li>
+<li><strong>标准色样</strong>：选取 8 种中等饱和度的非光谱色（R1 - R8）。</li>
+<li><strong>计算色差</strong>：计算这 8 种色样在两种光源下的色差 $\Delta E_i$（在 CIE 1964 U<em>V</em>W* 空间中）。</li>
+<li><strong>计算指数</strong>：<script type="math/tex; mode=display">
+R_i = 100 - 4.6 \Delta E_i</script><script type="math/tex; mode=display">
+R_a = \frac{1}{8} \sum_{i=1}^{8} R_i</script></li>
+</ol>
+<h3 id="CRI-的局限性"><a href="#CRI-的局限性" class="headerlink" title="CRI 的局限性"></a>CRI 的局限性</h3><p>虽然 CRI 简单易用，但随着 LED 技术的普及，其缺陷日益暴露：</p>
+<ol>
+<li><strong>样本太少且饱和度低</strong>：R1-R8 都是粉彩系颜色，无法反映光源对高饱和度颜色的还原能力。</li>
+<li><strong>缺失 R9</strong>：R9 是饱和红色（Saturated Red），对于肤色、肉类、水果的还原至关重要。很多号称 $R_a &gt; 80$ 的 LED，其 $R_9$ 可能是负值！</li>
+<li><strong>无法反映饱和度增加</strong>：如果一个光源让颜色看起来更鲜艳（饱和度增加），CRI 会降低（因为它只看差异，不看方向），但人眼往往喜欢这种效果。</li>
+</ol>
+<h2 id="IES-TM-30-18"><a href="#IES-TM-30-18" class="headerlink" title="IES TM-30-18"></a>IES TM-30-18</h2><p>为了解决 CRI 的问题，北美照明工程学会（IES）推出了全新的评价体系 TM-30。它不再只用一个分数，而是提供了一套完整的评价图表。</p>
+<h3 id="99-个颜色样本-CES"><a href="#99-个颜色样本-CES" class="headerlink" title="99 个颜色样本 (CES)"></a>99 个颜色样本 (CES)</h3><p>TM-30 选取了 99 个来自真实世界的颜色样本（Color Evaluation Samples），涵盖了肤色、自然物、纺织品等各种反射率特征，远比 CRI 的 8 个样本全面。</p>
+<h3 id="双指标体系"><a href="#双指标体系" class="headerlink" title="双指标体系"></a>双指标体系</h3><p>TM-30 引入了两个核心指标：</p>
+<ol>
+<li><strong>保真度指数 $R_f$ (Fidelity Index)</strong>：
+类似于 CRI 的 $R_a$，描述光源还原颜色的准确性。满分 100。</li>
+<li><strong>色域指数 $R_g$ (Gamut Index)</strong>：
+描述光源对颜色饱和度的影响。<ul>
+<li>$R_g = 100$：饱和度与参考光源一致。</li>
+<li>$R_g &gt; 100$：颜色被增强（更鲜艳）。</li>
+<li>$R_g &lt; 100$：颜色被致灰。</li>
+</ul>
+</li>
+</ol>
+<h3 id="颜色矢量图-Color-Vector-Graphic-CVG"><a href="#颜色矢量图-Color-Vector-Graphic-CVG" class="headerlink" title="颜色矢量图 (Color Vector Graphic, CVG)"></a>颜色矢量图 (Color Vector Graphic, CVG)</h3><p>TM-30 提供了一个直观的极坐标图，展示了光源在 16 个色相区间内的色偏和饱和度变化。通过 CVG，我们可以一眼看出该光源是让红色更红了，还是让蓝色更灰了。</p>
+<p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/TM30_CVG_Example.png" style="zoom:60%;" /></p>
+<h2 id="总结与展望"><a href="#总结与展望" class="headerlink" title="总结与展望"></a>总结与展望</h2><p>从 CRI 到 TM-30，显色性评价从单一的“准确性”维度，扩展到了“准确性 + 饱和度倾向”的多维评价。这对于商业照明（如商场、博物馆）尤为重要。</p>
+<p>至此，我们已经讨论了光源、物体色、人眼视觉、均匀色彩空间和色差。但还有一个终极问题：为什么同一个颜色在不同背景下看起来不一样？（例如著名的棋盘阴影错觉）。</p>
+<p>这涉及到了比色度学更高级的领域——颜色外观模型。在下一章《色彩科学Vol.10 颜色外观模型：CIECAM02》中，我们将探索这一复杂而迷人的领域。</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li>CIE. (1995). <em>Method of Measuring and Specifying Colour Rendering Properties of Light Sources</em>. CIE 13.3-1995.</li>
+<li>IES. (2018). <em>IES Method for Evaluating Light Source Color Rendition</em>. IES TM-30-18.</li>
+<li>Smet, K. A., et al. (2015). <em>Why the CIE Ra fails</em>. Lighting Research &amp; Technology.</li>
+</ol>
+
+    </div>
+     
+    <div class="post-footer__meta"><p>updated at 2025-11-21</p></div> 
+    <div class="post-entry__tags"><a href="/tags/%E8%89%B2%E5%BD%A9%E7%A7%91%E5%AD%A6/" class="post-tags__link button"># 色彩科学</a><a href="/tags/%E6%98%BE%E8%89%B2%E6%80%A7/" class="post-tags__link button"># 显色性</a><a href="/tags/CRI/" class="post-tags__link button"># CRI</a><a href="/tags/TM-30/" class="post-tags__link button"># TM-30</a><a href="/tags/%E5%85%89%E8%B0%B1/" class="post-tags__link button"># 光谱</a></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
+            
+                <a href="/2025/01/31/%E8%89%B2%E5%BD%A9%E7%A7%91%E5%AD%A6Vol.10-%E9%A2%9C%E8%89%B2%E5%A4%96%E8%A7%82%E6%A8%A1%E5%9E%8B%EF%BC%9ACIECAM02/" class="nav__link">
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
+                    </div>
+                    <div>
+                        <div class="nav__label">
+                            Previous Post
+                        </div>
+                        <div class="nav__title">
+                            色彩科学Vol.10 颜色外观模型：CIECAM02
+                        </div>
+                    </div>
+                </a>
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="/2025/01/29/%E8%89%B2%E5%BD%A9%E7%A7%91%E5%AD%A6Vol.8-%E8%89%B2%E9%80%82%E5%BA%94%E6%A8%A1%E5%9E%8B%EF%BC%9AVonKries%E4%B8%8ECAT02/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            Next Post
+                        </div>
+                        <div class="nav__title">
+                            色彩科学Vol.8 色适应模型：VonKries与CAT02
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
+        </div>
+    </div>
+
+
+
+
+
+</main>
+
+            <footer class="footer">
+     
+    <a href="#" class="button" id="b2t" aria-label="Back to Top" title="Back to Top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M233.376 722.752L278.624 768 512 534.624 745.376 768l45.248-45.248L512 444.128zM192 352h640V288H192z" fill="currentColor"></path>
+        </svg>
+    </a>
+
+    
+
+
+    
+     
+ 
+
+ 
+    
+        
+        <p class="footer-copyright">
+            Strtus's Journry
+        </p>
+    
+    
+        
+            
+        
+            
+        
+            <p>保持对世界的输出🙌</p>
+
+        
+    
+</footer>
+
+        </div>
+         
+
+ 
+    <script>
+        window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+        ga('create', 'G-5ERPC280ZB', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+ 
+
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5ERPC280ZB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-5ERPC280ZB');
+    </script>
+ 
+
+ 
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement('script');
+            hm.src = 'https://hm.baidu.com/hm.js?8da6411546e903e478a9d82d2a4d0c60';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+    
+ 
+
+
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.css">
+
+    
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.js"></script>
+
+    <script>
+        let lazyloadT = Boolean('false'),
+            auto_fancybox = Boolean('true')
+        if (auto_fancybox) {
+            $(".post__content").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        } else {
+            $(".post__content").find("fancybox").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        }
+    </script>
+ 
+
+
+    <script>
+        if (typeof MathJax === 'undefined') {
+            window.MathJax = {
+                loader: {
+                    source: {
+                        '[tex]/amsCd': '[tex]/amscd',
+                        '[tex]/AMScd': '[tex]/amscd'
+                    }
+                },
+                tex: {
+                    inlineMath: {'[+]': [['$', '$']]},
+                    tags: 'ams'
+                },
+                options: {
+                    renderActions: {
+                        findScript: [10, doc => {
+                            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                                const display = !!node.type.match(/; *mode=display/);
+                                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                                const text = document.createTextNode('');
+                                node.parentNode.replaceChild(text, node);
+                                math.start = {node: text, delim: '', n: 0};
+                                math.end = {node: text, delim: '', n: 0};
+                                doc.math.push(math);
+                            });
+                        }, '', false],
+                        insertedScript: [200, () => {
+                            document.querySelectorAll('mjx-container').forEach(node => {
+                                let target = node.parentNode;
+                                if (target.nodeName.toLowerCase() === 'li') {
+                                    target.parentNode.classList.add('has-jax');
+                                }
+                            });
+                        }, '', false]
+                    }
+                }
+            };
+            (function () {
+                var script = document.createElement('script');
+                script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js";
+                script.defer = true;
+                document.head.appendChild(script);
+            })();
+        } else {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+        }
+    </script>
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+
+    </body>
+</html>

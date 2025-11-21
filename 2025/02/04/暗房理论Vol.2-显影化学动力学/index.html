@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--icon-->
+
+    
+        <link rel="shortcut icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="16x16" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="32x32" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon-96x96.png">
+    
+    
+        <link rel="apple-touch-icon" sizes="180x180" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/web-app-manifest-192x192.png">
+    
+    
+        <link rel="mask-icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/apple-touch-icon.png">
+    
+
+
+    <!-- meta -->
+
+
+<title>暗房理论Vol.2 显影化学动力学 | Strtus&#39;s Journey</title>
+
+
+    <meta name="keywords" content="暗房技术, 显影, 化学动力学, pH值, 超加合性">
+
+
+
+
+    <!-- OpenGraph -->
+ 
+    <meta name="description" content="前言：化学放大器如果说潜影的形成是物理过程，那么显影就是纯粹的化学过程。显影的本质是化学放大。潜影中那几个微不足道的银原子，能诱导整个卤化银晶体（包含数十亿个银离子）被还原成金属银。这个放大倍率高达 $10^9$ 倍。 显影剂的选择性还原显影剂（Developing Agent）本质上是一种还原剂。但它必须具备选择性：  快速还原带有潜影中心的卤化银晶体。 极慢还原（或不还原）没有潜影中心的晶体。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="暗房理论Vol.2 显影化学动力学">
+<meta property="og:url" content="https://strtus.github.io/2025/02/04/%E6%9A%97%E6%88%BF%E7%90%86%E8%AE%BAVol.2-%E6%98%BE%E5%BD%B1%E5%8C%96%E5%AD%A6%E5%8A%A8%E5%8A%9B%E5%AD%A6/index.html">
+<meta property="og:site_name" content="Strtus&#39;s Journey">
+<meta property="og:description" content="前言：化学放大器如果说潜影的形成是物理过程，那么显影就是纯粹的化学过程。显影的本质是化学放大。潜影中那几个微不足道的银原子，能诱导整个卤化银晶体（包含数十亿个银离子）被还原成金属银。这个放大倍率高达 $10^9$ 倍。 显影剂的选择性还原显影剂（Developing Agent）本质上是一种还原剂。但它必须具备选择性：  快速还原带有潜影中心的卤化银晶体。 极慢还原（或不还原）没有潜影中心的晶体。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-02-04T04:00:00.000Z">
+<meta property="article:modified_time" content="2025-11-21T11:20:23.814Z">
+<meta property="article:author" content="strtus">
+<meta property="article:tag" content="暗房技术">
+<meta property="article:tag" content="显影">
+<meta property="article:tag" content="化学动力学">
+<meta property="article:tag" content="pH值">
+<meta property="article:tag" content="超加合性">
+<meta name="twitter:card" content="summary_large_image">
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/highlight.css" media="none" >
+        
+            <link rel="stylesheet" id="hl-dark-theme" href="/css/highlight/highlight.dark.css" media="none">
+        
+    
+
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/style/dark.css">
+
+    
+<script src="/js/darkmode.js"></script>
+
+
+
+     
+
+    <!-- custom head -->
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+    <body>
+        <div id="app" tabindex="-1">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">Strtus&#39;s Journey</span>
+        </a>
+    </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">首页</a>
+                
+                    <a href="/about.html" class="navbar-menu button">About</a>
+                
+                    <a href="/categories/" class="navbar-menu button">分类</a>
+                
+                    <a href="/tags/" class="navbar-menu button">标签</a>
+                
+                    <a href="/archives/" class="navbar-menu button">归档</a>
+                
+            </div>
+        
+        
+        
+    <a href="/search/" id="btn-search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="24" height="24" fill="currentColor" stroke="currentColor" stroke-width="32"><path d="M192 448c0-141.152 114.848-256 256-256s256 114.848 256 256-114.848 256-256 256-256-114.848-256-256z m710.624 409.376l-206.88-206.88A318.784 318.784 0 0 0 768 448c0-176.736-143.264-320-320-320S128 271.264 128 448s143.264 320 320 320a318.784 318.784 0 0 0 202.496-72.256l206.88 206.88 45.248-45.248z"></path></svg>
+    </a>
+
+
+        
+        
+    <a href="javaScript:void(0);" id="btn-toggle-dark">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </a>
+
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">首页</a>
+                
+                    <a href="/about.html" class="dropdown-menu button">About</a>
+                
+                    <a href="/categories/" class="dropdown-menu button">分类</a>
+                
+                    <a href="/tags/" class="dropdown-menu button">标签</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">归档</a>
+                
+            </div>
+        
+    </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        暗房理论Vol.2 显影化学动力学
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2025/02/" class="post-meta__date button">2025-02-04</a>
+        
+    <span class="separate-dot"></span><a href="/categories/%E6%91%84%E5%BD%B1%E8%89%BA%E6%9C%AF%E7%99%BE%E5%B9%B4%E5%8F%B2/" class="button">摄影艺术百年史</a>
+
+ 
+        
+    
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+    <aside class="post-side">
+        <div class="post-side__toc">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80%EF%BC%9A%E5%8C%96%E5%AD%A6%E6%94%BE%E5%A4%A7%E5%99%A8"><span class="toc-number">1.</span> <span class="toc-text">前言：化学放大器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%98%BE%E5%BD%B1%E5%89%82%E7%9A%84%E9%80%89%E6%8B%A9%E6%80%A7%E8%BF%98%E5%8E%9F"><span class="toc-number">2.</span> <span class="toc-text">显影剂的选择性还原</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%98%BE%E5%BD%B1%E6%9C%BA%E7%90%86%EF%BC%9A%E7%94%B5%E5%8C%96%E5%AD%A6%E6%A8%A1%E5%9E%8B"><span class="toc-number">3.</span> <span class="toc-text">显影机理：电化学模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B6%85%E5%8A%A0%E5%90%88%E6%80%A7"><span class="toc-number">4.</span> <span class="toc-text">超加合性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BD%B1%E5%93%8D%E6%98%BE%E5%BD%B1%E7%9A%84%E5%8A%A8%E5%8A%9B%E5%AD%A6%E5%9B%A0%E7%B4%A0"><span class="toc-number">5.</span> <span class="toc-text">影响显影的动力学因素</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#pH-%E5%80%BC-%E7%A2%B1%E6%80%A7%E4%BF%83%E8%BF%9B%E5%89%82"><span class="toc-number">5.1.</span> <span class="toc-text">pH 值 (碱性促进剂)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B8%A9%E5%BA%A6-Arrhenius-%E6%96%B9%E7%A8%8B"><span class="toc-number">5.2.</span> <span class="toc-text">温度 (Arrhenius 方程)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%91%E5%88%B6%E5%89%82-Restrainer"><span class="toc-number">5.3.</span> <span class="toc-text">抑制剂 (Restrainer)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">6.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-number">7.</span> <span class="toc-text">Reference</span></a></li></ol>
+        </div>
+    </aside>
+    <a class="btn-toc button" id="btn-toc" tabindex="0">
+        <svg viewBox="0 0 1024 1024" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M128 256h64V192H128zM320 256h576V192H320zM128 544h64v-64H128zM320 544h576v-64H320zM128 832h64v-64H128zM320 832h576v-64H320z" fill="currentColor"></path>
+        </svg>
+    </a>
+    <div class="toc-menus" id="toc-menus">
+        <div class="toc-title">Article Directory</div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80%EF%BC%9A%E5%8C%96%E5%AD%A6%E6%94%BE%E5%A4%A7%E5%99%A8"><span class="toc-number">1.</span> <span class="toc-text">前言：化学放大器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%98%BE%E5%BD%B1%E5%89%82%E7%9A%84%E9%80%89%E6%8B%A9%E6%80%A7%E8%BF%98%E5%8E%9F"><span class="toc-number">2.</span> <span class="toc-text">显影剂的选择性还原</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%98%BE%E5%BD%B1%E6%9C%BA%E7%90%86%EF%BC%9A%E7%94%B5%E5%8C%96%E5%AD%A6%E6%A8%A1%E5%9E%8B"><span class="toc-number">3.</span> <span class="toc-text">显影机理：电化学模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B6%85%E5%8A%A0%E5%90%88%E6%80%A7"><span class="toc-number">4.</span> <span class="toc-text">超加合性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BD%B1%E5%93%8D%E6%98%BE%E5%BD%B1%E7%9A%84%E5%8A%A8%E5%8A%9B%E5%AD%A6%E5%9B%A0%E7%B4%A0"><span class="toc-number">5.</span> <span class="toc-text">影响显影的动力学因素</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#pH-%E5%80%BC-%E7%A2%B1%E6%80%A7%E4%BF%83%E8%BF%9B%E5%89%82"><span class="toc-number">5.1.</span> <span class="toc-text">pH 值 (碱性促进剂)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B8%A9%E5%BA%A6-Arrhenius-%E6%96%B9%E7%A8%8B"><span class="toc-number">5.2.</span> <span class="toc-text">温度 (Arrhenius 方程)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%91%E5%88%B6%E5%89%82-Restrainer"><span class="toc-number">5.3.</span> <span class="toc-text">抑制剂 (Restrainer)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">6.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-number">7.</span> <span class="toc-text">Reference</span></a></li></ol>
+    </div>
+
+
+<article class="post post__with-toc content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <h2 id="前言：化学放大器"><a href="#前言：化学放大器" class="headerlink" title="前言：化学放大器"></a>前言：化学放大器</h2><p>如果说潜影的形成是物理过程，那么显影就是纯粹的化学过程。显影的本质是化学放大。潜影中那几个微不足道的银原子，能诱导整个卤化银晶体（包含数十亿个银离子）被还原成金属银。这个放大倍率高达 $10^9$ 倍。</p>
+<h2 id="显影剂的选择性还原"><a href="#显影剂的选择性还原" class="headerlink" title="显影剂的选择性还原"></a>显影剂的选择性还原</h2><p>显影剂（Developing Agent）本质上是一种还原剂。但它必须具备选择性：</p>
+<ol>
+<li><strong>快速还原</strong>带有潜影中心的卤化银晶体。</li>
+<li><strong>极慢还原</strong>（或不还原）没有潜影中心的晶体。</li>
+</ol>
+<p>如果选择性丧失，所有晶体都被还原，胶片就会变黑，产生严重的灰雾。</p>
+<p>常见的显影剂多为苯环衍生物：</p>
+<ul>
+<li><strong>米吐尔</strong>：起效快，能引出暗部细节，反差低。</li>
+<li><strong>对苯二酚</strong>：起效慢，但在高 pH 下活性极强，反差高。</li>
+<li><strong>菲尼酮</strong>：现代显影剂，活性极高，用量极少。</li>
+</ul>
+<h2 id="显影机理：电化学模型"><a href="#显影机理：电化学模型" class="headerlink" title="显影机理：电化学模型"></a>显影机理：电化学模型</h2><p>显影过程可以看作是一个微观的电化学电池。</p>
+<ul>
+<li><strong>阳极</strong>：显影剂分子在潜影中心（银团簇）表面被氧化，释放电子。<script type="math/tex; mode=display">\text{Dev} \rightarrow \text{Dev}_{ox} + n e^-</script></li>
+<li><strong>阴极</strong>：电子通过银团簇传导至晶体内部，还原银离子。<script type="math/tex; mode=display">Ag^+ + e^- \rightarrow Ag</script></li>
+</ul>
+<p>潜影中心起到了电极的作用，降低了电子传输的能垒（活化能）。没有潜影中心的晶体，电子无法有效进入，还原反应受阻。</p>
+<h2 id="超加合性"><a href="#超加合性" class="headerlink" title="超加合性"></a>超加合性</h2><p>现代显影液（如 D-76, XTOL）很少只用一种显影剂，而是组合使用。最经典的是 MQ (Metol + Hydroquinone) 和 PQ (Phenidone + Hydroquinone) 组合。</p>
+<p>这种组合会产生 <strong>1 + 1 &gt; 2</strong> 的效果，称为超加合性。</p>
+<ul>
+<li><strong>机理</strong>：Metol 或 Phenidone 吸附在银颗粒表面，快速启动显影反应。它们被氧化后，并不直接离开，而是被溶液中的 Hydroquinone 迅速还原再生。</li>
+<li>Hydroquinone 充当了“电子库”，源源不断地供给 Metol/Phenidone。</li>
+<li>结果：既保留了 Metol 的高感光度和暗部细节，又具备了 Hydroquinone 的高反差和持久力。</li>
+</ul>
+<h2 id="影响显影的动力学因素"><a href="#影响显影的动力学因素" class="headerlink" title="影响显影的动力学因素"></a>影响显影的动力学因素</h2><p>显影是一个非平衡态的动力学过程，受多种因素控制：</p>
+<h3 id="pH-值-碱性促进剂"><a href="#pH-值-碱性促进剂" class="headerlink" title="pH 值 (碱性促进剂)"></a>pH 值 (碱性促进剂)</h3><p>显影剂通常是弱酸，只有在碱性环境中解离成离子态才具有还原活性。</p>
+<ul>
+<li>pH 越高，显影速度越快，反差越大，颗粒越粗。</li>
+<li>常用的碱剂：硼砂 (pH~9, D-76), 碳酸钠 (pH~10, D-72), 氢氧化钠 (pH&gt;12, Rodinal)。</li>
+</ul>
+<h3 id="温度-Arrhenius-方程"><a href="#温度-Arrhenius-方程" class="headerlink" title="温度 (Arrhenius 方程)"></a>温度 (Arrhenius 方程)</h3><p>化学反应速率常数 $k$ 与温度 $T$ 的关系遵循 Arrhenius 方程：</p>
+<script type="math/tex; mode=display">k = A e^{-E_a / RT}</script><p>一般来说，温度每升高 10°C，显影速率增加 2-3 倍。因此，暗房温控必须精确到 ±0.5°C。</p>
+<h3 id="抑制剂-Restrainer"><a href="#抑制剂-Restrainer" class="headerlink" title="抑制剂 (Restrainer)"></a>抑制剂 (Restrainer)</h3><p>为了防止未曝光的晶体被还原（产生灰雾），显影液中通常加入溴化钾。</p>
+<ul>
+<li>$Br^-$ 离子吸附在晶体表面，形成电荷屏障，阻碍电子注入。</li>
+<li>潜影中心破坏了这种屏障，使得曝光晶体仍能显影。</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>显影液配方（如经典的 Kodak D-76）是化学家们在无数次实验中找到的完美平衡：</p>
+<ul>
+<li><strong>显影剂</strong>提供还原力。</li>
+<li><strong>保护剂</strong>（亚硫酸钠）防止氧化。</li>
+<li><strong>促进剂</strong>（碱）调节 pH。</li>
+<li><strong>抑制剂</strong>（溴化钾）控制灰雾。</li>
+</ul>
+<p>理解了这些成分的作用，我们就能根据需要调整配方，控制影像的反差与颗粒。</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li>Haist, G. (1979). <em>Modern Photographic Processing</em>.</li>
+<li>Anchell, S., &amp; Troop, B. (1998). <em>The Film Developing Cookbook</em>.</li>
+</ol>
+
+    </div>
+     
+    <div class="post-footer__meta"><p>updated at 2025-11-21</p></div> 
+    <div class="post-entry__tags"><a href="/tags/%E6%9A%97%E6%88%BF%E6%8A%80%E6%9C%AF/" class="post-tags__link button"># 暗房技术</a><a href="/tags/%E6%98%BE%E5%BD%B1/" class="post-tags__link button"># 显影</a><a href="/tags/%E5%8C%96%E5%AD%A6%E5%8A%A8%E5%8A%9B%E5%AD%A6/" class="post-tags__link button"># 化学动力学</a><a href="/tags/pH%E5%80%BC/" class="post-tags__link button"># pH值</a><a href="/tags/%E8%B6%85%E5%8A%A0%E5%90%88%E6%80%A7/" class="post-tags__link button"># 超加合性</a></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
+            
+                <a href="/2025/02/04/%E6%9A%97%E6%88%BF%E7%90%86%E8%AE%BAVol.3-%E5%AE%9A%E5%BD%B1%E4%B8%8E%E6%B0%B4%E6%B4%97%E7%9A%84%E7%89%A9%E7%90%86%E5%8C%96%E5%AD%A6/" class="nav__link">
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
+                    </div>
+                    <div>
+                        <div class="nav__label">
+                            Previous Post
+                        </div>
+                        <div class="nav__title">
+                            暗房理论Vol.3 定影与水洗的物理化学
+                        </div>
+                    </div>
+                </a>
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="/2025/02/04/%E6%9A%97%E6%88%BF%E7%90%86%E8%AE%BAVol.1-%E8%83%B6%E7%89%87%E6%84%9F%E5%85%89%E5%8E%9F%E7%90%86%E4%B8%8E%E6%BD%9C%E5%BD%B1%E5%BD%A2%E6%88%90/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            Next Post
+                        </div>
+                        <div class="nav__title">
+                            暗房理论Vol.1 胶片感光原理与潜影形成
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
+        </div>
+    </div>
+
+
+
+
+
+</main>
+
+            <footer class="footer">
+     
+    <a href="#" class="button" id="b2t" aria-label="Back to Top" title="Back to Top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M233.376 722.752L278.624 768 512 534.624 745.376 768l45.248-45.248L512 444.128zM192 352h640V288H192z" fill="currentColor"></path>
+        </svg>
+    </a>
+
+    
+
+
+    
+     
+ 
+
+ 
+    
+        
+        <p class="footer-copyright">
+            Strtus's Journry
+        </p>
+    
+    
+        
+            
+        
+            
+        
+            <p>保持对世界的输出🙌</p>
+
+        
+    
+</footer>
+
+        </div>
+         
+
+ 
+    <script>
+        window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+        ga('create', 'G-5ERPC280ZB', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+ 
+
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5ERPC280ZB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-5ERPC280ZB');
+    </script>
+ 
+
+ 
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement('script');
+            hm.src = 'https://hm.baidu.com/hm.js?8da6411546e903e478a9d82d2a4d0c60';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+    
+ 
+
+
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.css">
+
+    
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.js"></script>
+
+    <script>
+        let lazyloadT = Boolean('false'),
+            auto_fancybox = Boolean('true')
+        if (auto_fancybox) {
+            $(".post__content").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        } else {
+            $(".post__content").find("fancybox").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        }
+    </script>
+ 
+
+
+    <script>
+        if (typeof MathJax === 'undefined') {
+            window.MathJax = {
+                loader: {
+                    source: {
+                        '[tex]/amsCd': '[tex]/amscd',
+                        '[tex]/AMScd': '[tex]/amscd'
+                    }
+                },
+                tex: {
+                    inlineMath: {'[+]': [['$', '$']]},
+                    tags: 'ams'
+                },
+                options: {
+                    renderActions: {
+                        findScript: [10, doc => {
+                            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                                const display = !!node.type.match(/; *mode=display/);
+                                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                                const text = document.createTextNode('');
+                                node.parentNode.replaceChild(text, node);
+                                math.start = {node: text, delim: '', n: 0};
+                                math.end = {node: text, delim: '', n: 0};
+                                doc.math.push(math);
+                            });
+                        }, '', false],
+                        insertedScript: [200, () => {
+                            document.querySelectorAll('mjx-container').forEach(node => {
+                                let target = node.parentNode;
+                                if (target.nodeName.toLowerCase() === 'li') {
+                                    target.parentNode.classList.add('has-jax');
+                                }
+                            });
+                        }, '', false]
+                    }
+                }
+            };
+            (function () {
+                var script = document.createElement('script');
+                script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js";
+                script.defer = true;
+                document.head.appendChild(script);
+            })();
+        } else {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+        }
+    </script>
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+
+    </body>
+</html>

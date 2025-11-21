@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--icon-->
+
+    
+        <link rel="shortcut icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="16x16" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="32x32" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon-96x96.png">
+    
+    
+        <link rel="apple-touch-icon" sizes="180x180" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/web-app-manifest-192x192.png">
+    
+    
+        <link rel="mask-icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/apple-touch-icon.png">
+    
+
+
+    <!-- meta -->
+
+
+<title>姿态动力学Vol.10-鲁棒控制进阶：滑模变结构控制(SMC) | Strtus&#39;s Journey</title>
+
+
+    <meta name="keywords" content="鲁棒控制, 滑模控制, SMC, 抖振, 边界层">
+
+
+
+
+    <!-- OpenGraph -->
+ 
+    <meta name="description" content="引言在上一章中，我们介绍了基于反馈线性化的PID控制。这种方法在模型精确（$\mathbf{J}$ 已知）且无干扰的情况下表现完美。然而，在实际航天任务中，航天器的转动惯量 $\mathbf{J}$ 往往难以精确测量（燃料消耗、帆板展开都会改变 $\mathbf{J}$），且空间环境中充满了未知的干扰力矩（气动、太阳光压、重力梯度残差）。 当模型存在不确定性时，PID控制的性能会下降，甚至可能不稳">
+<meta property="og:type" content="article">
+<meta property="og:title" content="姿态动力学Vol.10-鲁棒控制进阶：滑模变结构控制(SMC)">
+<meta property="og:url" content="https://strtus.github.io/2025/02/20/%E5%A7%BF%E6%80%81%E5%8A%A8%E5%8A%9B%E5%AD%A6Vol.10-%E9%B2%81%E6%A3%92%E6%8E%A7%E5%88%B6%E8%BF%9B%E9%98%B6%EF%BC%9A%E6%BB%91%E6%A8%A1%E5%8F%98%E7%BB%93%E6%9E%84%E6%8E%A7%E5%88%B6(SMC)/index.html">
+<meta property="og:site_name" content="Strtus&#39;s Journey">
+<meta property="og:description" content="引言在上一章中，我们介绍了基于反馈线性化的PID控制。这种方法在模型精确（$\mathbf{J}$ 已知）且无干扰的情况下表现完美。然而，在实际航天任务中，航天器的转动惯量 $\mathbf{J}$ 往往难以精确测量（燃料消耗、帆板展开都会改变 $\mathbf{J}$），且空间环境中充满了未知的干扰力矩（气动、太阳光压、重力梯度残差）。 当模型存在不确定性时，PID控制的性能会下降，甚至可能不稳">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-02-20T04:00:00.000Z">
+<meta property="article:modified_time" content="2025-11-21T07:47:47.644Z">
+<meta property="article:author" content="strtus">
+<meta property="article:tag" content="鲁棒控制">
+<meta property="article:tag" content="滑模控制">
+<meta property="article:tag" content="SMC">
+<meta property="article:tag" content="抖振">
+<meta property="article:tag" content="边界层">
+<meta name="twitter:card" content="summary_large_image">
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/highlight.css" media="none" >
+        
+            <link rel="stylesheet" id="hl-dark-theme" href="/css/highlight/highlight.dark.css" media="none">
+        
+    
+
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/style/dark.css">
+
+    
+<script src="/js/darkmode.js"></script>
+
+
+
+     
+
+    <!-- custom head -->
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+    <body>
+        <div id="app" tabindex="-1">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">Strtus&#39;s Journey</span>
+        </a>
+    </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">首页</a>
+                
+                    <a href="/about.html" class="navbar-menu button">About</a>
+                
+                    <a href="/categories/" class="navbar-menu button">分类</a>
+                
+                    <a href="/tags/" class="navbar-menu button">标签</a>
+                
+                    <a href="/archives/" class="navbar-menu button">归档</a>
+                
+            </div>
+        
+        
+        
+    <a href="/search/" id="btn-search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="24" height="24" fill="currentColor" stroke="currentColor" stroke-width="32"><path d="M192 448c0-141.152 114.848-256 256-256s256 114.848 256 256-114.848 256-256 256-256-114.848-256-256z m710.624 409.376l-206.88-206.88A318.784 318.784 0 0 0 768 448c0-176.736-143.264-320-320-320S128 271.264 128 448s143.264 320 320 320a318.784 318.784 0 0 0 202.496-72.256l206.88 206.88 45.248-45.248z"></path></svg>
+    </a>
+
+
+        
+        
+    <a href="javaScript:void(0);" id="btn-toggle-dark">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </a>
+
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">首页</a>
+                
+                    <a href="/about.html" class="dropdown-menu button">About</a>
+                
+                    <a href="/categories/" class="dropdown-menu button">分类</a>
+                
+                    <a href="/tags/" class="dropdown-menu button">标签</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">归档</a>
+                
+            </div>
+        
+    </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        姿态动力学Vol.10-鲁棒控制进阶：滑模变结构控制(SMC)
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2025/02/" class="post-meta__date button">2025-02-20</a>
+        
+    <span class="separate-dot"></span><a href="/categories/%E8%88%AA%E5%A4%A9%E5%99%A8%E5%A7%BF%E6%80%81%E5%8A%A8%E5%8A%9B%E5%AD%A6%E7%90%86%E8%AE%BA/" class="button">航天器姿态动力学理论</a>
+
+ 
+        
+    
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+    <aside class="post-side">
+        <div class="post-side__toc">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%BB%91%E6%A8%A1%E6%8E%A7%E5%88%B6%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="toc-number">2.</span> <span class="toc-text">1. 滑模控制的基本原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E4%B8%A4%E4%B8%AA%E9%98%B6%E6%AE%B5"><span class="toc-number">2.1.</span> <span class="toc-text">1.1 两个阶段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E9%B2%81%E6%A3%92%E6%80%A7%EF%BC%88%E4%B8%8D%E5%8F%98%E6%80%A7%EF%BC%89"><span class="toc-number">2.2.</span> <span class="toc-text">1.2 鲁棒性（不变性）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%A7%BF%E6%80%81%E6%BB%91%E6%A8%A1%E6%8E%A7%E5%88%B6%E5%99%A8%E8%AE%BE%E8%AE%A1"><span class="toc-number">3.</span> <span class="toc-text">2. 姿态滑模控制器设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E5%AE%9A%E4%B9%89%E6%BB%91%E6%A8%A1%E9%9D%A2"><span class="toc-number">3.1.</span> <span class="toc-text">2.1 定义滑模面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E5%8A%A8%E5%8A%9B%E5%AD%A6%E6%A8%A1%E5%9E%8B%E4%B8%8E%E4%B8%8D%E7%A1%AE%E5%AE%9A%E6%80%A7"><span class="toc-number">3.2.</span> <span class="toc-text">2.2 动力学模型与不确定性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E8%B6%8B%E8%BF%91%E5%BE%8B%E4%B8%8E%E6%8E%A7%E5%88%B6%E5%BE%8B%E6%8E%A8%E5%AF%BC"><span class="toc-number">3.3.</span> <span class="toc-text">2.3 趋近律与控制律推导</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%8A%96%E6%8C%AF%E7%8E%B0%E8%B1%A1-Chattering-%E4%B8%8E%E5%AF%B9%E7%AD%96"><span class="toc-number">4.</span> <span class="toc-text">3. 抖振现象 (Chattering) 与对策</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E6%8A%96%E6%8C%AF%E7%9A%84%E6%88%90%E5%9B%A0%E4%B8%8E%E5%8D%B1%E5%AE%B3"><span class="toc-number">4.1.</span> <span class="toc-text">3.1 抖振的成因与危害</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E8%BE%B9%E7%95%8C%E5%B1%82%E6%B3%95-Boundary-Layer"><span class="toc-number">4.2.</span> <span class="toc-text">3.2 边界层法 (Boundary Layer)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E8%BF%9B%E9%98%B6%E8%AF%9D%E9%A2%98%EF%BC%9A%E8%87%AA%E9%80%82%E5%BA%94%E6%BB%91%E6%A8%A1"><span class="toc-number">5.</span> <span class="toc-text">4. 进阶话题：自适应滑模</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E5%88%97%E7%BB%93%E8%AF%AD"><span class="toc-number">6.</span> <span class="toc-text">系列结语</span></a></li></ol>
+        </div>
+    </aside>
+    <a class="btn-toc button" id="btn-toc" tabindex="0">
+        <svg viewBox="0 0 1024 1024" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M128 256h64V192H128zM320 256h576V192H320zM128 544h64v-64H128zM320 544h576v-64H320zM128 832h64v-64H128zM320 832h576v-64H320z" fill="currentColor"></path>
+        </svg>
+    </a>
+    <div class="toc-menus" id="toc-menus">
+        <div class="toc-title">Article Directory</div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%BB%91%E6%A8%A1%E6%8E%A7%E5%88%B6%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="toc-number">2.</span> <span class="toc-text">1. 滑模控制的基本原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E4%B8%A4%E4%B8%AA%E9%98%B6%E6%AE%B5"><span class="toc-number">2.1.</span> <span class="toc-text">1.1 两个阶段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E9%B2%81%E6%A3%92%E6%80%A7%EF%BC%88%E4%B8%8D%E5%8F%98%E6%80%A7%EF%BC%89"><span class="toc-number">2.2.</span> <span class="toc-text">1.2 鲁棒性（不变性）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%A7%BF%E6%80%81%E6%BB%91%E6%A8%A1%E6%8E%A7%E5%88%B6%E5%99%A8%E8%AE%BE%E8%AE%A1"><span class="toc-number">3.</span> <span class="toc-text">2. 姿态滑模控制器设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E5%AE%9A%E4%B9%89%E6%BB%91%E6%A8%A1%E9%9D%A2"><span class="toc-number">3.1.</span> <span class="toc-text">2.1 定义滑模面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E5%8A%A8%E5%8A%9B%E5%AD%A6%E6%A8%A1%E5%9E%8B%E4%B8%8E%E4%B8%8D%E7%A1%AE%E5%AE%9A%E6%80%A7"><span class="toc-number">3.2.</span> <span class="toc-text">2.2 动力学模型与不确定性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E8%B6%8B%E8%BF%91%E5%BE%8B%E4%B8%8E%E6%8E%A7%E5%88%B6%E5%BE%8B%E6%8E%A8%E5%AF%BC"><span class="toc-number">3.3.</span> <span class="toc-text">2.3 趋近律与控制律推导</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%8A%96%E6%8C%AF%E7%8E%B0%E8%B1%A1-Chattering-%E4%B8%8E%E5%AF%B9%E7%AD%96"><span class="toc-number">4.</span> <span class="toc-text">3. 抖振现象 (Chattering) 与对策</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E6%8A%96%E6%8C%AF%E7%9A%84%E6%88%90%E5%9B%A0%E4%B8%8E%E5%8D%B1%E5%AE%B3"><span class="toc-number">4.1.</span> <span class="toc-text">3.1 抖振的成因与危害</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E8%BE%B9%E7%95%8C%E5%B1%82%E6%B3%95-Boundary-Layer"><span class="toc-number">4.2.</span> <span class="toc-text">3.2 边界层法 (Boundary Layer)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E8%BF%9B%E9%98%B6%E8%AF%9D%E9%A2%98%EF%BC%9A%E8%87%AA%E9%80%82%E5%BA%94%E6%BB%91%E6%A8%A1"><span class="toc-number">5.</span> <span class="toc-text">4. 进阶话题：自适应滑模</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E5%88%97%E7%BB%93%E8%AF%AD"><span class="toc-number">6.</span> <span class="toc-text">系列结语</span></a></li></ol>
+    </div>
+
+
+<article class="post post__with-toc content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>在上一章中，我们介绍了基于反馈线性化的PID控制。这种方法在模型精确（$\mathbf{J}$ 已知）且无干扰的情况下表现完美。然而，在实际航天任务中，航天器的转动惯量 $\mathbf{J}$ 往往难以精确测量（燃料消耗、帆板展开都会改变 $\mathbf{J}$），且空间环境中充满了未知的干扰力矩（气动、太阳光压、重力梯度残差）。</p>
+<p>当模型存在不确定性时，PID控制的性能会下降，甚至可能不稳定。为了解决这个问题，我们需要引入<strong>鲁棒控制</strong>（Robust Control）。本章将介绍其中最强有力的一种方法：<strong>滑模变结构控制</strong>（Sliding Mode Control, SMC）。</p>
+<hr>
+<h2 id="1-滑模控制的基本原理"><a href="#1-滑模控制的基本原理" class="headerlink" title="1. 滑模控制的基本原理"></a>1. 滑模控制的基本原理</h2><p>滑模控制的核心思想是将系统的状态轨迹强行约束在一个设计的超曲面上运动。这个超曲面称为<strong>滑模面</strong>（Sliding Surface）。</p>
+<h3 id="1-1-两个阶段"><a href="#1-1-两个阶段" class="headerlink" title="1.1 两个阶段"></a>1.1 两个阶段</h3><p>SMC 的控制过程分为两个阶段：</p>
+<ol>
+<li><strong>趋近阶段 (Reaching Phase)</strong>：系统状态从初始点出发，在控制律的作用下，在有限时间内到达滑模面（$s=0$）。</li>
+<li><strong>滑模阶段 (Sliding Phase)</strong>：一旦到达滑模面，控制律迫使系统状态沿着滑模面滑动，最终收敛到平衡点（原点）。</li>
+</ol>
+<h3 id="1-2-鲁棒性（不变性）"><a href="#1-2-鲁棒性（不变性）" class="headerlink" title="1.2 鲁棒性（不变性）"></a>1.2 鲁棒性（不变性）</h3><p>SMC 最迷人的特性在于<strong>滑模阶段</strong>。一旦系统进入滑模面，其动态特性仅由滑模面的方程决定，而与原系统的参数（如 $\mathbf{J}$）和外部干扰完全无关！
+例如，如果我们定义滑模面为 $\dot{x} + c x = 0$，那么在滑模面上，系统的响应就是 $x(t) = x(0)e^{-ct}$，无论系统的质量、摩擦力如何变化，这个响应特性都不会改变。这就是所谓的<strong>不变性 (Invariance)</strong>。</p>
+<hr>
+<h2 id="2-姿态滑模控制器设计"><a href="#2-姿态滑模控制器设计" class="headerlink" title="2. 姿态滑模控制器设计"></a>2. 姿态滑模控制器设计</h2><h3 id="2-1-定义滑模面"><a href="#2-1-定义滑模面" class="headerlink" title="2.1 定义滑模面"></a>2.1 定义滑模面</h3><p>我们希望姿态误差 $\delta \boldsymbol{\epsilon}$ 和角速度误差 $\delta \boldsymbol{\omega}$ 都收敛到零。定义滑模变量 $\mathbf{s}$ 为两者的线性组合：</p>
+<script type="math/tex; mode=display">\mathbf{s} = \delta \boldsymbol{\omega} + \Lambda \delta \boldsymbol{\epsilon}</script><p>其中 $\Lambda$ 是一个正定对角矩阵（设计参数），决定了滑模面上的收敛速度。</p>
+<p>如果我们要让系统稳定，只需保证 $\mathbf{s} \to \mathbf{0}$。因为当 $\mathbf{s} = \mathbf{0}$ 时，$\delta \boldsymbol{\omega} = -\Lambda \delta \boldsymbol{\epsilon}$。这是一个一阶线性微分方程，意味着误差 $\delta \boldsymbol{\epsilon}$ 将以指数速度收敛到零。</p>
+<h3 id="2-2-动力学模型与不确定性"><a href="#2-2-动力学模型与不确定性" class="headerlink" title="2.2 动力学模型与不确定性"></a>2.2 动力学模型与不确定性</h3><p>考虑带有不确定性的刚体动力学方程：</p>
+<script type="math/tex; mode=display">\mathbf{J} \dot{\boldsymbol{\omega}} = -\boldsymbol{\omega} \times (\mathbf{J} \boldsymbol{\omega}) + \mathbf{u} + \mathbf{d}_{total}</script><p>其中 $\mathbf{d}_{total}$ 包含了外部干扰 $\mathbf{d}$ 和模型不确定性带来的等效干扰 $\Delta \mathbf{f}$。假设其有界：$|\mathbf{d}_{total}| \le D$。</p>
+<h3 id="2-3-趋近律与控制律推导"><a href="#2-3-趋近律与控制律推导" class="headerlink" title="2.3 趋近律与控制律推导"></a>2.3 趋近律与控制律推导</h3><p>为了迫使状态 $\mathbf{s}$ 趋向于零，我们采用李雅普诺夫方法。取候选函数：</p>
+<script type="math/tex; mode=display">V = \frac{1}{2} \mathbf{s}^T \mathbf{J} \mathbf{s}</script><p>求导：</p>
+<script type="math/tex; mode=display">\dot{V} = \mathbf{s}^T \mathbf{J} \dot{\mathbf{s}} = \mathbf{s}^T \mathbf{J} (\delta \dot{\boldsymbol{\omega}} + \Lambda \delta \dot{\boldsymbol{\epsilon}})</script><p>代入动力学方程：</p>
+<script type="math/tex; mode=display">\dot{V} = \mathbf{s}^T \left( -\boldsymbol{\omega} \times (\mathbf{J} \boldsymbol{\omega}) + \mathbf{u} + \mathbf{d}_{total} + \mathbf{J} \Lambda \delta \dot{\boldsymbol{\epsilon}} \right)</script><p>为了保证 $\dot{V} &lt; 0$，我们设计控制律 $\mathbf{u}$ 为两部分：</p>
+<script type="math/tex; mode=display">\mathbf{u} = \mathbf{u}_{eq} + \mathbf{u}_{sw}</script><ol>
+<li><strong>等效控制 $\mathbf{u}_{eq}$</strong>：用于抵消已知的系统动力学，保持 $\dot{\mathbf{s}} = 0$（不考虑干扰）。<script type="math/tex; mode=display">\mathbf{u}_{eq} = \boldsymbol{\omega} \times (\mathbf{J} \boldsymbol{\omega}) - \mathbf{J} \Lambda \delta \dot{\boldsymbol{\epsilon}}</script></li>
+<li><strong>切换控制 $\mathbf{u}_{sw}$</strong>：用于克服干扰和不确定性，迫使系统趋向滑模面。<script type="math/tex; mode=display">\mathbf{u}_{sw} = -K \text{sgn}(\mathbf{s})</script>其中 $K$ 是切换增益，必须满足 $K &gt; D$（干扰上界）。$\text{sgn}(\cdot)$ 是逐元素的符号函数。</li>
+</ol>
+<p>代入 $\dot{V}$：</p>
+<script type="math/tex; mode=display">\dot{V} = \mathbf{s}^T (\mathbf{d}_{total} - K \text{sgn}(\mathbf{s})) = \mathbf{s}^T \mathbf{d}_{total} - K \|\mathbf{s}\|_1 \le \|\mathbf{s}\| (D - K)</script><p>只要 $K &gt; D$，则 $\dot{V}$ 负定，系统将在有限时间内到达滑模面。</p>
+<hr>
+<h2 id="3-抖振现象-Chattering-与对策"><a href="#3-抖振现象-Chattering-与对策" class="headerlink" title="3. 抖振现象 (Chattering) 与对策"></a>3. 抖振现象 (Chattering) 与对策</h2><h3 id="3-1-抖振的成因与危害"><a href="#3-1-抖振的成因与危害" class="headerlink" title="3.1 抖振的成因与危害"></a>3.1 抖振的成因与危害</h3><p>理论上，SMC 完美无缺。但在实际应用中，由于：</p>
+<ol>
+<li><strong>离散时间实现</strong>：计算机控制不是连续的，导致控制量滞后。</li>
+<li><strong>执行机构延迟</strong>：推力器或飞轮无法瞬间改变输出。</li>
+</ol>
+<p>符号函数 $\text{sgn}(\mathbf{s})$ 的不连续性会导致控制量 $\mathbf{u}$ 在 $\mathbf{s}=0$ 附近高频切换。这种现象称为<strong>抖振</strong>（Chattering）。
+抖振不仅会磨损执行机构（如飞轮轴承），还会激发航天器的柔性模态（如太阳帆板振动），这是不可接受的。</p>
+<h3 id="3-2-边界层法-Boundary-Layer"><a href="#3-2-边界层法-Boundary-Layer" class="headerlink" title="3.2 边界层法 (Boundary Layer)"></a>3.2 边界层法 (Boundary Layer)</h3><p>为了消除抖振，最常用的方法是用连续的<strong>饱和函数</strong>（Saturation Function, sat）或双曲正切函数（tanh）来近似符号函数。引入一个边界层厚度 $\Phi$：</p>
+<script type="math/tex; mode=display">\text{sat}(s/\Phi) = \begin{cases} s/\Phi, & |s| \le \Phi \\ \text{sgn}(s), & |s| > \Phi \end{cases}</script><p>控制律变为：</p>
+<script type="math/tex; mode=display">\mathbf{u}_{sw} = -K \text{sat}(\mathbf{s}/\Phi)</script><ul>
+<li><strong>在边界层外 ($|s| &gt; \Phi$)</strong>：保持 SMC 的快速趋近特性。</li>
+<li><strong>在边界层内 ($|s| \le \Phi$)</strong>：变为高增益的线性反馈控制（类似于 PD 控制）。</li>
+</ul>
+<p>这是一种工程折衷：我们牺牲了完美的“零误差”收敛（系统最终收敛到一个小邻域 $\Phi/K$ 内），换取了平滑的控制输出，消除了抖振。</p>
+<hr>
+<h2 id="4-进阶话题：自适应滑模"><a href="#4-进阶话题：自适应滑模" class="headerlink" title="4. 进阶话题：自适应滑模"></a>4. 进阶话题：自适应滑模</h2><p>在上述设计中，我们需要知道干扰的上界 $D$ 来选择增益 $K$。如果 $D$ 估计过大，会导致 $K$ 过大，加剧抖振；如果 $D$ 估计过小，系统可能无法稳定。
+<strong>自适应滑模控制 (Adaptive SMC)</strong> 通过在线估计干扰的边界 $\hat{D}$，动态调整增益 $K(t)$，从而在保证稳定性的同时尽可能减小控制增益。</p>
+<hr>
+<h2 id="系列结语"><a href="#系列结语" class="headerlink" title="系列结语"></a>系列结语</h2><p>至此，我们的《航天器姿态动力学》十卷本系列教程圆满结束。</p>
+<ol>
+<li><strong>Vol.1-4 (运动学)</strong>：我们建立了描述姿态的数学语言（DCM、欧拉角、四元数、CRPs/MRPs）。</li>
+<li><strong>Vol.5-6 (动力学)</strong>：我们推导了欧拉方程，并分析了刚体自由运动的稳定性（中间轴定理）。</li>
+<li><strong>Vol.7 (姿态确定)</strong>：我们解决了“我在哪”的问题（TRIAD, Wahba）。</li>
+<li><strong>Vol.8 (被动稳定)</strong>：我们探讨了利用自然力矩的稳定方法（重力梯度、自旋）。</li>
+<li><strong>Vol.9-10 (主动控制)</strong>：我们入门了反馈控制，并进阶到了鲁棒滑模控制。</li>
+</ol>
+<p>希望这套教程能为你打开通往星辰大海的大门。航天动力学是一门深奥而迷人的学科，愿你在探索宇宙的征途中，始终保持好奇与敬畏。</p>
+<p><strong>Per Aspera Ad Astra.</strong></p>
+
+    </div>
+     
+    <div class="post-footer__meta"><p>updated at 2025-11-21</p></div> 
+    <div class="post-entry__tags"><a href="/tags/%E9%B2%81%E6%A3%92%E6%8E%A7%E5%88%B6/" class="post-tags__link button"># 鲁棒控制</a><a href="/tags/%E6%BB%91%E6%A8%A1%E6%8E%A7%E5%88%B6/" class="post-tags__link button"># 滑模控制</a><a href="/tags/SMC/" class="post-tags__link button"># SMC</a><a href="/tags/%E6%8A%96%E6%8C%AF/" class="post-tags__link button"># 抖振</a><a href="/tags/%E8%BE%B9%E7%95%8C%E5%B1%82/" class="post-tags__link button"># 边界层</a></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
+            
+                <a href="/2025/04/11/%E8%83%B6%E7%89%87%E7%9A%84%E6%84%9F%E5%85%89%E4%B8%8E%E6%9B%9D%E5%85%89%E7%90%86%E8%AE%BA/" class="nav__link">
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
+                    </div>
+                    <div>
+                        <div class="nav__label">
+                            Previous Post
+                        </div>
+                        <div class="nav__title">
+                            胶片的感光与曝光理论
+                        </div>
+                    </div>
+                </a>
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="/2025/02/19/%E5%A7%BF%E6%80%81%E5%8A%A8%E5%8A%9B%E5%AD%A6Vol.9-%E4%B8%BB%E5%8A%A8%E6%8E%A7%E5%88%B6%E5%85%A5%E9%97%A8%EF%BC%9A%E5%8F%8D%E9%A6%88%E7%BA%BF%E6%80%A7%E5%8C%96%E4%B8%8EPID%E6%8E%A7%E5%88%B6/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            Next Post
+                        </div>
+                        <div class="nav__title">
+                            姿态动力学Vol.9-主动控制入门：反馈线性化与PID控制
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
+        </div>
+    </div>
+
+
+
+
+
+</main>
+
+            <footer class="footer">
+     
+    <a href="#" class="button" id="b2t" aria-label="Back to Top" title="Back to Top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M233.376 722.752L278.624 768 512 534.624 745.376 768l45.248-45.248L512 444.128zM192 352h640V288H192z" fill="currentColor"></path>
+        </svg>
+    </a>
+
+    
+
+
+    
+     
+ 
+
+ 
+    
+        
+        <p class="footer-copyright">
+            Strtus's Journry
+        </p>
+    
+    
+        
+            
+        
+            
+        
+            <p>保持对世界的输出🙌</p>
+
+        
+    
+</footer>
+
+        </div>
+         
+
+ 
+    <script>
+        window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+        ga('create', 'G-5ERPC280ZB', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+ 
+
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5ERPC280ZB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-5ERPC280ZB');
+    </script>
+ 
+
+ 
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement('script');
+            hm.src = 'https://hm.baidu.com/hm.js?8da6411546e903e478a9d82d2a4d0c60';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+    
+ 
+
+
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.css">
+
+    
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.js"></script>
+
+    <script>
+        let lazyloadT = Boolean('false'),
+            auto_fancybox = Boolean('true')
+        if (auto_fancybox) {
+            $(".post__content").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        } else {
+            $(".post__content").find("fancybox").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        }
+    </script>
+ 
+
+
+    <script>
+        if (typeof MathJax === 'undefined') {
+            window.MathJax = {
+                loader: {
+                    source: {
+                        '[tex]/amsCd': '[tex]/amscd',
+                        '[tex]/AMScd': '[tex]/amscd'
+                    }
+                },
+                tex: {
+                    inlineMath: {'[+]': [['$', '$']]},
+                    tags: 'ams'
+                },
+                options: {
+                    renderActions: {
+                        findScript: [10, doc => {
+                            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                                const display = !!node.type.match(/; *mode=display/);
+                                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                                const text = document.createTextNode('');
+                                node.parentNode.replaceChild(text, node);
+                                math.start = {node: text, delim: '', n: 0};
+                                math.end = {node: text, delim: '', n: 0};
+                                doc.math.push(math);
+                            });
+                        }, '', false],
+                        insertedScript: [200, () => {
+                            document.querySelectorAll('mjx-container').forEach(node => {
+                                let target = node.parentNode;
+                                if (target.nodeName.toLowerCase() === 'li') {
+                                    target.parentNode.classList.add('has-jax');
+                                }
+                            });
+                        }, '', false]
+                    }
+                }
+            };
+            (function () {
+                var script = document.createElement('script');
+                script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js";
+                script.defer = true;
+                document.head.appendChild(script);
+            })();
+        } else {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+        }
+    </script>
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+
+    </body>
+</html>

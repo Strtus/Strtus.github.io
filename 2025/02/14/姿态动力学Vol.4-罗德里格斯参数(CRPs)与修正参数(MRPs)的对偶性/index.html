@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--icon-->
+
+    
+        <link rel="shortcut icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="16x16" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="32x32" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon-96x96.png">
+    
+    
+        <link rel="apple-touch-icon" sizes="180x180" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/web-app-manifest-192x192.png">
+    
+    
+        <link rel="mask-icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/apple-touch-icon.png">
+    
+
+
+    <!-- meta -->
+
+
+<title>姿态动力学Vol.4-罗德里格斯参数(CRPs)与修正参数(MRPs)的对偶性 | Strtus&#39;s Journey</title>
+
+
+    <meta name="keywords" content="姿态运动学, CRPs, MRPs, 对偶性">
+
+
+
+
+    <!-- OpenGraph -->
+ 
+    <meta name="description" content="引言在前面的章节中，我们介绍了欧拉角（直观但有奇点）和四元数（无奇点但有冗余约束）。是否存在一种既无冗余（只有3个参数）又能在大部分工作空间内避免奇点的描述方式呢？ 答案是肯定的。这就是本章要介绍的罗德里格斯参数 (Rodrigues Parameters) 家族。这一家族基于“轴-角”描述，通过巧妙的投影变换，将四元数的 4 个参数压缩为 3 个。其中，经典罗德里格斯参数 (CRPs) 和 修正">
+<meta property="og:type" content="article">
+<meta property="og:title" content="姿态动力学Vol.4-罗德里格斯参数(CRPs)与修正参数(MRPs)的对偶性">
+<meta property="og:url" content="https://strtus.github.io/2025/02/14/%E5%A7%BF%E6%80%81%E5%8A%A8%E5%8A%9B%E5%AD%A6Vol.4-%E7%BD%97%E5%BE%B7%E9%87%8C%E6%A0%BC%E6%96%AF%E5%8F%82%E6%95%B0(CRPs)%E4%B8%8E%E4%BF%AE%E6%AD%A3%E5%8F%82%E6%95%B0(MRPs)%E7%9A%84%E5%AF%B9%E5%81%B6%E6%80%A7/index.html">
+<meta property="og:site_name" content="Strtus&#39;s Journey">
+<meta property="og:description" content="引言在前面的章节中，我们介绍了欧拉角（直观但有奇点）和四元数（无奇点但有冗余约束）。是否存在一种既无冗余（只有3个参数）又能在大部分工作空间内避免奇点的描述方式呢？ 答案是肯定的。这就是本章要介绍的罗德里格斯参数 (Rodrigues Parameters) 家族。这一家族基于“轴-角”描述，通过巧妙的投影变换，将四元数的 4 个参数压缩为 3 个。其中，经典罗德里格斯参数 (CRPs) 和 修正">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/Orthogonal_decomposition_unit_vector_rodrigues_rotation_formula%20(1">
+<meta property="og:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/CRP.png">
+<meta property="article:published_time" content="2025-02-14T04:00:00.000Z">
+<meta property="article:modified_time" content="2025-11-21T07:39:58.212Z">
+<meta property="article:author" content="strtus">
+<meta property="article:tag" content="姿态运动学">
+<meta property="article:tag" content="CRPs">
+<meta property="article:tag" content="MRPs">
+<meta property="article:tag" content="对偶性">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/Orthogonal_decomposition_unit_vector_rodrigues_rotation_formula%20(1">
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/highlight.css" media="none" >
+        
+            <link rel="stylesheet" id="hl-dark-theme" href="/css/highlight/highlight.dark.css" media="none">
+        
+    
+
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/style/dark.css">
+
+    
+<script src="/js/darkmode.js"></script>
+
+
+
+     
+
+    <!-- custom head -->
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+    <body>
+        <div id="app" tabindex="-1">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">Strtus&#39;s Journey</span>
+        </a>
+    </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">首页</a>
+                
+                    <a href="/about.html" class="navbar-menu button">About</a>
+                
+                    <a href="/categories/" class="navbar-menu button">分类</a>
+                
+                    <a href="/tags/" class="navbar-menu button">标签</a>
+                
+                    <a href="/archives/" class="navbar-menu button">归档</a>
+                
+            </div>
+        
+        
+        
+    <a href="/search/" id="btn-search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="24" height="24" fill="currentColor" stroke="currentColor" stroke-width="32"><path d="M192 448c0-141.152 114.848-256 256-256s256 114.848 256 256-114.848 256-256 256-256-114.848-256-256z m710.624 409.376l-206.88-206.88A318.784 318.784 0 0 0 768 448c0-176.736-143.264-320-320-320S128 271.264 128 448s143.264 320 320 320a318.784 318.784 0 0 0 202.496-72.256l206.88 206.88 45.248-45.248z"></path></svg>
+    </a>
+
+
+        
+        
+    <a href="javaScript:void(0);" id="btn-toggle-dark">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </a>
+
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">首页</a>
+                
+                    <a href="/about.html" class="dropdown-menu button">About</a>
+                
+                    <a href="/categories/" class="dropdown-menu button">分类</a>
+                
+                    <a href="/tags/" class="dropdown-menu button">标签</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">归档</a>
+                
+            </div>
+        
+    </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        姿态动力学Vol.4-罗德里格斯参数(CRPs)与修正参数(MRPs)的对偶性
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2025/02/" class="post-meta__date button">2025-02-14</a>
+        
+    <span class="separate-dot"></span><a href="/categories/%E8%88%AA%E5%A4%A9%E5%99%A8%E5%A7%BF%E6%80%81%E5%8A%A8%E5%8A%9B%E5%AD%A6%E7%90%86%E8%AE%BA/" class="button">航天器姿态动力学理论</a>
+
+ 
+        
+    
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+    <aside class="post-side">
+        <div class="post-side__toc">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%BD%97%E5%BE%B7%E9%87%8C%E6%A0%BC%E6%96%AF%E6%97%8B%E8%BD%AC%E5%85%AC%E5%BC%8F-Rodrigues%E2%80%99-Rotation-Formula"><span class="toc-number">2.</span> <span class="toc-text">1. 罗德里格斯旋转公式 (Rodrigues’ Rotation Formula)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E5%87%A0%E4%BD%95%E6%8E%A8%E5%AF%BC"><span class="toc-number">2.1.</span> <span class="toc-text">1.1 几何推导</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E7%9F%A9%E9%98%B5%E5%BD%A2%E5%BC%8F"><span class="toc-number">2.2.</span> <span class="toc-text">1.2 矩阵形式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E7%BB%8F%E5%85%B8%E7%BD%97%E5%BE%B7%E9%87%8C%E6%A0%BC%E6%96%AF%E5%8F%82%E6%95%B0-CRPs"><span class="toc-number">3.</span> <span class="toc-text">2. 经典罗德里格斯参数 (CRPs)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E5%AE%9A%E4%B9%89"><span class="toc-number">3.1.</span> <span class="toc-text">2.1 定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E4%B8%8E%E5%9B%9B%E5%85%83%E6%95%B0%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">3.2.</span> <span class="toc-text">2.2 与四元数的关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E5%A5%87%E7%82%B9%E4%B8%8E%E6%80%A7%E8%B4%A8"><span class="toc-number">3.3.</span> <span class="toc-text">2.3 奇点与性质</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E4%BF%AE%E6%AD%A3%E7%BD%97%E5%BE%B7%E9%87%8C%E6%A0%BC%E6%96%AF%E5%8F%82%E6%95%B0-MRPs"><span class="toc-number">4.</span> <span class="toc-text">3. 修正罗德里格斯参数 (MRPs)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E5%AE%9A%E4%B9%89"><span class="toc-number">4.1.</span> <span class="toc-text">3.1 定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E4%B8%8E%E5%9B%9B%E5%85%83%E6%95%B0%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">4.2.</span> <span class="toc-text">3.2 与四元数的关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E5%A5%87%E7%82%B9%E5%88%86%E6%9E%90"><span class="toc-number">4.3.</span> <span class="toc-text">3.3 奇点分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E4%BC%B4%E5%BD%B1%E9%9B%86-Shadow-Set-%E4%B8%8E%E5%AF%B9%E5%81%B6%E6%80%A7"><span class="toc-number">5.</span> <span class="toc-text">4. 伴影集 (Shadow Set) 与对偶性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E4%BC%B4%E5%BD%B1%E9%9B%86%E5%AE%9A%E4%B9%89"><span class="toc-number">5.1.</span> <span class="toc-text">4.1 伴影集定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E6%A8%A1%E9%95%BF%E6%80%A7%E8%B4%A8"><span class="toc-number">5.2.</span> <span class="toc-text">4.2 模长性质</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-%E5%88%87%E6%8D%A2%E7%AD%96%E7%95%A5-Switching-Strategy"><span class="toc-number">5.3.</span> <span class="toc-text">4.3 切换策略 (Switching Strategy)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E8%BF%90%E5%8A%A8%E5%AD%A6%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B"><span class="toc-number">6.</span> <span class="toc-text">5. 运动学微分方程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AF%AD"><span class="toc-number">7.</span> <span class="toc-text">结语</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E7%BB%B4%E6%97%8B%E8%BD%AC%E7%9A%84%E6%9C%AC%E8%B4%A8"><span class="toc-number">8.</span> <span class="toc-text">三维旋转的本质</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%97%E5%BE%B7%E9%87%8C%E6%A0%BC%E6%96%AF%E6%97%8B%E8%BD%AC%E5%85%AC%E5%BC%8F%EF%BC%9A%E6%97%8B%E8%BD%AC%E7%9A%84%E5%90%91%E9%87%8F%E6%8F%8F%E8%BF%B0"><span class="toc-number">9.</span> <span class="toc-text">罗德里格斯旋转公式：旋转的向量描述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AC%E5%BC%8F%E6%8E%A8%E5%AF%BC"><span class="toc-number">9.1.</span> <span class="toc-text">公式推导</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9F%A9%E9%98%B5%E5%BD%A2%E5%BC%8F"><span class="toc-number">9.2.</span> <span class="toc-text">矩阵形式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A7%BF%E6%80%81%E8%BF%90%E5%8A%A8%E5%AD%A6%E5%8F%82%E6%95%B0"><span class="toc-number">10.</span> <span class="toc-text">姿态运动学参数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E7%BB%8F%E5%85%B8%E7%BD%97%E5%BE%B7%E9%87%8C%E6%A0%BC%E6%96%AF%E5%8F%82%E6%95%B0-CRP"><span class="toc-number">10.1.</span> <span class="toc-text">1. 经典罗德里格斯参数 (CRP)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-number">10.1.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8E%E6%AC%A7%E6%8B%89%E5%9B%9B%E5%85%83%E6%95%B0%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">10.1.2.</span> <span class="toc-text">与欧拉四元数的关系</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%A7%E8%B4%A8"><span class="toc-number">10.1.3.</span> <span class="toc-text">性质</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%A0%E4%BD%95%E6%84%8F%E4%B9%89"><span class="toc-number">10.1.4.</span> <span class="toc-text">几何意义</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E4%BF%AE%E6%AD%A3%E7%BD%97%E5%BE%B7%E9%87%8C%E6%A0%BC%E6%96%AF%E5%8F%82%E6%95%B0-MRP"><span class="toc-number">10.2.</span> <span class="toc-text">2. 修正罗德里格斯参数 (MRP)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-1"><span class="toc-number">10.2.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8E%E6%AC%A7%E6%8B%89%E5%9B%9B%E5%85%83%E6%95%B0%E7%9A%84%E5%85%B3%E7%B3%BB-1"><span class="toc-number">10.2.2.</span> <span class="toc-text">与欧拉四元数的关系</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%A7%E8%B4%A8%E4%B8%8E%E4%BC%98%E5%8A%BF"><span class="toc-number">10.2.3.</span> <span class="toc-text">性质与优势</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%A0%E4%BD%95%E6%84%8F%E4%B9%89-1"><span class="toc-number">10.2.4.</span> <span class="toc-text">几何意义</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E4%BC%B4%E5%BD%B1%E9%9B%86-Shadow-Set-%E4%B8%8E%E5%A5%87%E7%82%B9%E8%A7%84%E9%81%BF"><span class="toc-number">10.3.</span> <span class="toc-text">3. 伴影集 (Shadow Set) 与奇点规避</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-2"><span class="toc-number">10.3.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%87%E6%8D%A2%E7%AD%96%E7%95%A5"><span class="toc-number">10.3.2.</span> <span class="toc-text">切换策略</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E9%97%B4%E7%9A%84%E8%BD%AC%E6%8D%A2%E4%B8%8E%E8%BF%90%E5%8A%A8%E5%AD%A6"><span class="toc-number">11.</span> <span class="toc-text">参数间的转换与运动学</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#CRP-%E4%B8%8E-MRP-%E8%BD%AC%E6%8D%A2"><span class="toc-number">11.0.1.</span> <span class="toc-text">CRP 与 MRP 转换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E5%8A%A8%E5%AD%A6%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B"><span class="toc-number">11.0.2.</span> <span class="toc-text">运动学微分方程</span></a></li></ol></li></ol></li></ol>
+        </div>
+    </aside>
+    <a class="btn-toc button" id="btn-toc" tabindex="0">
+        <svg viewBox="0 0 1024 1024" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M128 256h64V192H128zM320 256h576V192H320zM128 544h64v-64H128zM320 544h576v-64H320zM128 832h64v-64H128zM320 832h576v-64H320z" fill="currentColor"></path>
+        </svg>
+    </a>
+    <div class="toc-menus" id="toc-menus">
+        <div class="toc-title">Article Directory</div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%BD%97%E5%BE%B7%E9%87%8C%E6%A0%BC%E6%96%AF%E6%97%8B%E8%BD%AC%E5%85%AC%E5%BC%8F-Rodrigues%E2%80%99-Rotation-Formula"><span class="toc-number">2.</span> <span class="toc-text">1. 罗德里格斯旋转公式 (Rodrigues’ Rotation Formula)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E5%87%A0%E4%BD%95%E6%8E%A8%E5%AF%BC"><span class="toc-number">2.1.</span> <span class="toc-text">1.1 几何推导</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E7%9F%A9%E9%98%B5%E5%BD%A2%E5%BC%8F"><span class="toc-number">2.2.</span> <span class="toc-text">1.2 矩阵形式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E7%BB%8F%E5%85%B8%E7%BD%97%E5%BE%B7%E9%87%8C%E6%A0%BC%E6%96%AF%E5%8F%82%E6%95%B0-CRPs"><span class="toc-number">3.</span> <span class="toc-text">2. 经典罗德里格斯参数 (CRPs)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E5%AE%9A%E4%B9%89"><span class="toc-number">3.1.</span> <span class="toc-text">2.1 定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E4%B8%8E%E5%9B%9B%E5%85%83%E6%95%B0%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">3.2.</span> <span class="toc-text">2.2 与四元数的关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E5%A5%87%E7%82%B9%E4%B8%8E%E6%80%A7%E8%B4%A8"><span class="toc-number">3.3.</span> <span class="toc-text">2.3 奇点与性质</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E4%BF%AE%E6%AD%A3%E7%BD%97%E5%BE%B7%E9%87%8C%E6%A0%BC%E6%96%AF%E5%8F%82%E6%95%B0-MRPs"><span class="toc-number">4.</span> <span class="toc-text">3. 修正罗德里格斯参数 (MRPs)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E5%AE%9A%E4%B9%89"><span class="toc-number">4.1.</span> <span class="toc-text">3.1 定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E4%B8%8E%E5%9B%9B%E5%85%83%E6%95%B0%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">4.2.</span> <span class="toc-text">3.2 与四元数的关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E5%A5%87%E7%82%B9%E5%88%86%E6%9E%90"><span class="toc-number">4.3.</span> <span class="toc-text">3.3 奇点分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E4%BC%B4%E5%BD%B1%E9%9B%86-Shadow-Set-%E4%B8%8E%E5%AF%B9%E5%81%B6%E6%80%A7"><span class="toc-number">5.</span> <span class="toc-text">4. 伴影集 (Shadow Set) 与对偶性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E4%BC%B4%E5%BD%B1%E9%9B%86%E5%AE%9A%E4%B9%89"><span class="toc-number">5.1.</span> <span class="toc-text">4.1 伴影集定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E6%A8%A1%E9%95%BF%E6%80%A7%E8%B4%A8"><span class="toc-number">5.2.</span> <span class="toc-text">4.2 模长性质</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-%E5%88%87%E6%8D%A2%E7%AD%96%E7%95%A5-Switching-Strategy"><span class="toc-number">5.3.</span> <span class="toc-text">4.3 切换策略 (Switching Strategy)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E8%BF%90%E5%8A%A8%E5%AD%A6%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B"><span class="toc-number">6.</span> <span class="toc-text">5. 运动学微分方程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AF%AD"><span class="toc-number">7.</span> <span class="toc-text">结语</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E7%BB%B4%E6%97%8B%E8%BD%AC%E7%9A%84%E6%9C%AC%E8%B4%A8"><span class="toc-number">8.</span> <span class="toc-text">三维旋转的本质</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%97%E5%BE%B7%E9%87%8C%E6%A0%BC%E6%96%AF%E6%97%8B%E8%BD%AC%E5%85%AC%E5%BC%8F%EF%BC%9A%E6%97%8B%E8%BD%AC%E7%9A%84%E5%90%91%E9%87%8F%E6%8F%8F%E8%BF%B0"><span class="toc-number">9.</span> <span class="toc-text">罗德里格斯旋转公式：旋转的向量描述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AC%E5%BC%8F%E6%8E%A8%E5%AF%BC"><span class="toc-number">9.1.</span> <span class="toc-text">公式推导</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9F%A9%E9%98%B5%E5%BD%A2%E5%BC%8F"><span class="toc-number">9.2.</span> <span class="toc-text">矩阵形式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A7%BF%E6%80%81%E8%BF%90%E5%8A%A8%E5%AD%A6%E5%8F%82%E6%95%B0"><span class="toc-number">10.</span> <span class="toc-text">姿态运动学参数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E7%BB%8F%E5%85%B8%E7%BD%97%E5%BE%B7%E9%87%8C%E6%A0%BC%E6%96%AF%E5%8F%82%E6%95%B0-CRP"><span class="toc-number">10.1.</span> <span class="toc-text">1. 经典罗德里格斯参数 (CRP)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-number">10.1.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8E%E6%AC%A7%E6%8B%89%E5%9B%9B%E5%85%83%E6%95%B0%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">10.1.2.</span> <span class="toc-text">与欧拉四元数的关系</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%A7%E8%B4%A8"><span class="toc-number">10.1.3.</span> <span class="toc-text">性质</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%A0%E4%BD%95%E6%84%8F%E4%B9%89"><span class="toc-number">10.1.4.</span> <span class="toc-text">几何意义</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E4%BF%AE%E6%AD%A3%E7%BD%97%E5%BE%B7%E9%87%8C%E6%A0%BC%E6%96%AF%E5%8F%82%E6%95%B0-MRP"><span class="toc-number">10.2.</span> <span class="toc-text">2. 修正罗德里格斯参数 (MRP)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-1"><span class="toc-number">10.2.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8E%E6%AC%A7%E6%8B%89%E5%9B%9B%E5%85%83%E6%95%B0%E7%9A%84%E5%85%B3%E7%B3%BB-1"><span class="toc-number">10.2.2.</span> <span class="toc-text">与欧拉四元数的关系</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%A7%E8%B4%A8%E4%B8%8E%E4%BC%98%E5%8A%BF"><span class="toc-number">10.2.3.</span> <span class="toc-text">性质与优势</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%A0%E4%BD%95%E6%84%8F%E4%B9%89-1"><span class="toc-number">10.2.4.</span> <span class="toc-text">几何意义</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E4%BC%B4%E5%BD%B1%E9%9B%86-Shadow-Set-%E4%B8%8E%E5%A5%87%E7%82%B9%E8%A7%84%E9%81%BF"><span class="toc-number">10.3.</span> <span class="toc-text">3. 伴影集 (Shadow Set) 与奇点规避</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-2"><span class="toc-number">10.3.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%87%E6%8D%A2%E7%AD%96%E7%95%A5"><span class="toc-number">10.3.2.</span> <span class="toc-text">切换策略</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E9%97%B4%E7%9A%84%E8%BD%AC%E6%8D%A2%E4%B8%8E%E8%BF%90%E5%8A%A8%E5%AD%A6"><span class="toc-number">11.</span> <span class="toc-text">参数间的转换与运动学</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#CRP-%E4%B8%8E-MRP-%E8%BD%AC%E6%8D%A2"><span class="toc-number">11.0.1.</span> <span class="toc-text">CRP 与 MRP 转换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E5%8A%A8%E5%AD%A6%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B"><span class="toc-number">11.0.2.</span> <span class="toc-text">运动学微分方程</span></a></li></ol></li></ol></li></ol>
+    </div>
+
+
+<article class="post post__with-toc content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>在前面的章节中，我们介绍了欧拉角（直观但有奇点）和四元数（无奇点但有冗余约束）。是否存在一种既无冗余（只有3个参数）又能在大部分工作空间内避免奇点的描述方式呢？</p>
+<p>答案是肯定的。这就是本章要介绍的<strong>罗德里格斯参数 (Rodrigues Parameters)</strong> 家族。这一家族基于“轴-角”描述，通过巧妙的投影变换，将四元数的 4 个参数压缩为 3 个。其中，<strong>经典罗德里格斯参数 (CRPs)</strong> 和 <strong>修正罗德里格斯参数 (MRPs)</strong> 是最为重要的两个成员。MRPs 凭借其优越的数值性质，已成为现代高精度姿态控制（如卫星编队飞行）的首选参数。</p>
+<hr>
+<h2 id="1-罗德里格斯旋转公式-Rodrigues’-Rotation-Formula"><a href="#1-罗德里格斯旋转公式-Rodrigues’-Rotation-Formula" class="headerlink" title="1. 罗德里格斯旋转公式 (Rodrigues’ Rotation Formula)"></a>1. 罗德里格斯旋转公式 (Rodrigues’ Rotation Formula)</h2><p>一切的起源都可以追溯到 1840 年 Olinde Rodrigues 提出的旋转公式。该公式给出了矢量 $athbf{v}$ 绕单位轴 $athbf{k}$ 旋转角度 $    heta$ 后的新矢量 $athbf{v}_{rot}$ 的解析表达。</p>
+<h3 id="1-1-几何推导"><a href="#1-1-几何推导" class="headerlink" title="1.1 几何推导"></a>1.1 几何推导</h3><p>将矢量 $athbf{v}$ 分解为平行于 $athbf{k}$ 的分量 $athbf{v}_{arallel}$ 和垂直于 $athbf{k}$ 的分量 $athbf{v}_{erp}$：</p>
+<script type="math/tex; mode=display">athbf{v} = athbf{v}_{arallel} + athbf{v}_{erp} = (athbf{v} dot athbf{k})athbf{k} + [athbf{v} - (athbf{v} dot athbf{k})athbf{k}]</script><p>旋转时，平行分量不变，垂直分量在垂直于 $athbf{k}$ 的平面内旋转 $    heta$ 角。</p>
+<script type="math/tex; mode=display">athbf{v}_{rot} = athbf{v}_{arallel} + athbf{v}_{erp} os    heta + (athbf{k}     imes athbf{v}_{erp}) in    heta</script><p>整理后得到著名的<strong>罗德里格斯旋转公式</strong>：</p>
+<script type="math/tex; mode=display">athbf{v}_{rot} = athbf{v} os    heta + (athbf{k}     imes athbf{v}) in    heta + athbf{k}(athbf{k} dot athbf{v})(1 - os    heta)</script><h3 id="1-2-矩阵形式"><a href="#1-2-矩阵形式" class="headerlink" title="1.2 矩阵形式"></a>1.2 矩阵形式</h3><p>利用反对称矩阵 $athbf{K} = [athbf{k}     imes]$，可以将上述公式写成矩阵形式 $athbf{v}_{rot} = athbf{R}(athbf{k},     heta) athbf{v}$，其中旋转矩阵 $athbf{R}$ 为：</p>
+<script type="math/tex; mode=display">athbf{R} = athbf{I} + (in    heta)athbf{K} + (1-os    heta)athbf{K}^2</script><p>这就是从轴-角到 DCM 的直接转换公式。</p>
+<hr>
+<h2 id="2-经典罗德里格斯参数-CRPs"><a href="#2-经典罗德里格斯参数-CRPs" class="headerlink" title="2. 经典罗德里格斯参数 (CRPs)"></a>2. 经典罗德里格斯参数 (CRPs)</h2><h3 id="2-1-定义"><a href="#2-1-定义" class="headerlink" title="2.1 定义"></a>2.1 定义</h3><p>经典罗德里格斯参数 $athbf{q}$（注意不要与四元数混淆，有时也记为 $oldsymbol{\rho}$）定义为：</p>
+<script type="math/tex; mode=display">athbf{q} = athbf{k}     aneft(rac{    heta}{2}ight)</script><p>它是一个 3 维矢量，方向与旋转轴相同，模长为半角的正切。</p>
+<h3 id="2-2-与四元数的关系"><a href="#2-2-与四元数的关系" class="headerlink" title="2.2 与四元数的关系"></a>2.2 与四元数的关系</h3><p>利用四元数定义 $eta_0 = os(    heta/2), oldsymbol{eta} = athbf{k}in(    heta/2)$，可得：</p>
+<script type="math/tex; mode=display">athbf{q} = rac{oldsymbol{eta}}{eta_0}</script><p>这解释了 CRPs 的几何意义：它是四元数在超平面 $eta_0=1$ 上的<strong>球极投影 (Stereographic Projection)</strong>。</p>
+<h3 id="2-3-奇点与性质"><a href="#2-3-奇点与性质" class="headerlink" title="2.3 奇点与性质"></a>2.3 奇点与性质</h3><ul>
+<li><strong>奇点</strong>：当 $    heta     o m 180^irc$ 时，$eta_0     o 0$，$    an(    heta/2)     o nfty$。这意味着 CRPs 在 $180^irc$ 旋转处存在奇点。</li>
+<li><strong>优点</strong>：无冗余约束（3个参数），且其运动学方程不含三角函数，计算极快。</li>
+<li><strong>缺点</strong>：无法描述 $180^irc$ 附近的姿态，限制了其在大角度机动中的应用。</li>
+</ul>
+<hr>
+<h2 id="3-修正罗德里格斯参数-MRPs"><a href="#3-修正罗德里格斯参数-MRPs" class="headerlink" title="3. 修正罗德里格斯参数 (MRPs)"></a>3. 修正罗德里格斯参数 (MRPs)</h2><p>为了克服 CRPs 在 $180^irc$ 处的奇点，Marandi 和 Modi 在 1987 年提出了修正罗德里格斯参数 (MRPs)。</p>
+<h3 id="3-1-定义"><a href="#3-1-定义" class="headerlink" title="3.1 定义"></a>3.1 定义</h3><p>MRPs $oldsymbol{igma}$ 定义为：</p>
+<script type="math/tex; mode=display">oldsymbol{igma} = athbf{k}     aneft(rac{    heta}{4}ight)</script><p>注意这里使用的是 <strong>1/4 角</strong>。</p>
+<h3 id="3-2-与四元数的关系"><a href="#3-2-与四元数的关系" class="headerlink" title="3.2 与四元数的关系"></a>3.2 与四元数的关系</h3><p>利用半角公式 $    an(rac{    heta}{4}) = rac{in(    heta/2)}{1+os(    heta/2)}$，可得：</p>
+<script type="math/tex; mode=display">oldsymbol{igma} = rac{oldsymbol{eta}}{1 + eta_0}</script><p>几何上，这是将四元数从超球面的“南极” $(-1, 0, 0, 0)$ 投影到赤道平面上的结果。</p>
+<h3 id="3-3-奇点分析"><a href="#3-3-奇点分析" class="headerlink" title="3.3 奇点分析"></a>3.3 奇点分析</h3><p>MRPs 的奇点发生在 $    heta = m 360^irc$ ($eta_0 = -1$)。
+这意味着 MRPs 可以描述 $0$ 到 $360^irc$ 范围内的所有姿态！
+对于刚体旋转，$m 360^irc$ 等同于 $0^irc$。因此，MRPs 在物理上几乎是全局非奇异的。</p>
+<hr>
+<h2 id="4-伴影集-Shadow-Set-与对偶性"><a href="#4-伴影集-Shadow-Set-与对偶性" class="headerlink" title="4. 伴影集 (Shadow Set) 与对偶性"></a>4. 伴影集 (Shadow Set) 与对偶性</h2><p>虽然 MRPs 的奇点在 $360^irc$，但当 $    heta$ 接近 $360^irc$ 时，$oldsymbol{igma}$ 的模长会变得非常大，导致数值精度下降。为了解决这个问题，我们引入了<strong>伴影集 (Shadow Set)</strong> 的概念。</p>
+<h3 id="4-1-伴影集定义"><a href="#4-1-伴影集定义" class="headerlink" title="4.1 伴影集定义"></a>4.1 伴影集定义</h3><p>对于任意姿态，存在两组 MRPs 参数：</p>
+<ol>
+<li><strong>原参数</strong> $oldsymbol{igma}$：对应四元数 $(eta_0, oldsymbol{eta})$。</li>
+<li><strong>伴影参数</strong> $oldsymbol{igma}_S$：对应四元数 $(-eta_0, -oldsymbol{eta})$（代表同一物理姿态）。</li>
+</ol>
+<p>根据定义：</p>
+<script type="math/tex; mode=display">oldsymbol{igma}_S = rac{-oldsymbol{eta}}{1 - eta_0}</script><p>两者满足对偶关系：</p>
+<script type="math/tex; mode=display">oldsymbol{igma}_S = -rac{oldsymbol{igma}}{oldsymbol{igma}^2}</script><h3 id="4-2-模长性质"><a href="#4-2-模长性质" class="headerlink" title="4.2 模长性质"></a>4.2 模长性质</h3><p>容易证明：如果 $oldsymbol{igma} &gt; 1$，则 $oldsymbol{igma}_S &lt; 1$。
+$oldsymbol{igma} = 1$ 对应于 $    heta = 180^irc$。</p>
+<h3 id="4-3-切换策略-Switching-Strategy"><a href="#4-3-切换策略-Switching-Strategy" class="headerlink" title="4.3 切换策略 (Switching Strategy)"></a>4.3 切换策略 (Switching Strategy)</h3><p>为了保证数值稳定性，我们在仿真或控制中采用如下策略：
+<strong>始终保持 $oldsymbol{igma} e 1$。</strong>
+当检测到 $oldsymbol{igma} &gt; 1$ 时，立即切换到其伴影集：</p>
+<script type="math/tex; mode=display">oldsymbol{igma} eftarrow -rac{oldsymbol{igma}}{oldsymbol{igma}^2}</script><p>这一操作将姿态描述从“长路径”（$    heta &gt; 180^irc$）切换到了“短路径”（$    heta’ =     heta - 360^irc$）。
+通过这种机制，MRPs 实现了<strong>全局无奇点、无数值发散</strong>的姿态描述，是目前最完美的 3 参数姿态描述法。</p>
+<hr>
+<h2 id="5-运动学微分方程"><a href="#5-运动学微分方程" class="headerlink" title="5. 运动学微分方程"></a>5. 运动学微分方程</h2><p>MRPs 的运动学方程非常简洁，且不含三角函数：</p>
+<script type="math/tex; mode=display">
+ot{oldsymbol{igma}} = rac{1}{4} eft[ (1 - oldsymbol{igma}^T oldsymbol{igma}) athbf{I} + 2 [oldsymbol{igma}     imes] + 2 oldsymbol{igma} oldsymbol{igma}^T ight] oldsymbol{mega}</script><p>或者写成矩阵形式 $ot{oldsymbol{igma}} = rac{1}{4} athbf{B}(oldsymbol{igma}) oldsymbol{mega}$。
+这一方程是多项式形式，非常适合计算机快速求解。</p>
+<hr>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>从 CRPs 到 MRPs，我们见证了数学家如何通过巧妙的变换，一步步逼近完美的姿态描述。MRPs 结合了 3 参数的简洁性和四元数的鲁棒性，配合伴影集切换策略，成为了现代航天动力学的“瑞士军刀”。</p>
+<p>下一章，我们将从运动学转向动力学，推导描述刚体转动核心规律的——<strong>欧拉动力学方程</strong>。</p>
+<h2 id="三维旋转的本质"><a href="#三维旋转的本质" class="headerlink" title="三维旋转的本质"></a>三维旋转的本质</h2><p>在机器人学和航空航天领域，精确描述和操作三维空间中的物体姿态是一项核心任务，一个物体从一个参考姿态到另一个姿态的变换，本质上是一次旋转。为了量化和计算这种旋转，数学家和工程师们发展了多种方法，如欧拉角、方向余弦矩阵和四元数。</p>
+<p>其中，基于“轴-角”概念的描述方法以其物理直观性而被广泛应用。该方法指出：任何复杂的三维旋转都可以等效为绕空间中一个固定的轴（AKA主轴，Eigenaxis）旋转一个特定的角度，也即主角度，Principal Angle。这一思想由19世纪的法国数学家Olinde Rodrigues系统地阐述，并最终形成了著名的Rodrigues’ Rotation Formula，这是现代姿态动力学中一系列重要参数的基础。</p>
+<p>这篇文章将从最核心的罗德里格斯旋转公式出发，详细推导其向量和矩阵形式，并进一步探讨由此衍生的两种重要的姿态参数——经典罗德里格斯参数CRPs和修正罗德里格斯参数MRPs，深入分析它们的数学性质、几何意义、优缺点以及在避免奇点问题上的巧妙解决方案。</p>
+<hr>
+<h2 id="罗德里格斯旋转公式：旋转的向量描述"><a href="#罗德里格斯旋转公式：旋转的向量描述" class="headerlink" title="罗德里格斯旋转公式：旋转的向量描述"></a>罗德里格斯旋转公式：旋转的向量描述</h2><p>罗德里格斯旋转公式提供了一个直接的方法来计算一个向量<strong>v</strong>绕一个单位向量<strong>k</strong>（定义了旋转轴）旋转角度$\theta$后得到的新向量$\mathbf{v}_{\text{rot}}$。</p>
+<p>公式的最终形式如下：</p>
+<script type="math/tex; mode=display">\mathbf{v}_{\text{rot}} = \mathbf{v} \cos\theta + (\mathbf{k} \times \mathbf{v}) \sin\theta + \mathbf{k}(\mathbf{k} \cdot \mathbf{v})(1 - \cos\theta)</script><p>旋转被分解为三个具向量分量的和，每个分量都具有明确的几何意义。</p>
+<h3 id="公式推导"><a href="#公式推导" class="headerlink" title="公式推导"></a>公式推导</h3><p>首先，将向量<strong>v</strong>分解为平行于旋转轴<strong>k</strong>的分量 $\mathbf{v}_{|}$ 和垂直于<strong>k</strong>的分量 $\mathbf{v}_{\perp}$</p>
+<script type="math/tex; mode=display">\mathbf{v} = \mathbf{v}_{\|} + \mathbf{v}_{\perp}</script><ul>
+<li><p><strong>平行分量 $\mathbf{v}_{|}$</strong>：
+<strong>v</strong>在<strong>k</strong>上的投影。根据向量投影的定义，有：</p>
+<script type="math/tex; mode=display">\mathbf{v}_{\|} = (\mathbf{v} \cdot \mathbf{k})\mathbf{k}</script><p>由于这个分量本身就在旋转轴上，因此旋转对它没有影响，即 $\mathbf{v}_{|,\text{rot}} = \mathbf{v}_{|}$。</p>
+</li>
+<li><p><strong>垂直分量 $\mathbf{v}_{\perp}$</strong>：
+垂直分量可以通过从原向量<strong>v</strong>中减去平行分量得到：</p>
+<script type="math/tex; mode=display">\mathbf{v}_{\perp} = \mathbf{v} - \mathbf{v}_{\|} = \mathbf{v} - (\mathbf{v} \cdot \mathbf{k})\mathbf{k}</script><p>分量位于一个垂直于<strong>k</strong>的平面上，所有的旋转都发生在这个平面内。当$\mathbf{v}_{\perp}$旋转$\theta$角时，可以将其旋转后的向量$\mathbf{v}_{\perp,\text{rot}}$分解。</p>
+<p>为了描述这个平面内的旋转，我们需要一个与$\mathbf{v}_{\perp}$正交且长度相同的基向量。向量叉乘 $\mathbf{k} \times \mathbf{v}$ 恰好满足这个要求。由于<strong>k</strong>是单位向量且垂直于$\mathbf{v}_{\perp}$，所以 $|\mathbf{k} \times \mathbf{v}_{\perp}| = |\mathbf{k}||\mathbf{v}_{\perp}|\sin(90^\circ) = |\mathbf{v}_{\perp}|$。同时，我们知道 $\mathbf{k} \times \mathbf{v} = \mathbf{k} \times (\mathbf{v}_{|} + \mathbf{v}_{\perp}) = \mathbf{k} \times \mathbf{v}_{|} + \mathbf{k} \times \mathbf{v}_{\perp} = \mathbf{0} + \mathbf{k} \times \mathbf{v}_{\perp}$，所以我们可以使用 $\mathbf{k} \times \mathbf{v}$ 作为这个正交基向量。</p>
+<p>在由 $\mathbf{v}_{\perp}$ 和 $\mathbf{k} \times \mathbf{v}$ 构成的二维平面中，旋转后的向量 $\mathbf{v}_{\perp, \text{rot}}$ 可以表示为：</p>
+<script type="math/tex; mode=display">\mathbf{v}_{\perp, \text{rot}} = \mathbf{v}_{\perp} \cos\theta + (\mathbf{k} \times \mathbf{v}) \sin\theta</script></li>
+</ul>
+<p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/Orthogonal_decomposition_unit_vector_rodrigues_rotation_formula%20(1" alt="Orthogonal_decomposition_unit_vector_rodrigues_rotation_formula (1)">.svg)</p>
+<ul>
+<li><strong>组合结果</strong>：
+旋转后的总向量 $\mathbf{v}_{\text{rot}}$ 是其旋转后平行与垂直分量的和：<script type="math/tex; mode=display">\mathbf{v}_{\text{rot}} = \mathbf{v}_{\|,\text{rot}} + \mathbf{v}_{\perp, \text{rot}}</script><script type="math/tex; mode=display">\mathbf{v}_{\text{rot}} = \mathbf{v}_{\|} + \mathbf{v}_{\perp} \cos\theta + (\mathbf{k} \times \mathbf{v}) \sin\theta</script>将 $\mathbf{v}_{|} = (\mathbf{v} \cdot \mathbf{k})\mathbf{k}$ 和 $\mathbf{v}_{\perp} = \mathbf{v} - \mathbf{v}_{|}$ 代入上式：<script type="math/tex; mode=display">\mathbf{v}_{\text{rot}} = (\mathbf{v} \cdot \mathbf{k})\mathbf{k} + (\mathbf{v} - (\mathbf{v} \cdot \mathbf{k})\mathbf{k}) \cos\theta + (\mathbf{k} \times \mathbf{v}) \sin\theta</script>整理后即可得到最终的罗德里格斯旋转公式：<script type="math/tex; mode=display">\mathbf{v}_{\text{rot}} = \mathbf{v} \cos\theta + (\mathbf{k} \times \mathbf{v}) \sin\theta + \mathbf{k}(\mathbf{k} \cdot \mathbf{v})(1 - \cos\theta)</script></li>
+</ul>
+<h3 id="矩阵形式"><a href="#矩阵形式" class="headerlink" title="矩阵形式"></a>矩阵形式</h3><p>为了便于求解和计算，我们通常将旋转表示为矩阵形式</p>
+<p>叉乘运算 $\mathbf{k} \times \mathbf{v}$ 可以用一个反对称矩阵 $\mathbf{K}$ 与向量 $\mathbf{v}$ 的乘积来表示：</p>
+<script type="math/tex; mode=display">\mathbf{k} \times \mathbf{v} = \mathbf{K}\mathbf{v}</script><p>如果 $\mathbf{k} = [k_x, k_y, k_z]^T$，则：</p>
+<script type="math/tex; mode=display">\mathbf{K} = \begin{bmatrix} 0 & -k_z & k_y \\ k_z & 0 & -k_x \\ -k_y & k_x & 0 \end{bmatrix}</script><p>将这个关系代入旋转公式：</p>
+<script type="math/tex; mode=display">\mathbf{v}_{\text{rot}} = \mathbf{v} \cos\theta + \mathbf{K}\mathbf{v} \sin\theta + (\mathbf{k}\mathbf{k}^T)\mathbf{v}(1 - \cos\theta)</script><p>注意到 $\mathbf{k}(\mathbf{k}\cdot\mathbf{v}) = (\mathbf{k}\mathbf{k}^T)\mathbf{v}$。同时，可以证明 $\mathbf{K}^2 = \mathbf{k}\mathbf{k}^T - \mathbf{I}$，其中 <strong>I</strong> 是3x3单位矩阵。因此，$\mathbf{k}\mathbf{k}^T = \mathbf{K}^2 + \mathbf{I}$。代入上式并整理：</p>
+<script type="math/tex; mode=display">\mathbf{v}_{\text{rot}} = \left( \mathbf{I}\cos\theta + \mathbf{K}\sin\theta + (\mathbf{K}^2+\mathbf{I})(1-\cos\theta) \right) \mathbf{v}</script><script type="math/tex; mode=display">\mathbf{v}_{\text{rot}} = \left( \mathbf{I} + (\sin\theta)\mathbf{K} + (1-\cos\theta)\mathbf{K}^2 \right) \mathbf{v}</script><p>因此，旋转矩阵<strong>R</strong>可以表示为：</p>
+<script type="math/tex; mode=display">\mathbf{R} = \mathbf{I} + (\sin\theta)\mathbf{K} + (1-\cos\theta)\mathbf{K}^2</script><hr>
+<h2 id="姿态运动学参数"><a href="#姿态运动学参数" class="headerlink" title="姿态运动学参数"></a>姿态运动学参数</h2><p>虽然旋转矩阵<strong>R</strong>能够完全描述旋转，但它包含9个元素，而三维旋转只有3个自由度，这导致了冗余。为了寻求更紧凑的表示方法，运动学中引入了多种参数集，其中罗德里格斯参数及其变体是重要的一族。</p>
+<h3 id="1-经典罗德里格斯参数-CRP"><a href="#1-经典罗德里格斯参数-CRP" class="headerlink" title="1. 经典罗德里格斯参数 (CRP)"></a>1. 经典罗德里格斯参数 (CRP)</h3><p>经典罗德里格斯参数CRP，有时也称为Gibbs Vector，直接源于轴-角表示法。</p>
+<h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a><strong>定义</strong></h4><p>CRP是一个三维向量 $\mathbf{q}$，其方向与主轴 $\mathbf{k}$ 相同，其模的大小与主角度 $\theta$ 的半角正切相关：</p>
+<script type="math/tex; mode=display">\mathbf{q} = \mathbf{k} \tan\left(\frac{\theta}{2}\right)</script><h4 id="与欧拉四元数的关系"><a href="#与欧拉四元数的关系" class="headerlink" title="与欧拉四元数的关系"></a><strong>与欧拉四元数的关系</strong></h4><p>CRP与欧拉四元数 $(\beta_0, \boldsymbol{\beta})$ 有着简洁的关系。已知四元数定义为 $\beta_0 = \cos(\theta/2)$ 和 $\boldsymbol{\beta} = \mathbf{k}\sin(\theta/2)$，我们可以轻易推导出：</p>
+<script type="math/tex; mode=display">q_i = \frac{k_i \sin(\theta/2)}{\cos(\theta/2)} = \frac{\beta_i}{\beta_0} \quad (i=1,2,3)</script><p>反之，从CRP也可以求得四元数：</p>
+<script type="math/tex; mode=display">\beta_0 = \frac{1}{\sqrt{1 + \mathbf{q}^T\mathbf{q}}}, \quad \beta_i = \frac{q_i}{\sqrt{1 + \mathbf{q}^T\mathbf{q}}}</script><h4 id="性质"><a href="#性质" class="headerlink" title="性质"></a><strong>性质</strong></h4><ul>
+<li><strong>唯一性</strong>: CRP与姿态具有唯一对应关系，克服了四元数中 $(\boldsymbol{\beta}, \beta_0)$ 和 $(-\boldsymbol{\beta}, -\beta_0)$ 描述同一旋转的模糊性。</li>
+<li><strong>奇点 (Singularity)</strong>: CRP存在一个严重的奇点问题。当主旋转角 $\theta \to \pm\pi$ (180度) 时，$\tan(\theta/2) \to \infty$。这意味着围绕任意轴旋转180度的姿态都无法用有限的CRP值表示。</li>
+<li><strong>不可叠加性</strong>: 两次连续旋转的CRP不能通过简单的向量加法得到总旋转的CRP。</li>
+</ul>
+<h4 id="几何意义"><a href="#几何意义" class="headerlink" title="几何意义"></a><strong>几何意义</strong></h4><p>CRP的几何意义可以通过球极投影（Stereographic Projection）来理解。想象一个四维单位超球面，欧拉四元数 $(\beta_0, \boldsymbol{\beta})$ 是球面上的一个点。CRP是这个点从北极点 $(\beta_0=1, \boldsymbol{\beta}=0)$ 投影到超平面 $\beta_0=0$ 上的影像。当旋转角度 $\theta \to \pi$ 时，$\beta_0 \to 0$，这意味着投影点趋于无穷远，从而导致了奇点。</p>
+<h3 id="2-修正罗德里格斯参数-MRP"><a href="#2-修正罗德里格斯参数-MRP" class="headerlink" title="2. 修正罗德里格斯参数 (MRP)"></a>2. 修正罗德里格斯参数 (MRP)</h3><p>为了解决CRP在180度时的奇点问题，并获得在更大角度范围内表现更接近线性的参数，修正罗德里格斯参数（MRP）应运而生。</p>
+<h4 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a><strong>定义</strong></h4><p>MRP是一个三维向量 $\boldsymbol{\sigma}$，其定义与CRP非常相似，但使用了主角度的四分之一角：</p>
+<script type="math/tex; mode=display">\boldsymbol{\sigma} = \mathbf{k} \tan\left(\frac{\theta}{4}\right)</script><h4 id="与欧拉四元数的关系-1"><a href="#与欧拉四元数的关系-1" class="headerlink" title="与欧拉四元数的关系"></a><strong>与欧拉四元数的关系</strong></h4><p>利用半角/四分之一角恒等式，可以推导出MRP与四元数的关系：</p>
+<script type="math/tex; mode=display">\sigma_i = k_i \tan\left(\frac{\theta}{4}\right) = k_i \frac{\sin(\theta/2)}{1+\cos(\theta/2)} = \frac{\beta_i}{1+\beta_0} \quad (i=1,2,3)</script><h4 id="性质与优势"><a href="#性质与优势" class="headerlink" title="性质与优势"></a><strong>性质与优势</strong></h4><ul>
+<li><strong>奇点位置</strong>: MRP的奇点发生在 $1+\beta_0=0$，即 $\beta_0=-1$ 时。这对应于主旋转角 $\theta = \pm 2\pi$ (360度)。对于大多数物理系统，旋转360度等同于没有旋转，这个奇点在实际应用中几乎不会遇到，这是一个巨大的优势。</li>
+<li><strong>线性范围更广</strong>: MRP在其定义域内比CRP更接近线性，尤其是在大角度旋转时，这对于控制算法的设计非常有利。</li>
+</ul>
+<h4 id="几何意义-1"><a href="#几何意义-1" class="headerlink" title="几何意义"></a><strong>几何意义</strong></h4><p>MRP同样可以通过球极投影来解释。不同的是，MRP是将四元数点从南极点 $(\beta_0=-1, \boldsymbol{\beta}=0)$ 投影到超平面 $\beta_0=0$ 上的影像。这种投影方式巧妙地将奇点从180度移动到了360度。</p>
+<p><img src="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/CRP.png" alt="CRP的几何意义"></p>
+<h3 id="3-伴影集-Shadow-Set-与奇点规避"><a href="#3-伴影集-Shadow-Set-与奇点规避" class="headerlink" title="3. 伴影集 (Shadow Set) 与奇点规避"></a>3. 伴影集 (Shadow Set) 与奇点规避</h3><p>尽管MRP已经将奇点移至一个通常无害的位置，但在数值计算中，当旋转角度接近360度时，MRP的模会变得非常大，可能导致计算不稳定。为此，引入了伴影集（Shadow Set）的概念来彻底解决这个问题。</p>
+<h4 id="定义-2"><a href="#定义-2" class="headerlink" title="定义"></a><strong>定义</strong></h4><p>对于任意一个MRP $\boldsymbol{\sigma}$，其伴影集 $\boldsymbol{\sigma}^S$ 被定义为：</p>
+<script type="math/tex; mode=display">\boldsymbol{\sigma}^S = -\frac{\boldsymbol{\sigma}}{\|\boldsymbol{\sigma}\|^2}</script><p>可以证明，$\boldsymbol{\sigma}$ 和 $\boldsymbol{\sigma}^S$ 描述的是完全相同的物理姿态。它们的区别在于，一个对应于主角度 $\theta$，另一个则对应于 $2\pi-\theta$ 或 $2\pi+\theta$。</p>
+<p>一个关键性质是，如果 $|\boldsymbol{\sigma}| &gt; 1$，那么 $|\boldsymbol{\sigma}^S| &lt; 1$。</p>
+<h4 id="切换策略"><a href="#切换策略" class="headerlink" title="切换策略"></a><strong>切换策略</strong></h4><p>在进行姿态动力学积分或控制计算时，可以采用以下切换策略：</p>
+<ol>
+<li>始终使用模长小于或等于1的MRP集进行计算。</li>
+<li>当计算过程中发现 $|\boldsymbol{\sigma}| &gt; 1$ 时，立即切换到其伴影集 $\boldsymbol{\sigma}^S$ 来继续后续的计算。</li>
+<li>由于 $|\boldsymbol{\sigma}| = 1$ 对应于主角度 $\theta = \pi$ (180度)，这个策略保证了所使用的姿态参数始终描述小于180度的最短旋转路径，完美地规避了所有奇点和数值溢出问题。</li>
+</ol>
+<h2 id="参数间的转换与运动学"><a href="#参数间的转换与运动学" class="headerlink" title="参数间的转换与运动学"></a>参数间的转换与运动学</h2><h4 id="CRP-与-MRP-转换"><a href="#CRP-与-MRP-转换" class="headerlink" title="CRP 与 MRP 转换"></a><strong>CRP 与 MRP 转换</strong></h4><script type="math/tex; mode=display">\mathbf{q} = \frac{2\boldsymbol{\sigma}}{1 - \|\boldsymbol{\sigma}\|^2}, \quad \boldsymbol{\sigma} = \frac{\mathbf{q}}{1 + \sqrt{1 + \|\mathbf{q}\|^2}}</script><h4 id="运动学微分方程"><a href="#运动学微分方程" class="headerlink" title="运动学微分方程"></a><strong>运动学微分方程</strong></h4><p>姿态参数的时间导数与航天器角速度 $\boldsymbol{\omega}$ 之间的关系至关重要。</p>
+<ul>
+<li><p><strong>CRP运动学方程</strong>:</p>
+<script type="math/tex; mode=display">\dot{\mathbf{q}} = \frac{1}{2}\left( \mathbf{I} + [\tilde{\mathbf{q}}] + \mathbf{q}\mathbf{q}^T \right)\boldsymbol{\omega}</script></li>
+<li><p><strong>MRP运动学方程</strong>:</p>
+<script type="math/tex; mode=display">\dot{\boldsymbol{\sigma}} = \frac{1}{4}\left( (1-\|\boldsymbol{\sigma}\|^2)\mathbf{I} + 2[\tilde{\boldsymbol{\sigma}}] + 2\boldsymbol{\sigma}\boldsymbol{\sigma}^T \right)\boldsymbol{\omega}</script></li>
+</ul>
+<p>其中 $[\tilde{\mathbf{a}}]$ 表示向量 $\mathbf{a}$ 对应的反对称叉乘矩阵。可以看到MRP的运动学方程略显复杂，但在引入伴影集后，其鲁棒性远超CRP</p>
+
+    </div>
+     
+    <div class="post-footer__meta"><p>updated at 2025-11-21</p></div> 
+    <div class="post-entry__tags"><a href="/tags/%E5%A7%BF%E6%80%81%E8%BF%90%E5%8A%A8%E5%AD%A6/" class="post-tags__link button"># 姿态运动学</a><a href="/tags/CRPs/" class="post-tags__link button"># CRPs</a><a href="/tags/MRPs/" class="post-tags__link button"># MRPs</a><a href="/tags/%E5%AF%B9%E5%81%B6%E6%80%A7/" class="post-tags__link button"># 对偶性</a></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
+            
+                <a href="/2025/02/17/%E5%A7%BF%E6%80%81%E5%8A%A8%E5%8A%9B%E5%AD%A6Vol.7-%E5%A7%BF%E6%80%81%E7%A1%AE%E5%AE%9A%EF%BC%9ATRIAD%E7%AE%97%E6%B3%95%E4%B8%8EWahba%E9%97%AE%E9%A2%98/" class="nav__link">
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
+                    </div>
+                    <div>
+                        <div class="nav__label">
+                            Previous Post
+                        </div>
+                        <div class="nav__title">
+                            姿态动力学Vol.7-姿态确定：TRIAD算法与Wahba问题
+                        </div>
+                    </div>
+                </a>
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="/2025/02/14/%E5%A7%BF%E6%80%81%E5%8A%A8%E5%8A%9B%E5%AD%A6Vol.5-%E5%88%9A%E4%BD%93%E5%8A%A8%E5%8A%9B%E5%AD%A6%E6%96%B9%E7%A8%8B%EF%BC%9A%E6%AC%A7%E6%8B%89%E6%96%B9%E7%A8%8B%E4%B8%8E%E6%83%AF%E6%80%A7%E5%BC%A0%E9%87%8F/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            Next Post
+                        </div>
+                        <div class="nav__title">
+                            姿态动力学Vol.5-刚体动力学方程：欧拉方程与惯性张量
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
+        </div>
+    </div>
+
+
+
+
+
+</main>
+
+            <footer class="footer">
+     
+    <a href="#" class="button" id="b2t" aria-label="Back to Top" title="Back to Top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M233.376 722.752L278.624 768 512 534.624 745.376 768l45.248-45.248L512 444.128zM192 352h640V288H192z" fill="currentColor"></path>
+        </svg>
+    </a>
+
+    
+
+
+    
+     
+ 
+
+ 
+    
+        
+        <p class="footer-copyright">
+            Strtus's Journry
+        </p>
+    
+    
+        
+            
+        
+            
+        
+            <p>保持对世界的输出🙌</p>
+
+        
+    
+</footer>
+
+        </div>
+         
+
+ 
+    <script>
+        window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+        ga('create', 'G-5ERPC280ZB', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+ 
+
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5ERPC280ZB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-5ERPC280ZB');
+    </script>
+ 
+
+ 
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement('script');
+            hm.src = 'https://hm.baidu.com/hm.js?8da6411546e903e478a9d82d2a4d0c60';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+    
+ 
+
+
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.css">
+
+    
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.js"></script>
+
+    <script>
+        let lazyloadT = Boolean('false'),
+            auto_fancybox = Boolean('true')
+        if (auto_fancybox) {
+            $(".post__content").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        } else {
+            $(".post__content").find("fancybox").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        }
+    </script>
+ 
+
+
+    <script>
+        if (typeof MathJax === 'undefined') {
+            window.MathJax = {
+                loader: {
+                    source: {
+                        '[tex]/amsCd': '[tex]/amscd',
+                        '[tex]/AMScd': '[tex]/amscd'
+                    }
+                },
+                tex: {
+                    inlineMath: {'[+]': [['$', '$']]},
+                    tags: 'ams'
+                },
+                options: {
+                    renderActions: {
+                        findScript: [10, doc => {
+                            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                                const display = !!node.type.match(/; *mode=display/);
+                                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                                const text = document.createTextNode('');
+                                node.parentNode.replaceChild(text, node);
+                                math.start = {node: text, delim: '', n: 0};
+                                math.end = {node: text, delim: '', n: 0};
+                                doc.math.push(math);
+                            });
+                        }, '', false],
+                        insertedScript: [200, () => {
+                            document.querySelectorAll('mjx-container').forEach(node => {
+                                let target = node.parentNode;
+                                if (target.nodeName.toLowerCase() === 'li') {
+                                    target.parentNode.classList.add('has-jax');
+                                }
+                            });
+                        }, '', false]
+                    }
+                }
+            };
+            (function () {
+                var script = document.createElement('script');
+                script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js";
+                script.defer = true;
+                document.head.appendChild(script);
+            })();
+        } else {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+        }
+    </script>
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+
+    </body>
+</html>

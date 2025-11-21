@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--icon-->
+
+    
+        <link rel="shortcut icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="16x16" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="32x32" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/favicon-96x96.png">
+    
+    
+        <link rel="apple-touch-icon" sizes="180x180" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/web-app-manifest-192x192.png">
+    
+    
+        <link rel="mask-icon" href="https://obsidian-1306927076.cos.ap-shanghai.myqcloud.com/picgo/apple-touch-icon.png">
+    
+
+
+    <!-- meta -->
+
+
+<title>暗房理论Vol.8 暗房工艺的数字化与混合流程 | Strtus&#39;s Journey</title>
+
+
+    <meta name="keywords" content="暗房技术, 数字化, 扫描, 线性反转, 混合流程">
+
+
+
+
+    <!-- OpenGraph -->
+ 
+    <meta name="description" content="前言：混合流程在 21 世纪，坚持胶片摄影并不意味着拒绝数字技术。混合流程（胶片拍摄 -&gt; 显影 -&gt; 扫描 -&gt; 数字后期 -&gt; 喷墨打印&#x2F;屏幕显示）已经成为主流。 本章将探讨如何用科学的方法将模拟影像转化为数字信号，并保持胶片特有的质感。 扫描的物理本质扫描仪本质上是一个高精度的透射密度计。它测量底片上每一点的透光率 $T$，并将其转化为数字信号。 动态范围底片的密度范">
+<meta property="og:type" content="article">
+<meta property="og:title" content="暗房理论Vol.8 暗房工艺的数字化与混合流程">
+<meta property="og:url" content="https://strtus.github.io/2025/02/04/%E6%9A%97%E6%88%BF%E7%90%86%E8%AE%BAVol.8-%E6%9A%97%E6%88%BF%E5%B7%A5%E8%89%BA%E7%9A%84%E6%95%B0%E5%AD%97%E5%8C%96%E4%B8%8E%E6%B7%B7%E5%90%88%E6%B5%81%E7%A8%8B/index.html">
+<meta property="og:site_name" content="Strtus&#39;s Journey">
+<meta property="og:description" content="前言：混合流程在 21 世纪，坚持胶片摄影并不意味着拒绝数字技术。混合流程（胶片拍摄 -&gt; 显影 -&gt; 扫描 -&gt; 数字后期 -&gt; 喷墨打印&#x2F;屏幕显示）已经成为主流。 本章将探讨如何用科学的方法将模拟影像转化为数字信号，并保持胶片特有的质感。 扫描的物理本质扫描仪本质上是一个高精度的透射密度计。它测量底片上每一点的透光率 $T$，并将其转化为数字信号。 动态范围底片的密度范">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-02-04T10:00:00.000Z">
+<meta property="article:modified_time" content="2025-11-21T11:22:15.842Z">
+<meta property="article:author" content="strtus">
+<meta property="article:tag" content="暗房技术">
+<meta property="article:tag" content="数字化">
+<meta property="article:tag" content="扫描">
+<meta property="article:tag" content="线性反转">
+<meta property="article:tag" content="混合流程">
+<meta name="twitter:card" content="summary_large_image">
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/highlight.css" media="none" >
+        
+            <link rel="stylesheet" id="hl-dark-theme" href="/css/highlight/highlight.dark.css" media="none">
+        
+    
+
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/style/dark.css">
+
+    
+<script src="/js/darkmode.js"></script>
+
+
+
+     
+
+    <!-- custom head -->
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+    <body>
+        <div id="app" tabindex="-1">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">Strtus&#39;s Journey</span>
+        </a>
+    </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">首页</a>
+                
+                    <a href="/about.html" class="navbar-menu button">About</a>
+                
+                    <a href="/categories/" class="navbar-menu button">分类</a>
+                
+                    <a href="/tags/" class="navbar-menu button">标签</a>
+                
+                    <a href="/archives/" class="navbar-menu button">归档</a>
+                
+            </div>
+        
+        
+        
+    <a href="/search/" id="btn-search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="24" height="24" fill="currentColor" stroke="currentColor" stroke-width="32"><path d="M192 448c0-141.152 114.848-256 256-256s256 114.848 256 256-114.848 256-256 256-256-114.848-256-256z m710.624 409.376l-206.88-206.88A318.784 318.784 0 0 0 768 448c0-176.736-143.264-320-320-320S128 271.264 128 448s143.264 320 320 320a318.784 318.784 0 0 0 202.496-72.256l206.88 206.88 45.248-45.248z"></path></svg>
+    </a>
+
+
+        
+        
+    <a href="javaScript:void(0);" id="btn-toggle-dark">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </a>
+
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">首页</a>
+                
+                    <a href="/about.html" class="dropdown-menu button">About</a>
+                
+                    <a href="/categories/" class="dropdown-menu button">分类</a>
+                
+                    <a href="/tags/" class="dropdown-menu button">标签</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">归档</a>
+                
+            </div>
+        
+    </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        暗房理论Vol.8 暗房工艺的数字化与混合流程
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2025/02/" class="post-meta__date button">2025-02-04</a>
+        
+    <span class="separate-dot"></span><a href="/categories/%E6%91%84%E5%BD%B1%E8%89%BA%E6%9C%AF%E7%99%BE%E5%B9%B4%E5%8F%B2/" class="button">摄影艺术百年史</a>
+
+ 
+        
+    
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+    <aside class="post-side">
+        <div class="post-side__toc">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80%EF%BC%9A%E6%B7%B7%E5%90%88%E6%B5%81%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">前言：混合流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%AB%E6%8F%8F%E7%9A%84%E7%89%A9%E7%90%86%E6%9C%AC%E8%B4%A8"><span class="toc-number">2.</span> <span class="toc-text">扫描的物理本质</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E8%8C%83%E5%9B%B4"><span class="toc-number">2.1.</span> <span class="toc-text">动态范围</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%89%E6%BA%90%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="toc-number">2.2.</span> <span class="toc-text">光源的影响</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E6%89%AB%E6%8F%8F"><span class="toc-number">3.</span> <span class="toc-text">线性扫描</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E5%AD%97%E5%8F%8D%E8%BD%AC%E6%95%B0%E5%AD%A6"><span class="toc-number">4.</span> <span class="toc-text">数字反转数学</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E7%9A%84%E5%8F%8D%E8%BD%AC%E5%85%AC%E5%BC%8F"><span class="toc-number">4.1.</span> <span class="toc-text">简单的反转公式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E5%AE%9A%E9%BB%91%E7%99%BD%E5%9C%BA"><span class="toc-number">4.2.</span> <span class="toc-text">设定黑白场</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E5%AD%97%E6%9A%97%E6%88%BF%E6%8A%80%E6%9C%AF"><span class="toc-number">5.</span> <span class="toc-text">数字暗房技术</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E5%AD%97%E5%BA%95%E7%89%87"><span class="toc-number">6.</span> <span class="toc-text">数字底片</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">7.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-number">8.</span> <span class="toc-text">Reference</span></a></li></ol>
+        </div>
+    </aside>
+    <a class="btn-toc button" id="btn-toc" tabindex="0">
+        <svg viewBox="0 0 1024 1024" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M128 256h64V192H128zM320 256h576V192H320zM128 544h64v-64H128zM320 544h576v-64H320zM128 832h64v-64H128zM320 832h576v-64H320z" fill="currentColor"></path>
+        </svg>
+    </a>
+    <div class="toc-menus" id="toc-menus">
+        <div class="toc-title">Article Directory</div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80%EF%BC%9A%E6%B7%B7%E5%90%88%E6%B5%81%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">前言：混合流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%AB%E6%8F%8F%E7%9A%84%E7%89%A9%E7%90%86%E6%9C%AC%E8%B4%A8"><span class="toc-number">2.</span> <span class="toc-text">扫描的物理本质</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E8%8C%83%E5%9B%B4"><span class="toc-number">2.1.</span> <span class="toc-text">动态范围</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%89%E6%BA%90%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="toc-number">2.2.</span> <span class="toc-text">光源的影响</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E6%89%AB%E6%8F%8F"><span class="toc-number">3.</span> <span class="toc-text">线性扫描</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E5%AD%97%E5%8F%8D%E8%BD%AC%E6%95%B0%E5%AD%A6"><span class="toc-number">4.</span> <span class="toc-text">数字反转数学</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E7%9A%84%E5%8F%8D%E8%BD%AC%E5%85%AC%E5%BC%8F"><span class="toc-number">4.1.</span> <span class="toc-text">简单的反转公式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E5%AE%9A%E9%BB%91%E7%99%BD%E5%9C%BA"><span class="toc-number">4.2.</span> <span class="toc-text">设定黑白场</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E5%AD%97%E6%9A%97%E6%88%BF%E6%8A%80%E6%9C%AF"><span class="toc-number">5.</span> <span class="toc-text">数字暗房技术</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E5%AD%97%E5%BA%95%E7%89%87"><span class="toc-number">6.</span> <span class="toc-text">数字底片</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">7.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-number">8.</span> <span class="toc-text">Reference</span></a></li></ol>
+    </div>
+
+
+<article class="post post__with-toc content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <h2 id="前言：混合流程"><a href="#前言：混合流程" class="headerlink" title="前言：混合流程"></a>前言：混合流程</h2><p>在 21 世纪，坚持胶片摄影并不意味着拒绝数字技术。混合流程（胶片拍摄 -&gt; 显影 -&gt; 扫描 -&gt; 数字后期 -&gt; 喷墨打印/屏幕显示）已经成为主流。</p>
+<p>本章将探讨如何用科学的方法将模拟影像转化为数字信号，并保持胶片特有的质感。</p>
+<h2 id="扫描的物理本质"><a href="#扫描的物理本质" class="headerlink" title="扫描的物理本质"></a>扫描的物理本质</h2><p>扫描仪本质上是一个高精度的透射密度计。它测量底片上每一点的透光率 $T$，并将其转化为数字信号。</p>
+<h3 id="动态范围"><a href="#动态范围" class="headerlink" title="动态范围"></a>动态范围</h3><p>底片的密度范围（D-max - D-min）通常在 2.0 - 3.0 之间。专业底片扫描仪（如 Nikon Coolscan, Hasselblad Flextight）的 D-max 可达 4.0 以上，足以捕捉底片的所有细节。</p>
+<h3 id="光源的影响"><a href="#光源的影响" class="headerlink" title="光源的影响"></a>光源的影响</h3><p>与放大机类似，扫描仪光源也有聚光和散光之分。</p>
+<ul>
+<li>大多数平板扫描仪使用冷阴极荧光灯或 LED，属于散光光源，能抑制颗粒和划痕。</li>
+<li>专用底片扫描仪通常使用 LED 点光源，锐度极高，但会夸大颗粒（颗粒混叠效应）。</li>
+</ul>
+<h2 id="线性扫描"><a href="#线性扫描" class="headerlink" title="线性扫描"></a>线性扫描</h2><p>大多数扫描软件（Epson Scan, SilverFast）默认会应用一条 Gamma 曲线（通常 $\gamma=2.2$）并自动反转黑白，这往往会破坏底片的影调线性度，导致高光死白或暗部死黑。</p>
+<p>正确的做法是进行线性扫描：</p>
+<ol>
+<li><strong>作为正片扫描</strong>：告诉软件这是一张幻灯片（即使它是负片）。</li>
+<li><strong>Gamma 1.0</strong>：确保输出的是线性的光强数据，不做任何色调映射。</li>
+<li><strong>16-bit 深度</strong>：必须使用 16-bit（或 48-bit 彩色），因为线性数据在暗部（底片的亮部）只有很少的色阶，8-bit 会导致严重的色调断裂。</li>
+</ol>
+<h2 id="数字反转数学"><a href="#数字反转数学" class="headerlink" title="数字反转数学"></a>数字反转数学</h2><p>获得线性负像后，我们需要在 Photoshop 或 Lightroom 中手动反转。</p>
+<h3 id="简单的反转公式"><a href="#简单的反转公式" class="headerlink" title="简单的反转公式"></a>简单的反转公式</h3><p>对于黑白负片，反转公式很简单：</p>
+<script type="math/tex; mode=display">\text{Pixel}_{\text{new}} = \text{Pixel}_{\text{max}} - \text{Pixel}_{\text{old}}</script><p>在 16-bit 图像中，$\text{Pixel}_{\text{max}} = 65535$。</p>
+<h3 id="设定黑白场"><a href="#设定黑白场" class="headerlink" title="设定黑白场"></a>设定黑白场</h3><p>反转后，直方图通常很平（反差低）。我们需要重新定义黑场（Zone 0）和白场（Zone X）。</p>
+<ul>
+<li><strong>黑场</strong>：找到片基（Film Base）的颜色，将其设为 0。</li>
+<li><strong>白场</strong>：找到底片上最黑的部分（高光），将其设为 255 (或 65535)。</li>
+</ul>
+<h2 id="数字暗房技术"><a href="#数字暗房技术" class="headerlink" title="数字暗房技术"></a>数字暗房技术</h2><p>在 Photoshop 中，我们可以模拟传统暗房的所有技法，而且更精确、可撤销。</p>
+<ul>
+<li><strong>反差控制</strong>：使用曲线（Curves）工具模拟相纸的特性曲线。S 形曲线可以增加中间调反差。</li>
+<li><strong>遮挡与加光</strong>：使用 50% 灰度图层 + 叠加模式（Overlay/Soft Light），用黑白画笔涂抹。这比在放大机下挥舞纸板要精确得多。</li>
+<li><strong>分阶调色</strong>：模拟硒调色（Selenium Toning）或茶色调色（Sepia），给高光和阴影赋予不同的色相。</li>
+</ul>
+<h2 id="数字底片"><a href="#数字底片" class="headerlink" title="数字底片"></a>数字底片</h2><p>混合流程的终极玩法是数字底片。</p>
+<ol>
+<li>拍摄数码照片或扫描胶片。</li>
+<li>在电脑上处理好影调。</li>
+<li>用喷墨打印机将负像打印在透明胶片（OHP Film）上。</li>
+<li>将这张“大底片”与传统银盐相纸或铂金相纸接触印相（Contact Print）。</li>
+</ol>
+<p>这结合了数码的精确控制和传统印相工艺的物理质感。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>无论是银盐颗粒还是二进制像素，它们都是记录光的容器。理解了从光子到电子、再到银原子的转换机制，我们就能在模拟与数字的世界之间自由穿梭，用最合适的技术手段表达心中的影像。</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li>Burkholder, D. (2002). <em>Making Digital Negatives for Contact Printing</em>.</li>
+<li>Fraser, B. (2004). <em>Real World Camera Raw</em>.</li>
+</ol>
+
+    </div>
+     
+    <div class="post-footer__meta"><p>updated at 2025-11-21</p></div> 
+    <div class="post-entry__tags"><a href="/tags/%E6%9A%97%E6%88%BF%E6%8A%80%E6%9C%AF/" class="post-tags__link button"># 暗房技术</a><a href="/tags/%E6%95%B0%E5%AD%97%E5%8C%96/" class="post-tags__link button"># 数字化</a><a href="/tags/%E6%89%AB%E6%8F%8F/" class="post-tags__link button"># 扫描</a><a href="/tags/%E7%BA%BF%E6%80%A7%E5%8F%8D%E8%BD%AC/" class="post-tags__link button"># 线性反转</a><a href="/tags/%E6%B7%B7%E5%90%88%E6%B5%81%E7%A8%8B/" class="post-tags__link button"># 混合流程</a></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
+            
+                <a href="/2025/02/10/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0%EF%BC%9AA-Real-to-Sim-to-Real-Approach-for-Robust-Manipulation/" class="nav__link">
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
+                    </div>
+                    <div>
+                        <div class="nav__label">
+                            Previous Post
+                        </div>
+                        <div class="nav__title">
+                            文献阅读笔记：A Real-to-Sim-to-Real Approach for Robust Manipulation
+                        </div>
+                    </div>
+                </a>
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="/2025/02/04/%E6%9A%97%E6%88%BF%E7%90%86%E8%AE%BAVol.7-%E7%89%B9%E6%AE%8A%E6%98%BE%E5%BD%B1%E9%85%8D%E6%96%B9%E8%AE%BE%E8%AE%A1/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            Next Post
+                        </div>
+                        <div class="nav__title">
+                            暗房理论Vol.7 特殊显影配方设计
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
+        </div>
+    </div>
+
+
+
+
+
+</main>
+
+            <footer class="footer">
+     
+    <a href="#" class="button" id="b2t" aria-label="Back to Top" title="Back to Top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M233.376 722.752L278.624 768 512 534.624 745.376 768l45.248-45.248L512 444.128zM192 352h640V288H192z" fill="currentColor"></path>
+        </svg>
+    </a>
+
+    
+
+
+    
+     
+ 
+
+ 
+    
+        
+        <p class="footer-copyright">
+            Strtus's Journry
+        </p>
+    
+    
+        
+            
+        
+            
+        
+            <p>保持对世界的输出🙌</p>
+
+        
+    
+</footer>
+
+        </div>
+         
+
+ 
+    <script>
+        window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+        ga('create', 'G-5ERPC280ZB', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+ 
+
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5ERPC280ZB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-5ERPC280ZB');
+    </script>
+ 
+
+ 
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement('script');
+            hm.src = 'https://hm.baidu.com/hm.js?8da6411546e903e478a9d82d2a4d0c60';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+    
+ 
+
+
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.css">
+
+    
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.js"></script>
+
+    <script>
+        let lazyloadT = Boolean('false'),
+            auto_fancybox = Boolean('true')
+        if (auto_fancybox) {
+            $(".post__content").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        } else {
+            $(".post__content").find("fancybox").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        }
+    </script>
+ 
+
+
+    <script>
+        if (typeof MathJax === 'undefined') {
+            window.MathJax = {
+                loader: {
+                    source: {
+                        '[tex]/amsCd': '[tex]/amscd',
+                        '[tex]/AMScd': '[tex]/amscd'
+                    }
+                },
+                tex: {
+                    inlineMath: {'[+]': [['$', '$']]},
+                    tags: 'ams'
+                },
+                options: {
+                    renderActions: {
+                        findScript: [10, doc => {
+                            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                                const display = !!node.type.match(/; *mode=display/);
+                                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                                const text = document.createTextNode('');
+                                node.parentNode.replaceChild(text, node);
+                                math.start = {node: text, delim: '', n: 0};
+                                math.end = {node: text, delim: '', n: 0};
+                                doc.math.push(math);
+                            });
+                        }, '', false],
+                        insertedScript: [200, () => {
+                            document.querySelectorAll('mjx-container').forEach(node => {
+                                let target = node.parentNode;
+                                if (target.nodeName.toLowerCase() === 'li') {
+                                    target.parentNode.classList.add('has-jax');
+                                }
+                            });
+                        }, '', false]
+                    }
+                }
+            };
+            (function () {
+                var script = document.createElement('script');
+                script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js";
+                script.defer = true;
+                document.head.appendChild(script);
+            })();
+        } else {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+        }
+    </script>
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+
+    </body>
+</html>
